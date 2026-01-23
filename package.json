@@ -1,0 +1,31 @@
+{
+  "name": "keiba-data-shared",
+  "version": "1.0.0",
+  "description": "競馬データ共有リポジトリ - 南関競馬・中央競馬の予想・結果データを一元管理",
+  "type": "module",
+  "main": "parser/parse-nankan-results.js",
+  "exports": {
+    "./parse-nankan-results": "./parser/parse-nankan-results.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/apol0510/keiba-data-shared.git"
+  },
+  "keywords": [
+    "keiba",
+    "nankan",
+    "horse-racing",
+    "data-sharing",
+    "predictions",
+    "results"
+  ],
+  "author": "apol0510",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/apol0510/keiba-data-shared/issues"
+  },
+  "homepage": "https://github.com/apol0510/keiba-data-shared#readme"
+}
