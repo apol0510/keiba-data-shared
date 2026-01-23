@@ -1,0 +1,365 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "keiba-data-shared Schema",
+  "description": "競馬データ共有リポジトリの標準フォーマット定義",
+  "version": "1.0",
+  "definitions": {
+    "results": {
+      "type": "object",
+      "required": ["date", "venue", "venueCode", "races", "dataVersion"],
+      "properties": {
+        "date": {
+          "type": "string",
+          "format": "date",
+          "description": "開催日（YYYY-MM-DD形式）",
+          "example": "2026-01-23"
+        },
+        "venue": {
+          "type": "string",
+          "description": "競馬場名",
+          "enum": ["大井", "川崎", "船橋", "浦和", "東京", "中山", "阪神", "京都", "中京", "新潟", "小倉", "札幌", "函館", "福島"],
+          "example": "船橋"
+        },
+        "venueCode": {
+          "type": "string",
+          "description": "競馬場コード",
+          "enum": ["OI", "KA", "FU", "UR", "TK", "NA", "HN", "KY", "CK", "NG", "KO", "SP", "HK", "FK"],
+          "example": "FU"
+        },
+        "races": {
+          "type": "array",
+          "description": "レース結果配列",
+          "items": {
+            "$ref": "#/definitions/race"
+          }
+        },
+        "dataVersion": {
+          "type": "string",
+          "description": "データバージョン",
+          "example": "1.0"
+        }
+      }
+    },
+    "race": {
+      "type": "object",
+      "required": ["raceNumber", "results", "payouts"],
+      "properties": {
+        "raceNumber": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 12,
+          "description": "レース番号",
+          "example": 5
+        },
+        "raceName": {
+          "type": "string",
+          "description": "レース名",
+          "example": "ガーネット２２００"
+        },
+        "distance": {
+          "type": "integer",
+          "description": "距離（メートル）",
+          "example": 2200
+        },
+        "surface": {
+          "type": "string",
+          "enum": ["ダート", "芝"],
+          "description": "馬場種別",
+          "example": "ダート"
+        },
+        "track": {
+          "type": "string",
+          "enum": ["外", "内", "右", "左"],
+          "description": "コース",
+          "example": "外"
+        },
+        "horses": {
+          "type": "integer",
+          "description": "出走頭数",
+          "example": 14
+        },
+        "startTime": {
+          "type": "string",
+          "pattern": "^([0-1][0-9]|2[0-3]):[0-5][0-9]$",
+          "description": "発走時刻（HH:MM形式）",
+          "example": "20:50"
+        },
+        "results": {
+          "type": "array",
+          "description": "着順結果配列",
+          "items": {
+            "$ref": "#/definitions/horseResult"
+          }
+        },
+        "payouts": {
+          "$ref": "#/definitions/payouts"
+        },
+        "enteredAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "データ登録日時（ISO 8601形式）",
+          "example": "2026-01-23T21:30:00+09:00"
+        },
+        "enteredBy": {
+          "type": "string",
+          "enum": ["staff-ui", "api", "manual"],
+          "description": "データ登録方法",
+          "example": "staff-ui"
+        }
+      }
+    },
+    "horseResult": {
+      "type": "object",
+      "required": ["rank", "number", "name"],
+      "properties": {
+        "rank": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "着順",
+          "example": 1
+        },
+        "bracket": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 8,
+          "description": "枠番",
+          "example": 5
+        },
+        "number": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 18,
+          "description": "馬番",
+          "example": 7
+        },
+        "name": {
+          "type": "string",
+          "description": "馬名",
+          "example": "マキシマムパワー"
+        },
+        "jockey": {
+          "type": "string",
+          "description": "騎手名",
+          "example": "町田直希"
+        },
+        "trainer": {
+          "type": "string",
+          "description": "調教師名",
+          "example": "林正人"
+        },
+        "time": {
+          "type": "string",
+          "description": "タイム",
+          "example": "2:28.0"
+        },
+        "margin": {
+          "type": "string",
+          "description": "着差",
+          "example": "クビ"
+        },
+        "lastFurlong": {
+          "type": "string",
+          "description": "上がり3F",
+          "example": "39.3"
+        },
+        "popularity": {
+          "type": "integer",
+          "description": "人気",
+          "example": 1
+        }
+      }
+    },
+    "payouts": {
+      "type": "object",
+      "description": "払戻金",
+      "properties": {
+        "tansho": {
+          "$ref": "#/definitions/payoutSingle"
+        },
+        "fukusho": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/payoutSingle"
+          }
+        },
+        "wakuren": {
+          "$ref": "#/definitions/payoutCombo"
+        },
+        "umaren": {
+          "$ref": "#/definitions/payoutCombo"
+        },
+        "wide": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/payoutCombo"
+          }
+        },
+        "umatan": {
+          "$ref": "#/definitions/payoutCombo"
+        },
+        "sanrenpuku": {
+          "$ref": "#/definitions/payoutCombo"
+        },
+        "sanrentan": {
+          "$ref": "#/definitions/payoutCombo"
+        }
+      }
+    },
+    "payoutSingle": {
+      "type": "object",
+      "required": ["number", "payout"],
+      "properties": {
+        "number": {
+          "type": "integer",
+          "description": "馬番",
+          "example": 7
+        },
+        "payout": {
+          "type": "integer",
+          "description": "配当（円）",
+          "example": 290
+        },
+        "popularity": {
+          "type": "integer",
+          "description": "人気",
+          "example": 1
+        }
+      }
+    },
+    "payoutCombo": {
+      "type": "object",
+      "required": ["combination", "payout"],
+      "properties": {
+        "combination": {
+          "type": "string",
+          "description": "組番（例: 7-9, 7-9-11）",
+          "example": "7-9"
+        },
+        "payout": {
+          "type": "integer",
+          "description": "配当（円）",
+          "example": 10160
+        },
+        "popularity": {
+          "type": "integer",
+          "description": "人気",
+          "example": 40
+        }
+      }
+    },
+    "predictions": {
+      "type": "object",
+      "required": ["date", "venue", "venueCode", "races", "dataVersion"],
+      "properties": {
+        "date": {
+          "type": "string",
+          "format": "date",
+          "description": "開催日（YYYY-MM-DD形式）",
+          "example": "2026-01-23"
+        },
+        "venue": {
+          "type": "string",
+          "description": "競馬場名",
+          "example": "大井"
+        },
+        "venueCode": {
+          "type": "string",
+          "description": "競馬場コード",
+          "example": "OI"
+        },
+        "races": {
+          "type": "array",
+          "description": "予想レース配列",
+          "items": {
+            "$ref": "#/definitions/predictionRace"
+          }
+        },
+        "dataVersion": {
+          "type": "string",
+          "description": "データバージョン",
+          "example": "1.0"
+        }
+      }
+    },
+    "predictionRace": {
+      "type": "object",
+      "required": ["raceNumber", "horses"],
+      "properties": {
+        "raceNumber": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 12,
+          "description": "レース番号",
+          "example": 1
+        },
+        "raceName": {
+          "type": "string",
+          "description": "レース名",
+          "example": "３歳(六)ダ1,300m"
+        },
+        "horses": {
+          "type": "array",
+          "description": "予想馬配列",
+          "items": {
+            "$ref": "#/definitions/predictionHorse"
+          }
+        },
+        "bettingLines": {
+          "type": "object",
+          "description": "買い目",
+          "properties": {
+            "umatan": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "馬単買い目",
+              "example": ["5-3.7.8", "3-5.7.8"]
+            }
+          }
+        },
+        "generatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "予想生成日時",
+          "example": "2026-01-23T15:00:00+09:00"
+        }
+      }
+    },
+    "predictionHorse": {
+      "type": "object",
+      "required": ["number", "name", "pt", "role"],
+      "properties": {
+        "number": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 18,
+          "description": "馬番",
+          "example": 5
+        },
+        "name": {
+          "type": "string",
+          "description": "馬名",
+          "example": "マコスペシャル"
+        },
+        "pt": {
+          "type": "number",
+          "description": "累積スコア（pt）",
+          "example": 90.5
+        },
+        "role": {
+          "type": "string",
+          "enum": ["本命", "対抗", "単穴", "連下", "抑え"],
+          "description": "役割",
+          "example": "本命"
+        },
+        "mark": {
+          "type": "string",
+          "enum": ["◎", "○", "▲", "△", "×"],
+          "description": "印",
+          "example": "◎"
+        }
+      }
+    }
+  }
+}
