@@ -1,0 +1,32 @@
+{
+  "date": "2026-01-23",
+  "venue": "船橋",
+  "venueCode": "FU",
+  "races": [
+    {
+      "raceNumber": 5,
+      "raceName": "ガーネット２２００",
+      "predictions": {
+        "honmei": 7,
+        "taikou": 9,
+        "tanaana": 11
+      },
+      "bettingLines": {
+        "umatan": {
+          "main": ["7-9", "7-11"],
+          "sub": ["9-7", "11-7", "9-11"]
+        },
+        "sanrenpuku": {
+          "main": ["7-9-11"],
+          "sub": ["7-9-12", "7-11-12"]
+        },
+        "sanrentan": {
+          "main": ["7-9-11"],
+          "sub": ["7-11-9", "9-7-11"]
+        }
+      },
+      "generatedAt": "2026-01-23T15:00:00+09:00"
+    }
+  ],
+  "dataVersion": "1.0"
+}
