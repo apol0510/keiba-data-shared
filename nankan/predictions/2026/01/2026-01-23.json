@@ -4,29 +4,14 @@
   "venueCode": "FU",
   "races": [
     {
-      "raceNumber": 5,
-      "raceName": "ガーネット２２００",
-      "predictions": {
-        "honmei": 7,
-        "taikou": 9,
-        "tanaana": 11
-      },
+      "raceNumber": 11,
+      "raceName": "鯛ノ浦特別 Ａ２Ｂ１(一)",
       "bettingLines": {
         "umatan": {
-          "main": ["7-9", "7-11"],
-          "sub": ["9-7", "11-7", "9-11"]
-        },
-        "sanrenpuku": {
-          "main": ["7-9-11"],
-          "sub": ["7-9-12", "7-11-12"]
-        },
-        "sanrentan": {
-          "main": ["7-9-11"],
-          "sub": ["7-11-9", "9-7-11"]
+          "main": ["3-10", "10-3"],
+          "sub": ["7-9", "9-10"]
         }
-      },
-      "generatedAt": "2026-01-23T15:00:00+09:00"
+      }
     }
-  ],
-  "dataVersion": "1.0"
+  ]
 }
