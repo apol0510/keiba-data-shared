@@ -1,21 +1,6 @@
 ---
-export const prerender = false;
-
-const title = '南関競馬・地方競馬の結果データ | keiba-data-shared';
-const description = '南関競馬（大井・船橋・川崎・浦和）の最新レース結果。当日の全レース結果、払戻金、ラップタイムをすぐに確認できます。JSON APIでデータ取得も可能。';
-
-// 最新のJSONファイルを取得
-async function getLatestResults() {
-  try {
-    const response = await fetch('https://raw.githubusercontent.com/apol0510/keiba-data-shared/main/nankan/results/2026/01/2026-01-23.json');
-    if (!response.ok) return null;
-    return await response.json();
-  } catch {
-    return null;
-  }
-}
-
-const latestData = await getLatestResults();
+const title = 'keiba-data-shared - 競馬データ共有API';
+const description = '南関競馬・中央競馬の予想・結果データJSON API';
 ---
 
 <!DOCTYPE html>
@@ -25,307 +10,66 @@ const latestData = await getLatestResults();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{title}</title>
     <meta name="description" content={description}>
-    <link rel="canonical" href={Astro.site}>
+    <meta name="robots" content="noindex">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
         body {
-            font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+            font-family: system-ui, -apple-system, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
             line-height: 1.6;
             color: #333;
-            background: #f5f5f5;
         }
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 0 1rem;
-        }
-        header {
-            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
-            color: white;
-            padding: 3rem 0;
-            text-align: center;
-        }
-        header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-        }
-        header p {
-            font-size: 1.2rem;
-            opacity: 0.9;
-        }
-        main {
-            padding: 2rem 0;
-        }
-        section {
-            background: white;
-            margin-bottom: 2rem;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        h1 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 0.5rem;
         }
         h2 {
-            color: #2c3e50;
-            margin-bottom: 1.5rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 3px solid #3498db;
-        }
-        h3 {
             color: #34495e;
-            margin: 1.5rem 0 1rem;
+            margin-top: 2rem;
         }
-        .venue-badge {
-            display: inline-block;
-            background: #3498db;
-            color: white;
-            padding: 0.25rem 0.75rem;
-            border-radius: 4px;
-            font-weight: bold;
-            margin-right: 0.5rem;
-        }
-        .race-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-        .race-card {
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            padding: 1rem;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-        .race-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-        }
-        .race-card a {
-            text-decoration: none;
-            color: inherit;
-        }
-        .race-number {
-            font-size: 1.5rem;
-            font-weight: bold;
+        a {
             color: #3498db;
-            margin-bottom: 0.5rem;
+            text-decoration: none;
         }
-        .race-name {
-            font-size: 0.9rem;
-            color: #666;
-            margin-bottom: 0.5rem;
+        a:hover {
+            text-decoration: underline;
         }
-        .race-info {
-            font-size: 0.85rem;
-            color: #888;
+        ul {
+            margin: 1rem 0;
         }
-        .winner {
-            margin-top: 0.5rem;
-            padding-top: 0.5rem;
-            border-top: 1px solid #eee;
-            font-size: 0.9rem;
-        }
-        .winner-name {
-            font-weight: bold;
-            color: #e74c3c;
-        }
-        .api-section {
-            background: #ecf0f1;
-        }
-        .endpoint {
-            background: #34495e;
-            color: #ecf0f1;
-            padding: 0.75rem 1rem;
-            border-radius: 4px;
+        li {
             margin: 0.5rem 0;
+        }
+        code {
+            background: #f5f5f5;
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
             font-family: 'Courier New', monospace;
             font-size: 0.9rem;
-            overflow-x: auto;
         }
-        .endpoint a {
-            color: #3498db;
-        }
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin-top: 1rem;
-        }
-        .feature {
-            padding: 1rem;
-            background: #f8f9fa;
-            border-radius: 6px;
-            border-left: 4px solid #3498db;
-        }
-        .feature h3 {
-            margin-top: 0;
-            font-size: 1.1rem;
-        }
-        .cta {
-            text-align: center;
-            padding: 2rem;
-            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
-            color: white;
-            border-radius: 8px;
-        }
-        .cta a {
-            display: inline-block;
-            background: white;
-            color: #2980b9;
-            padding: 0.75rem 2rem;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: bold;
-            margin-top: 1rem;
-            transition: transform 0.2s;
-        }
-        .cta a:hover {
-            transform: scale(1.05);
-        }
-        footer {
-            text-align: center;
-            padding: 2rem 0;
-            color: #666;
-            font-size: 0.9rem;
-        }
-        @media (max-width: 768px) {
-            header h1 {
-                font-size: 1.8rem;
-            }
-            header p {
-                font-size: 1rem;
-            }
-            section {
-                padding: 1.5rem;
-            }
-            .race-grid {
-                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            }
+        .section {
+            margin: 2rem 0;
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1>🏇 keiba-data-shared</h1>
-            <p>南関競馬・地方競馬の最新結果データ</p>
-        </div>
-    </header>
+    <h1>keiba-data-shared</h1>
+    <p>競馬データ共有API - JSON配信サービス</p>
 
-    <main class="container">
-        {latestData && (
-            <section>
-                <h2>📅 最新レース結果 - {latestData.date}</h2>
-                <p>
-                    <span class="venue-badge">{latestData.venue}</span>
-                    全{latestData.races.length}レース
-                </p>
+    <div class="section">
+        <h2>📋 JSONエンドポイント</h2>
+        <ul>
+            <li><a href="/nankan/results/2026/01/2026-01-23.json"><code>/nankan/results/YYYY/MM/YYYY-MM-DD.json</code></a> - 結果データ</li>
+            <li><a href="/nankan/predictions/2026/01/2026-01-23.json"><code>/nankan/predictions/YYYY/MM/YYYY-MM-DD.json</code></a> - 予想データ</li>
+            <li><a href="/nankan/archive/archiveResults.json"><code>/nankan/archive/archiveResults.json</code></a> - 的中判定データ</li>
+        </ul>
+    </div>
 
-                <div class="race-grid">
-                    {latestData.races.map((race: any) => (
-                        <div class="race-card">
-                            <a href={`/nankan/results/2026/1/23/${latestData.venueCode.toLowerCase() === 'fu' ? 'funabashi' : latestData.venueCode.toLowerCase() === 'oi' ? 'ooi' : latestData.venueCode.toLowerCase() === 'ka' ? 'kawasaki' : 'urawa'}/${race.raceNumber}/`}>
-                                <div class="race-number">第{race.raceNumber}R</div>
-                                <div class="race-name">{race.raceName}</div>
-                                <div class="race-info">
-                                    {race.surface}{race.distance}m / {race.horses}頭
-                                </div>
-                                {race.results && race.results[0] && (
-                                    <div class="winner">
-                                        <div class="winner-name">🏆 {race.results[0].name}</div>
-                                        <div style="font-size: 0.85rem; color: #888;">
-                                            {race.results[0].jockey} / {race.results[0].popularity}番人気
-                                        </div>
-                                    </div>
-                                )}
-                            </a>
-                        </div>
-                    ))}
-                </div>
-            </section>
-        )}
-
-        <section>
-            <h2>✨ 主な機能</h2>
-            <div class="features">
-                <div class="feature">
-                    <h3>📊 全レース結果</h3>
-                    <p>着順、タイム、人気、払戻金など詳細なレースデータを提供</p>
-                </div>
-                <div class="feature">
-                    <h3>⚡ リアルタイム更新</h3>
-                    <p>レース確定後、迅速にデータを公開。速報性重視</p>
-                </div>
-                <div class="feature">
-                    <h3>🔍 SEO最適化</h3>
-                    <p>Google検索でレース結果をすぐに発見できる構造化データ</p>
-                </div>
-                <div class="feature">
-                    <h3>📱 レスポンシブ</h3>
-                    <p>スマホ・タブレット・PCあらゆるデバイスで快適に閲覧</p>
-                </div>
-                <div class="feature">
-                    <h3>🔌 JSON API</h3>
-                    <p>開発者向けにJSON形式でデータを提供。自由に活用可能</p>
-                </div>
-                <div class="feature">
-                    <h3>🆓 無料・公開</h3>
-                    <p>すべてのデータを無料で公開。商用・非商用問わず利用可能</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="api-section">
-            <h2>🔌 JSON APIエンドポイント</h2>
-            <p>開発者向けに、すべてのデータをJSON形式で提供しています。</p>
-
-            <h3>結果データ</h3>
-            <div class="endpoint">
-                <a href="/nankan/results/2026/01/2026-01-23.json" target="_blank">
-                    /nankan/results/YYYY/MM/YYYY-MM-DD.json
-                </a>
-            </div>
-
-            <h3>予想データ</h3>
-            <div class="endpoint">
-                <a href="/nankan/predictions/2026/01/2026-01-23.json" target="_blank">
-                    /nankan/predictions/YYYY/MM/YYYY-MM-DD.json
-                </a>
-            </div>
-
-            <h3>的中判定データ</h3>
-            <div class="endpoint">
-                <a href="/nankan/archive/archiveResults.json" target="_blank">
-                    /nankan/archive/archiveResults.json
-                </a>
-            </div>
-
-            <h3>使用例（JavaScript）</h3>
-            <pre style="background: #2c3e50; color: #ecf0f1; padding: 1rem; border-radius: 4px; overflow-x: auto;"><code>const response = await fetch(
-  'https://keiba-data-shared.netlify.app/nankan/results/2026/01/2026-01-23.json'
-);
-const data = await response.json();
-
-console.log(data.races[0].results[0]); // 1着馬データ
-console.log(data.races[0].payouts.tansho); // 単勝配当</code></pre>
-        </section>
-
-        <section class="cta">
-            <h2>📖 開発者向けドキュメント</h2>
-            <p>詳細なデータスキーマ、使用方法、サンプルコードを確認できます</p>
-            <a href="https://github.com/apol0510/keiba-data-shared" target="_blank" rel="noopener">
-                GitHub リポジトリを見る →
-            </a>
-        </section>
-    </main>
-
-    <footer>
-        <div class="container">
-            <p>&copy; 2026 keiba-data-shared | <a href="https://github.com/apol0510/keiba-data-shared" style="color: #3498db;">GitHub</a></p>
-            <p style="margin-top: 0.5rem; font-size: 0.85rem;">南関競馬（大井・船橋・川崎・浦和）のレース結果データを無料で提供</p>
-        </div>
-    </footer>
+    <div class="section">
+        <h2>📖 ドキュメント</h2>
+        <p><a href="https://github.com/apol0510/keiba-data-shared">GitHub リポジトリ</a> - データスキーマ、使用方法</p>
+    </div>
 </body>
 </html>
