@@ -98,16 +98,70 @@
         }
       ],
       "payouts": {
-        "tansho": {
-          "number": 3,
-          "payout": 120,
-          "popularity": 1
-        },
-        "umatan": {
-          "combination": "3-2",
-          "payout": 190,
-          "popularity": 1
-        }
+        "tansho": [
+          {
+            "number": "3",
+            "payout": 120,
+            "popularity": 1
+          }
+        ],
+        "fukusho": [
+          {
+            "number": "3",
+            "payout": 100,
+            "popularity": 1
+          },
+          {
+            "number": "2",
+            "payout": 110,
+            "popularity": 2
+          }
+        ],
+        "umaren": [
+          {
+            "combination": "2-3",
+            "payout": 150,
+            "popularity": 1
+          }
+        ],
+        "umatan": [
+          {
+            "combination": "3-2",
+            "payout": 190,
+            "popularity": 1
+          }
+        ],
+        "wide": [
+          {
+            "combination": "2-3",
+            "payout": 120,
+            "popularity": 1
+          },
+          {
+            "combination": "3-4",
+            "payout": 270,
+            "popularity": 4
+          },
+          {
+            "combination": "2-4",
+            "payout": 320,
+            "popularity": 5
+          }
+        ],
+        "sanrenpuku": [
+          {
+            "combination": "2-3-4",
+            "payout": 470,
+            "popularity": 2
+          }
+        ],
+        "sanrentan": [
+          {
+            "combination": "3-2-4",
+            "payout": 840,
+            "popularity": 2
+          }
+        ]
       },
       "timeData": {
         "furlongTimes": [
@@ -116,311 +170,7 @@
       },
       "cornerData": null,
       "commentary": "1番人気3番エスポワールバイオが直線で2番ハウトゥヴェールを捕らえて優勝。勝ちタイム1:18.6で快勝。",
-      "enteredAt": "2026-01-26T02:54:17.333Z",
-      "enteredBy": "staff-ui"
-    },
-    {
-      "raceNumber": 2,
-      "raceName": "３歳 未出走未受賞ア",
-      "distance": 1200,
-      "surface": "ダート",
-      "track": "外",
-      "horses": 7,
-      "startTime": "15:15",
-      "results": [
-        {
-          "rank": 1,
-          "bracket": 1,
-          "number": 1,
-          "name": "トラペジウム",
-          "jockey": "川島正太郎",
-          "trainer": "大津剛",
-          "time": "1:17.3",
-          "margin": "-",
-          "lastFurlong": "39.7",
-          "popularity": 2
-        },
-        {
-          "rank": 2,
-          "bracket": 7,
-          "number": 7,
-          "name": "ココアリスタ",
-          "jockey": "本田正重",
-          "trainer": "米谷康秀",
-          "time": "1:17.8",
-          "margin": "２ 1/2",
-          "lastFurlong": "39.8",
-          "popularity": 1
-        },
-        {
-          "rank": 3,
-          "bracket": 2,
-          "number": 2,
-          "name": "バブリーヒーロー",
-          "jockey": "本橋孝太",
-          "trainer": "矢野義幸",
-          "time": "1:18.3",
-          "margin": "２ 1/2",
-          "lastFurlong": "40.3",
-          "popularity": 3
-        },
-        {
-          "rank": 4,
-          "bracket": 5,
-          "number": 5,
-          "name": "ステレオカリー",
-          "jockey": "矢野貴之",
-          "trainer": "坂本昇",
-          "time": "1:18.8",
-          "margin": "２ 1/2",
-          "lastFurlong": "41.0",
-          "popularity": 4
-        },
-        {
-          "rank": 5,
-          "bracket": 6,
-          "number": 6,
-          "name": "フィカスリラータ",
-          "jockey": "小杉亮",
-          "trainer": "山中尊徳",
-          "time": "1:19.0",
-          "margin": "3/4",
-          "lastFurlong": "40.4",
-          "popularity": 5
-        },
-        {
-          "rank": 6,
-          "bracket": 4,
-          "number": 4,
-          "name": "エムワンワークス",
-          "jockey": "山口達弥",
-          "trainer": "林正人",
-          "time": "1:19.6",
-          "margin": "３",
-          "lastFurlong": "40.6",
-          "popularity": 7
-        },
-        {
-          "rank": 7,
-          "bracket": 3,
-          "number": 3,
-          "name": "オールインアリス",
-          "jockey": "濱田達也",
-          "trainer": "渋谷信博",
-          "time": "1:19.9",
-          "margin": "１ 1/2",
-          "lastFurlong": "41.3",
-          "popularity": 6
-        }
-      ],
-      "payouts": {
-        "tansho": {
-          "number": 1,
-          "payout": 270,
-          "popularity": 2
-        },
-        "umatan": {
-          "combination": "1-7",
-          "payout": 520,
-          "popularity": 3
-        }
-      },
-      "timeData": {
-        "furlongTimes": [
-          39.7
-        ]
-      },
-      "cornerData": null,
-      "commentary": "2番人気の1番トラペジウムが追い込みから 勝ちタイム1:17.3、1番人気7番ココアリスタは2着。波乱の決着となった。",
-      "enteredAt": "2026-01-26T02:54:47.917Z",
-      "enteredBy": "staff-ui"
-    },
-    {
-      "raceNumber": 3,
-      "raceName": "Ｃ３(一) 特選",
-      "distance": 1500,
-      "surface": "ダート",
-      "track": "外",
-      "horses": 13,
-      "startTime": "15:45",
-      "results": [
-        {
-          "rank": 1,
-          "bracket": 8,
-          "number": 13,
-          "name": "ウェカピポ",
-          "jockey": "笹川翼",
-          "trainer": "山田信大",
-          "time": "1:38.1",
-          "margin": "-",
-          "lastFurlong": "39.1",
-          "popularity": 2
-        },
-        {
-          "rank": 2,
-          "bracket": 3,
-          "number": 3,
-          "name": "ゴッドトレジャー",
-          "jockey": "本田正重",
-          "trainer": "石崎駿",
-          "time": "1:38.2",
-          "margin": "1/2",
-          "lastFurlong": "39.7",
-          "popularity": 4
-        },
-        {
-          "rank": 3,
-          "bracket": 8,
-          "number": 12,
-          "name": "ブレーブヒーロー",
-          "jockey": "岡村健司",
-          "trainer": "田中力",
-          "time": "1:39.1",
-          "margin": "４",
-          "lastFurlong": "39.9",
-          "popularity": 6
-        },
-        {
-          "rank": 4,
-          "bracket": 7,
-          "number": 10,
-          "name": "ハンクスター",
-          "jockey": "矢野貴之",
-          "trainer": "坂本昇",
-          "time": "1:39.2",
-          "margin": "1/2",
-          "lastFurlong": "40.2",
-          "popularity": 1
-        },
-        {
-          "rank": 5,
-          "bracket": 6,
-          "number": 8,
-          "name": "エリセイラ",
-          "jockey": "野畑凌",
-          "trainer": "齊藤敏",
-          "time": "1:39.3",
-          "margin": "1/2",
-          "lastFurlong": "39.7",
-          "popularity": 11
-        },
-        {
-          "rank": 6,
-          "bracket": 2,
-          "number": 2,
-          "name": "フィオーレ",
-          "jockey": "西啓太",
-          "trainer": "林幻",
-          "time": "1:39.5",
-          "margin": "１",
-          "lastFurlong": "40.7",
-          "popularity": 7
-        },
-        {
-          "rank": 7,
-          "bracket": 7,
-          "number": 11,
-          "name": "アルセリア",
-          "jockey": "篠谷葵",
-          "trainer": "林正人",
-          "time": "1:40.2",
-          "margin": "３",
-          "lastFurlong": "41.3",
-          "popularity": 5
-        },
-        {
-          "rank": 8,
-          "bracket": 6,
-          "number": 9,
-          "name": "マオノオラクル",
-          "jockey": "西村栄喜",
-          "trainer": "渋谷信博",
-          "time": "1:40.5",
-          "margin": "１ 1/2",
-          "lastFurlong": "41.5",
-          "popularity": 9
-        },
-        {
-          "rank": 9,
-          "bracket": 5,
-          "number": 7,
-          "name": "ルジュウェール",
-          "jockey": "桑村真明",
-          "trainer": "山中尊徳",
-          "time": "1:40.6",
-          "margin": "クビ",
-          "lastFurlong": "41.4",
-          "popularity": 3
-        },
-        {
-          "rank": 10,
-          "bracket": 4,
-          "number": 4,
-          "name": "メイショウボンゴチ",
-          "jockey": "本橋孝太",
-          "trainer": "玉井勝",
-          "time": "1:41.2",
-          "margin": "３",
-          "lastFurlong": "42.5",
-          "popularity": 10
-        },
-        {
-          "rank": 11,
-          "bracket": 4,
-          "number": 5,
-          "name": "ハッピージェミニ",
-          "jockey": "小杉亮",
-          "trainer": "矢内博",
-          "time": "1:41.3",
-          "margin": "1/2",
-          "lastFurlong": "41.7",
-          "popularity": 12
-        },
-        {
-          "rank": 12,
-          "bracket": 1,
-          "number": 1,
-          "name": "アルゴフィリオ",
-          "jockey": "▲椿聡太",
-          "trainer": "玉井等",
-          "time": "1:41.3",
-          "margin": "アタマ",
-          "lastFurlong": "41.7",
-          "popularity": 13
-        },
-        {
-          "rank": 13,
-          "bracket": 5,
-          "number": 6,
-          "name": "アルファエリザベス",
-          "jockey": "山口達弥",
-          "trainer": "林正人",
-          "time": "1:41.5",
-          "margin": "3/4",
-          "lastFurlong": "41.5",
-          "popularity": 8
-        }
-      ],
-      "payouts": {
-        "tansho": {
-          "number": 13,
-          "payout": 230,
-          "popularity": 2
-        },
-        "umatan": {
-          "combination": "13-3",
-          "payout": 1640,
-          "popularity": 5
-        }
-      },
-      "timeData": {
-        "furlongTimes": [
-          39.6
-        ]
-      },
-      "cornerData": null,
-      "commentary": "2番人気の13番ウェカピポが追い込みから 勝ちタイム1:38.1、1番人気10番ハンクスターは4着。波乱の決着となった。",
-      "enteredAt": "2026-01-26T02:55:06.506Z",
+      "enteredAt": "2026-01-26T05:10:16.250Z",
       "enteredBy": "staff-ui"
     }
   ],
