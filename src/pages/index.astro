@@ -1,10 +1,36 @@
+---
+const title = 'keiba-data-shared - 競馬データ共有API';
+const description = '南関競馬・中央競馬の予想・結果データJSON API';
+---
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>keiba-data-shared - 競馬データ共有API</title>
-    <meta name="description" content="南関競馬・中央競馬の予想・結果データJSON API">
+    <title>{title}</title>
+    <meta name="description" content={description}>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+        h1 {
+            color: #333;
+        }
+        a {
+            color: #0066cc;
+        }
+        ul {
+            margin: 1rem 0;
+        }
+        li {
+            margin: 0.5rem 0;
+        }
+    </style>
 </head>
 <body>
     <h1>keiba-data-shared</h1>

@@ -20,3 +20,10 @@ yarn-error.log*
 *.tmp
 *.temp
 .cache/
+
+# Local Netlify folder
+.netlify
+
+# Astro
+dist/
+.astro/

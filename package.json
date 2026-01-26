@@ -8,6 +8,9 @@
     "./parse-nankan-results": "./parser/parse-nankan-results.js"
   },
   "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -27,5 +30,9 @@
   "bugs": {
     "url": "https://github.com/apol0510/keiba-data-shared/issues"
   },
-  "homepage": "https://github.com/apol0510/keiba-data-shared#readme"
+  "homepage": "https://github.com/apol0510/keiba-data-shared#readme",
+  "dependencies": {
+    "@astrojs/netlify": "^6.6.4",
+    "astro": "^5.16.15"
+  }
 }
