@@ -1,6 +1,5 @@
 [build]
   publish = "."
-  command = "echo 'no build'"
 
 [[headers]]
   for = "/**/*.json"
