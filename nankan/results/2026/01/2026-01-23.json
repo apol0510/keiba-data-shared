@@ -4,11 +4,127 @@
   "venueCode": "FU",
   "races": [
     {
-      "raceNumber": 3,
-      "raceName": "Ｃ３(一) 特選",
-      "distance": 1500,
+      "raceNumber": 1,
+      "raceName": "３歳 未出走未受賞イ",
+      "distance": 1200,
       "surface": "ダート",
       "track": "外",
+      "horses": 7,
+      "startTime": "14:45",
+      "results": [
+        {
+          "rank": 1,
+          "bracket": 3,
+          "number": 3,
+          "name": "エスポワールバイオ",
+          "jockey": "本田正重",
+          "trainer": "新井清重",
+          "time": "1:18.6",
+          "margin": "-",
+          "lastFurlong": "39.9",
+          "popularity": 1
+        },
+        {
+          "rank": 2,
+          "bracket": 2,
+          "number": 2,
+          "name": "ハウトゥヴェール",
+          "jockey": "張田昂",
+          "trainer": "森泰斗",
+          "time": "1:18.7",
+          "margin": "クビ",
+          "lastFurlong": "40.2",
+          "popularity": 2
+        },
+        {
+          "rank": 3,
+          "bracket": 4,
+          "number": 4,
+          "name": "ビッグメダーリア",
+          "jockey": "▲椿聡太",
+          "trainer": "田中力",
+          "time": "1:19.4",
+          "margin": "３",
+          "lastFurlong": "40.4",
+          "popularity": 4
+        },
+        {
+          "rank": 4,
+          "bracket": 5,
+          "number": 5,
+          "name": "ブライティアメール",
+          "jockey": "篠谷葵",
+          "trainer": "山田信大",
+          "time": "1:19.7",
+          "margin": "１ 1/2",
+          "lastFurlong": "39.9",
+          "popularity": 3
+        },
+        {
+          "rank": 5,
+          "bracket": 6,
+          "number": 6,
+          "name": "ユウユウスター",
+          "jockey": "仲野光馬",
+          "trainer": "渋谷信博",
+          "time": "1:19.8",
+          "margin": "クビ",
+          "lastFurlong": "40.4",
+          "popularity": 6
+        },
+        {
+          "rank": 6,
+          "bracket": 1,
+          "number": 1,
+          "name": "ターンイットアップ",
+          "jockey": "川島正太郎",
+          "trainer": "山中尊徳",
+          "time": "1:20.2",
+          "margin": "２",
+          "lastFurlong": "41.3",
+          "popularity": 5
+        },
+        {
+          "rank": 7,
+          "bracket": 7,
+          "number": 7,
+          "name": "ラグビル",
+          "jockey": "庄司大輔",
+          "trainer": "阿井正雄",
+          "time": "1:20.4",
+          "margin": "１",
+          "lastFurlong": "40.0",
+          "popularity": 7
+        }
+      ],
+      "payouts": {
+        "tansho": {
+          "number": 3,
+          "payout": 120,
+          "popularity": 1
+        },
+        "umatan": {
+          "combination": "3-2",
+          "payout": 190,
+          "popularity": 1
+        }
+      },
+      "timeData": {
+        "furlongTimes": [
+          40.1
+        ]
+      },
+      "cornerData": null,
+      "commentary": "1番人気3番エスポワールバイオが直線で2番ハウトゥヴェールを捕らえて優勝。勝ちタイム1:18.6で快勝。",
+      "enteredAt": "2026-01-26T00:53:11.737Z",
+      "enteredBy": "staff-ui"
+    },
+    {
+      "raceNumber": 3,
+      "raceName": "ï¼£ï¼(ä¸) ç¹é¸",
+      "distance": 1500,
+      "surface": "ãã¼ã",
+      "track": "å¤",
       "horses": 13,
       "startTime": "15:45",
       "results": [
@@ -16,9 +132,9 @@
           "rank": 1,
           "bracket": 8,
           "number": 13,
-          "name": "ウェカピポ",
-          "jockey": "笹川翼",
-          "trainer": "山田信大",
+          "name": "ã¦ã§ã«ãã",
+          "jockey": "ç¬¹å·ç¿¼",
+          "trainer": "å±±ç°ä¿¡å¤§",
           "time": "1:38.1",
           "margin": "-",
           "lastFurlong": "39.1",
@@ -28,9 +144,9 @@
           "rank": 2,
           "bracket": 3,
           "number": 3,
-          "name": "ゴッドトレジャー",
-          "jockey": "本田正重",
-          "trainer": "石崎駿",
+          "name": "ã´ãããã¬ã¸ã£ã¼",
+          "jockey": "æ¬ç°æ­£é",
+          "trainer": "ç³å´é§¿",
           "time": "1:38.2",
           "margin": "1/2",
           "lastFurlong": "39.7",
@@ -40,11 +156,11 @@
           "rank": 3,
           "bracket": 8,
           "number": 12,
-          "name": "ブレーブヒーロー",
-          "jockey": "岡村健司",
-          "trainer": "田中力",
+          "name": "ãã¬ã¼ããã¼ã­ã¼",
+          "jockey": "å²¡æå¥å¸",
+          "trainer": "ç°ä¸­å",
           "time": "1:39.1",
-          "margin": "４",
+          "margin": "ï¼",
           "lastFurlong": "39.9",
           "popularity": 6
         },
@@ -52,9 +168,9 @@
           "rank": 4,
           "bracket": 7,
           "number": 10,
-          "name": "ハンクスター",
-          "jockey": "矢野貴之",
-          "trainer": "坂本昇",
+          "name": "ãã³ã¯ã¹ã¿ã¼",
+          "jockey": "ç¢éè²´ä¹",
+          "trainer": "åæ¬æ",
           "time": "1:39.2",
           "margin": "1/2",
           "lastFurlong": "40.2",
@@ -64,9 +180,9 @@
           "rank": 5,
           "bracket": 6,
           "number": 8,
-          "name": "エリセイラ",
-          "jockey": "野畑凌",
-          "trainer": "齊藤敏",
+          "name": "ã¨ãªã»ã¤ã©",
+          "jockey": "éçå",
+          "trainer": "é½è¤æ",
           "time": "1:39.3",
           "margin": "1/2",
           "lastFurlong": "39.7",
@@ -76,11 +192,11 @@
           "rank": 6,
           "bracket": 2,
           "number": 2,
-          "name": "フィオーレ",
-          "jockey": "西啓太",
-          "trainer": "林幻",
+          "name": "ãã£ãªã¼ã¬",
+          "jockey": "è¥¿åå¤ª",
+          "trainer": "æå¹»",
           "time": "1:39.5",
-          "margin": "１",
+          "margin": "ï¼",
           "lastFurlong": "40.7",
           "popularity": 7
         },
@@ -88,11 +204,11 @@
           "rank": 7,
           "bracket": 7,
           "number": 11,
-          "name": "アルセリア",
-          "jockey": "篠谷葵",
-          "trainer": "林正人",
+          "name": "ã¢ã«ã»ãªã¢",
+          "jockey": "ç¯ è°·èµ",
+          "trainer": "ææ­£äºº",
           "time": "1:40.2",
-          "margin": "３",
+          "margin": "ï¼",
           "lastFurlong": "41.3",
           "popularity": 5
         },
@@ -100,11 +216,11 @@
           "rank": 8,
           "bracket": 6,
           "number": 9,
-          "name": "マオノオラクル",
-          "jockey": "西村栄喜",
-          "trainer": "渋谷信博",
+          "name": "ããªããªã©ã¯ã«",
+          "jockey": "è¥¿ææ å",
+          "trainer": "æ¸è°·ä¿¡å",
           "time": "1:40.5",
-          "margin": "１ 1/2",
+          "margin": "ï¼ 1/2",
           "lastFurlong": "41.5",
           "popularity": 9
         },
@@ -112,11 +228,11 @@
           "rank": 9,
           "bracket": 5,
           "number": 7,
-          "name": "ルジュウェール",
-          "jockey": "桑村真明",
-          "trainer": "山中尊徳",
+          "name": "ã«ã¸ã¥ã¦ã§ã¼ã«",
+          "jockey": "æ¡æçæ",
+          "trainer": "å±±ä¸­å°å¾³",
           "time": "1:40.6",
-          "margin": "クビ",
+          "margin": "ã¯ã",
           "lastFurlong": "41.4",
           "popularity": 3
         },
@@ -124,11 +240,11 @@
           "rank": 10,
           "bracket": 4,
           "number": 4,
-          "name": "メイショウボンゴチ",
-          "jockey": "本橋孝太",
-          "trainer": "玉井勝",
+          "name": "ã¡ã¤ã·ã§ã¦ãã³ã´ã",
+          "jockey": "æ¬æ©å­å¤ª",
+          "trainer": "çäºå",
           "time": "1:41.2",
-          "margin": "３",
+          "margin": "ï¼",
           "lastFurlong": "42.5",
           "popularity": 10
         },
@@ -136,9 +252,9 @@
           "rank": 11,
           "bracket": 4,
           "number": 5,
-          "name": "ハッピージェミニ",
-          "jockey": "小杉亮",
-          "trainer": "矢内博",
+          "name": "ãããã¼ã¸ã§ãã",
+          "jockey": "å°æäº®",
+          "trainer": "ç¢åå",
           "time": "1:41.3",
           "margin": "1/2",
           "lastFurlong": "41.7",
@@ -148,11 +264,11 @@
           "rank": 12,
           "bracket": 1,
           "number": 1,
-          "name": "アルゴフィリオ",
-          "jockey": "▲椿聡太",
-          "trainer": "玉井等",
+          "name": "ã¢ã«ã´ãã£ãªãª",
+          "jockey": "â²æ¤¿è¡å¤ª",
+          "trainer": "çäºç­",
           "time": "1:41.3",
-          "margin": "アタマ",
+          "margin": "ã¢ã¿ã",
           "lastFurlong": "41.7",
           "popularity": 13
         },
@@ -160,9 +276,9 @@
           "rank": 13,
           "bracket": 5,
           "number": 6,
-          "name": "アルファエリザベス",
-          "jockey": "山口達弥",
-          "trainer": "林正人",
+          "name": "ã¢ã«ãã¡ã¨ãªã¶ãã¹",
+          "jockey": "å±±å£éå¼¥",
+          "trainer": "ææ­£äºº",
           "time": "1:41.5",
           "margin": "3/4",
           "lastFurlong": "41.5",
@@ -237,7 +353,7 @@
       },
       "cornerData": [
         {
-          "corner": "１角",
+          "corner": "ï¼è§",
           "order": [
             3,
             4,
@@ -255,7 +371,7 @@
           ]
         },
         {
-          "corner": "２角",
+          "corner": "ï¼è§",
           "order": [
             3,
             4,
@@ -273,7 +389,7 @@
           ]
         },
         {
-          "corner": "３角",
+          "corner": "ï¼è§",
           "order": [
             3,
             4,
@@ -291,7 +407,7 @@
           ]
         },
         {
-          "corner": "４角",
+          "corner": "ï¼è§",
           "order": [
             3,
             11,
@@ -309,16 +425,16 @@
           ]
         }
       ],
-      "commentary": "3番ゴッドトレジャーが勢いよくハナを切り、2番人気の13番ウェカピポが追い込みから 勝ちタイム1:38.1、1番人気10番ハンクスターは4着に敗れた。波乱の決着となった。三連単の払い戻しは23,330円の高配当。",
+      "commentary": "3çªã´ãããã¬ã¸ã£ã¼ãå¢ããããããåãã2çªäººæ°ã®13çªã¦ã§ã«ãããè¿½ãè¾¼ã¿ãã åã¡ã¿ã¤ã 1:38.1ã1çªäººæ°10çªãã³ã¯ã¹ã¿ã¼ã¯4çã«æãããæ³¢ä¹±ã®æ±ºçã¨ãªã£ããä¸é£åã®æãæ»ãã¯23,330åã®é«éå½ã",
       "enteredAt": "2026-01-25T15:06:09.502Z",
       "enteredBy": "staff-ui"
     },
     {
       "raceNumber": 4,
-      "raceName": "賞金",
+      "raceName": "è³é",
       "distance": 1200,
-      "surface": "ダート",
-      "track": "外",
+      "surface": "ãã¼ã",
+      "track": "å¤",
       "horses": 12,
       "startTime": "16:20",
       "results": [
@@ -326,9 +442,9 @@
           "rank": 1,
           "bracket": 5,
           "number": 6,
-          "name": "シーオブスターズ",
-          "jockey": "張田昂",
-          "trainer": "張田京",
+          "name": "ã·ã¼ãªãã¹ã¿ã¼ãº",
+          "jockey": "å¼µç°æ",
+          "trainer": "å¼µç°äº¬",
           "time": "1:17.7",
           "margin": "-",
           "lastFurlong": "39.7",
@@ -338,11 +454,11 @@
           "rank": 2,
           "bracket": 4,
           "number": 4,
-          "name": "マサノカトレア",
-          "jockey": "岡村健司",
-          "trainer": "齊藤敏",
+          "name": "ããµãã«ãã¬ã¢",
+          "jockey": "å²¡æå¥å¸",
+          "trainer": "é½è¤æ",
           "time": "1:17.8",
-          "margin": "クビ",
+          "margin": "ã¯ã",
           "lastFurlong": "39.9",
           "popularity": 1
         },
@@ -350,11 +466,11 @@
           "rank": 3,
           "bracket": 8,
           "number": 11,
-          "name": "ボンシャンス",
-          "jockey": "笠野雄大",
-          "trainer": "山中尊徳",
+          "name": "ãã³ã·ã£ã³ã¹",
+          "jockey": "ç¬ ééå¤§",
+          "trainer": "å±±ä¸­å°å¾³",
           "time": "1:18.6",
-          "margin": "４",
+          "margin": "ï¼",
           "lastFurlong": "38.9",
           "popularity": 4
         },
@@ -362,9 +478,9 @@
           "rank": 4,
           "bracket": 5,
           "number": 5,
-          "name": "コンシェルディー",
-          "jockey": "木間塚龍馬",
-          "trainer": "岩崎真樹",
+          "name": "ã³ã³ã·ã§ã«ãã£ã¼",
+          "jockey": "æ¨éå¡é¾é¦¬",
+          "trainer": "å²©å´çæ¨¹",
           "time": "1:18.8",
           "margin": "3/4",
           "lastFurlong": "40.0",
@@ -374,11 +490,11 @@
           "rank": 5,
           "bracket": 7,
           "number": 9,
-          "name": "ラヴィエベル",
-          "jockey": "△中山遥人",
-          "trainer": "齊藤敏",
+          "name": "ã©ã´ã£ã¨ãã«",
+          "jockey": "â³ä¸­å±±é¥äºº",
+          "trainer": "é½è¤æ",
           "time": "1:19.2",
-          "margin": "２",
+          "margin": "ï¼",
           "lastFurlong": "40.7",
           "popularity": 3
         },
@@ -386,11 +502,11 @@
           "rank": 6,
           "bracket": 8,
           "number": 12,
-          "name": "カミカゼスカイ",
-          "jockey": "仲野光馬",
-          "trainer": "山下貴之",
+          "name": "ã«ãã«ã¼ã¹ã«ã¤",
+          "jockey": "ä»²éåé¦¬",
+          "trainer": "å±±ä¸è²´ä¹",
           "time": "1:19.3",
-          "margin": "クビ",
+          "margin": "ã¯ã",
           "lastFurlong": "41.2",
           "popularity": 5
         },
@@ -398,11 +514,11 @@
           "rank": 7,
           "bracket": 6,
           "number": 8,
-          "name": "キャッスルギフト",
-          "jockey": "澤田龍哉",
-          "trainer": "渋谷信博",
+          "name": "ã­ã£ãã¹ã«ã®ãã",
+          "jockey": "æ¾¤ç°é¾å",
+          "trainer": "æ¸è°·ä¿¡å",
           "time": "1:19.6",
-          "margin": "１ 1/2",
+          "margin": "ï¼ 1/2",
           "lastFurlong": "38.3",
           "popularity": 8
         },
@@ -410,11 +526,11 @@
           "rank": 8,
           "bracket": 2,
           "number": 2,
-          "name": "フロムイエスタディ",
-          "jockey": "町田直希",
-          "trainer": "佐々木功",
+          "name": "ãã­ã ã¤ã¨ã¹ã¿ãã£",
+          "jockey": "çºç°ç´å¸",
+          "trainer": "ä½ãæ¨å",
           "time": "1:19.7",
-          "margin": "クビ",
+          "margin": "ã¯ã",
           "lastFurlong": "40.4",
           "popularity": 7
         },
@@ -422,11 +538,11 @@
           "rank": 9,
           "bracket": 7,
           "number": 10,
-          "name": "レッドリリー",
-          "jockey": "野澤憲彦",
-          "trainer": "佐々木清明",
+          "name": "ã¬ãããªãªã¼",
+          "jockey": "éæ¾¤æ²å½¦",
+          "trainer": "ä½ãæ¨æ¸æ",
           "time": "1:20.0",
-          "margin": "１ 1/2",
+          "margin": "ï¼ 1/2",
           "lastFurlong": "41.3",
           "popularity": 10
         },
@@ -434,11 +550,11 @@
           "rank": 10,
           "bracket": 1,
           "number": 1,
-          "name": "サクラエナジー",
-          "jockey": "山本聡紀",
-          "trainer": "齊藤敏",
+          "name": "ãµã¯ã©ã¨ãã¸ã¼",
+          "jockey": "å±±æ¬è¡ç´",
+          "trainer": "é½è¤æ",
           "time": "1:20.3",
-          "margin": "１ 1/2",
+          "margin": "ï¼ 1/2",
           "lastFurlong": "41.1",
           "popularity": 11
         },
@@ -446,11 +562,11 @@
           "rank": 11,
           "bracket": 3,
           "number": 3,
-          "name": "ミノホタテ",
-          "jockey": "山中悠希",
-          "trainer": "林幻",
+          "name": "ãããã¿ã",
+          "jockey": "å±±ä¸­æ å¸",
+          "trainer": "æå¹»",
           "time": "1:21.9",
-          "margin": "８",
+          "margin": "ï¼",
           "lastFurlong": "42.9",
           "popularity": 6
         }
@@ -523,7 +639,7 @@
       },
       "cornerData": [
         {
-          "corner": "２角",
+          "corner": "ï¼è§",
           "order": [
             4,
             6,
@@ -540,7 +656,7 @@
           ]
         },
         {
-          "corner": "３角",
+          "corner": "ï¼è§",
           "order": [
             4,
             6,
@@ -555,7 +671,7 @@
           ]
         },
         {
-          "corner": "４角",
+          "corner": "ï¼è§",
           "order": [
             4,
             6,
@@ -570,7 +686,7 @@
           ]
         }
       ],
-      "commentary": "4番マサノカトレアが勢いよくハナを切り、2番人気の6番シーオブスターズが追い込みから 勝ちタイム1:17.7、1番人気4番マサノカトレアは2着。波乱の決着となった。三連単は2,660円。",
+      "commentary": "4çªããµãã«ãã¬ã¢ãå¢ããããããåãã2çªäººæ°ã®6çªã·ã¼ãªãã¹ã¿ã¼ãºãè¿½ãè¾¼ã¿ãã åã¡ã¿ã¤ã 1:17.7ã1çªäººæ°4çªããµãã«ãã¬ã¢ã¯2çãæ³¢ä¹±ã®æ±ºçã¨ãªã£ããä¸é£åã¯2,660åã",
       "enteredAt": "2026-01-25T15:06:09.502Z",
       "enteredBy": "staff-ui"
     }
