@@ -216,6 +216,220 @@
       "commentary": "1番人気3番エスポワールバイオが直線で2番ハウトゥヴェールを捕らえて優勝。上がり3ハロン40.1の脚を使い、勝ちタイム1:18.6で快勝。",
       "enteredAt": "2026-01-26T10:02:58.625Z",
       "enteredBy": "staff-ui"
+    },
+    {
+      "raceNumber": 2,
+      "raceName": "３歳 未出走未受賞ア",
+      "distance": 1200,
+      "surface": "ダート",
+      "track": "外",
+      "horses": 7,
+      "startTime": "15:15",
+      "results": [
+        {
+          "rank": 1,
+          "bracket": 1,
+          "number": 1,
+          "name": "トラペジウム",
+          "jockey": "川島正太郎",
+          "trainer": "大津剛",
+          "time": "1:17.3",
+          "margin": "-",
+          "lastFurlong": "39.7",
+          "popularity": 2
+        },
+        {
+          "rank": 2,
+          "bracket": 7,
+          "number": 7,
+          "name": "ココアリスタ",
+          "jockey": "本田正重",
+          "trainer": "米谷康秀",
+          "time": "1:17.8",
+          "margin": "２ 1/2",
+          "lastFurlong": "39.8",
+          "popularity": 1
+        },
+        {
+          "rank": 3,
+          "bracket": 2,
+          "number": 2,
+          "name": "バブリーヒーロー",
+          "jockey": "本橋孝太",
+          "trainer": "矢野義幸",
+          "time": "1:18.3",
+          "margin": "２ 1/2",
+          "lastFurlong": "40.3",
+          "popularity": 3
+        },
+        {
+          "rank": 4,
+          "bracket": 5,
+          "number": 5,
+          "name": "ステレオカリー",
+          "jockey": "矢野貴之",
+          "trainer": "坂本昇",
+          "time": "1:18.8",
+          "margin": "２ 1/2",
+          "lastFurlong": "41.0",
+          "popularity": 4
+        },
+        {
+          "rank": 5,
+          "bracket": 6,
+          "number": 6,
+          "name": "フィカスリラータ",
+          "jockey": "小杉亮",
+          "trainer": "山中尊徳",
+          "time": "1:19.0",
+          "margin": "3/4",
+          "lastFurlong": "40.4",
+          "popularity": 5
+        },
+        {
+          "rank": 6,
+          "bracket": 4,
+          "number": 4,
+          "name": "エムワンワークス",
+          "jockey": "山口達弥",
+          "trainer": "林正人",
+          "time": "1:19.6",
+          "margin": "３",
+          "lastFurlong": "40.6",
+          "popularity": 7
+        },
+        {
+          "rank": 7,
+          "bracket": 3,
+          "number": 3,
+          "name": "オールインアリス",
+          "jockey": "濱田達也",
+          "trainer": "渋谷信博",
+          "time": "1:19.9",
+          "margin": "１ 1/2",
+          "lastFurlong": "41.3",
+          "popularity": 6
+        }
+      ],
+      "payouts": {
+        "tansho": [
+          {
+            "number": "1",
+            "payout": 270,
+            "popularity": 2
+          }
+        ],
+        "fukusho": [
+          {
+            "number": "1",
+            "payout": 120,
+            "popularity": 2
+          },
+          {
+            "number": "7",
+            "payout": 110,
+            "popularity": 1
+          }
+        ],
+        "umaren": [
+          {
+            "combination": "1-7",
+            "payout": 220,
+            "popularity": 1
+          }
+        ],
+        "umatan": [
+          {
+            "combination": "1-7",
+            "payout": 520,
+            "popularity": 3
+          }
+        ],
+        "wide": [
+          {
+            "combination": "1-7",
+            "payout": 120,
+            "popularity": 1
+          },
+          {
+            "combination": "1-2",
+            "payout": 160,
+            "popularity": 2
+          },
+          {
+            "combination": "2-7",
+            "payout": 170,
+            "popularity": 3
+          }
+        ],
+        "sanrenpuku": [
+          {
+            "combination": "1-2-7",
+            "payout": 250,
+            "popularity": 1
+          }
+        ],
+        "sanrentan": [
+          {
+            "combination": "1-7-2",
+            "payout": 1210,
+            "popularity": 2
+          }
+        ]
+      },
+      "timeData": {
+        "last3F": 39.7,
+        "last4F": 52.4,
+        "furlongTimes": [
+          12.7,
+          12.2,
+          12.7,
+          12.6,
+          13.4,
+          13.7
+        ]
+      },
+      "cornerData": [
+        {
+          "corner": "２角",
+          "order": [
+            1,
+            5,
+            2,
+            7,
+            3,
+            6,
+            4
+          ]
+        },
+        {
+          "corner": "３角",
+          "order": [
+            1,
+            5,
+            2,
+            7,
+            3,
+            6,
+            4
+          ]
+        },
+        {
+          "corner": "４角",
+          "order": [
+            1,
+            5,
+            7,
+            2,
+            6,
+            3,
+            4
+          ]
+        }
+      ],
+      "commentary": "2番人気の1番トラペジウムが追い込みから、上がり3ハロン39.7 勝ちタイム1:17.3、1番人気7番ココアリスタは2着。波乱の決着となった。",
+      "enteredAt": "2026-01-26T10:03:32.084Z",
+      "enteredBy": "staff-ui"
     }
   ],
   "dataVersion": "1.0"
