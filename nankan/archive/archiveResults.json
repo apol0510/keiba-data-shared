@@ -10,24 +10,18 @@
         "recoveryRate": 0,
         "races": [
           {
-            "raceNumber": "11R",
-            "raceName": "鯛ノ浦特別 Ａ２Ｂ１(一)",
+            "raceNumber": "12R",
+            "raceName": "ガーネット２２００ Ｂ２Ｂ３ 選抜馬",
             "betType": "馬単",
-            "betPoints": 10,
+            "betPoints": 11,
             "hit": false,
             "hitType": null,
             "payout": 0,
             "debug": {
-              "hasPrediction": true,
+              "hasPrediction": false,
               "hasResult": true,
-              "predictionMain": [
-                "3-10",
-                "10-3"
-              ],
-              "predictionSub": [
-                "7-9",
-                "9-10"
-              ],
+              "predictionMain": [],
+              "predictionSub": [],
               "resultCombo": null,
               "resultPayout": 0
             }
