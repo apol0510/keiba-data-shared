@@ -1,0 +1,9 @@
+[build]
+  publish = "."
+  command = "echo 'no build'"
+
+[[headers]]
+  for = "/**/*.json"
+  [headers.values]
+    Content-Type = "application/json; charset=utf-8"
+    Cache-Control = "public, max-age=300"
