@@ -1,75 +1,370 @@
 ---
-const title = 'keiba-data-shared - 競馬データ共有API';
-const description = '南関競馬・中央競馬の予想・結果データJSON API';
+/**
+ * トップページ - 南関競馬結果サイト
+ * 一般ユーザー向け、検索エンジン対応
+ */
+
+const title = '南関競馬結果速報 - 大井・川崎・船橋・浦和の競馬結果';
+const description = '南関東4競馬場（大井・川崎・船橋・浦和）の最新レース結果を速報。着順・払戻金・ラップタイムなど詳細データを掲載。';
+
+// 利用可能な結果データを取得
+const resultsBaseUrl = 'https://raw.githubusercontent.com/apol0510/keiba-data-shared/main/nankan/results';
+
+// 2026年1月のデータを確認（将来的には動的に）
+const availableDates = [
+  { date: '2026-01-23', venue: '船橋', races: 12 }
+  // 今後データが増えたら自動で追加
+];
+
+const venues = [
+  { name: '大井', slug: 'ooi', color: '#2e7d32' },
+  { name: '船橋', slug: 'funabashi', color: '#1976d2' },
+  { name: '川崎', slug: 'kawasaki', color: '#d32f2f' },
+  { name: '浦和', slug: 'urawa', color: '#f57c00' }
+];
 ---
 
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{title}</title>
-    <meta name="description" content={description}>
-    <meta name="robots" content="noindex">
-    <style>
-        body {
-            font-family: system-ui, -apple-system, sans-serif;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 2rem;
-            line-height: 1.6;
-            color: #333;
-        }
-        h1 {
-            color: #2c3e50;
-            border-bottom: 2px solid #3498db;
-            padding-bottom: 0.5rem;
-        }
-        h2 {
-            color: #34495e;
-            margin-top: 2rem;
-        }
-        a {
-            color: #3498db;
-            text-decoration: none;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-        ul {
-            margin: 1rem 0;
-        }
-        li {
-            margin: 0.5rem 0;
-        }
-        code {
-            background: #f5f5f5;
-            padding: 0.2rem 0.4rem;
-            border-radius: 3px;
-            font-family: 'Courier New', monospace;
-            font-size: 0.9rem;
-        }
-        .section {
-            margin: 2rem 0;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>{title}</title>
+  <meta name="description" content={description}>
+
+  <!-- SEO -->
+  <meta name="keywords" content="南関競馬,結果,大井競馬,川崎競馬,船橋競馬,浦和競馬,競馬結果,レース結果,払戻金">
+  <link rel="canonical" href={Astro.site}>
+
+  <!-- OGP -->
+  <meta property="og:title" content={title}>
+  <meta property="og:description" content={description}>
+  <meta property="og:type" content="website">
+  <meta property="og:url" content={Astro.site}>
+
+  <!-- 構造化データ -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "南関競馬結果速報",
+    "url": Astro.site,
+    "description": description,
+    "publisher": {
+      "@type": "Organization",
+      "name": "南関競馬結果速報"
+    }
+  })} />
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background: #f5f5f5;
+    }
+
+    /* ヘッダー */
+    header {
+      background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);
+      color: white;
+      padding: 2rem 1rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      font-size: 1.75rem;
+      margin-bottom: 0.5rem;
+      font-weight: 700;
+    }
+
+    .subtitle {
+      font-size: 0.95rem;
+      opacity: 0.9;
+    }
+
+    /* メインコンテンツ */
+    main {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    .section {
+      background: white;
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+
+    .section h2 {
+      font-size: 1.25rem;
+      color: #2e7d32;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid #2e7d32;
+    }
+
+    /* 競馬場カード */
+    .venue-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .venue-card {
+      background: white;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      padding: 1.5rem;
+      text-align: center;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+
+    .venue-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      border-color: #2e7d32;
+    }
+
+    .venue-name {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .venue-status {
+      font-size: 0.875rem;
+      color: #666;
+    }
+
+    /* 最新結果リスト */
+    .results-list {
+      list-style: none;
+    }
+
+    .result-item {
+      border: 1px solid #e0e0e0;
+      border-radius: 6px;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      transition: background 0.2s ease;
+    }
+
+    .result-item:hover {
+      background: #f9f9f9;
+    }
+
+    .result-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.75rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .result-date {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #2e7d32;
+    }
+
+    .result-venue {
+      background: #2e7d32;
+      color: white;
+      padding: 0.25rem 0.75rem;
+      border-radius: 4px;
+      font-size: 0.875rem;
+      font-weight: 600;
+    }
+
+    .result-races {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .race-link {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      background: #f5f5f5;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      color: #333;
+      text-decoration: none;
+      font-size: 0.875rem;
+      transition: all 0.2s ease;
+    }
+
+    .race-link:hover {
+      background: #2e7d32;
+      color: white;
+      border-color: #2e7d32;
+    }
+
+    /* 説明セクション */
+    .description {
+      line-height: 1.8;
+      color: #555;
+    }
+
+    .description ul {
+      margin: 1rem 0;
+      padding-left: 1.5rem;
+    }
+
+    .description li {
+      margin: 0.5rem 0;
+    }
+
+    /* フッター */
+    footer {
+      background: #333;
+      color: white;
+      text-align: center;
+      padding: 2rem 1rem;
+      margin-top: 3rem;
+    }
+
+    footer p {
+      font-size: 0.875rem;
+      opacity: 0.8;
+    }
+
+    /* モバイル対応 */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      .section {
+        padding: 1rem;
+      }
+
+      .venue-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .result-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    /* データなしメッセージ */
+    .no-data {
+      text-align: center;
+      padding: 2rem;
+      color: #666;
+    }
+  </style>
 </head>
+
 <body>
-    <h1>keiba-data-shared</h1>
-    <p>競馬データ共有API - JSON配信サービス</p>
+  <header>
+    <div class="header-content">
+      <h1>南関競馬結果速報</h1>
+      <p class="subtitle">大井・川崎・船橋・浦和の最新レース結果</p>
+    </div>
+  </header>
 
-    <div class="section">
-        <h2>📋 JSONエンドポイント</h2>
-        <ul>
-            <li><a href="/nankan/results/2026/01/2026-01-23.json"><code>/nankan/results/YYYY/MM/YYYY-MM-DD.json</code></a> - 結果データ</li>
-            <li><a href="/nankan/predictions/2026/01/2026-01-23.json"><code>/nankan/predictions/YYYY/MM/YYYY-MM-DD.json</code></a> - 予想データ</li>
-            <li><a href="/nankan/archive/archiveResults.json"><code>/nankan/archive/archiveResults.json</code></a> - 的中判定データ</li>
+  <main>
+    <!-- 最新結果セクション -->
+    <section class="section">
+      <h2>📅 最新のレース結果</h2>
+
+      {availableDates.length > 0 ? (
+        <ul class="results-list">
+          {availableDates.map(item => {
+            const [year, month, day] = item.date.split('-');
+            const venueSlug = venues.find(v => v.name === item.venue)?.slug || 'ooi';
+
+            return (
+              <li class="result-item">
+                <div class="result-header">
+                  <time class="result-date" datetime={item.date}>
+                    {year}年{parseInt(month)}月{parseInt(day)}日
+                  </time>
+                  <span class="result-venue">{item.venue}競馬</span>
+                </div>
+                <div class="result-races">
+                  {Array.from({ length: item.races }, (_, i) => i + 1).map(raceNum => (
+                    <a
+                      href={`/nankan/results/${year}/${month}/${day}/${venueSlug}/${raceNum}/`}
+                      class="race-link"
+                    >
+                      第{raceNum}R
+                    </a>
+                  ))}
+                </div>
+              </li>
+            );
+          })}
         </ul>
-    </div>
+      ) : (
+        <p class="no-data">現在表示できる結果データはありません</p>
+      )}
+    </section>
 
-    <div class="section">
-        <h2>📖 ドキュメント</h2>
-        <p><a href="https://github.com/apol0510/keiba-data-shared">GitHub リポジトリ</a> - データスキーマ、使用方法</p>
-    </div>
+    <!-- 競馬場別セクション -->
+    <section class="section">
+      <h2>🏇 競馬場から探す</h2>
+      <div class="venue-grid">
+        {venues.map(venue => (
+          <div class="venue-card" style={`border-color: ${venue.color};`}>
+            <div class="venue-name" style={`color: ${venue.color};`}>
+              {venue.name}競馬場
+            </div>
+            <div class="venue-status">
+              結果を見る
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- サイト説明 -->
+    <section class="section">
+      <h2>📖 南関競馬結果速報について</h2>
+      <div class="description">
+        <p>
+          南関競馬結果速報は、南関東4競馬場（大井競馬・川崎競馬・船橋競馬・浦和競馬）のレース結果を掲載する情報サイトです。
+        </p>
+        <ul>
+          <li>レース着順・タイム</li>
+          <li>全券種の払戻金</li>
+          <li>ラップタイム・上がり3F</li>
+          <li>コーナー通過順</li>
+          <li>騎手・調教師情報</li>
+        </ul>
+        <p>
+          各レース詳細ページでは、レース展開の要約や詳細なデータもご覧いただけます。
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 南関競馬結果速報 - keiba-data-shared</p>
+    <p>南関東地方競馬の結果情報を提供</p>
+  </footer>
 </body>
 </html>
