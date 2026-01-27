@@ -4,13 +4,14 @@
  * URL: /nankan/results/YYYY/MM/DD/
  */
 
+import { readFile } from 'node:fs/promises';
+import { join } from 'node:path';
+
 export const prerender = false; // SSR mode
 
 const { year, month, day } = Astro.params;
 
 // JSONデータの取得（ローカルファイルから直接読み込み）
-import { readFile } from 'node:fs/promises';
-import { join } from 'node:path';
 
 let raceData = null;
 let errorMessage = null;

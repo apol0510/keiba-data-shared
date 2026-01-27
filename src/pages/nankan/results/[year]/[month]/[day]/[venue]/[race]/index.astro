@@ -4,6 +4,9 @@
  * URL: /nankan/results/YYYY/MM/DD/{venueSlug}/{raceNumber}/
  */
 
+import { readFile } from 'node:fs/promises';
+import { join } from 'node:path';
+
 export const prerender = false; // SSR mode
 
 const { year, month, day, venue, race } = Astro.params;
@@ -20,8 +23,6 @@ const venueName = venueMap[venue] || venue;
 const raceNumber = parseInt(race, 10);
 
 // JSONデータの取得（ローカルファイルから直接読み込み）
-import { readFile } from 'node:fs/promises';
-import { join } from 'node:path';
 
 let raceData = null;
 let allRaces = [];
