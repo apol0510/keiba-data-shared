@@ -131,7 +131,7 @@ const venueColor = venueColors[venue] || '#2e7d32';
     }
 
     header {
-      background: linear-gradient(135deg, {venueColor} 0%, {venueColor}dd 100%);
+      background: linear-gradient(135deg, var(--venue-color) 0%, var(--venue-color-dark) 100%);
       color: white;
       padding: 1.5rem 1rem;
       box-shadow: 0 2px 4px rgba(0,0,0,0.1);
@@ -175,10 +175,10 @@ const venueColor = venueColors[venue] || '#2e7d32';
 
     .archive-section h2 {
       font-size: 1.25rem;
-      color: {venueColor};
+      color: var(--venue-color);
       margin-bottom: 1rem;
       padding-bottom: 0.5rem;
-      border-bottom: 2px solid {venueColor};
+      border-bottom: 2px solid var(--venue-color);
     }
 
     .archive-grid {
@@ -202,13 +202,13 @@ const venueColor = venueColors[venue] || '#2e7d32';
     .archive-card:hover {
       transform: translateY(-2px);
       box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      border-color: {venueColor};
+      border-color: var(--venue-color);
     }
 
     .archive-date {
       font-size: 1.1rem;
       font-weight: 600;
-      color: {venueColor};
+      color: var(--venue-color);
       margin-bottom: 0.5rem;
     }
 
@@ -219,7 +219,7 @@ const venueColor = venueColors[venue] || '#2e7d32';
   </style>
 </head>
 
-<body>
+<body style={`--venue-color: ${venueColor}; --venue-color-dark: ${venueColor}dd;`}>
   <header>
     <div class="header-content">
       <div class="breadcrumb">

@@ -120,12 +120,12 @@ const canonicalUrl = `${Astro.site}nankan/results/${year}/${month}/${day}/`;
   <script type="application/ld+json" set:html={JSON.stringify({
     "@context": "https://schema.org",
     "@type": "SportsEvent",
-    "name": `${venue}競馬`,
+    "name": `${venueNames || '南関'}競馬`,
     "sport": "競馬",
     "startDate": `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`,
     "location": {
       "@type": "Place",
-      "name": `${venue}競馬場`
+      "name": allVenuesData.length > 0 ? `${venueNames}競馬場` : "南関東地方競馬"
     }
   })} />
 
