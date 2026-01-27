@@ -8,20 +8,27 @@ export const prerender = false; // SSR mode
 
 const { year, month, day } = Astro.params;
 
-// JSONデータの取得
-const jsonUrl = `https://raw.githubusercontent.com/apol0510/keiba-data-shared/main/nankan/results/${year}/${month.padStart(2, '0')}/${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}.json`;
+// JSONデータの取得（ローカルファイルから直接読み込み）
+import { readFile } from 'node:fs/promises';
+import { join } from 'node:path';
 
 let raceData = null;
 let errorMessage = null;
 
 try {
-  const response = await fetch(jsonUrl);
-  if (response.ok) {
-    raceData = await response.json();
-  } else {
-    errorMessage = 'データが見つかりません';
-  }
+  const filePath = join(
+    process.cwd(),
+    'nankan',
+    'results',
+    year,
+    month.padStart(2, '0'),
+    `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}.json`
+  );
+
+  const fileContent = await readFile(filePath, 'utf-8');
+  raceData = JSON.parse(fileContent);
 } catch (error) {
+  console.error('ファイル読み込みエラー:', error);
   errorMessage = 'データの取得に失敗しました';
 }
 
