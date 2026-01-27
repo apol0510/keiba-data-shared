@@ -2,8 +2,21 @@
   command = "npm run build"
   publish = "dist"
 
+# HTMLページ：短時間キャッシュ + CDNキャッシュ無効化
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Cache-Control = "public, max-age=0, s-maxage=0, must-revalidate"
+
+# 個別レースページ：常に最新データを取得
+[[headers]]
+  for = "/nankan/results/*"
+  [headers.values]
+    Cache-Control = "public, max-age=0, s-maxage=0, must-revalidate"
+
+# JSONファイル：短時間キャッシュ（5分）
 [[headers]]
   for = "/**/*.json"
   [headers.values]
     Content-Type = "application/json; charset=utf-8"
-    Cache-Control = "public, max-age=300"
+    Cache-Control = "public, max-age=300, s-maxage=60"
