@@ -1,0 +1,19 @@
+name: Trigger Netlify Build on Data Update
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'nankan/results/**/*.json'
+      - 'nankan/predictions/**/*.json'
+
+jobs:
+  trigger-netlify:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Trigger Netlify Build Hook
+        run: |
+          curl -X POST -d {} ${{ secrets.NETLIFY_BUILD_HOOK_URL }}
+          echo "✅ Netlifyビルドをトリガーしました"
