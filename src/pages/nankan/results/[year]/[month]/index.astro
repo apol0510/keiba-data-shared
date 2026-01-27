@@ -7,7 +7,30 @@
 import { readdir, readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 
-export const prerender = false; // SSR mode
+export const prerender = true; // 静的プリレンダリング
+
+export async function getStaticPaths() {
+  const resultsBaseDir = join(process.cwd(), 'nankan', 'results');
+  const years = await readdir(resultsBaseDir);
+  const paths = [];
+
+  for (const year of years) {
+    if (!year.match(/^\d{4}$/)) continue;
+
+    const yearPath = join(resultsBaseDir, year);
+    const months = await readdir(yearPath);
+
+    for (const month of months) {
+      if (!month.match(/^\d{2}$/)) continue;
+
+      paths.push({
+        params: { year, month }
+      });
+    }
+  }
+
+  return paths;
+}
 
 const { year, month } = Astro.params;
 

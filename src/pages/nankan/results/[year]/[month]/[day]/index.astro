@@ -4,7 +4,45 @@
  * URL: /nankan/results/YYYY/MM/DD/
  */
 
-export const prerender = false; // SSR mode
+import { readdir } from 'node:fs/promises';
+import { join } from 'node:path';
+
+export const prerender = true; // 静的プリレンダリング
+
+export async function getStaticPaths() {
+  const resultsBaseDir = join(process.cwd(), 'nankan', 'results');
+  const years = await readdir(resultsBaseDir);
+  const paths = [];
+
+  for (const year of years) {
+    if (!year.match(/^\d{4}$/)) continue;
+
+    const yearPath = join(resultsBaseDir, year);
+    const months = await readdir(yearPath);
+
+    for (const month of months) {
+      if (!month.match(/^\d{2}$/)) continue;
+
+      const monthPath = join(yearPath, month);
+      const files = await readdir(monthPath);
+
+      for (const file of files) {
+        if (!file.endsWith('.json')) continue;
+
+        // ファイル名から日付を抽出 (YYYY-MM-DD.json)
+        const match = file.match(/^\d{4}-\d{2}-(\d{2})\.json$/);
+        if (match) {
+          const day = match[1];
+          paths.push({
+            params: { year, month, day }
+          });
+        }
+      }
+    }
+  }
+
+  return paths;
+}
 
 const { year, month, day } = Astro.params;
 

@@ -7,7 +7,7 @@
 import { readdir, readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 
-export const prerender = false; // SSR mode
+export const prerender = true; // 静的プリレンダリング
 
 const title = '南関競馬 結果アーカイブ | 大井・川崎・船橋・浦和';
 const description = '南関東4競馬場（大井・川崎・船橋・浦和）の過去のレース結果アーカイブ。年月別に検索できます。';

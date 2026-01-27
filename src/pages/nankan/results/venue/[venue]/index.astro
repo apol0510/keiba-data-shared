@@ -7,7 +7,15 @@
 import { readdir, readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 
-export const prerender = false; // SSR mode
+export const prerender = true; // 静的プリレンダリング
+
+export async function getStaticPaths() {
+  const venues = ['ooi', 'funabashi', 'kawasaki', 'urawa'];
+
+  return venues.map(venue => ({
+    params: { venue }
+  }));
+}
 
 const { venue } = Astro.params;
 
