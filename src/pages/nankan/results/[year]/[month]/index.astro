@@ -7,8 +7,6 @@
 import { readdir, readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 
-export const prerender = true; // 静的プリレンダリング
-
 export async function getStaticPaths() {
   const resultsBaseDir = join(process.cwd(), 'nankan', 'results');
   const years = await readdir(resultsBaseDir);

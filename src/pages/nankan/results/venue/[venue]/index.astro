@@ -7,8 +7,6 @@
 import { readdir, readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 
-export const prerender = true; // 静的プリレンダリング
-
 export async function getStaticPaths() {
   const venues = ['ooi', 'funabashi', 'kawasaki', 'urawa'];
 
