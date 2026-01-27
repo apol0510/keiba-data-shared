@@ -4,9 +4,6 @@
  * URL: /nankan/results/YYYY/MM/DD/{venueSlug}/
  */
 
-import { readdir, readFile } from 'node:fs/promises';
-import { join } from 'node:path';
-
 export const prerender = false; // SSR mode
 
 const { year, month, day, venue } = Astro.params;
@@ -21,33 +18,31 @@ const venueSlugToNameMap = {
 
 const venueName = venueSlugToNameMap[venue] || venue;
 
-// その日の全競馬場のデータを取得
-const dayPath = join(process.cwd(), 'nankan', 'results', year, month);
+// GitHubからJSONデータを取得（キャッシュバスティング付き）
+const timestamp = Date.now();
+const jsonUrl = `https://raw.githubusercontent.com/apol0510/keiba-data-shared/main/nankan/results/${year}/${month.padStart(2, '0')}/${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}.json?t=${timestamp}`;
+
 let venueData = null;
 
 try {
-  const files = await readdir(dayPath);
+  const response = await fetch(jsonUrl, {
+    cache: 'no-store',
+    headers: {
+      'Cache-Control': 'no-cache, no-store, must-revalidate',
+      'Pragma': 'no-cache'
+    }
+  });
 
-  for (const file of files) {
-    if (!file.endsWith('.json')) continue;
+  if (response.ok) {
+    const data = await response.json();
 
-    try {
-      const filePath = join(dayPath, file);
-      const content = await readFile(filePath, 'utf-8');
-      const data = JSON.parse(content);
-
-      // その日付で、かつ該当競馬場のデータのみ
-      if (data.date === `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}` &&
-          data.venue === venueName) {
-        venueData = {
-          venue: data.venue,
-          venueCode: data.venueCode,
-          races: data.races || []
-        };
-        break;
-      }
-    } catch (e) {
-      console.error(`Error reading ${file}:`, e);
+    // 該当競馬場のデータかチェック
+    if (data.venue === venueName) {
+      venueData = {
+        venue: data.venue,
+        venueCode: data.venueCode,
+        races: data.races || []
+      };
     }
   }
 } catch (error) {

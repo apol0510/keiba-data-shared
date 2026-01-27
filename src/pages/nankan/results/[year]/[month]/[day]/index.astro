@@ -4,39 +4,32 @@
  * URL: /nankan/results/YYYY/MM/DD/
  */
 
-import { readdir, readFile } from 'node:fs/promises';
-import { join } from 'node:path';
-
 export const prerender = false; // SSR mode
 
 const { year, month, day } = Astro.params;
 
-// その日の全競馬場のデータを取得
-const dayPath = join(process.cwd(), 'nankan', 'results', year, month);
-const allVenuesData = [];
+// GitHubからJSONデータを取得（キャッシュバスティング付き）
+const timestamp = Date.now();
+const jsonUrl = `https://raw.githubusercontent.com/apol0510/keiba-data-shared/main/nankan/results/${year}/${month.padStart(2, '0')}/${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}.json?t=${timestamp}`;
+
+let allVenuesData = [];
 
 try {
-  const files = await readdir(dayPath);
-
-  for (const file of files) {
-    if (!file.endsWith('.json')) continue;
-
-    try {
-      const filePath = join(dayPath, file);
-      const content = await readFile(filePath, 'utf-8');
-      const data = JSON.parse(content);
-
-      // その日付のデータのみ
-      if (data.date === `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`) {
-        allVenuesData.push({
-          venue: data.venue,
-          venueCode: data.venueCode,
-          races: data.races || []
-        });
-      }
-    } catch (e) {
-      console.error(`Error reading ${file}:`, e);
+  const response = await fetch(jsonUrl, {
+    cache: 'no-store',
+    headers: {
+      'Cache-Control': 'no-cache, no-store, must-revalidate',
+      'Pragma': 'no-cache'
     }
+  });
+
+  if (response.ok) {
+    const data = await response.json();
+    allVenuesData = [{
+      venue: data.venue,
+      venueCode: data.venueCode,
+      races: data.races || []
+    }];
   }
 } catch (error) {
   console.error(`${year}年${month}月${day}日のデータ取得エラー:`, error);
