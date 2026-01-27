@@ -15,5 +15,14 @@ jobs:
     steps:
       - name: Trigger Netlify Build Hook
         run: |
-          curl -X POST -d {} ${{ secrets.NETLIFY_BUILD_HOOK_URL }}
-          echo "✅ Netlifyビルドをトリガーしました"
+          echo "🚀 Netlifyビルドフックを呼び出します..."
+          response=$(curl -X POST -d {} -w "\nHTTP_CODE:%{http_code}" "${{ secrets.NETLIFY_BUILD_HOOK_URL }}")
+          http_code=$(echo "$response" | grep "HTTP_CODE" | cut -d: -f2)
+
+          if [ "$http_code" = "200" ] || [ "$http_code" = "204" ]; then
+            echo "✅ Netlifyビルドを正常にトリガーしました (HTTP $http_code)"
+          else
+            echo "❌ Netlifyビルドのトリガーに失敗しました (HTTP $http_code)"
+            echo "Response: $response"
+            exit 1
+          fi
