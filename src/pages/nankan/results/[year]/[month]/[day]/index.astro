@@ -1,45 +1,46 @@
 ---
 /**
- * 日付別結果一覧ページ
+ * 日付別結果一覧ページ（全競馬場）
  * URL: /nankan/results/YYYY/MM/DD/
  */
+
+import { readdir, readFile } from 'node:fs/promises';
+import { join } from 'node:path';
 
 export const prerender = false; // SSR mode
 
 const { year, month, day } = Astro.params;
 
-// JSONデータの取得（キャッシュバスティング付き）
-const timestamp = Date.now();
-const jsonUrl = `https://raw.githubusercontent.com/apol0510/keiba-data-shared/main/nankan/results/${year}/${month.padStart(2, '0')}/${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}.json?t=${timestamp}`;
-
-let raceData = null;
-let errorMessage = null;
+// その日の全競馬場のデータを取得
+const dayPath = join(process.cwd(), 'nankan', 'results', year, month);
+const allVenuesData = [];
 
 try {
-  const response = await fetch(jsonUrl, {
-    cache: 'no-store',
-    headers: {
-      'Cache-Control': 'no-cache, no-store, must-revalidate',
-      'Pragma': 'no-cache'
-    }
-  });
+  const files = await readdir(dayPath);
 
-  if (response.ok) {
-    raceData = await response.json();
-  } else {
-    errorMessage = 'データが見つかりません';
+  for (const file of files) {
+    if (!file.endsWith('.json')) continue;
+
+    try {
+      const filePath = join(dayPath, file);
+      const content = await readFile(filePath, 'utf-8');
+      const data = JSON.parse(content);
+
+      // その日付のデータのみ
+      if (data.date === `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`) {
+        allVenuesData.push({
+          venue: data.venue,
+          venueCode: data.venueCode,
+          races: data.races || []
+        });
+      }
+    } catch (e) {
+      console.error(`Error reading ${file}:`, e);
+    }
   }
 } catch (error) {
-  console.error('データ取得エラー:', error);
-  errorMessage = 'データの取得に失敗しました';
+  console.error(`${year}年${month}月${day}日のデータ取得エラー:`, error);
 }
-
-// 404チェック
-if (!raceData) {
-  return Astro.redirect('/');
-}
-
-const { venue, races = [] } = raceData;
 
 // venueからslugへの変換
 const venueSlugMap = {
@@ -48,11 +49,19 @@ const venueSlugMap = {
   '川崎': 'kawasaki',
   '浦和': 'urawa'
 };
-const venueSlug = venueSlugMap[venue] || 'ooi';
+
+// 競馬場カラー
+const venueColors = {
+  '大井': '#d32f2f',
+  '船橋': '#2e7d32',
+  '川崎': '#00bcd4',
+  '浦和': '#1976d2'
+};
 
 // title生成
-const title = `${year}年${month}月${day}日 ${venue}競馬 全レース結果 | 南関競馬結果速報`;
-const description = `${year}年${month}月${day}日に開催された${venue}競馬場の全${races.length}レースの結果。着順・払戻金・レース詳細を掲載。`;
+const venueNames = allVenuesData.map(v => v.venue).join('・');
+const title = `${year}年${parseInt(month)}月${parseInt(day)}日 南関競馬 結果一覧 | ${venueNames || '南関競馬結果速報'}`;
+const description = `${year}年${parseInt(month)}月${parseInt(day)}日の南関競馬レース結果一覧。${venueNames}競馬場の全レース結果を掲載。`;
 
 // canonical URL
 const canonicalUrl = `${Astro.site}nankan/results/${year}/${month}/${day}/`;
@@ -354,92 +363,101 @@ const canonicalUrl = `${Astro.site}nankan/results/${year}/${month}/${day}/`;
       <nav class="breadcrumb">
         <a href="/">トップ</a>
         <span>›</span>
-        <a href="/nankan/">南関競馬</a>
+        <a href="/nankan/results/">アーカイブ</a>
         <span>›</span>
-        <span>{year}年{month}月{day}日</span>
+        <a href={`/nankan/results/${year}/`}>{year}年</a>
+        <span>›</span>
+        <a href={`/nankan/results/${year}/${month}/`}>{parseInt(month)}月</a>
+        <span>›</span>
+        <span>{parseInt(day)}日</span>
       </nav>
-      <h1>{year}年{month}月{day}日 {venue}競馬 結果</h1>
-      <p class="page-meta">全{races.length}レース</p>
+      <h1>{year}年{parseInt(month)}月{parseInt(day)}日 南関競馬 結果</h1>
+      <p class="page-meta">{allVenuesData.map(v => v.venue).join('・')}競馬</p>
     </div>
   </header>
 
   <main>
-    <!-- サマリーセクション -->
-    <section class="summary-section">
-      <h2>開催情報</h2>
-      <dl class="summary-info">
-        <div class="summary-item">
-          <dt>開催日</dt>
-          <dd>{year}/{month}/{day}</dd>
-        </div>
-        <div class="summary-item">
-          <dt>競馬場</dt>
-          <dd>{venue}</dd>
-        </div>
-        <div class="summary-item">
-          <dt>レース数</dt>
-          <dd>{races.length}</dd>
-        </div>
-      </dl>
-    </section>
-
-    <!-- レース一覧 -->
-    <div class="races-grid">
-      {races.map(race => {
-        const winner = race.results?.[0];
-        const tansho = race.payouts?.tansho?.[0];
-        const umatan = race.payouts?.umatan?.[0];
+    {allVenuesData.length > 0 ? (
+      allVenuesData.map(venueData => {
+        const venueSlug = venueSlugMap[venueData.venue] || 'ooi';
+        const venueColor = venueColors[venueData.venue] || '#2e7d32';
 
         return (
-          <a
-            href={`/nankan/results/${year}/${month}/${day}/${venueSlug}/${race.raceNumber}/`}
-            class="race-card"
-          >
-            <div class="race-header">
-              <div class="race-number">第{race.raceNumber}R</div>
-              <div class="race-name">{race.raceName}</div>
-              <div class="race-info">
-                <span>{race.surface}{race.distance}m</span>
-                <span>{race.horses}頭立て</span>
-                {race.startTime && <span>{race.startTime}発走</span>}
-              </div>
+          <>
+            <!-- サマリーセクション -->
+            <section class="summary-section">
+              <h2 style={`color: ${venueColor}; border-color: ${venueColor};`}>
+                {venueData.venue}競馬 全{venueData.races.length}レース
+              </h2>
+            </section>
+
+            <!-- レース一覧 -->
+            <div class="races-grid">
+              {venueData.races.map(race => {
+                const winner = race.results?.[0];
+                const tansho = race.payouts?.tansho?.[0];
+                const umatan = race.payouts?.umatan?.[0];
+
+                return (
+                  <a
+                    href={`/nankan/results/${year}/${month}/${day}/${venueSlug}/${race.raceNumber}/`}
+                    class="race-card"
+                  >
+                    <div class="race-header" style={`background: linear-gradient(135deg, ${venueColor} 0%, ${venueColor}dd 100%);`}>
+                      <div class="race-number">第{race.raceNumber}R</div>
+                      <div class="race-name">{race.raceName}</div>
+                      <div class="race-info">
+                        <span>{race.surface}{race.distance}m</span>
+                        <span>{race.horses}頭立て</span>
+                        {race.startTime && <span>{race.startTime}発走</span>}
+                      </div>
+                    </div>
+
+                    <div class="race-body">
+                      {winner && (
+                        <div class="winner-box">
+                          <div class="winner-title">1着</div>
+                          <div class="winner-name">
+                            {winner.number}番 {winner.name}
+                          </div>
+                          <div class="winner-details">
+                            {winner.jockey} / {winner.time} / {winner.popularity}番人気
+                          </div>
+                        </div>
+                      )}
+
+                      <div class="payouts-preview">
+                        {tansho && (
+                          <div class="payout-item">
+                            <div class="payout-label">単勝</div>
+                            <div class="payout-value">{tansho.payout.toLocaleString()}円</div>
+                            <div class="payout-combo">{tansho.number}番</div>
+                          </div>
+                        )}
+
+                        {umatan && (
+                          <div class="payout-item">
+                            <div class="payout-label">馬単</div>
+                            <div class="payout-value">{umatan.payout.toLocaleString()}円</div>
+                            <div class="payout-combo">{umatan.combination}</div>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </a>
+                );
+              })}
             </div>
-
-            <div class="race-body">
-              {winner && (
-                <div class="winner-box">
-                  <div class="winner-title">1着</div>
-                  <div class="winner-name">
-                    {winner.number}番 {winner.name}
-                  </div>
-                  <div class="winner-details">
-                    {winner.jockey} / {winner.time} / {winner.popularity}番人気
-                  </div>
-                </div>
-              )}
-
-              <div class="payouts-preview">
-                {tansho && (
-                  <div class="payout-item">
-                    <div class="payout-label">単勝</div>
-                    <div class="payout-value">{tansho.payout.toLocaleString()}円</div>
-                    <div class="payout-combo">{tansho.number}番</div>
-                  </div>
-                )}
-
-                {umatan && (
-                  <div class="payout-item">
-                    <div class="payout-label">馬単</div>
-                    <div class="payout-value">{umatan.payout.toLocaleString()}円</div>
-                    <div class="payout-combo">{umatan.combination}</div>
-                  </div>
-                )}
-              </div>
-            </div>
-          </a>
+          </>
         );
-      })}
-    </div>
+      })
+    ) : (
+      <section class="summary-section">
+        <p style="text-align: center; color: #666;">
+          {year}年{parseInt(month)}月{parseInt(day)}日のデータがありません
+        </p>
+      </section>
+    )}
   </main>
 
   <footer>
