@@ -1601,6 +1601,283 @@
       "commentary": "1番人気5番シューゼウスが直線で1番エイシンピサロを捕らえて優勝。上がり3ハロン39.3の脚を使い、勝ちタイム1:29.6で快勝。",
       "enteredAt": "2026-01-27T14:49:04.340Z",
       "enteredBy": "staff-ui"
+    },
+    {
+      "raceNumber": 6,
+      "raceName": "賞金",
+      "distance": 1200,
+      "surface": "ダート",
+      "track": "外",
+      "horses": 11,
+      "startTime": "13:37",
+      "results": [
+        {
+          "rank": 1,
+          "bracket": 3,
+          "number": 3,
+          "name": "エンリッチザハート",
+          "jockey": "石川倭",
+          "trainer": "的場直之",
+          "time": "1:15.9",
+          "margin": "-",
+          "lastFurlong": "38.4",
+          "popularity": 1
+        },
+        {
+          "rank": 2,
+          "bracket": 5,
+          "number": 6,
+          "name": "ルビーマーベル",
+          "jockey": "吉井章",
+          "trainer": "立花伸",
+          "time": "1:16.2",
+          "margin": "１ 1/2",
+          "lastFurlong": "39.3",
+          "popularity": 3
+        },
+        {
+          "rank": 3,
+          "bracket": 7,
+          "number": 10,
+          "name": "ハヤテノシンノスケ",
+          "jockey": "桑村真明",
+          "trainer": "高野毅",
+          "time": "1:16.3",
+          "margin": "1/2",
+          "lastFurlong": "39.0",
+          "popularity": 5
+        },
+        {
+          "rank": 4,
+          "bracket": 7,
+          "number": 9,
+          "name": "アネラリノ",
+          "jockey": "安藤洋一",
+          "trainer": "渡邉和雄",
+          "time": "1:16.3",
+          "margin": "ハナ",
+          "lastFurlong": "37.7",
+          "popularity": 4
+        },
+        {
+          "rank": 5,
+          "bracket": 8,
+          "number": 12,
+          "name": "トキオゴリン",
+          "jockey": "瀬川将輝",
+          "trainer": "朝倉実",
+          "time": "1:16.6",
+          "margin": "１ 3/4",
+          "lastFurlong": "39.4",
+          "popularity": 11
+        },
+        {
+          "rank": 6,
+          "bracket": 5,
+          "number": 5,
+          "name": "アイドルショー",
+          "jockey": "▲高橋優",
+          "trainer": "渡邉和雄",
+          "time": "1:16.6",
+          "margin": "アタマ",
+          "lastFurlong": "39.5",
+          "popularity": 8
+        },
+        {
+          "rank": 7,
+          "bracket": 4,
+          "number": 4,
+          "name": "ハッピーワイド",
+          "jockey": "服部茂史",
+          "trainer": "渡部則夫",
+          "time": "1:17.0",
+          "margin": "２",
+          "lastFurlong": "38.9",
+          "popularity": 10
+        },
+        {
+          "rank": 8,
+          "bracket": 6,
+          "number": 7,
+          "name": "ジーティークィーン",
+          "jockey": "矢野貴之",
+          "trainer": "中道啓二",
+          "time": "1:17.0",
+          "margin": "アタマ",
+          "lastFurlong": "40.3",
+          "popularity": 2
+        },
+        {
+          "rank": 9,
+          "bracket": 6,
+          "number": 8,
+          "name": "カチョカヴァロ",
+          "jockey": "☆谷内貫太",
+          "trainer": "市村誠",
+          "time": "1:17.1",
+          "margin": "3/4",
+          "lastFurlong": "38.8",
+          "popularity": 9
+        },
+        {
+          "rank": 10,
+          "bracket": 2,
+          "number": 2,
+          "name": "バラミブンダ",
+          "jockey": "西啓太",
+          "trainer": "田中正人",
+          "time": "1:17.1",
+          "margin": "ハナ",
+          "lastFurlong": "40.2",
+          "popularity": 7
+        },
+        {
+          "rank": 11,
+          "bracket": 8,
+          "number": 11,
+          "name": "タイセイディエティ",
+          "jockey": "千田洋",
+          "trainer": "松浦裕之",
+          "time": "1:17.2",
+          "margin": "クビ",
+          "lastFurlong": "40.4",
+          "popularity": 6
+        }
+      ],
+      "payouts": {
+        "tansho": [
+          {
+            "number": "3",
+            "payout": 180,
+            "popularity": 1
+          }
+        ],
+        "fukusho": [
+          {
+            "number": "3",
+            "payout": 110,
+            "popularity": 1
+          },
+          {
+            "number": "6",
+            "payout": 160,
+            "popularity": 3
+          },
+          {
+            "number": "10",
+            "payout": 210,
+            "popularity": 5
+          }
+        ],
+        "wakuren": [
+          {
+            "combination": "3-5",
+            "payout": 360,
+            "popularity": 1
+          }
+        ],
+        "umaren": [
+          {
+            "combination": "3-6",
+            "payout": 480,
+            "popularity": 2
+          }
+        ],
+        "wakutan": [
+          {
+            "combination": "3-5",
+            "payout": 510,
+            "popularity": 2
+          }
+        ],
+        "umatan": [
+          {
+            "combination": "3-6",
+            "payout": 720,
+            "popularity": 2
+          }
+        ],
+        "wide": [
+          {
+            "combination": "3-6",
+            "payout": 240,
+            "popularity": 2
+          },
+          {
+            "combination": "3-10",
+            "payout": 440,
+            "popularity": 5
+          },
+          {
+            "combination": "6-10",
+            "payout": 650,
+            "popularity": 10
+          }
+        ],
+        "sanrenpuku": [
+          {
+            "combination": "3-6-10",
+            "payout": 1280,
+            "popularity": 5
+          }
+        ],
+        "sanrentan": [
+          {
+            "combination": "3-6-10",
+            "payout": 3480,
+            "popularity": 6
+          }
+        ]
+      },
+      "timeData": {
+        "last3F": 39.2,
+        "last4F": 51.8,
+        "furlongTimes": [
+          12.7,
+          11.4,
+          12.6,
+          13.2,
+          12.6,
+          13.4
+        ]
+      },
+      "cornerData": [
+        {
+          "corner": "３角",
+          "order": [
+            7,
+            11,
+            2,
+            6,
+            5,
+            12,
+            10,
+            3,
+            4,
+            8,
+            9
+          ]
+        },
+        {
+          "corner": "４角",
+          "order": [
+            7,
+            6,
+            2,
+            11,
+            12,
+            5,
+            10,
+            3,
+            4,
+            8,
+            9
+          ]
+        }
+      ],
+      "commentary": "1番人気3番エンリッチザハートが直線で6番ルビーマーベルを捕らえて優勝。上がり3ハロン39.2の脚を使い、勝ちタイム1:15.9で快勝。",
+      "enteredAt": "2026-01-27T14:56:10.338Z",
+      "enteredBy": "staff-ui"
     }
   ],
   "dataVersion": "1.0"
