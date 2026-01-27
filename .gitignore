@@ -27,3 +27,7 @@ yarn-error.log*
 # Astro
 dist/
 .astro/
+
+# ビルド成果物（静的HTML）
+nankan/**/*.html
+nankan/results/venue/
