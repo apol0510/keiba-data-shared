@@ -7,14 +7,53 @@
 const title = '南関競馬結果速報 - 大井・川崎・船橋・浦和の競馬結果';
 const description = '南関東4競馬場（大井・川崎・船橋・浦和）の最新レース結果を速報。着順・払戻金・ラップタイムなど詳細データを掲載。';
 
-// 利用可能な結果データを取得
+// 利用可能な結果データを動的に取得
+import { readdir, readFile } from 'node:fs/promises';
+import { join } from 'node:path';
+
 const resultsBaseUrl = 'https://raw.githubusercontent.com/apol0510/keiba-data-shared/main/nankan/results';
 
-// 2026年1月のデータを確認（将来的には動的に）
-const availableDates = [
-  { date: '2026-01-23', venue: '船橋', races: 12 }
-  // 今後データが増えたら自動で追加
-];
+// nankan/results/配下の全JSONファイルを自動検出
+const availableDates = [];
+const resultsDir = join(process.cwd(), 'nankan', 'results');
+
+try {
+  // 年ディレクトリを走査
+  const years = await readdir(resultsDir);
+
+  for (const year of years) {
+    if (!year.match(/^\d{4}$/)) continue; // 4桁の年のみ
+
+    const yearPath = join(resultsDir, year);
+    const months = await readdir(yearPath);
+
+    for (const month of months) {
+      if (!month.match(/^\d{2}$/)) continue; // 2桁の月のみ
+
+      const monthPath = join(yearPath, month);
+      const files = await readdir(monthPath);
+
+      for (const file of files) {
+        if (!file.endsWith('.json')) continue;
+
+        const filePath = join(monthPath, file);
+        const content = await readFile(filePath, 'utf-8');
+        const data = JSON.parse(content);
+
+        availableDates.push({
+          date: data.date,
+          venue: data.venue,
+          races: data.races.length
+        });
+      }
+    }
+  }
+
+  // 日付の新しい順にソート
+  availableDates.sort((a, b) => b.date.localeCompare(a.date));
+} catch (error) {
+  console.error('結果データの読み込みエラー:', error);
+}
 
 const venues = [
   { name: '大井', slug: 'ooi', color: '#d32f2f' },
