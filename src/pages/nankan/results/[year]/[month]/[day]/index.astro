@@ -4,32 +4,33 @@
  * URL: /nankan/results/YYYY/MM/DD/
  */
 
-import { readFile } from 'node:fs/promises';
-import { join } from 'node:path';
-
 export const prerender = false; // SSR mode
 
 const { year, month, day } = Astro.params;
 
-// JSONデータの取得（ローカルファイルから直接読み込み）
+// JSONデータの取得（キャッシュバスティング付き）
+const timestamp = Date.now();
+const jsonUrl = `https://raw.githubusercontent.com/apol0510/keiba-data-shared/main/nankan/results/${year}/${month.padStart(2, '0')}/${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}.json?t=${timestamp}`;
 
 let raceData = null;
 let errorMessage = null;
 
 try {
-  const filePath = join(
-    process.cwd(),
-    'nankan',
-    'results',
-    year,
-    month.padStart(2, '0'),
-    `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}.json`
-  );
+  const response = await fetch(jsonUrl, {
+    cache: 'no-store',
+    headers: {
+      'Cache-Control': 'no-cache, no-store, must-revalidate',
+      'Pragma': 'no-cache'
+    }
+  });
 
-  const fileContent = await readFile(filePath, 'utf-8');
-  raceData = JSON.parse(fileContent);
+  if (response.ok) {
+    raceData = await response.json();
+  } else {
+    errorMessage = 'データが見つかりません';
+  }
 } catch (error) {
-  console.error('ファイル読み込みエラー:', error);
+  console.error('データ取得エラー:', error);
   errorMessage = 'データの取得に失敗しました';
 }
 
