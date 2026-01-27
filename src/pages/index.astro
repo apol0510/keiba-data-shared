@@ -367,16 +367,39 @@ const venues = [
     <section class="section">
       <h2>🏇 競馬場から探す</h2>
       <div class="venue-grid">
-        {venues.map(venue => (
-          <div class="venue-card" style={`border-color: ${venue.color};`}>
-            <div class="venue-name" style={`color: ${venue.color};`}>
-              {venue.name}競馬場
-            </div>
-            <div class="venue-status">
-              結果を見る
-            </div>
-          </div>
-        ))}
+        {venues.map(venue => {
+          // その競馬場の最新データを探す
+          const latestVenueData = availableDates.find(d => d.venue === venue.name);
+
+          if (latestVenueData) {
+            const [year, month, day] = latestVenueData.date.split('-');
+            return (
+              <a
+                href={`/nankan/results/${year}/${month}/${day}/`}
+                class="venue-card"
+                style={`border-color: ${venue.color};`}
+              >
+                <div class="venue-name" style={`color: ${venue.color};`}>
+                  {venue.name}競馬場
+                </div>
+                <div class="venue-status">
+                  最新結果を見る
+                </div>
+              </a>
+            );
+          } else {
+            return (
+              <div class="venue-card venue-card-disabled" style={`border-color: ${venue.color}; opacity: 0.5;`}>
+                <div class="venue-name" style={`color: ${venue.color};`}>
+                  {venue.name}競馬場
+                </div>
+                <div class="venue-status">
+                  データなし
+                </div>
+              </div>
+            );
+          }
+        })}
       </div>
     </section>
 
