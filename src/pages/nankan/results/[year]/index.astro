@@ -1,0 +1,227 @@
+---
+/**
+ * 南関競馬 年別アーカイブ
+ * URL: /nankan/results/YYYY/
+ */
+
+import { readdir, readFile } from 'node:fs/promises';
+import { join } from 'node:path';
+
+export const prerender = false; // SSR mode
+
+const { year } = Astro.params;
+
+const title = `${year}年 南関競馬 結果アーカイブ | 大井・川崎・船橋・浦和`;
+const description = `${year}年の南関東4競馬場（大井・川崎・船橋・浦和）の全レース結果アーカイブ。月別に検索できます。`;
+
+// 指定年のデータを取得
+const resultsDir = join(process.cwd(), 'nankan', 'results', year);
+const archiveData = [];
+
+try {
+  const months = await readdir(resultsDir);
+
+  for (const month of months) {
+    if (!month.match(/^\d{2}$/)) continue;
+
+    const monthPath = join(resultsDir, month);
+    const files = await readdir(monthPath);
+
+    for (const file of files) {
+      if (!file.endsWith('.json')) continue;
+
+      try {
+        const filePath = join(monthPath, file);
+        const content = await readFile(filePath, 'utf-8');
+        const data = JSON.parse(content);
+
+        archiveData.push({
+          date: data.date,
+          venue: data.venue,
+          venueCode: data.venueCode,
+          raceCount: data.races.length,
+          month
+        });
+      } catch (e) {
+        console.error(`Error reading ${file}:`, e);
+      }
+    }
+  }
+
+  // 日付の新しい順にソート
+  archiveData.sort((a, b) => b.date.localeCompare(a.date));
+} catch (error) {
+  console.error(`${year}年のアーカイブデータ取得エラー:`, error);
+}
+
+// 月別にグループ化
+const groupedByMonth = archiveData.reduce((acc, item) => {
+  const key = item.month;
+  if (!acc[key]) {
+    acc[key] = [];
+  }
+  acc[key].push(item);
+  return acc;
+}, {});
+
+const canonicalUrl = `${Astro.site}nankan/results/${year}/`;
+---
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>{title}</title>
+  <meta name="description" content={description}>
+
+  <link rel="canonical" href={canonicalUrl}>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Hiragino Sans', sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background: #f5f5f5;
+    }
+
+    header {
+      background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);
+      color: white;
+      padding: 1.5rem 1rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .breadcrumb {
+      font-size: 0.875rem;
+      margin-bottom: 1rem;
+      opacity: 0.9;
+    }
+
+    .breadcrumb a {
+      color: white;
+      text-decoration: none;
+    }
+
+    h1 {
+      font-size: 1.75rem;
+      margin-bottom: 0.5rem;
+      font-weight: 700;
+    }
+
+    main {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    .archive-section {
+      background: white;
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+
+    .archive-section h2 {
+      font-size: 1.25rem;
+      color: #2e7d32;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid #2e7d32;
+    }
+
+    .archive-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .archive-card {
+      display: block;
+      background: white;
+      border: 1px solid #e0e0e0;
+      border-radius: 6px;
+      padding: 1rem;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.2s ease;
+    }
+
+    .archive-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      border-color: #2e7d32;
+    }
+
+    .archive-date {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #2e7d32;
+      margin-bottom: 0.5rem;
+    }
+
+    .archive-venue {
+      font-size: 0.95rem;
+      color: #666;
+      margin-bottom: 0.25rem;
+    }
+
+    .archive-races {
+      font-size: 0.875rem;
+      color: #999;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="header-content">
+      <div class="breadcrumb">
+        <a href="/">トップ</a> &gt; <a href="/nankan/results/">アーカイブ</a> &gt; {year}年
+      </div>
+      <h1>{year}年 南関競馬 結果</h1>
+      <p>全{archiveData.length}開催</p>
+    </div>
+  </header>
+
+  <main>
+    {Object.entries(groupedByMonth).sort((a, b) => b[0].localeCompare(a[0])).map(([month, items]) => (
+      <section class="archive-section">
+        <h2>{year}年{parseInt(month)}月</h2>
+        <div class="archive-grid">
+          {items.map(item => {
+            const [y, m, d] = item.date.split('-');
+            return (
+              <a href={`/nankan/results/${y}/${m}/${d}/`} class="archive-card">
+                <div class="archive-date">{parseInt(m)}月{parseInt(d)}日</div>
+                <div class="archive-venue">{item.venue}競馬</div>
+                <div class="archive-races">全{item.raceCount}レース</div>
+              </a>
+            );
+          })}
+        </div>
+      </section>
+    ))}
+
+    {archiveData.length === 0 && (
+      <div class="archive-section">
+        <p>{year}年のデータがありません</p>
+      </div>
+    )}
+  </main>
+</body>
+</html>
