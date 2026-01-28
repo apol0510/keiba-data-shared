@@ -2492,6 +2492,255 @@
       "enteredAt": "2026-01-28T16:00:22.165Z",
       "enteredBy": "staff-ui",
       "commentary": "2026年1月28日大井競馬8レース（Ｃ１(八)(九) ダ1600m・14頭立）は、4番デスティニーホープ（5番人気）がハナを切って逃げる展開から、14番ヴィラスターリ（1番人気）が3番手を追走。直線で上がり38.6秒の鋭い脚を繰り出して差し切り、勝ちタイム1:43.1で1着、鞍上は藤田凌騎手と橋本和馬厩舎のコンビでした。2着には4番手から伸びた3番ナイトウォーリア（10番人気）、3着には8番アレグランサ（8番人気）が入線。逃げた4番デスティニーホープは10着と後退した。"
+    },
+    {
+      "raceNumber": 9,
+      "raceName": "Ｃ１(八)(九)",
+      "distance": 1200,
+      "surface": "ダート",
+      "track": "外",
+      "horses": 9,
+      "startTime": "15:20",
+      "results": [
+        {
+          "rank": 1,
+          "bracket": 6,
+          "number": 6,
+          "name": "ビッグロイヤル",
+          "jockey": "御神本訓史",
+          "trainer": "橋本和馬",
+          "time": "1:14.1",
+          "margin": "-",
+          "lastFurlong": "37.2",
+          "popularity": 1
+        },
+        {
+          "rank": 2,
+          "bracket": 3,
+          "number": 3,
+          "name": "ラブラブフォー",
+          "jockey": "▲杉山海波",
+          "trainer": "荒井朋弘",
+          "time": "1:14.3",
+          "margin": "１ 1/4",
+          "lastFurlong": "37.7",
+          "popularity": 2
+        },
+        {
+          "rank": 3,
+          "bracket": 2,
+          "number": 2,
+          "name": "カゼノハガクレ",
+          "jockey": "仲原大生",
+          "trainer": "的場直之",
+          "time": "1:14.6",
+          "margin": "１ 1/2",
+          "lastFurlong": "37.8",
+          "popularity": 3
+        },
+        {
+          "rank": 4,
+          "bracket": 5,
+          "number": 5,
+          "name": "アオイコウキ",
+          "jockey": "高橋昭平",
+          "trainer": "市村誠",
+          "time": "1:15.2",
+          "margin": "３",
+          "lastFurlong": "37.7",
+          "popularity": 6
+        },
+        {
+          "rank": 5,
+          "bracket": 7,
+          "number": 7,
+          "name": "ゴールドグラント",
+          "jockey": "和田譲治",
+          "trainer": "嶋田幸晴",
+          "time": "1:15.4",
+          "margin": "１",
+          "lastFurlong": "38.3",
+          "popularity": 5
+        },
+        {
+          "rank": 6,
+          "bracket": 8,
+          "number": 8,
+          "name": "クレイジーフルーツ",
+          "jockey": "藤本現暉",
+          "trainer": "朝倉実",
+          "time": "1:15.8",
+          "margin": "２",
+          "lastFurlong": "38.4",
+          "popularity": 9
+        },
+        {
+          "rank": 7,
+          "bracket": 1,
+          "number": 1,
+          "name": "アイルビリーヴ",
+          "jockey": "藤田凌",
+          "trainer": "藤田輝信",
+          "time": "1:15.9",
+          "margin": "1/2",
+          "lastFurlong": "38.9",
+          "popularity": 4
+        },
+        {
+          "rank": 8,
+          "bracket": 8,
+          "number": 9,
+          "name": "オメガオリーブ",
+          "jockey": "▲小野俊斗",
+          "trainer": "赤嶺本浩",
+          "time": "1:16.4",
+          "margin": "２ 1/2",
+          "lastFurlong": "39.0",
+          "popularity": 8
+        },
+        {
+          "rank": 9,
+          "bracket": 4,
+          "number": 4,
+          "name": "アユツリー",
+          "jockey": "吉井章",
+          "trainer": "月岡健二",
+          "time": "1:17.7",
+          "margin": "６",
+          "lastFurlong": "40.6",
+          "popularity": 7
+        }
+      ],
+      "payouts": {
+        "tansho": [
+          {
+            "number": "6",
+            "payout": 120,
+            "popularity": 1
+          }
+        ],
+        "fukusho": [
+          {
+            "number": "6",
+            "payout": 100,
+            "popularity": 1
+          },
+          {
+            "number": "3",
+            "payout": 110,
+            "popularity": 2
+          },
+          {
+            "number": "2",
+            "payout": 130,
+            "popularity": 3
+          }
+        ],
+        "wakuren": [
+          {
+            "combination": "3-6",
+            "payout": 280,
+            "popularity": 1
+          }
+        ],
+        "umaren": [
+          {
+            "combination": "3-6",
+            "payout": 330,
+            "popularity": 2
+          }
+        ],
+        "wakutan": [
+          {
+            "combination": "6-3",
+            "payout": 340,
+            "popularity": 1
+          }
+        ],
+        "umatan": [
+          {
+            "combination": "6-3",
+            "payout": 390,
+            "popularity": 1
+          }
+        ],
+        "wide": [
+          {
+            "combination": "3-6",
+            "payout": 150,
+            "popularity": 1
+          },
+          {
+            "combination": "2-6",
+            "payout": 160,
+            "popularity": 2
+          },
+          {
+            "combination": "2-3",
+            "payout": 330,
+            "popularity": 5
+          }
+        ],
+        "sanrenpuku": [
+          {
+            "combination": "2-3-6",
+            "payout": 350,
+            "popularity": 1
+          }
+        ],
+        "sanrentan": [
+          {
+            "combination": "6-3-2",
+            "payout": 870,
+            "popularity": 1
+          }
+        ]
+      },
+      "timeData": {
+        "last3F": 37.5,
+        "last4F": 49.7,
+        "furlongTimes": [
+          12.8,
+          11.6,
+          12.2,
+          12.6,
+          11.9,
+          13
+        ]
+      },
+      "cornerData": [
+        {
+          "corner": "３角",
+          "order": [
+            3,
+            2,
+            6,
+            1,
+            4,
+            7,
+            8,
+            9,
+            5
+          ]
+        },
+        {
+          "corner": "４角",
+          "order": [
+            3,
+            6,
+            2,
+            1,
+            7,
+            4,
+            8,
+            5,
+            9
+          ]
+        }
+      ],
+      "enteredAt": "2026-01-28T16:02:03.678Z",
+      "enteredBy": "staff-ui",
+      "commentary": "2026年1月28日大井競馬9レース（Ｃ１(八)(九) ダ1200m・9頭立）は、3番ラブラブフォー（2番人気）がハナを切って逃げる展開から、6番ビッグロイヤル（1番人気）が2番手を追走。直線で上がり37.2秒の鋭い脚を繰り出して差し切り、勝ちタイム1:14.1で1着、鞍上は御神本訓史騎手と橋本和馬厩舎のコンビでした。2着には先頭から伸びた3番ラブラブフォー（2番人気）、3着には2番カゼノハガクレ（3番人気）が入線。三連単6-3-2は870円（1番人気）で決着した。"
     }
   ],
   "dataVersion": "1.0"
