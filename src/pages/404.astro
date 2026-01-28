@@ -1,0 +1,356 @@
+---
+/**
+ * 404エラーページ - ページが見つかりません
+ */
+
+const title = 'ページが見つかりません（404） - 南関競馬結果速報';
+const description = 'お探しのページは見つかりませんでした。URLをご確認の上、トップページからお探しください。';
+
+const venues = [
+  { name: '大井', slug: 'ooi', color: '#d32f2f' },
+  { name: '船橋', slug: 'funabashi', color: '#2e7d32' },
+  { name: '川崎', slug: 'kawasaki', color: '#00bcd4' },
+  { name: '浦和', slug: 'urawa', color: '#1976d2' }
+];
+---
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>{title}</title>
+  <meta name="description" content={description}>
+
+  <!-- SEO -->
+  <meta name="robots" content="noindex, follow">
+  <link rel="canonical" href={Astro.site}>
+
+  <!-- OGP -->
+  <meta property="og:title" content={title}>
+  <meta property="og:description" content={description}>
+  <meta property="og:type" content="website">
+  <meta property="og:url" content={Astro.url}>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background: #f5f5f5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ヘッダー */
+    header {
+      background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);
+      color: white;
+      padding: 2rem 1rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      font-size: 1.75rem;
+      margin-bottom: 0.5rem;
+      font-weight: 700;
+    }
+
+    .subtitle {
+      font-size: 0.95rem;
+      opacity: 0.9;
+    }
+
+    /* メインコンテンツ */
+    main {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      flex: 1;
+    }
+
+    .section {
+      background: white;
+      border-radius: 8px;
+      padding: 2rem 1.5rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+
+    .section h2 {
+      font-size: 1.25rem;
+      color: #2e7d32;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid #2e7d32;
+    }
+
+    /* エラーメッセージ */
+    .error-container {
+      text-align: center;
+      padding: 3rem 1rem;
+    }
+
+    .error-code {
+      font-size: 8rem;
+      font-weight: 900;
+      color: #2e7d32;
+      opacity: 0.2;
+      line-height: 1;
+      margin-bottom: 1rem;
+    }
+
+    .error-title {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 1rem;
+    }
+
+    .error-description {
+      font-size: 1rem;
+      color: #666;
+      margin-bottom: 2rem;
+      line-height: 1.8;
+    }
+
+    /* ボタン */
+    .button-group {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 0.875rem 2rem;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .button-primary {
+      background: #2e7d32;
+      color: white;
+    }
+
+    .button-primary:hover {
+      background: #1b5e20;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    }
+
+    .button-secondary {
+      background: white;
+      color: #2e7d32;
+      border: 2px solid #2e7d32;
+    }
+
+    .button-secondary:hover {
+      background: #f5f5f5;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    }
+
+    /* 競馬場カード */
+    .venue-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .venue-card {
+      background: white;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      padding: 1.5rem;
+      text-align: center;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+
+    .venue-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    .venue-name {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .venue-status {
+      font-size: 0.875rem;
+      color: #666;
+    }
+
+    /* 参考リンク */
+    .help-links {
+      margin-top: 2rem;
+    }
+
+    .help-links h3 {
+      font-size: 1.1rem;
+      color: #666;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    .help-links ul {
+      list-style: none;
+      text-align: center;
+    }
+
+    .help-links li {
+      margin: 0.5rem 0;
+    }
+
+    .help-links a {
+      color: #2e7d32;
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+
+    .help-links a:hover {
+      color: #1b5e20;
+      text-decoration: underline;
+    }
+
+    /* フッター */
+    footer {
+      background: #333;
+      color: white;
+      text-align: center;
+      padding: 2rem 1rem;
+      margin-top: auto;
+    }
+
+    footer p {
+      font-size: 0.875rem;
+      opacity: 0.8;
+    }
+
+    /* モバイル対応 */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      .error-code {
+        font-size: 5rem;
+      }
+
+      .error-title {
+        font-size: 1.5rem;
+      }
+
+      .section {
+        padding: 1.5rem 1rem;
+      }
+
+      .venue-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .button-group {
+        flex-direction: column;
+      }
+
+      .button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="header-content">
+      <h1>南関競馬結果速報</h1>
+      <p class="subtitle">大井・川崎・船橋・浦和の最新レース結果</p>
+    </div>
+  </header>
+
+  <main>
+    <!-- エラーメッセージセクション -->
+    <section class="section">
+      <div class="error-container">
+        <div class="error-code">404</div>
+        <h2 class="error-title">ページが見つかりません</h2>
+        <p class="error-description">
+          お探しのページは移動または削除された可能性があります。<br>
+          URLをご確認の上、下記のリンクからお探しください。
+        </p>
+
+        <div class="button-group">
+          <a href="/" class="button button-primary">
+            🏠 トップページへ
+          </a>
+          <a href="/nankan/results/" class="button button-secondary">
+            📚 結果アーカイブ
+          </a>
+        </div>
+
+        <div class="help-links">
+          <h3>よくアクセスされるページ</h3>
+          <ul>
+            <li><a href="/">最新のレース結果</a></li>
+            <li><a href="/nankan/results/">全アーカイブ</a></li>
+            <li><a href="/nankan/">南関競馬について</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 競馬場別セクション -->
+    <section class="section">
+      <h2>🏇 競馬場から探す</h2>
+      <div class="venue-grid">
+        {venues.map(venue => (
+          <a
+            href={`/nankan/results/venue/${venue.slug}/`}
+            class="venue-card"
+            style={`border-color: ${venue.color};`}
+          >
+            <div class="venue-name" style={`color: ${venue.color};`}>
+              {venue.name}競馬場
+            </div>
+            <div class="venue-status">
+              結果を見る
+            </div>
+          </a>
+        ))}
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 南関競馬結果速報 - keiba-data-shared</p>
+    <p>南関東地方競馬の結果情報を提供</p>
+  </footer>
+</body>
+</html>
