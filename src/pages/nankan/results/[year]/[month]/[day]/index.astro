@@ -109,6 +109,19 @@ const venueNames = allVenuesData.map(v => v.venue).join('・');
 const title = `${year}年${parseInt(month)}月${parseInt(day)}日 南関競馬 結果一覧 | ${venueNames || '南関競馬結果速報'}`;
 const description = `${year}年${parseInt(month)}月${parseInt(day)}日の南関競馬レース結果一覧。${venueNames}競馬場の全レース結果を掲載。`;
 
+// 天候絵文字を返す関数
+const getWeatherEmoji = (weather) => {
+  const weatherEmojis = {
+    '晴': '☀️',
+    '曇': '☁️',
+    '雨': '☔',
+    '雪': '❄️',
+    '小雨': '🌧️',
+    '小雪': '🌨️'
+  };
+  return weatherEmojis[weather] || '';
+};
+
 // canonical URL
 const canonicalUrl = `${Astro.site}nankan/results/${year}/${month}/${day}/`;
 ---
@@ -676,6 +689,8 @@ const canonicalUrl = `${Astro.site}nankan/results/${year}/${month}/${day}/`;
                         <span>{race.surface}{race.distance}m</span>
                         <span>{race.horses}頭立て</span>
                         {race.startTime && <span>{race.startTime}発走</span>}
+                        {race.weather && <span>{getWeatherEmoji(race.weather)}{race.weather}</span>}
+                        {race.trackCondition && <span>馬場{race.trackCondition}</span>}
                       </div>
                     </div>
 

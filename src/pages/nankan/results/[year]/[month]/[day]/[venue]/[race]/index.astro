@@ -158,6 +158,19 @@ const title = `${year}年${month}月${day}日 ${venueName}競馬 第${raceNumber
 const winner = raceData.results[0];
 const metaDescription = `${year}年${month}月${day}日 ${venueName}競馬 第${raceNumber}R ${raceData.raceName}の結果。1着${winner.name}（${winner.jockey}）${winner.time}。${raceData.surface}${raceData.distance}m ${raceData.horses}頭立て、着順・払戻金・ラップタイムを掲載。`;
 
+// 天候絵文字を返す関数
+const getWeatherEmoji = (weather) => {
+  const weatherEmojis = {
+    '晴': '☀️',
+    '曇': '☁️',
+    '雨': '☔',
+    '雪': '❄️',
+    '小雨': '🌧️',
+    '小雪': '🌨️'
+  };
+  return weatherEmojis[weather] || '';
+};
+
 // レース内容要約生成
 const generateRaceSummary = () => {
   const w = raceData.results[0];
@@ -1008,7 +1021,7 @@ const generateRaceSummary = () => {
         <span>🏇 {venueName}競馬場</span>
         <span>🏁 第{raceNumber}R</span>
         {raceData.startTime && <span>⏰ {raceData.startTime}発走</span>}
-        {raceData.weather && <span>{raceData.weather === '晴' ? '☀️' : raceData.weather === '曇' ? '☁️' : raceData.weather === '雨' ? '☔' : ''} {raceData.weather}</span>}
+        {raceData.weather && <span>{getWeatherEmoji(raceData.weather)} 天候{raceData.weather}</span>}
         {raceData.trackCondition && <span>🏇 馬場{raceData.trackCondition}</span>}
       </div>
     </div>
@@ -1029,6 +1042,20 @@ const generateRaceSummary = () => {
 
           <dt>出走頭数</dt>
           <dd>{raceData.horses}頭</dd>
+
+          {raceData.weather && (
+            <>
+              <dt>天候</dt>
+              <dd>{getWeatherEmoji(raceData.weather)} {raceData.weather}</dd>
+            </>
+          )}
+
+          {raceData.trackCondition && (
+            <>
+              <dt>馬場状態</dt>
+              <dd>{raceData.trackCondition}</dd>
+            </>
+          )}
         </dl>
       </section>
 
