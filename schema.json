@@ -84,6 +84,18 @@
           "description": "発走時刻（HH:MM形式）",
           "example": "20:50"
         },
+        "weather": {
+          "type": "string",
+          "enum": ["晴", "曇", "雨", "雪", "小雨", "小雪"],
+          "description": "天候",
+          "example": "晴"
+        },
+        "trackCondition": {
+          "type": "string",
+          "enum": ["良", "稍重", "重", "不良"],
+          "description": "馬場状態",
+          "example": "良"
+        },
         "results": {
           "type": "array",
           "description": "着順結果配列",
