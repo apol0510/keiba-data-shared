@@ -57,10 +57,10 @@ try {
 }
 
 const venues = [
-  { name: '大井', slug: 'ooi', color: '#d32f2f' },
-  { name: '船橋', slug: 'funabashi', color: '#2e7d32' },
-  { name: '川崎', slug: 'kawasaki', color: '#00bcd4' },
-  { name: '浦和', slug: 'urawa', color: '#1976d2' }
+  { name: '大井', slug: 'ooi', color: '#FF6B6B', gradient: 'linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%)', emoji: '🌃' },
+  { name: '船橋', slug: 'funabashi', color: '#4ECDC4', gradient: 'linear-gradient(135deg, #4ECDC4 0%, #44A08D 100%)', emoji: '⚓' },
+  { name: '川崎', slug: 'kawasaki', color: '#45B7D1', gradient: 'linear-gradient(135deg, #45B7D1 0%, #2E86AB 100%)', emoji: '🌉' },
+  { name: '浦和', slug: 'urawa', color: '#A770EF', gradient: 'linear-gradient(135deg, #A770EF 0%, #7B68EE 100%)', emoji: '🌸' }
 ];
 ---
 
@@ -106,32 +106,60 @@ const venues = [
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif;
       line-height: 1.6;
-      color: #333;
-      background: #f5f5f5;
+      color: #2C3E50;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background-attachment: fixed;
+      min-height: 100vh;
     }
 
-    /* ヘッダー */
+    /* ヘッダー - 大胆なデザイン */
     header {
-      background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
       color: white;
-      padding: 2rem 1rem;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      padding: 3rem 1rem;
+      box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: '🏇';
+      position: absolute;
+      font-size: 15rem;
+      opacity: 0.1;
+      right: -2rem;
+      top: -3rem;
+      transform: rotate(-15deg);
     }
 
     .header-content {
       max-width: 1200px;
       margin: 0 auto;
+      position: relative;
+      z-index: 1;
     }
 
     h1 {
-      font-size: 1.75rem;
+      font-size: 2.5rem;
       margin-bottom: 0.5rem;
-      font-weight: 700;
+      font-weight: 800;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    h1::before {
+      content: '🏇';
+      font-size: 2rem;
     }
 
     .subtitle {
-      font-size: 0.95rem;
-      opacity: 0.9;
+      font-size: 1.1rem;
+      opacity: 0.95;
+      font-weight: 500;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
     }
 
     /* メインコンテンツ */
@@ -142,178 +170,314 @@ const venues = [
     }
 
     .section {
-      background: white;
-      border-radius: 8px;
-      padding: 1.5rem;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 2rem;
       margin-bottom: 2rem;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.5);
     }
 
     .section h2 {
-      font-size: 1.25rem;
-      color: #2e7d32;
-      margin-bottom: 1rem;
-      padding-bottom: 0.5rem;
-      border-bottom: 2px solid #2e7d32;
+      font-size: 1.75rem;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1.5rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
     }
 
-    /* 競馬場カード */
+    /* 競馬場カード - ポップなデザイン */
     .venue-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1rem;
-      margin-top: 1rem;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
     }
 
     .venue-card {
       background: white;
-      border: 2px solid #e0e0e0;
-      border-radius: 8px;
-      padding: 1.5rem;
+      border-radius: 16px;
+      padding: 2rem;
       text-align: center;
-      transition: all 0.3s ease;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       cursor: pointer;
       text-decoration: none;
       color: inherit;
       display: block;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      border: 3px solid transparent;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .venue-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 6px;
+      background: var(--venue-gradient);
     }
 
     .venue-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-      border-color: #2e7d32;
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+      border-color: var(--venue-color);
+    }
+
+    .venue-emoji {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      display: block;
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
     }
 
     .venue-name {
-      font-size: 1.5rem;
-      font-weight: 700;
+      font-size: 1.75rem;
+      font-weight: 800;
       margin-bottom: 0.5rem;
+      background: var(--venue-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
 
     .venue-status {
-      font-size: 0.875rem;
-      color: #666;
+      font-size: 0.95rem;
+      color: #7f8c8d;
+      font-weight: 600;
     }
 
-    /* 最新結果リスト */
-    .results-list {
-      list-style: none;
+    /* 最新結果カード */
+    .results-grid {
+      display: grid;
+      gap: 1.5rem;
     }
 
-    .result-item {
-      border: 1px solid #e0e0e0;
-      border-radius: 6px;
-      padding: 1rem;
-      margin-bottom: 1rem;
-      transition: background 0.2s ease;
+    .result-card {
+      background: white;
+      border-radius: 16px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
     }
 
-    .result-item:hover {
-      background: #f9f9f9;
+    .result-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+      border-color: #667eea;
     }
 
     .result-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 0.75rem;
+      margin-bottom: 1rem;
       flex-wrap: wrap;
-      gap: 0.5rem;
+      gap: 0.75rem;
     }
 
     .result-date {
-      font-size: 1.1rem;
-      font-weight: 600;
-      color: #2e7d32;
+      font-size: 1.25rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .result-date::before {
+      content: '📅';
     }
 
     .result-venue {
-      background: #2e7d32;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       color: white;
-      padding: 0.25rem 0.75rem;
-      border-radius: 4px;
-      font-size: 0.875rem;
-      font-weight: 600;
+      padding: 0.5rem 1.25rem;
+      border-radius: 20px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      box-shadow: 0 2px 10px rgba(102, 126, 234, 0.3);
     }
 
     .result-races {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.5rem;
+      gap: 0.75rem;
     }
 
     .race-link {
-      display: inline-block;
-      padding: 0.5rem 1rem;
-      background: #f5f5f5;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-      color: #333;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.75rem 1.25rem;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      border-radius: 12px;
+      color: #2C3E50;
       text-decoration: none;
-      font-size: 0.875rem;
-      transition: all 0.2s ease;
+      font-size: 0.95rem;
+      font-weight: 700;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      min-width: 80px;
     }
 
     .race-link:hover {
-      background: #2e7d32;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       color: white;
-      border-color: #2e7d32;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+    }
+
+    /* アーカイブボタン */
+    .archive-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 1rem 2rem;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      text-decoration: none;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 1.05rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    }
+
+    .archive-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
     }
 
     /* 説明セクション */
     .description {
       line-height: 1.8;
       color: #555;
+      font-size: 1.05rem;
     }
 
     .description ul {
-      margin: 1rem 0;
-      padding-left: 1.5rem;
+      margin: 1.5rem 0;
+      padding-left: 0;
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
     }
 
     .description li {
-      margin: 0.5rem 0;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      padding: 1rem 1.5rem;
+      border-radius: 12px;
+      font-weight: 600;
+      color: #2C3E50;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      transition: all 0.3s ease;
+    }
+
+    .description li:hover {
+      transform: translateX(5px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .description li::before {
+      content: '✅ ';
+      margin-right: 0.5rem;
     }
 
     /* フッター */
     footer {
-      background: #333;
+      background: linear-gradient(135deg, #2C3E50 0%, #34495e 100%);
       color: white;
       text-align: center;
-      padding: 2rem 1rem;
+      padding: 2.5rem 1rem;
       margin-top: 3rem;
+      box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
     }
 
     footer p {
-      font-size: 0.875rem;
-      opacity: 0.8;
+      font-size: 0.95rem;
+      opacity: 0.9;
+      margin: 0.5rem 0;
+    }
+
+    /* データなしメッセージ */
+    .no-data {
+      text-align: center;
+      padding: 3rem;
+      color: #7f8c8d;
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    .no-data::before {
+      content: '📭';
+      display: block;
+      font-size: 4rem;
+      margin-bottom: 1rem;
     }
 
     /* モバイル対応 */
     @media (max-width: 768px) {
       h1 {
-        font-size: 1.5rem;
+        font-size: 1.75rem;
+      }
+
+      header {
+        padding: 2rem 1rem;
       }
 
       .section {
-        padding: 1rem;
+        padding: 1.5rem;
+        border-radius: 16px;
+      }
+
+      .section h2 {
+        font-size: 1.5rem;
       }
 
       .venue-grid {
         grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+      }
+
+      .venue-card {
+        padding: 1.5rem 1rem;
+      }
+
+      .venue-emoji {
+        font-size: 2.5rem;
+      }
+
+      .venue-name {
+        font-size: 1.5rem;
       }
 
       .result-header {
         flex-direction: column;
         align-items: flex-start;
       }
-    }
 
-    /* データなしメッセージ */
-    .no-data {
-      text-align: center;
-      padding: 2rem;
-      color: #666;
+      .description ul {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
@@ -322,7 +486,7 @@ const venues = [
   <header>
     <div class="header-content">
       <h1>南関競馬結果速報</h1>
-      <p class="subtitle">大井・川崎・船橋・浦和の最新レース結果</p>
+      <p class="subtitle">大井・川崎・船橋・浦和の最新レース結果をお届け</p>
     </div>
   </header>
 
@@ -332,13 +496,13 @@ const venues = [
       <h2>📅 最新のレース結果</h2>
 
       {availableDates.length > 0 ? (
-        <ul class="results-list">
+        <div class="results-grid">
           {availableDates.map(item => {
             const [year, month, day] = item.date.split('-');
             const venueSlug = venues.find(v => v.name === item.venue)?.slug || 'ooi';
 
             return (
-              <li class="result-item">
+              <div class="result-card">
                 <div class="result-header">
                   <time class="result-date" datetime={item.date}>
                     {year}年{parseInt(month)}月{parseInt(day)}日
@@ -355,10 +519,10 @@ const venues = [
                     </a>
                   ))}
                 </div>
-              </li>
+              </div>
             );
           })}
-        </ul>
+        </div>
       ) : (
         <p class="no-data">現在表示できる結果データはありません</p>
       )}
@@ -372,9 +536,10 @@ const venues = [
           <a
             href={`/nankan/results/venue/${venue.slug}/`}
             class="venue-card"
-            style={`border-color: ${venue.color};`}
+            style={`--venue-color: ${venue.color}; --venue-gradient: ${venue.gradient};`}
           >
-            <div class="venue-name" style={`color: ${venue.color};`}>
+            <span class="venue-emoji">{venue.emoji}</span>
+            <div class="venue-name">
               {venue.name}競馬場
             </div>
             <div class="venue-status">
@@ -389,10 +554,10 @@ const venues = [
     <section class="section">
       <h2>📚 過去の結果を見る</h2>
       <div class="description">
-        <p style="margin-bottom: 1rem;">
+        <p style="margin-bottom: 1.5rem;">
           過去の南関競馬の結果を年月別、競馬場別に検索できます。
         </p>
-        <a href="/nankan/results/" style="display: inline-block; padding: 0.75rem 1.5rem; background: #2e7d32; color: white; text-decoration: none; border-radius: 4px; font-weight: 600; transition: background 0.2s;">
+        <a href="/nankan/results/" class="archive-btn">
           📚 全アーカイブを見る
         </a>
       </div>
@@ -402,7 +567,7 @@ const venues = [
     <section class="section">
       <h2>📖 南関競馬結果速報について</h2>
       <div class="description">
-        <p>
+        <p style="margin-bottom: 1rem;">
           南関競馬結果速報は、南関東4競馬場（大井競馬・川崎競馬・船橋競馬・浦和競馬）のレース結果を掲載する情報サイトです。
         </p>
         <ul>
@@ -420,8 +585,9 @@ const venues = [
   </main>
 
   <footer>
-    <p>&copy; 2026 南関競馬結果速報 - keiba-data-shared</p>
+    <p>🏇 南関競馬結果速報 - keiba-data-shared</p>
     <p>南関東地方競馬の結果情報を提供</p>
+    <p style="margin-top: 1rem; font-size: 0.85rem;">&copy; 2026 All rights reserved</p>
   </footer>
 </body>
 </html>
