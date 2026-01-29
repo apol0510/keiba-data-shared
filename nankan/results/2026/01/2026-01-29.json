@@ -4,6 +4,315 @@
   "venueCode": "OI",
   "races": [
     {
+      "raceNumber": 1,
+      "raceName": "Ｃ３(一)(二)(三)",
+      "distance": 1400,
+      "surface": "ダート",
+      "track": "外",
+      "horses": 12,
+      "startTime": "10:55",
+      "results": [
+        {
+          "rank": 1,
+          "bracket": 6,
+          "number": 7,
+          "name": "ベンハー",
+          "jockey": "藤本現暉",
+          "trainer": "高橋清顕",
+          "time": "1:29.3",
+          "margin": "-",
+          "lastFurlong": "40.2",
+          "popularity": 1
+        },
+        {
+          "rank": 2,
+          "bracket": 8,
+          "number": 12,
+          "name": "ピーエムドレミ",
+          "jockey": "▲杉山海波",
+          "trainer": "市村誠",
+          "time": "1:29.3",
+          "margin": "クビ",
+          "lastFurlong": "39.4",
+          "popularity": 6
+        },
+        {
+          "rank": 3,
+          "bracket": 2,
+          "number": 2,
+          "name": "ピックアンドロール",
+          "jockey": "江里口裕輝",
+          "trainer": "鷹見浩",
+          "time": "1:29.6",
+          "margin": "１ 1/2",
+          "lastFurlong": "39.0",
+          "popularity": 5
+        },
+        {
+          "rank": 4,
+          "bracket": 5,
+          "number": 6,
+          "name": "セブンゴー",
+          "jockey": "石川倭",
+          "trainer": "橋本和馬",
+          "time": "1:29.7",
+          "margin": "3/4",
+          "lastFurlong": "38.7",
+          "popularity": 4
+        },
+        {
+          "rank": 5,
+          "bracket": 4,
+          "number": 4,
+          "name": "ルイーサ",
+          "jockey": "矢野貴之",
+          "trainer": "鷹見浩",
+          "time": "1:29.8",
+          "margin": "1/2",
+          "lastFurlong": "40.5",
+          "popularity": 3
+        },
+        {
+          "rank": 6,
+          "bracket": 3,
+          "number": 3,
+          "name": "ポンペルモ",
+          "jockey": "山林堂信彦",
+          "trainer": "小野寺晋廣",
+          "time": "1:30.1",
+          "margin": "１ 1/2",
+          "lastFurlong": "40.1",
+          "popularity": 8
+        },
+        {
+          "rank": 7,
+          "bracket": 6,
+          "number": 8,
+          "name": "キラン",
+          "jockey": "▲小野俊斗",
+          "trainer": "小野寺晋廣",
+          "time": "1:30.4",
+          "margin": "１ 1/2",
+          "lastFurlong": "39.2",
+          "popularity": 12
+        },
+        {
+          "rank": 8,
+          "bracket": 5,
+          "number": 5,
+          "name": "アウスラフラッグ",
+          "jockey": "藤田凌",
+          "trainer": "阪本一栄",
+          "time": "1:30.6",
+          "margin": "１",
+          "lastFurlong": "41.5",
+          "popularity": 2
+        },
+        {
+          "rank": 9,
+          "bracket": 7,
+          "number": 9,
+          "name": "ガニュメデスレイ",
+          "jockey": "▲高橋優",
+          "trainer": "渡邉和雄",
+          "time": "1:31.2",
+          "margin": "３",
+          "lastFurlong": "39.1",
+          "popularity": 11
+        },
+        {
+          "rank": 10,
+          "bracket": 7,
+          "number": 10,
+          "name": "ヴェルヴェーナ",
+          "jockey": "西啓太",
+          "trainer": "堀千亜樹",
+          "time": "1:32.2",
+          "margin": "５",
+          "lastFurlong": "40.7",
+          "popularity": 9
+        },
+        {
+          "rank": 11,
+          "bracket": 1,
+          "number": 1,
+          "name": "ラシャスバラード",
+          "jockey": "和田譲治",
+          "trainer": "的場直之",
+          "time": "1:32.3",
+          "margin": "1/2",
+          "lastFurlong": "43.2",
+          "popularity": 7
+        },
+        {
+          "rank": 12,
+          "bracket": 8,
+          "number": 11,
+          "name": "クレストライン",
+          "jockey": "△中山遥人",
+          "trainer": "久保杉隆",
+          "time": "1:32.6",
+          "margin": "１ 1/2",
+          "lastFurlong": "40.4",
+          "popularity": 10
+        }
+      ],
+      "payouts": {
+        "tansho": [
+          {
+            "number": "7",
+            "payout": 200,
+            "popularity": 1
+          }
+        ],
+        "fukusho": [
+          {
+            "number": "7",
+            "payout": 140,
+            "popularity": 2
+          },
+          {
+            "number": "12",
+            "payout": 360,
+            "popularity": 6
+          },
+          {
+            "number": "2",
+            "payout": 230,
+            "popularity": 5
+          }
+        ],
+        "wakuren": [
+          {
+            "combination": "6-8",
+            "payout": 3260,
+            "popularity": 10
+          }
+        ],
+        "umaren": [
+          {
+            "combination": "7-12",
+            "payout": 2540,
+            "popularity": 10
+          }
+        ],
+        "wakutan": [
+          {
+            "combination": "6-8",
+            "payout": 3770,
+            "popularity": 12
+          }
+        ],
+        "umatan": [
+          {
+            "combination": "7-12",
+            "payout": 3430,
+            "popularity": 13
+          }
+        ],
+        "wide": [
+          {
+            "combination": "7-12",
+            "payout": 690,
+            "popularity": 9
+          },
+          {
+            "combination": "2-7",
+            "payout": 410,
+            "popularity": 5
+          },
+          {
+            "combination": "2-12",
+            "payout": 2090,
+            "popularity": 21
+          }
+        ],
+        "sanrenpuku": [
+          {
+            "combination": "2-7-12",
+            "payout": 8290,
+            "popularity": 25
+          }
+        ],
+        "sanrentan": [
+          {
+            "combination": "7-12-2",
+            "payout": 27880,
+            "popularity": 88
+          }
+        ]
+      },
+      "timeData": {
+        "last3F": 40.2,
+        "last4F": 52.8,
+        "furlongTimes": [
+          13.2,
+          11.5,
+          11.8,
+          12.6,
+          13.2,
+          12.9,
+          14.1
+        ]
+      },
+      "cornerData": [
+        {
+          "corner": "２角",
+          "order": [
+            5,
+            4,
+            1,
+            7,
+            12,
+            2,
+            6,
+            3,
+            8,
+            10,
+            9,
+            11
+          ]
+        },
+        {
+          "corner": "３角",
+          "order": [
+            1,
+            5,
+            7,
+            4,
+            12,
+            3,
+            2,
+            6,
+            8,
+            10,
+            9,
+            11
+          ]
+        },
+        {
+          "corner": "４角",
+          "order": [
+            5,
+            7,
+            1,
+            4,
+            12,
+            3,
+            2,
+            6,
+            8,
+            10,
+            9,
+            11
+          ]
+        }
+      ],
+      "enteredAt": "2026-01-29T04:43:12.559Z",
+      "enteredBy": "staff-ui",
+      "commentary": "2026年1月29日大井競馬1レース（Ｃ３(一)(二)(三) ダ1400m・12頭立）は、5番アウスラフラッグ（2番人気）がハナを切る展開の中、7番ベンハー（1番人気）が先行して脚を溜める形から直線で抜け出してゴール。勝ちタイム1:29.3だった。鞍上は藤本現暉騎手と高橋清顕厩舎のコンビ。2着には5番手から伸びた12番ピーエムドレミ（6番人気）、3着には2番ピックアンドロール（5番人気）が入線した。三連単7-12-2は27,880円（88番人気）で決着した。"
+    },
+    {
       "raceNumber": 11,
       "raceName": "第７０回 金盃（ＳII）",
       "distance": 2600,
