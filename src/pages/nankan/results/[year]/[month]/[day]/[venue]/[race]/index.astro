@@ -170,7 +170,7 @@ const generateRaceSummary = () => {
     summary += `、直線で${second.number}番${second.name}を捕らえて`;
   }
 
-  summary += `優勝。`;
+  summary += `1着。`;
 
   if (raceData.timeData?.last3F) {
     summary += `上がり3ハロン${raceData.timeData.last3F}秒の脚を使い、`;
@@ -241,29 +241,44 @@ const generateRaceSummary = () => {
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif;
       line-height: 1.6;
-      color: #333;
-      background: #f5f5f5;
+      color: #2C3E50;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background-attachment: fixed;
+      min-height: 100vh;
     }
 
-    /* ヘッダー */
+    /* ヘッダー - ポップなデザイン */
     .page-header {
-      background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
       color: white;
-      padding: 1.5rem 1rem;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-      margin-bottom: 2rem;
+      padding: 2rem 1rem;
+      box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .page-header::before {
+      content: '🏇';
+      position: absolute;
+      font-size: 12rem;
+      opacity: 0.1;
+      right: -2rem;
+      top: -2rem;
+      transform: rotate(-15deg);
     }
 
     .header-content {
       max-width: 1200px;
       margin: 0 auto;
+      position: relative;
+      z-index: 1;
     }
 
     /* パンくずリスト */
     nav[aria-label="パンくずリスト"] {
       margin-bottom: 1rem;
       font-size: 0.875rem;
-      opacity: 0.9;
+      opacity: 0.95;
     }
 
     nav[aria-label="パンくずリスト"] ol {
@@ -285,9 +300,11 @@ const generateRaceSummary = () => {
     nav[aria-label="パンくずリスト"] a {
       color: white;
       text-decoration: none;
+      transition: opacity 0.2s;
     }
 
     nav[aria-label="パンくずリスト"] a:hover {
+      opacity: 0.8;
       text-decoration: underline;
     }
 
@@ -295,113 +312,159 @@ const generateRaceSummary = () => {
       color: white;
     }
 
-    /* ヘッダー */
     h1 {
+      font-size: 2rem;
+      margin-bottom: 0.75rem;
+      font-weight: 800;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    h1::before {
+      content: '🏆';
       font-size: 1.75rem;
-      margin-bottom: 0.5rem;
-      font-weight: 700;
     }
 
     .race-meta {
-      margin-top: 0.5rem;
+      margin-top: 0.75rem;
       display: flex;
       flex-wrap: wrap;
       gap: 1rem;
-      font-size: 0.95rem;
+      font-size: 1rem;
       opacity: 0.95;
+      font-weight: 500;
+    }
+
+    .race-meta span {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
     }
 
     main {
       max-width: 1200px;
-      margin: 0 auto;
+      margin: 2rem auto;
       padding: 0 1rem 2rem;
     }
 
+    /* カードセクション */
     section {
-      background: white;
-      border-radius: 8px;
-      padding: 1.5rem;
-      margin-bottom: 1.5rem;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.5);
     }
 
     h2 {
-      font-size: 1.25rem;
-      margin: 0 0 1rem;
-      padding-bottom: 0.5rem;
-      border-bottom: 2px solid #2e7d32;
-      color: #2e7d32;
+      font-size: 1.5rem;
+      margin: 0 0 1.5rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
     }
 
     /* 定義リスト */
     dl {
       display: grid;
       grid-template-columns: auto 1fr;
-      gap: 0.5rem 1rem;
+      gap: 1rem 2rem;
       margin-bottom: 1rem;
     }
 
     dt {
-      font-weight: 600;
-      color: #555;
+      font-weight: 700;
+      color: #667eea;
+      font-size: 0.95rem;
     }
 
     dd {
-      color: #333;
+      color: #2C3E50;
+      font-weight: 600;
     }
 
-    /* 勝ち馬ハイライト */
+    /* 勝ち馬ハイライト - ポップなデザイン */
     .winner-highlight {
-      background: linear-gradient(135deg, #fff3cd 0%, #fffbef 100%);
-      border: 2px solid #ffc107;
-      border-radius: 8px;
-      padding: 1.5rem;
-      margin-bottom: 1.5rem;
-      box-shadow: 0 2px 4px rgba(255, 193, 7, 0.2);
+      background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+      border-radius: 16px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 8px 24px rgba(255, 215, 0, 0.4);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .winner-highlight::before {
+      content: '👑';
+      position: absolute;
+      font-size: 6rem;
+      opacity: 0.2;
+      right: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
     }
 
     .winner-highlight strong {
       display: inline-block;
-      background: #ffc107;
-      color: #333;
-      padding: 0.25rem 0.75rem;
-      border-radius: 4px;
-      font-size: 0.875rem;
-      margin-bottom: 0.5rem;
+      background: rgba(255, 255, 255, 0.9);
+      color: #FF6B00;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+      font-weight: 800;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     }
 
     .winner-highlight p {
-      margin: 0.5rem 0;
-      font-size: 1.1rem;
+      margin: 0.75rem 0;
+      font-size: 1.25rem;
+      color: white;
+      font-weight: 700;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+      position: relative;
+      z-index: 1;
     }
 
-    /* テーブル */
+    /* テーブル - カラフルなデザイン */
     table {
       width: 100%;
       border-collapse: collapse;
       margin: 1rem 0;
       font-size: 0.875rem;
-      border: 1px solid #e0e0e0;
-      border-radius: 8px;
+      border-radius: 12px;
       overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
     }
 
     caption {
       text-align: left;
-      font-weight: 600;
-      margin-bottom: 0.5rem;
-      font-size: 1rem;
-      color: #2e7d32;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      font-size: 1.1rem;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
 
     th, td {
-      padding: 0.75rem 0.5rem;
+      padding: 1rem 0.75rem;
       text-align: left;
-      border-bottom: 1px solid #e0e0e0;
     }
 
     th {
-      background: linear-gradient(180deg, #2e7d32 0%, #388e3c 100%);
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       color: white;
       font-weight: 700;
       white-space: nowrap;
@@ -411,151 +474,138 @@ const generateRaceSummary = () => {
     td:nth-child(1),
     td:nth-child(2),
     td:nth-child(3),
+    td:nth-child(7),
     td:nth-child(8),
     td:nth-child(9),
-    td:nth-child(10),
-    td:nth-child(11) {
+    td:nth-child(10) {
       text-align: center;
     }
 
-    tbody tr:nth-child(odd) {
-      background: #fafafa;
+    tbody tr {
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+      transition: all 0.3s ease;
     }
 
     tbody tr:hover {
-      background: #e8f5e9;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      transform: translateX(4px);
     }
 
     tbody tr:first-child {
-      background: #fff3cd;
-      font-weight: 600;
+      background: linear-gradient(135deg, #FFF9C4 0%, #FFEB3B 100%);
+      font-weight: 700;
     }
 
     tbody tr:first-child:hover {
-      background: #ffecb3;
+      background: linear-gradient(135deg, #FFF176 0%, #FFEB3B 100%);
     }
 
-    /* モバイル対応 */
-    @media (max-width: 768px) {
-      .page-header {
-        padding: 1rem 0.5rem;
-      }
-
-      h1 {
-        font-size: 1.25rem;
-      }
-
-      main {
-        padding: 0 0.5rem 1rem;
-      }
-
-      section {
-        padding: 1rem;
-        margin-bottom: 1rem;
-      }
-
-      h2 {
-        font-size: 1.1rem;
-      }
-
-      table {
-        display: block;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-        font-size: 0.75rem;
-      }
-
-      th, td {
-        padding: 0.5rem 0.25rem;
-      }
-
-      dl {
-        grid-template-columns: 1fr;
-      }
-
-      .payouts-main dl {
-        grid-template-columns: 1fr;
-      }
-
-      .race-footer ul {
-        gap: 0.5rem;
-      }
-
-      .race-footer a,
-      .race-footer strong {
-        padding: 0.4rem 0.75rem;
-        font-size: 0.875rem;
-      }
-    }
-
-    /* 払戻金 */
+    /* 払戻金 - 目立つカードデザイン */
     .payouts-main {
-      background: linear-gradient(135deg, #e8f5e9 0%, #f1f8f4 100%);
-      padding: 1.5rem;
-      border-radius: 8px;
-      margin-bottom: 1.5rem;
-      border: 2px solid #4caf50;
+      background: linear-gradient(135deg, #4ECDC4 0%, #44A08D 100%);
+      padding: 2rem;
+      border-radius: 16px;
+      margin-bottom: 2rem;
+      box-shadow: 0 8px 24px rgba(78, 205, 196, 0.4);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .payouts-main::before {
+      content: '💰';
+      position: absolute;
+      font-size: 8rem;
+      opacity: 0.15;
+      right: 1rem;
+      bottom: -1rem;
     }
 
     .payouts-main dl {
-      grid-template-columns: 100px 1fr;
-      gap: 1rem 1.5rem;
+      grid-template-columns: 120px 1fr;
+      gap: 1.25rem 2rem;
+      position: relative;
+      z-index: 1;
     }
 
     .payouts-main dt {
-      font-weight: 700;
-      color: #2e7d32;
-      font-size: 1rem;
+      font-weight: 800;
+      color: white;
+      font-size: 1.1rem;
     }
 
     .payouts-main dd {
-      font-size: 1.1rem;
-      color: #333;
-      font-weight: 600;
+      font-size: 1.25rem;
+      color: white;
+      font-weight: 700;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
     }
 
     /* 折りたたみ */
     details {
-      margin: 1rem 0;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-      padding: 0.5rem 1rem;
+      margin: 1.5rem 0;
+      border: 2px solid #e0e0e0;
+      border-radius: 12px;
+      padding: 1rem 1.5rem;
+      transition: all 0.3s ease;
+    }
+
+    details:hover {
+      border-color: #667eea;
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
     }
 
     summary {
       cursor: pointer;
-      font-weight: 600;
+      font-weight: 700;
       padding: 0.5rem 0;
       user-select: none;
+      color: #667eea;
+      font-size: 1.05rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
     }
 
-    summary:hover {
-      color: #0066cc;
+    summary::before {
+      content: '▶';
+      font-size: 0.75rem;
+      transition: transform 0.3s ease;
+    }
+
+    details[open] summary::before {
+      transform: rotate(90deg);
     }
 
     details[open] summary {
-      margin-bottom: 1rem;
+      margin-bottom: 1.5rem;
     }
 
     .note {
       font-size: 0.875rem;
-      color: #666;
-      margin-top: 0.5rem;
+      color: #7f8c8d;
+      margin-top: 1rem;
+      font-style: italic;
     }
 
-    /* フッターナビゲーション */
+    /* フッターナビゲーション - カラフルなボタン */
     .race-footer {
-      background: white;
-      border-radius: 8px;
-      padding: 1.5rem;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 2rem;
       margin-top: 2rem;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.5);
     }
 
     .race-footer h3 {
-      font-size: 1.1rem;
-      margin-bottom: 1rem;
-      color: #2e7d32;
+      font-size: 1.25rem;
+      margin-bottom: 1.5rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
 
     .race-footer ul {
@@ -571,50 +621,123 @@ const generateRaceSummary = () => {
 
     .race-footer a,
     .race-footer strong {
-      display: inline-block;
-      padding: 0.5rem 1rem;
-      background: #f5f5f5;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-      color: #333;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.75rem 1.5rem;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      border-radius: 12px;
+      color: #2C3E50;
       text-decoration: none;
-      transition: all 0.2s ease;
+      transition: all 0.3s ease;
+      font-weight: 700;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      min-width: 80px;
     }
 
     .race-footer a:hover {
-      background: #2e7d32;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       color: white;
-      border-color: #2e7d32;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
     }
 
     .race-footer strong {
-      background: #2e7d32;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       color: white;
-      border-color: #2e7d32;
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
     }
 
     /* サイトフッター */
     .site-footer {
-      background: #333;
+      background: linear-gradient(135deg, #2C3E50 0%, #34495e 100%);
       color: white;
       text-align: center;
-      padding: 2rem 1rem;
+      padding: 2.5rem 1rem;
       margin-top: 3rem;
+      box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
     }
 
     .site-footer p {
-      font-size: 0.875rem;
-      opacity: 0.8;
+      font-size: 0.95rem;
+      opacity: 0.9;
       margin: 0.5rem 0;
     }
 
     .site-footer a {
       color: white;
       text-decoration: none;
+      font-weight: 600;
+      transition: opacity 0.2s;
     }
 
     .site-footer a:hover {
+      opacity: 0.8;
       text-decoration: underline;
+    }
+
+    /* モバイル対応 */
+    @media (max-width: 768px) {
+      .page-header {
+        padding: 1.5rem 1rem;
+      }
+
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      main {
+        padding: 0 0.5rem 1.5rem;
+      }
+
+      section {
+        padding: 1.5rem;
+        border-radius: 16px;
+        margin-bottom: 1.5rem;
+      }
+
+      h2 {
+        font-size: 1.25rem;
+      }
+
+      table {
+        display: block;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        font-size: 0.75rem;
+      }
+
+      th, td {
+        padding: 0.75rem 0.5rem;
+      }
+
+      dl {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+      }
+
+      .payouts-main dl {
+        grid-template-columns: 1fr;
+      }
+
+      .winner-highlight {
+        padding: 1.5rem;
+      }
+
+      .winner-highlight p {
+        font-size: 1.05rem;
+      }
+
+      .race-footer ul {
+        gap: 0.5rem;
+      }
+
+      .race-footer a,
+      .race-footer strong {
+        padding: 0.6rem 1rem;
+        font-size: 0.875rem;
+        min-width: 70px;
+      }
     }
   </style>
 </head>
@@ -641,11 +764,13 @@ const generateRaceSummary = () => {
       <h1>{raceData.raceName}</h1>
       <div class="race-meta">
         <time datetime={`${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`}>
-          {year}年{month}月{day}日
+          📅 {year}年{month}月{day}日
         </time>
-        <span>{venueName}競馬場</span>
-        <span>第{raceNumber}R</span>
-        {raceData.startTime && <span>{raceData.startTime}発走</span>}
+        <span>🏇 {venueName}競馬場</span>
+        <span>🏁 第{raceNumber}R</span>
+        {raceData.startTime && <span>⏰ {raceData.startTime}発走</span>}
+        {raceData.weather && <span>{raceData.weather === '晴' ? '☀️' : raceData.weather === '曇' ? '☁️' : raceData.weather === '雨' ? '☔' : ''} {raceData.weather}</span>}
+        {raceData.trackCondition && <span>🏇 馬場{raceData.trackCondition}</span>}
       </div>
     </div>
   </header>
@@ -655,7 +780,7 @@ const generateRaceSummary = () => {
 
       <!-- 1. レース概要 -->
       <section>
-        <h2>レース概要</h2>
+        <h2>📋 レース概要</h2>
         <dl>
           <dt>レース名</dt>
           <dd>{raceData.raceName}</dd>
@@ -670,10 +795,11 @@ const generateRaceSummary = () => {
 
       <!-- 2. 着順結果 -->
       <section>
-        <h2>着順結果</h2>
+        <h2>🏆 着順結果</h2>
 
         <div class="winner-highlight">
-          <p><strong>1着</strong> {winner.number}番 {winner.name}（{winner.jockey}）</p>
+          <strong>🥇 1着</strong>
+          <p>{winner.number}番 {winner.name}（{winner.jockey}）</p>
           <p>タイム: {winner.time} / 人気: {winner.popularity}番人気</p>
         </div>
 
@@ -714,7 +840,7 @@ const generateRaceSummary = () => {
 
       <!-- 3. 払戻金 -->
       <section>
-        <h2>払戻金</h2>
+        <h2>💰 払戻金</h2>
 
         {raceData.payouts && (
           <div class="payouts-main">
@@ -815,17 +941,17 @@ const generateRaceSummary = () => {
 
       <!-- 4. レース内容 -->
       <section>
-        <h2>レース内容</h2>
-        <p>{raceData.commentary || generateRaceSummary()}</p>
+        <h2>📝 レース内容</h2>
+        <p style="line-height: 1.9; font-size: 1.05rem; color: #2C3E50;">{raceData.commentary || generateRaceSummary()}</p>
       </section>
 
       <!-- 5. 詳細データ -->
       <section>
-        <h2>詳細データ</h2>
+        <h2>📊 詳細データ</h2>
 
         {raceData.timeData && (
           <details>
-            <summary>ラップタイム</summary>
+            <summary>⏱️ ラップタイム</summary>
             <dl>
               {raceData.timeData.last3F && (
                 <>
@@ -853,7 +979,7 @@ const generateRaceSummary = () => {
 
         {raceData.cornerData && raceData.cornerData.length > 0 && (
           <details>
-            <summary>コーナー通過順</summary>
+            <summary>📍 コーナー通過順</summary>
             <dl>
               {raceData.cornerData.map(corner => (
                 <>
@@ -870,7 +996,7 @@ const generateRaceSummary = () => {
       <!-- フッター: 関連レース -->
       <div class="race-footer">
         <nav aria-label="関連レース">
-          <h3>同日の他レース</h3>
+          <h3>🏁 同日の他レース</h3>
           <ul>
             {allRaces.map(r => (
               <li>
@@ -891,8 +1017,9 @@ const generateRaceSummary = () => {
 
   <!-- サイトフッター -->
   <footer class="site-footer">
-    <p><a href="/">南関競馬結果速報トップへ戻る</a></p>
-    <p>&copy; 2026 南関競馬結果速報 - keiba-data-shared</p>
+    <p><a href="/">🏇 南関競馬結果速報トップへ戻る</a></p>
+    <p>南関東地方競馬の結果情報を提供</p>
+    <p style="margin-top: 1rem; font-size: 0.85rem;">&copy; 2026 All rights reserved</p>
   </footer>
 </body>
 </html>
