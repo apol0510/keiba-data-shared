@@ -4,52 +4,54 @@
  * 一般ユーザー向け、検索エンジン対応
  */
 
-import { readdir, readFile } from 'node:fs/promises';
-import { join } from 'node:path';
-
 const title = '南関競馬結果速報 - 大井・川崎・船橋・浦和の競馬結果';
 const description = '南関東4競馬場（大井・川崎・船橋・浦和）の最新レース結果を速報。着順・払戻金・ラップタイムなど詳細データを掲載。';
 
-const resultsBaseUrl = 'https://raw.githubusercontent.com/apol0510/keiba-data-shared/main/nankan/results';
-
-// nankan/results/配下の全JSONファイルを自動検出
+// GitHubから最新のレース結果を取得
 const availableDates = [];
-const resultsDir = join(process.cwd(), 'nankan', 'results');
 
 try {
-  // 年ディレクトリを走査
-  const years = await readdir(resultsDir);
+  const GITHUB_API_URL = 'https://api.github.com/repos/apol0510/keiba-data-shared/git/trees/main?recursive=1';
 
-  for (const year of years) {
-    if (!year.match(/^\d{4}$/)) continue; // 4桁の年のみ
+  const response = await fetch(GITHUB_API_URL, {
+    headers: {
+      'Accept': 'application/vnd.github.v3+json',
+      'User-Agent': 'keiba-data-shared-build'
+    }
+  });
 
-    const yearPath = join(resultsDir, year);
-    const months = await readdir(yearPath);
+  if (response.ok) {
+    const data = await response.json();
 
-    for (const month of months) {
-      if (!month.match(/^\d{2}$/)) continue; // 2桁の月のみ
+    const jsonFiles = data.tree.filter(item =>
+      item.path.startsWith('nankan/results/') &&
+      item.path.endsWith('.json') &&
+      item.path.match(/nankan\/results\/\d{4}\/\d{2}\/\d{4}-\d{2}-\d{2}\.json/)
+    );
 
-      const monthPath = join(yearPath, month);
-      const files = await readdir(monthPath);
+    // 各JSONファイルを取得
+    for (const file of jsonFiles) {
+      try {
+        const jsonUrl = `https://raw.githubusercontent.com/apol0510/keiba-data-shared/main/${file.path}`;
+        const jsonResponse = await fetch(jsonUrl);
 
-      for (const file of files) {
-        if (!file.endsWith('.json')) continue;
+        if (jsonResponse.ok) {
+          const jsonData = await jsonResponse.json();
 
-        const filePath = join(monthPath, file);
-        const content = await readFile(filePath, 'utf-8');
-        const data = JSON.parse(content);
-
-        availableDates.push({
-          date: data.date,
-          venue: data.venue,
-          races: data.races.length
-        });
+          availableDates.push({
+            date: jsonData.date,
+            venue: jsonData.venue,
+            raceNumbers: jsonData.races.map(r => r.raceNumber).sort((a, b) => a - b) // 実際のレース番号配列
+          });
+        }
+      } catch (e) {
+        console.error(`Error fetching ${file.path}:`, e.message);
       }
     }
-  }
 
-  // 日付の新しい順にソート
-  availableDates.sort((a, b) => b.date.localeCompare(a.date));
+    // 日付の新しい順にソート
+    availableDates.sort((a, b) => b.date.localeCompare(a.date));
+  }
 } catch (error) {
   console.error('結果データの読み込みエラー:', error);
 }
@@ -344,7 +346,7 @@ const venues = [
                   <span class="result-venue">{item.venue}競馬</span>
                 </div>
                 <div class="result-races">
-                  {Array.from({ length: item.races }, (_, i) => i + 1).map(raceNum => (
+                  {item.raceNumbers.map(raceNum => (
                     <a
                       href={`/nankan/results/${year}/${month}/${day}/${venueSlug}/${raceNum}/`}
                       class="race-link"
