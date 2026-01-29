@@ -361,18 +361,74 @@ const currentVenue = venueData[venue] || venueData['ooi'];
     }
 
     footer {
-      background: linear-gradient(135deg, #2C3E50 0%, #34495e 100%);
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
       color: white;
       text-align: center;
-      padding: 2.5rem 1rem;
+      padding: 3rem 1rem;
       margin-top: 3rem;
-      box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
+      box-shadow: 0 -8px 32px rgba(102, 126, 234, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    footer::before {
+      content: '🏇';
+      position: absolute;
+      font-size: 10rem;
+      opacity: 0.1;
+      left: -2rem;
+      top: 50%;
+      transform: translateY(-50%) rotate(15deg);
+      animation: float-horse 6s ease-in-out infinite;
+    }
+
+    @keyframes float-horse {
+      0%, 100% {
+        transform: translateY(-50%) rotate(15deg) translateX(0);
+      }
+      50% {
+        transform: translateY(-50%) rotate(15deg) translateX(20px);
+      }
+    }
+
+    footer::after {
+      content: '🏆';
+      position: absolute;
+      font-size: 8rem;
+      opacity: 0.1;
+      right: -1rem;
+      top: 50%;
+      transform: translateY(-50%) rotate(-15deg);
+      animation: float-trophy 5s ease-in-out infinite;
+    }
+
+    @keyframes float-trophy {
+      0%, 100% {
+        transform: translateY(-50%) rotate(-15deg) translateX(0);
+      }
+      50% {
+        transform: translateY(-50%) rotate(-15deg) translateX(-20px);
+      }
     }
 
     footer p {
-      font-size: 0.95rem;
-      opacity: 0.9;
-      margin: 0.5rem 0;
+      font-size: 1rem;
+      opacity: 0.95;
+      margin: 0.75rem 0;
+      font-weight: 600;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+      position: relative;
+      z-index: 1;
+    }
+
+    footer p:first-child {
+      font-size: 1.25rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
     }
 
     @media (max-width: 768px) {
