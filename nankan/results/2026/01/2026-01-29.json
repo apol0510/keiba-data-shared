@@ -2102,6 +2102,227 @@
       "enteredAt": "2026-01-29T06:04:49.535Z",
       "enteredBy": "staff-ui",
       "commentary": "2026年1月29日大井競馬7レース（Ｃ２(六)(七) ダ1200m・14頭立）は、2番ゴールデンラック（2番人気）がハナを切る展開の中、6番ニジノカナタニ（3番人気）が中団で脚を溜める形。直線で上がり38.5秒をマークして差し切り、勝ちタイム1:14.9で1着となった。鞍上は御神本訓史騎手と上杉昌宏厩舎のコンビ。2着には中団から伸びた12番アルマヴィーナス（1番人気）、3着には3番ファサード（5番人気）が入線。三連単6-12-3は27,740円（81番人気）で決着した。"
+    },
+    {
+      "raceNumber": 8,
+      "raceName": "フロストフラワー賞 Ａ２ 以下選抜特別",
+      "distance": 1200,
+      "surface": "ダート",
+      "track": "外",
+      "horses": 8,
+      "startTime": "14:45",
+      "results": [
+        {
+          "rank": 1,
+          "bracket": 7,
+          "number": 7,
+          "name": "ユスティニアン",
+          "jockey": "吉井章",
+          "trainer": "的場直之",
+          "time": "1:12.6",
+          "margin": "-",
+          "lastFurlong": "36.4",
+          "popularity": 3
+        },
+        {
+          "rank": 2,
+          "bracket": 3,
+          "number": 3,
+          "name": "ベニッシモ",
+          "jockey": "菅原涼太",
+          "trainer": "堀千亜樹",
+          "time": "1:13.1",
+          "margin": "２ 1/2",
+          "lastFurlong": "36.5",
+          "popularity": 4
+        },
+        {
+          "rank": 3,
+          "bracket": 8,
+          "number": 8,
+          "name": "ランプロン",
+          "jockey": "和田譲治",
+          "trainer": "赤嶺本浩",
+          "time": "1:13.7",
+          "margin": "３",
+          "lastFurlong": "37.5",
+          "popularity": 1
+        },
+        {
+          "rank": 4,
+          "bracket": 1,
+          "number": 1,
+          "name": "ベジャール",
+          "jockey": "桑村真明",
+          "trainer": "福永敏",
+          "time": "1:13.8",
+          "margin": "3/4",
+          "lastFurlong": "36.8",
+          "popularity": 5
+        },
+        {
+          "rank": 5,
+          "bracket": 2,
+          "number": 2,
+          "name": "ミラクルヴォイス",
+          "jockey": "山林堂信彦",
+          "trainer": "佐々木仁",
+          "time": "1:14.9",
+          "margin": "５",
+          "lastFurlong": "37.6",
+          "popularity": 2
+        },
+        {
+          "rank": 6,
+          "bracket": 4,
+          "number": 4,
+          "name": "キタノブレイド",
+          "jockey": "藤江渉",
+          "trainer": "宇野木博徳",
+          "time": "1:14.9",
+          "margin": "クビ",
+          "lastFurlong": "38.1",
+          "popularity": 6
+        },
+        {
+          "rank": 7,
+          "bracket": 6,
+          "number": 6,
+          "name": "ベルウッドブラボー",
+          "jockey": "福原杏",
+          "trainer": "野口寛仁",
+          "time": "1:15.1",
+          "margin": "１",
+          "lastFurlong": "38.0",
+          "popularity": 7
+        },
+        {
+          "rank": 8,
+          "bracket": 5,
+          "number": 5,
+          "name": "ウインリブルマン",
+          "jockey": "▲高橋優",
+          "trainer": "赤嶺本浩",
+          "time": "1:16.1",
+          "margin": "５",
+          "lastFurlong": "38.4",
+          "popularity": 8
+        }
+      ],
+      "payouts": {
+        "tansho": [
+          {
+            "number": "7",
+            "payout": 530,
+            "popularity": 3
+          }
+        ],
+        "fukusho": [
+          {
+            "number": "7",
+            "payout": 130,
+            "popularity": 2
+          },
+          {
+            "number": "3",
+            "payout": 130,
+            "popularity": 4
+          },
+          {
+            "number": "8",
+            "payout": 110,
+            "popularity": 1
+          }
+        ],
+        "umaren": [
+          {
+            "combination": "3-7",
+            "payout": 1250,
+            "popularity": 6
+          }
+        ],
+        "umatan": [
+          {
+            "combination": "7-3",
+            "payout": 2680,
+            "popularity": 14
+          }
+        ],
+        "wide": [
+          {
+            "combination": "3-7",
+            "payout": 330,
+            "popularity": 6
+          },
+          {
+            "combination": "7-8",
+            "payout": 180,
+            "popularity": 2
+          },
+          {
+            "combination": "3-8",
+            "payout": 180,
+            "popularity": 1
+          }
+        ],
+        "sanrenpuku": [
+          {
+            "combination": "3-7-8",
+            "payout": 670,
+            "popularity": 1
+          }
+        ],
+        "sanrentan": [
+          {
+            "combination": "7-3-8",
+            "payout": 7000,
+            "popularity": 28
+          }
+        ]
+      },
+      "timeData": {
+        "last3F": 36.4,
+        "last4F": 48.4,
+        "furlongTimes": [
+          12.6,
+          11.6,
+          12,
+          12.1,
+          11.6,
+          12.7
+        ]
+      },
+      "cornerData": [
+        {
+          "corner": "３角",
+          "order": [
+            8,
+            7,
+            3,
+            4,
+            1,
+            6,
+            2,
+            5
+          ]
+        },
+        {
+          "corner": "４角",
+          "order": [
+            8,
+            7,
+            3,
+            4,
+            1,
+            6,
+            2,
+            5
+          ]
+        }
+      ],
+      "enteredAt": "2026-01-29T09:34:31.144Z",
+      "enteredBy": "staff-ui",
+      "commentary": "2026年1月29日大井競馬8レース（フロストフラワー賞 Ａ２ 以下選抜特別 ダ1200m・8頭立）は、8番ランプロン（1番人気）がハナを切る展開の中、7番ユスティニアン（3番人気）が2番手で折り合い直線で抜け出し、勝ちタイム1:12.6で1着となった。鞍上は吉井章騎手と的場直之厩舎のコンビ。2着には3番手から伸びた3番ベニッシモ（4番人気）、3着には逃げた8番ランプロン（1番人気）が入線。三連単7-3-8は7,000円（28番人気）で決着した。"
     }
   ],
   "dataVersion": "1.0"
