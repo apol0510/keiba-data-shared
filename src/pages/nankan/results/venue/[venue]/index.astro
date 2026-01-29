@@ -98,14 +98,30 @@ const groupedByYearMonth = archiveData.reduce((acc, item) => {
 
 const canonicalUrl = `${Astro.site}nankan/results/venue/${venue}/`;
 
-// 競馬場カラー
-const venueColors = {
-  'ooi': '#d32f2f',
-  'funabashi': '#2e7d32',
-  'kawasaki': '#00bcd4',
-  'urawa': '#1976d2'
+// 競馬場カラーとグラデーション（トップページと統一）
+const venueData = {
+  'ooi': {
+    emoji: '🌃',
+    gradient: 'linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%)',
+    textGradient: 'linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%)'
+  },
+  'funabashi': {
+    emoji: '⚓',
+    gradient: 'linear-gradient(135deg, #4ECDC4 0%, #44A08D 100%)',
+    textGradient: 'linear-gradient(135deg, #4ECDC4 0%, #44A08D 100%)'
+  },
+  'kawasaki': {
+    emoji: '🌉',
+    gradient: 'linear-gradient(135deg, #45B7D1 0%, #2E86AB 100%)',
+    textGradient: 'linear-gradient(135deg, #45B7D1 0%, #2E86AB 100%)'
+  },
+  'urawa': {
+    emoji: '🌸',
+    gradient: 'linear-gradient(135deg, #A770EF 0%, #7B68EE 100%)',
+    textGradient: 'linear-gradient(135deg, #A770EF 0%, #7B68EE 100%)'
+  }
 };
-const venueColor = venueColors[venue] || '#2e7d32';
+const currentVenue = venueData[venue] || venueData['ooi'];
 ---
 
 <!DOCTYPE html>
@@ -127,39 +143,92 @@ const venueColor = venueColors[venue] || '#2e7d32';
     }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Hiragino Sans', sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif;
       line-height: 1.6;
-      color: #333;
-      background: #f5f5f5;
+      color: #2C3E50;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background-attachment: fixed;
+      min-height: 100vh;
     }
 
     header {
-      background: linear-gradient(135deg, var(--venue-color) 0%, var(--venue-color-dark) 100%);
+      background: var(--venue-gradient);
       color: white;
-      padding: 1.5rem 1rem;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      padding: 2.5rem 1rem;
+      box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: var(--venue-emoji);
+      position: absolute;
+      font-size: 12rem;
+      opacity: 0.15;
+      right: -1rem;
+      top: -2rem;
+      transform: rotate(-10deg);
     }
 
     .header-content {
       max-width: 1200px;
       margin: 0 auto;
+      position: relative;
+      z-index: 1;
     }
 
     .breadcrumb {
-      font-size: 0.875rem;
-      margin-bottom: 1rem;
-      opacity: 0.9;
+      font-size: 0.95rem;
+      margin-bottom: 1.25rem;
+      opacity: 0.95;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .breadcrumb::before {
+      content: '🏠';
     }
 
     .breadcrumb a {
       color: white;
       text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .breadcrumb a:hover {
+      text-shadow: 0 0 10px rgba(255,255,255,0.8);
     }
 
     h1 {
-      font-size: 1.75rem;
-      margin-bottom: 0.5rem;
-      font-weight: 700;
+      font-size: 2.25rem;
+      margin-bottom: 0.75rem;
+      font-weight: 800;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    h1::before {
+      content: var(--venue-emoji);
+      font-size: 2rem;
+    }
+
+    .page-meta {
+      font-size: 1.05rem;
+      opacity: 0.95;
+      font-weight: 600;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .page-meta::before {
+      content: '📊';
     }
 
     main {
@@ -169,67 +238,181 @@ const venueColor = venueColors[venue] || '#2e7d32';
     }
 
     .archive-section {
-      background: white;
-      border-radius: 8px;
-      padding: 1.5rem;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 2rem;
       margin-bottom: 2rem;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.5);
     }
 
     .archive-section h2 {
-      font-size: 1.25rem;
-      color: var(--venue-color);
-      margin-bottom: 1rem;
-      padding-bottom: 0.5rem;
-      border-bottom: 2px solid var(--venue-color);
+      font-size: 1.75rem;
+      background: var(--venue-text-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1.5rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 3px solid transparent;
+      border-image: var(--venue-gradient) 1;
+    }
+
+    .archive-section h2::before {
+      content: '📅';
+      font-size: 1.5rem;
+      -webkit-text-fill-color: initial;
+      background: none;
     }
 
     .archive-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      gap: 1rem;
-      margin-top: 1rem;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
     }
 
     .archive-card {
       display: block;
       background: white;
-      border: 1px solid #e0e0e0;
-      border-radius: 6px;
-      padding: 1rem;
+      border-radius: 16px;
+      padding: 1.5rem;
       text-decoration: none;
       color: inherit;
-      transition: all 0.2s ease;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      border: 3px solid transparent;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .archive-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 5px;
+      background: var(--venue-gradient);
+      opacity: 0;
+      transition: opacity 0.3s ease;
     }
 
     .archive-card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      border-color: var(--venue-color);
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+      border-image: var(--venue-gradient) 1;
+    }
+
+    .archive-card:hover::before {
+      opacity: 1;
     }
 
     .archive-date {
-      font-size: 1.1rem;
-      font-weight: 600;
-      color: var(--venue-color);
-      margin-bottom: 0.5rem;
+      font-size: 1.25rem;
+      font-weight: 700;
+      background: var(--venue-text-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .archive-date::before {
+      content: '📅';
+      -webkit-text-fill-color: initial;
+      background: none;
     }
 
     .archive-races {
-      font-size: 0.875rem;
-      color: #999;
+      font-size: 0.95rem;
+      color: #888;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .archive-races::before {
+      content: '🏁';
+    }
+
+    .no-data {
+      text-align: center;
+      padding: 3rem;
+      color: #7f8c8d;
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    .no-data::before {
+      content: '📭';
+      display: block;
+      font-size: 4rem;
+      margin-bottom: 1rem;
+    }
+
+    footer {
+      background: linear-gradient(135deg, #2C3E50 0%, #34495e 100%);
+      color: white;
+      text-align: center;
+      padding: 2.5rem 1rem;
+      margin-top: 3rem;
+      box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
+    }
+
+    footer p {
+      font-size: 0.95rem;
+      opacity: 0.9;
+      margin: 0.5rem 0;
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 1.75rem;
+      }
+
+      header {
+        padding: 2rem 1rem;
+      }
+
+      .archive-section {
+        padding: 1.5rem;
+        border-radius: 16px;
+      }
+
+      .archive-section h2 {
+        font-size: 1.5rem;
+      }
+
+      .archive-grid {
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+        gap: 1rem;
+      }
+
+      .archive-card {
+        padding: 1.25rem;
+      }
     }
   </style>
 </head>
 
-<body style={`--venue-color: ${venueColor}; --venue-color-dark: ${venueColor}dd;`}>
+<body style={`--venue-gradient: ${currentVenue.gradient}; --venue-text-gradient: ${currentVenue.textGradient}; --venue-emoji: '${currentVenue.emoji}';`}>
   <header>
     <div class="header-content">
       <div class="breadcrumb">
         <a href="/">トップ</a> &gt; <a href="/nankan/results/">アーカイブ</a> &gt; {venueName}競馬
       </div>
       <h1>{venueName}競馬 結果アーカイブ</h1>
-      <p>全{archiveData.length}開催</p>
+      <p class="page-meta">全{archiveData.length}開催の結果を掲載中</p>
     </div>
   </header>
 
@@ -256,9 +439,15 @@ const venueColor = venueColors[venue] || '#2e7d32';
 
     {archiveData.length === 0 && (
       <div class="archive-section">
-        <p>{venueName}競馬のデータがありません</p>
+        <p class="no-data">{venueName}競馬の結果データはまだありません</p>
       </div>
     )}
   </main>
+
+  <footer>
+    <p>🏇 南関競馬結果速報 - keiba-data-shared</p>
+    <p>{venueName}競馬場の結果情報を提供</p>
+    <p style="margin-top: 1rem; font-size: 0.85rem;">&copy; 2026 All rights reserved</p>
+  </footer>
 </body>
 </html>
