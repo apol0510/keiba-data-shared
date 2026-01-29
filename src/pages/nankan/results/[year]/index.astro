@@ -4,18 +4,56 @@
  * URL: /nankan/results/YYYY/
  */
 
-import { readdir, readFile } from 'node:fs/promises';
-import { join } from 'node:path';
-
+/**
+ * GitHubからJSONファイルリストを取得してパスを生成
+ */
 export async function getStaticPaths() {
-  const resultsDir = join(process.cwd(), 'nankan', 'results');
-  const years = await readdir(resultsDir);
+  const paths = [];
 
-  return years
-    .filter(year => year.match(/^\d{4}$/))
-    .map(year => ({
-      params: { year }
-    }));
+  try {
+    const GITHUB_API_URL = 'https://api.github.com/repos/apol0510/keiba-data-shared/git/trees/main?recursive=1';
+
+    const response = await fetch(GITHUB_API_URL, {
+      headers: {
+        'Accept': 'application/vnd.github.v3+json',
+        'User-Agent': 'keiba-data-shared-build'
+      }
+    });
+
+    if (!response.ok) {
+      console.error('GitHub API error:', response.status);
+      return paths;
+    }
+
+    const data = await response.json();
+
+    const jsonFiles = data.tree.filter(item =>
+      item.path.startsWith('nankan/results/') &&
+      item.path.endsWith('.json') &&
+      item.path.match(/nankan\/results\/(\d{4})\/\d{2}\/\d{4}-\d{2}-\d{2}\.json/)
+    );
+
+    // 年のみでユニーク化
+    const uniqueYears = new Set();
+
+    for (const file of jsonFiles) {
+      const match = file.path.match(/nankan\/results\/(\d{4})\//);
+      if (match) {
+        const year = match[1];
+        uniqueYears.add(year);
+      }
+    }
+
+    for (const year of uniqueYears) {
+      paths.push({ params: { year } });
+    }
+
+    console.log(`[year] Total paths generated: ${paths.length}`);
+  } catch (error) {
+    console.error('[year] Fatal error in getStaticPaths:', error);
+  }
+
+  return paths;
 }
 
 const { year } = Astro.params;
@@ -23,42 +61,59 @@ const { year } = Astro.params;
 const title = `${year}年 南関競馬 結果アーカイブ | 大井・川崎・船橋・浦和`;
 const description = `${year}年の南関東4競馬場（大井・川崎・船橋・浦和）の全レース結果アーカイブ。月別に検索できます。`;
 
-// 指定年のデータを取得
-const resultsDir = join(process.cwd(), 'nankan', 'results', year);
+// 指定年のデータをGitHubから取得
 const archiveData = [];
 
 try {
-  const months = await readdir(resultsDir);
+  const GITHUB_API_URL = 'https://api.github.com/repos/apol0510/keiba-data-shared/git/trees/main?recursive=1';
 
-  for (const month of months) {
-    if (!month.match(/^\d{2}$/)) continue;
+  const response = await fetch(GITHUB_API_URL, {
+    headers: {
+      'Accept': 'application/vnd.github.v3+json',
+      'User-Agent': 'keiba-data-shared-build'
+    }
+  });
 
-    const monthPath = join(resultsDir, month);
-    const files = await readdir(monthPath);
+  if (response.ok) {
+    const data = await response.json();
 
-    for (const file of files) {
-      if (!file.endsWith('.json')) continue;
+    // 指定年のJSONファイルをフィルター
+    const jsonFiles = data.tree.filter(item =>
+      item.path.startsWith(`nankan/results/${year}/`) &&
+      item.path.endsWith('.json') &&
+      item.path.match(/nankan\/results\/\d{4}\/\d{2}\/\d{4}-\d{2}-\d{2}\.json/)
+    );
 
-      try {
-        const filePath = join(monthPath, file);
-        const content = await readFile(filePath, 'utf-8');
-        const data = JSON.parse(content);
+    // 各JSONファイルを取得
+    for (const file of jsonFiles) {
+      const match = file.path.match(/nankan\/results\/\d{4}\/(\d{2})\/\d{4}-\d{2}-\d{2}\.json/);
+      if (match) {
+        const month = match[1];
 
-        archiveData.push({
-          date: data.date,
-          venue: data.venue,
-          venueCode: data.venueCode,
-          raceCount: data.races.length,
-          month
-        });
-      } catch (e) {
-        console.error(`Error reading ${file}:`, e);
+        try {
+          const jsonUrl = `https://raw.githubusercontent.com/apol0510/keiba-data-shared/main/${file.path}`;
+          const jsonResponse = await fetch(jsonUrl);
+
+          if (jsonResponse.ok) {
+            const jsonData = await jsonResponse.json();
+
+            archiveData.push({
+              date: jsonData.date,
+              venue: jsonData.venue,
+              venueCode: jsonData.venueCode,
+              raceCount: jsonData.races.length,
+              month
+            });
+          }
+        } catch (e) {
+          console.error(`Error fetching ${file.path}:`, e.message);
+        }
       }
     }
-  }
 
-  // 日付の新しい順にソート
-  archiveData.sort((a, b) => b.date.localeCompare(a.date));
+    // 日付の新しい順にソート
+    archiveData.sort((a, b) => b.date.localeCompare(a.date));
+  }
 } catch (error) {
   console.error(`${year}年のアーカイブデータ取得エラー:`, error);
 }

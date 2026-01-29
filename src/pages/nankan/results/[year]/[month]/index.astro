@@ -4,27 +4,50 @@
  * URL: /nankan/results/YYYY/MM/
  */
 
-import { readdir, readFile } from 'node:fs/promises';
-import { join } from 'node:path';
-
+/**
+ * GitHubからJSONファイルリストを取得してパスを生成
+ */
 export async function getStaticPaths() {
-  const resultsBaseDir = join(process.cwd(), 'nankan', 'results');
-  const years = await readdir(resultsBaseDir);
   const paths = [];
 
-  for (const year of years) {
-    if (!year.match(/^\d{4}$/)) continue;
+  try {
+    const GITHUB_API_URL = 'https://api.github.com/repos/apol0510/keiba-data-shared/git/trees/main?recursive=1';
 
-    const yearPath = join(resultsBaseDir, year);
-    const months = await readdir(yearPath);
+    const response = await fetch(GITHUB_API_URL, {
+      headers: {
+        'Accept': 'application/vnd.github.v3+json',
+        'User-Agent': 'keiba-data-shared-build'
+      }
+    });
 
-    for (const month of months) {
-      if (!month.match(/^\d{2}$/)) continue;
+    if (!response.ok) return paths;
 
-      paths.push({
-        params: { year, month }
-      });
+    const data = await response.json();
+
+    const jsonFiles = data.tree.filter(item =>
+      item.path.startsWith('nankan/results/') &&
+      item.path.endsWith('.json') &&
+      item.path.match(/nankan\/results\/\d{4}\/\d{2}\/\d{4}-\d{2}-\d{2}\.json/)
+    );
+
+    const uniqueMonths = new Set();
+
+    for (const file of jsonFiles) {
+      const match = file.path.match(/nankan\/results\/(\d{4})\/(\d{2})\//);
+      if (match) {
+        const [, year, month] = match;
+        const key = `${year}-${month}`;
+
+        if (!uniqueMonths.has(key)) {
+          uniqueMonths.add(key);
+          paths.push({ params: { year, month } });
+        }
+      }
     }
+
+    console.log(`[month] Total paths generated: ${paths.length}`);
+  } catch (error) {
+    console.error('[month] Fatal error:', error);
   }
 
   return paths;
@@ -35,34 +58,49 @@ const { year, month } = Astro.params;
 const title = `${year}年${parseInt(month)}月 南関競馬 結果アーカイブ | 大井・川崎・船橋・浦和`;
 const description = `${year}年${parseInt(month)}月の南関東4競馬場（大井・川崎・船橋・浦和）の全レース結果アーカイブ。`;
 
-// 指定月のデータを取得
-const monthPath = join(process.cwd(), 'nankan', 'results', year, month);
+// 指定月のデータをGitHubから取得
 const archiveData = [];
 
 try {
-  const files = await readdir(monthPath);
+  const GITHUB_API_URL = 'https://api.github.com/repos/apol0510/keiba-data-shared/git/trees/main?recursive=1';
 
-  for (const file of files) {
-    if (!file.endsWith('.json')) continue;
-
-    try {
-      const filePath = join(monthPath, file);
-      const content = await readFile(filePath, 'utf-8');
-      const data = JSON.parse(content);
-
-      archiveData.push({
-        date: data.date,
-        venue: data.venue,
-        venueCode: data.venueCode,
-        raceCount: data.races.length
-      });
-    } catch (e) {
-      console.error(`Error reading ${file}:`, e);
+  const response = await fetch(GITHUB_API_URL, {
+    headers: {
+      'Accept': 'application/vnd.github.v3+json',
+      'User-Agent': 'keiba-data-shared-build'
     }
-  }
+  });
 
-  // 日付の新しい順にソート
-  archiveData.sort((a, b) => b.date.localeCompare(a.date));
+  if (response.ok) {
+    const data = await response.json();
+
+    const jsonFiles = data.tree.filter(item =>
+      item.path.startsWith(`nankan/results/${year}/${month}/`) &&
+      item.path.endsWith('.json')
+    );
+
+    for (const file of jsonFiles) {
+      try {
+        const jsonUrl = `https://raw.githubusercontent.com/apol0510/keiba-data-shared/main/${file.path}`;
+        const jsonResponse = await fetch(jsonUrl);
+
+        if (jsonResponse.ok) {
+          const jsonData = await jsonResponse.json();
+
+          archiveData.push({
+            date: jsonData.date,
+            venue: jsonData.venue,
+            venueCode: jsonData.venueCode,
+            raceCount: jsonData.races.length
+          });
+        }
+      } catch (e) {
+        console.error(`Error fetching ${file.path}:`, e.message);
+      }
+    }
+
+    archiveData.sort((a, b) => b.date.localeCompare(a.date));
+  }
 } catch (error) {
   console.error(`${year}年${month}月のアーカイブデータ取得エラー:`, error);
 }

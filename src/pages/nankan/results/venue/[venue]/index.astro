@@ -4,9 +4,6 @@
  * URL: /nankan/results/venue/{venueSlug}/
  */
 
-import { readdir, readFile } from 'node:fs/promises';
-import { join } from 'node:path';
-
 export async function getStaticPaths() {
   const venues = ['ooi', 'funabashi', 'kawasaki', 'urawa'];
 
@@ -30,53 +27,61 @@ const venueName = venueMap[venue] || venue;
 const title = `${venueName}競馬 結果アーカイブ | 南関競馬`;
 const description = `${venueName}競馬場の全レース結果アーカイブ。過去の開催データを検索できます。`;
 
-// 全データから指定競馬場のデータを抽出
-const resultsDir = join(process.cwd(), 'nankan', 'results');
+// 全データから指定競馬場のデータをGitHubから抽出
 const archiveData = [];
 
 try {
-  const years = await readdir(resultsDir);
+  const GITHUB_API_URL = 'https://api.github.com/repos/apol0510/keiba-data-shared/git/trees/main?recursive=1';
 
-  for (const year of years) {
-    if (!year.match(/^\d{4}$/)) continue;
+  const response = await fetch(GITHUB_API_URL, {
+    headers: {
+      'Accept': 'application/vnd.github.v3+json',
+      'User-Agent': 'keiba-data-shared-build'
+    }
+  });
 
-    const yearPath = join(resultsDir, year);
-    const months = await readdir(yearPath);
+  if (response.ok) {
+    const data = await response.json();
 
-    for (const month of months) {
-      if (!month.match(/^\d{2}$/)) continue;
+    const jsonFiles = data.tree.filter(item =>
+      item.path.startsWith('nankan/results/') &&
+      item.path.endsWith('.json') &&
+      item.path.match(/nankan\/results\/\d{4}\/\d{2}\/\d{4}-\d{2}-\d{2}\.json/)
+    );
 
-      const monthPath = join(yearPath, month);
-      const files = await readdir(monthPath);
-
-      for (const file of files) {
-        if (!file.endsWith('.json')) continue;
+    for (const file of jsonFiles) {
+      const match = file.path.match(/nankan\/results\/(\d{4})\/(\d{2})\//);
+      if (match) {
+        const [, year, month] = match;
 
         try {
-          const filePath = join(monthPath, file);
-          const content = await readFile(filePath, 'utf-8');
-          const data = JSON.parse(content);
+          const jsonUrl = `https://raw.githubusercontent.com/apol0510/keiba-data-shared/main/${file.path}`;
+          const jsonResponse = await fetch(jsonUrl);
 
-          // 指定競馬場のデータのみ抽出
-          if (data.venue === venueName) {
-            archiveData.push({
-              date: data.date,
-              venue: data.venue,
-              venueCode: data.venueCode,
-              raceCount: data.races.length,
-              year,
-              month
-            });
+          if (jsonResponse.ok) {
+            const jsonData = await jsonResponse.json();
+
+            // 指定競馬場のデータのみ抽出
+            if (jsonData.venue === venueName) {
+              archiveData.push({
+                date: jsonData.date,
+                venue: jsonData.venue,
+                venueCode: jsonData.venueCode,
+                raceCount: jsonData.races.length,
+                year,
+                month
+              });
+            }
           }
         } catch (e) {
-          console.error(`Error reading ${file}:`, e);
+          console.error(`Error fetching ${file.path}:`, e.message);
         }
       }
     }
-  }
 
-  // 日付の新しい順にソート
-  archiveData.sort((a, b) => b.date.localeCompare(a.date));
+    // 日付の新しい順にソート
+    archiveData.sort((a, b) => b.date.localeCompare(a.date));
+  }
 } catch (error) {
   console.error(`${venueName}競馬のアーカイブデータ取得エラー:`, error);
 }
