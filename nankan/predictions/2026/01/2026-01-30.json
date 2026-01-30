@@ -1,9 +1,255 @@
 {
   "raceDate": "2026-01-30",
-  "lastUpdated": "2026-01-30T13:33:15.224Z",
+  "lastUpdated": "2026-01-30T14:20:11.204Z",
   "track": "大井",
-  "totalRaces": 1,
+  "totalRaces": 2,
   "races": [
+    {
+      "version": "1.0.0",
+      "createdAt": "2026-01-30T14:20:10.304Z",
+      "lastUpdated": "2026-01-30T14:20:10.304Z",
+      "raceInfo": {
+        "date": "2026年1月30日",
+        "track": "大井",
+        "raceNumber": "1R",
+        "raceName": "サラ４歳以上",
+        "raceType": "C3,選抜牝馬",
+        "distance": "1400m",
+        "surface": "(ダート・右外)"
+      },
+      "horses": [
+        {
+          "number": 4,
+          "name": "メイショウトキイロ",
+          "umacd": "0934133",
+          "marks": {
+            "印3": "○",
+            "印2": "svg",
+            "印1": "◎",
+            "印0": "◎"
+          },
+          "seirei": "牝4",
+          "kisyu": "和田譲",
+          "kinryo": "54",
+          "kyusya": "(大)大宮",
+          "totalScore": 16,
+          "assignment": "本命"
+        },
+        {
+          "number": 1,
+          "name": "ビューティフルベル",
+          "umacd": "0901583",
+          "marks": {
+            "印3": "▲",
+            "印2": "○",
+            "印1": "△",
+            "印0": "○"
+          },
+          "seirei": "牝6",
+          "kisyu": "本橋孝",
+          "kinryo": "54",
+          "kyusya": "(大)蛯名雄",
+          "totalScore": 12,
+          "assignment": "対抗"
+        },
+        {
+          "number": 11,
+          "name": "メイショウトワニ",
+          "umacd": "0888581",
+          "marks": {
+            "印3": "svg",
+            "印2": "◎",
+            "印1": "svg",
+            "印0": "▲"
+          },
+          "seirei": "牝7",
+          "kisyu": "高橋優",
+          "kinryo": "51",
+          "kyusya": "(大)鷹見",
+          "totalScore": 12,
+          "assignment": "単穴"
+        },
+        {
+          "number": 2,
+          "name": "ヴァレンシアスノー",
+          "umacd": "0898519",
+          "marks": {
+            "印3": "◎",
+            "印2": "▲",
+            "印1": "△",
+            "印0": "△"
+          },
+          "seirei": "牝6",
+          "kisyu": "杉山海",
+          "kinryo": "51",
+          "kyusya": "(大)吉井竜",
+          "totalScore": 10,
+          "assignment": "連下最上位"
+        },
+        {
+          "number": 5,
+          "name": "メロパール",
+          "umacd": "0903504",
+          "marks": {
+            "印3": "△",
+            "印2": "△",
+            "印1": "▲",
+            "印0": "svg"
+          },
+          "seirei": "牝6",
+          "kisyu": "西啓太",
+          "kinryo": "54",
+          "kyusya": "(大)中道",
+          "totalScore": 7,
+          "assignment": "連下"
+        },
+        {
+          "number": 7,
+          "name": "ラッキー",
+          "umacd": "0932681",
+          "marks": {
+            "印3": "-",
+            "印2": "-",
+            "印1": "○",
+            "印0": "-"
+          },
+          "seirei": "牝4",
+          "kisyu": "本田重",
+          "kinryo": "54",
+          "kyusya": "(大)佐野",
+          "totalScore": 4,
+          "assignment": "連下"
+        },
+        {
+          "number": 9,
+          "name": "サンバフレイバー",
+          "umacd": "0886471",
+          "marks": {
+            "印3": "△",
+            "印2": "△",
+            "印1": "-",
+            "印0": "△"
+          },
+          "seirei": "牝7",
+          "kisyu": "野畑凌",
+          "kinryo": "54",
+          "kyusya": "(大)月岡",
+          "totalScore": 3,
+          "assignment": "連下"
+        },
+        {
+          "number": 10,
+          "name": "ラヴレボーテ",
+          "umacd": "0920717",
+          "marks": {
+            "印3": "△",
+            "印2": "△",
+            "印1": "-",
+            "印0": "△"
+          },
+          "seirei": "牝5",
+          "kisyu": "吉井章",
+          "kinryo": "54",
+          "kyusya": "(大)米田",
+          "totalScore": 3,
+          "assignment": "連下"
+        },
+        {
+          "number": 8,
+          "name": "ブルーキャット",
+          "umacd": "0938638",
+          "marks": {
+            "印3": "△",
+            "印2": "-",
+            "印1": "-",
+            "印0": "△"
+          },
+          "seirei": "牝4",
+          "kisyu": "桑村真",
+          "kinryo": "54",
+          "kyusya": "(大)栗田裕",
+          "totalScore": 2,
+          "assignment": "連下"
+        },
+        {
+          "number": 6,
+          "name": "ボンマティ",
+          "umacd": "0935187",
+          "marks": {
+            "印3": "-",
+            "印2": "-",
+            "印1": "△",
+            "印0": "-"
+          },
+          "seirei": "牝4",
+          "kisyu": "谷内貫",
+          "kinryo": "53",
+          "kyusya": "(大)嶋田幸",
+          "totalScore": 1,
+          "assignment": "補欠"
+        },
+        {
+          "number": 3,
+          "name": "ブレイクルージュ",
+          "umacd": "0914095",
+          "marks": {
+            "印3": "-",
+            "印2": "-",
+            "印1": "-",
+            "印0": "-"
+          },
+          "seirei": "牝5",
+          "kisyu": "達城龍",
+          "kinryo": "54",
+          "kyusya": "(小)堀千",
+          "totalScore": 0,
+          "assignment": "無"
+        },
+        {
+          "number": 12,
+          "name": "マルヨリヴィエラ",
+          "umacd": "0914817",
+          "marks": {
+            "印3": "-",
+            "印2": "-",
+            "印1": "-",
+            "印0": "-"
+          },
+          "seirei": "牝5",
+          "kisyu": "菅原涼",
+          "kinryo": "54",
+          "kyusya": "(大)赤嶺",
+          "totalScore": 0,
+          "assignment": "無"
+        }
+      ],
+      "predictors": [
+        "印3",
+        "印2",
+        "印1",
+        "印0"
+      ],
+      "assignments": {
+        "main": 4,
+        "sub": 1,
+        "hole": 11,
+        "connectTop": 2,
+        "connect": [
+          5,
+          7,
+          9,
+          10,
+          8
+        ],
+        "reserve": [
+          6
+        ],
+        "none": [
+          3,
+          12
+        ]
+      }
+    },
     {
       "version": "1.0.0",
       "createdAt": "2026-01-30T13:33:15.224Z",
