@@ -504,6 +504,7 @@ const generateRaceSummary = () => {
       transform: translateX(4px);
     }
 
+    /* 1着 - 金色 */
     tbody tr:first-child {
       background: linear-gradient(135deg, #FFF9C4 0%, #FFEB3B 100%);
       font-weight: 700;
@@ -511,6 +512,26 @@ const generateRaceSummary = () => {
 
     tbody tr:first-child:hover {
       background: linear-gradient(135deg, #FFF176 0%, #FFEB3B 100%);
+    }
+
+    /* 2着 - 銀色 */
+    tbody tr:nth-child(2) {
+      background: linear-gradient(135deg, #F5F5F5 0%, #E0E0E0 100%);
+      font-weight: 700;
+    }
+
+    tbody tr:nth-child(2):hover {
+      background: linear-gradient(135deg, #EEEEEE 0%, #D5D5D5 100%);
+    }
+
+    /* 3着 - 銅色 */
+    tbody tr:nth-child(3) {
+      background: linear-gradient(135deg, #FFE4C4 0%, #E6BE8A 100%);
+      font-weight: 700;
+    }
+
+    tbody tr:nth-child(3):hover {
+      background: linear-gradient(135deg, #FFD7A8 0%, #DEB887 100%);
     }
 
     /* 払戻金 - 目立つカードデザイン */
