@@ -1021,8 +1021,8 @@ const generateRaceSummary = () => {
         <span>🏇 {venueName}競馬場</span>
         <span>🏁 第{raceNumber}R</span>
         {raceData.startTime && <span>⏰ {raceData.startTime}発走</span>}
-        {raceData.weather && <span>{getWeatherEmoji(raceData.weather)} 天候{raceData.weather}</span>}
-        {raceData.trackCondition && <span>🏇 馬場{raceData.trackCondition}</span>}
+        {raceData.weather && <span>天候 {raceData.weather}{getWeatherEmoji(raceData.weather)}</span>}
+        {raceData.trackCondition && <span>馬場 {raceData.trackCondition}</span>}
       </div>
     </div>
   </header>
@@ -1046,7 +1046,7 @@ const generateRaceSummary = () => {
           {raceData.weather && (
             <>
               <dt>天候</dt>
-              <dd>{getWeatherEmoji(raceData.weather)} {raceData.weather}</dd>
+              <dd>{raceData.weather} {getWeatherEmoji(raceData.weather)}</dd>
             </>
           )}
 

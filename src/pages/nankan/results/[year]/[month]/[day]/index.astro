@@ -689,8 +689,8 @@ const canonicalUrl = `${Astro.site}nankan/results/${year}/${month}/${day}/`;
                         <span>{race.surface}{race.distance}m</span>
                         <span>{race.horses}頭立て</span>
                         {race.startTime && <span>{race.startTime}発走</span>}
-                        {race.weather && <span>{getWeatherEmoji(race.weather)}{race.weather}</span>}
-                        {race.trackCondition && <span>馬場{race.trackCondition}</span>}
+                        {race.weather && <span>{race.weather} {getWeatherEmoji(race.weather)}</span>}
+                        {race.trackCondition && <span>馬場 {race.trackCondition}</span>}
                       </div>
                     </div>
 
