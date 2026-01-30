@@ -1,8 +1,8 @@
 {
   "raceDate": "2026-01-30",
-  "lastUpdated": "2026-01-30T14:21:36.304Z",
+  "lastUpdated": "2026-01-30T14:22:29.713Z",
   "track": "大井",
-  "totalRaces": 3,
+  "totalRaces": 4,
   "races": [
     {
       "version": "1.0.0",
@@ -438,6 +438,179 @@
         "reserve": [],
         "none": [
           2
+        ]
+      }
+    },
+    {
+      "version": "1.0.0",
+      "createdAt": "2026-01-30T14:22:28.963Z",
+      "lastUpdated": "2026-01-30T14:22:28.963Z",
+      "raceInfo": {
+        "date": "2026年1月30日",
+        "track": "大井",
+        "raceNumber": "3R",
+        "raceName": "サラ３歳",
+        "raceType": "279ポイント以上,1組～３組",
+        "distance": "1400m",
+        "surface": "(ダート・右外)"
+      },
+      "horses": [
+        {
+          "number": 4,
+          "name": "シーテープ",
+          "umacd": "0948052",
+          "marks": {
+            "印3": "◎",
+            "印2": "svg",
+            "印1": "○",
+            "印0": "◎"
+          },
+          "seirei": "牡3",
+          "kisyu": "矢野貴",
+          "kinryo": "57",
+          "kyusya": "(大)佐野",
+          "totalScore": 16,
+          "assignment": "本命"
+        },
+        {
+          "number": 7,
+          "name": "ライドハイ",
+          "umacd": "0950570",
+          "marks": {
+            "印3": "○",
+            "印2": "◎",
+            "印1": "-",
+            "印0": "○"
+          },
+          "seirei": "牝3",
+          "kisyu": "石川倭",
+          "kinryo": "55",
+          "kyusya": "(小)荒山",
+          "totalScore": 13,
+          "assignment": "対抗"
+        },
+        {
+          "number": 3,
+          "name": "フィールドアピール",
+          "umacd": "0949345",
+          "marks": {
+            "印3": "svg",
+            "印2": "○",
+            "印1": "svg",
+            "印0": "svg"
+          },
+          "seirei": "牝3",
+          "kisyu": "本田重",
+          "kinryo": "54",
+          "kyusya": "(小)荒山",
+          "totalScore": 10,
+          "assignment": "単穴"
+        },
+        {
+          "number": 6,
+          "name": "ゴルトフェニックス",
+          "umacd": "0946448",
+          "marks": {
+            "印3": "▲",
+            "印2": "▲",
+            "印1": "△",
+            "印0": "▲"
+          },
+          "seirei": "牡3",
+          "kisyu": "江里口裕",
+          "kinryo": "56",
+          "kyusya": "(大)市村",
+          "totalScore": 10,
+          "assignment": "連下最上位"
+        },
+        {
+          "number": 8,
+          "name": "ベイビーモンストル",
+          "umacd": "0948179",
+          "marks": {
+            "印3": "△",
+            "印2": "△",
+            "印1": "◎",
+            "印0": "△"
+          },
+          "seirei": "牡3",
+          "kisyu": "野畑凌",
+          "kinryo": "57",
+          "kyusya": "(小)田中正",
+          "totalScore": 8,
+          "assignment": "連下"
+        },
+        {
+          "number": 5,
+          "name": "ザンエイ",
+          "umacd": "0946232",
+          "marks": {
+            "印3": "△",
+            "印2": "-",
+            "印1": "▲",
+            "印0": "△"
+          },
+          "seirei": "牡3",
+          "kisyu": "篠谷葵",
+          "kinryo": "56",
+          "kyusya": "(大)朝倉",
+          "totalScore": 5,
+          "assignment": "連下"
+        },
+        {
+          "number": 2,
+          "name": "リアンリーヴァ",
+          "umacd": "0946713",
+          "marks": {
+            "印3": "△",
+            "印2": "-",
+            "印1": "△",
+            "印0": "△"
+          },
+          "seirei": "牡3",
+          "kisyu": "笹川翼",
+          "kinryo": "56",
+          "kyusya": "(大)米田",
+          "totalScore": 3,
+          "assignment": "連下"
+        },
+        {
+          "number": 1,
+          "name": "フラワーガールエス",
+          "umacd": "0946478",
+          "marks": {
+            "印3": "-",
+            "印2": "-",
+            "印1": "-",
+            "印0": "-"
+          },
+          "seirei": "牝3",
+          "kisyu": "谷内貫",
+          "kinryo": "53",
+          "kyusya": "(大)的場直",
+          "totalScore": 0,
+          "assignment": "無"
+        }
+      ],
+      "predictors": [
+        "印3",
+        "印2",
+        "印1",
+        "印0"
+      ],
+      "assignments": {
+        "main": 4,
+        "sub": 7,
+        "hole": 3,
+        "connectTop": 6,
+        "connect": [
+          8,
+          5,
+          2
+        ],
+        "reserve": [],
+        "none": [
+          1
         ]
       }
     },
