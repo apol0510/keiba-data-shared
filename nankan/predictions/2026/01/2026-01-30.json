@@ -1,8 +1,8 @@
 {
   "raceDate": "2026-01-30",
-  "lastUpdated": "2026-01-30T14:20:11.204Z",
+  "lastUpdated": "2026-01-30T14:21:36.304Z",
   "track": "大井",
-  "totalRaces": 2,
+  "totalRaces": 3,
   "races": [
     {
       "version": "1.0.0",
@@ -247,6 +247,197 @@
         "none": [
           3,
           12
+        ]
+      }
+    },
+    {
+      "version": "1.0.0",
+      "createdAt": "2026-01-30T14:21:35.280Z",
+      "lastUpdated": "2026-01-30T14:21:35.280Z",
+      "raceInfo": {
+        "date": "2026年1月30日",
+        "track": "大井",
+        "raceNumber": "2R",
+        "raceName": "サラ３歳",
+        "raceType": "279ポイント以上,1組～３組",
+        "distance": "1600m",
+        "surface": "(ダート・右内)"
+      },
+      "horses": [
+        {
+          "number": 6,
+          "name": "エクセレンティ",
+          "umacd": "0950878",
+          "marks": {
+            "印3": "○",
+            "印2": "◎",
+            "印1": "○",
+            "印0": "○"
+          },
+          "seirei": "牡3",
+          "kisyu": "安藤洋",
+          "kinryo": "57",
+          "kyusya": "(小)荒山",
+          "totalScore": 17,
+          "assignment": "本命"
+        },
+        {
+          "number": 9,
+          "name": "ヒュプシュ",
+          "umacd": "0954092",
+          "marks": {
+            "印3": "◎",
+            "印2": "svg",
+            "印1": "svg",
+            "印0": "◎"
+          },
+          "seirei": "牡3",
+          "kisyu": "岡村健",
+          "kinryo": "56",
+          "kyusya": "(大)村上",
+          "totalScore": 14,
+          "assignment": "対抗"
+        },
+        {
+          "number": 1,
+          "name": "ティーズアライト",
+          "umacd": "0947990",
+          "marks": {
+            "印3": "svg",
+            "印2": "△",
+            "印1": "◎",
+            "印0": "svg"
+          },
+          "seirei": "牡3",
+          "kisyu": "矢野貴",
+          "kinryo": "58",
+          "kyusya": "(大)嶋田幸",
+          "totalScore": 10,
+          "assignment": "単穴"
+        },
+        {
+          "number": 3,
+          "name": "シュガーバイン",
+          "umacd": "0949460",
+          "marks": {
+            "印3": "▲",
+            "印2": "-",
+            "印1": "▲",
+            "印0": "▲"
+          },
+          "seirei": "牝3",
+          "kisyu": "藤本現",
+          "kinryo": "54",
+          "kyusya": "(小)真島大",
+          "totalScore": 9,
+          "assignment": "連下最上位"
+        },
+        {
+          "number": 7,
+          "name": "オーヴァザトラブル",
+          "umacd": "0950142",
+          "marks": {
+            "印3": "△",
+            "印2": "○",
+            "印1": "-",
+            "印0": "△"
+          },
+          "seirei": "牡3",
+          "kisyu": "藤田凌",
+          "kinryo": "56",
+          "kyusya": "(大)中道",
+          "totalScore": 6,
+          "assignment": "連下"
+        },
+        {
+          "number": 8,
+          "name": "ディアシンバ",
+          "umacd": "0951605",
+          "marks": {
+            "印3": "△",
+            "印2": "▲",
+            "印1": "△",
+            "印0": "△"
+          },
+          "seirei": "牡3",
+          "kisyu": "笹川翼",
+          "kinryo": "56",
+          "kyusya": "(大)鈴木啓",
+          "totalScore": 6,
+          "assignment": "連下"
+        },
+        {
+          "number": 5,
+          "name": "ラブミーカンヌ",
+          "umacd": "0952629",
+          "marks": {
+            "印3": "△",
+            "印2": "-",
+            "印1": "-",
+            "印0": "△"
+          },
+          "seirei": "牝3",
+          "kisyu": "野畑凌",
+          "kinryo": "54",
+          "kyusya": "(大)赤嶺亮",
+          "totalScore": 2,
+          "assignment": "連下"
+        },
+        {
+          "number": 4,
+          "name": "トゥーナウィッシュ",
+          "umacd": "0951536",
+          "marks": {
+            "印3": "-",
+            "印2": "△",
+            "印1": "-",
+            "印0": "-"
+          },
+          "seirei": "牡3",
+          "kisyu": "桑村真",
+          "kinryo": "56",
+          "kyusya": "(大)高野毅",
+          "totalScore": 1,
+          "assignment": "連下"
+        },
+        {
+          "number": 2,
+          "name": "ワカチーコ",
+          "umacd": "0949883",
+          "marks": {
+            "印3": "-",
+            "印2": "-",
+            "印1": "-",
+            "印0": "-"
+          },
+          "seirei": "牝3",
+          "kisyu": "吉井章",
+          "kinryo": "54",
+          "kyusya": "(大)松浦裕",
+          "totalScore": 0,
+          "assignment": "無"
+        }
+      ],
+      "predictors": [
+        "印3",
+        "印2",
+        "印1",
+        "印0"
+      ],
+      "assignments": {
+        "main": 6,
+        "sub": 9,
+        "hole": 1,
+        "connectTop": 3,
+        "connect": [
+          7,
+          8,
+          5,
+          4
+        ],
+        "reserve": [],
+        "none": [
+          2
         ]
       }
     },
