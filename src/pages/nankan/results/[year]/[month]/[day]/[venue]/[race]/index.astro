@@ -497,10 +497,16 @@ const generateRaceSummary = () => {
     tbody tr {
       border-bottom: 1px solid rgba(0,0,0,0.05);
       transition: all 0.3s ease;
+      background: white;
     }
 
-    tbody tr:hover {
-      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    /* 4着以降 - 白背景 */
+    tbody tr:nth-child(n+4) {
+      background: white;
+    }
+
+    tbody tr:nth-child(n+4):hover {
+      background: #FAFAFA;
       transform: translateX(4px);
     }
 
