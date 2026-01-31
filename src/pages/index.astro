@@ -4,54 +4,56 @@
  * 一般ユーザー向け、検索エンジン対応
  */
 
+import { readdirSync, readFileSync, existsSync } from 'fs';
+import { join } from 'path';
+
 const title = '南関競馬結果速報 - 大井・川崎・船橋・浦和の競馬結果';
 const description = '南関東4競馬場（大井・川崎・船橋・浦和）の最新レース結果を速報。着順・払戻金・ラップタイムなど詳細データを掲載。';
 
-// GitHubから最新のレース結果を取得
+// ローカルファイルから最新のレース結果を取得
 const availableDates = [];
 
 try {
-  const GITHUB_API_URL = 'https://api.github.com/repos/apol0510/keiba-data-shared/git/trees/main?recursive=1';
+  const resultsDir = join(process.cwd(), 'nankan', 'results');
 
-  const response = await fetch(GITHUB_API_URL, {
-    headers: {
-      'Accept': 'application/vnd.github.v3+json',
-      'User-Agent': 'keiba-data-shared-build'
-    }
-  });
+  // 年ディレクトリを取得（例: 2026）
+  const years = readdirSync(resultsDir).filter(name => /^\d{4}$/.test(name)).sort().reverse();
 
-  if (response.ok) {
-    const data = await response.json();
+  for (const year of years) {
+    const yearDir = join(resultsDir, year);
 
-    const jsonFiles = data.tree.filter(item =>
-      item.path.startsWith('nankan/results/') &&
-      item.path.endsWith('.json') &&
-      item.path.match(/nankan\/results\/\d{4}\/\d{2}\/\d{4}-\d{2}-\d{2}\.json/)
-    );
+    // 月ディレクトリを取得（例: 01, 02, ...）
+    const months = readdirSync(yearDir).filter(name => /^\d{2}$/.test(name)).sort().reverse();
 
-    // 各JSONファイルを取得
-    for (const file of jsonFiles) {
-      try {
-        const jsonUrl = `https://raw.githubusercontent.com/apol0510/keiba-data-shared/main/${file.path}`;
-        const jsonResponse = await fetch(jsonUrl);
+    for (const month of months) {
+      const monthDir = join(yearDir, month);
 
-        if (jsonResponse.ok) {
-          const jsonData = await jsonResponse.json();
+      // JSONファイルを取得（例: 2026-01-30.json）
+      const files = readdirSync(monthDir)
+        .filter(name => /^\d{4}-\d{2}-\d{2}\.json$/.test(name))
+        .sort()
+        .reverse();
+
+      for (const file of files) {
+        try {
+          const filePath = join(monthDir, file);
+          const fileContent = readFileSync(filePath, 'utf-8');
+          const jsonData = JSON.parse(fileContent);
 
           availableDates.push({
             date: jsonData.date,
             venue: jsonData.venue,
-            raceNumbers: jsonData.races.map(r => r.raceNumber).sort((a, b) => a - b) // 実際のレース番号配列
+            raceNumbers: jsonData.races.map(r => r.raceNumber).sort((a, b) => a - b)
           });
+        } catch (e) {
+          console.error(`Error reading ${file}:`, e.message);
         }
-      } catch (e) {
-        console.error(`Error fetching ${file.path}:`, e.message);
       }
     }
-
-    // 日付の新しい順にソート
-    availableDates.sort((a, b) => b.date.localeCompare(a.date));
   }
+
+  // 日付の新しい順にソート（すでにソート済みだが念のため）
+  availableDates.sort((a, b) => b.date.localeCompare(a.date));
 } catch (error) {
   console.error('結果データの読み込みエラー:', error);
 }
