@@ -1,0 +1,78 @@
+name: Dispatch to keiba-intelligence
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'nankan/predictions/**/*.json'
+
+jobs:
+  dispatch:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2  # 差分確認用
+
+      - name: Get changed prediction files
+        id: changed-files
+        run: |
+          # 更新されたファイルを取得
+          CHANGED_FILES=$(git diff --name-only HEAD^ HEAD | grep 'nankan/predictions/.*\.json' || true)
+
+          if [ -z "$CHANGED_FILES" ]; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+            echo "ℹ️  No prediction files changed"
+            exit 0
+          fi
+
+          echo "changed=true" >> $GITHUB_OUTPUT
+
+          # 【修正】全ファイルから日付を抽出してJSON配列化
+          DATES_ARRAY="["
+          FIRST=true
+          while IFS= read -r file; do
+            DATE=$(basename "$file" .json)
+            if [ "$FIRST" = true ]; then
+              DATES_ARRAY="${DATES_ARRAY}\"${DATE}\""
+              FIRST=false
+            else
+              DATES_ARRAY="${DATES_ARRAY},\"${DATE}\""
+            fi
+          done <<< "$CHANGED_FILES"
+          DATES_ARRAY="${DATES_ARRAY}]"
+
+          echo "dates=$DATES_ARRAY" >> $GITHUB_OUTPUT
+          echo "📅 Extracted dates: $DATES_ARRAY"
+          echo "   Files: $CHANGED_FILES"
+
+      - name: Dispatch to keiba-intelligence
+        if: steps.changed-files.outputs.changed == 'true'
+        uses: peter-evans/repository-dispatch@v3
+        with:
+          token: ${{ secrets.INTELLIGENCE_REPO_DISPATCH_TOKEN }}
+          repository: apol0510/keiba-intelligence
+          event-type: prediction-updated
+          client-payload: |
+            {
+              "dates": ${{ steps.changed-files.outputs.dates }},
+              "source": "keiba-data-shared",
+              "trigger": "auto",
+              "commit_sha": "${{ github.sha }}"
+            }
+
+      - name: Success notification
+        if: steps.changed-files.outputs.changed == 'true'
+        run: |
+          echo "✅ Dispatched to keiba-intelligence"
+          echo "   Dates: ${{ steps.changed-files.outputs.dates }}"
+          echo "   Event type: prediction-updated"
+          echo "   Target repo: apol0510/keiba-intelligence"
+
+      - name: Skip notification
+        if: steps.changed-files.outputs.changed != 'true'
+        run: |
+          echo "⏭️  Skipped: No prediction files changed in this push"
