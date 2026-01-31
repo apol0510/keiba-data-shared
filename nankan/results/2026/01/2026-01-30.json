@@ -311,7 +311,288 @@
       "enteredAt": "2026-01-30T06:00:16.047Z",
       "enteredBy": "staff-ui",
       "commentary": "2026年1月30日大井競馬1レース（Ｃ３ 選抜牝馬 ダ1400m・12頭立）は、2番ヴァレンシアスノー（3番人気）がハナを切る展開の中、8番ブルーキャット（6番人気）が中団で脚を溜め直線では上がり38.1秒をマークして差し切り、勝ちタイム1:29.8で1着となった。鞍上は桑村真明騎手と栗田裕光厩舎のコンビ。2着には中団から伸びた1番ビューティフルベル（8番人気）、3着には5番メロパール（4番人気）が入線。三連単8-1-5は201,480円（405番人気）で決着した。馬単は26,880円の高配当となった。"
+    },
+    {
+      "raceNumber": 2,
+      "raceName": "賞金",
+      "distance": 1600,
+      "surface": "ダート",
+      "track": "内",
+      "horses": 9,
+      "startTime": "11:27",
+      "weather": "晴",
+      "trackCondition": "良",
+      "results": [
+        {
+          "rank": 1,
+          "bracket": 6,
+          "number": 6,
+          "name": "エクセレンティ",
+          "jockey": "安藤洋一",
+          "trainer": "荒山勝徳",
+          "time": "1:43.2",
+          "margin": "-",
+          "lastFurlong": "39.5",
+          "popularity": 1
+        },
+        {
+          "rank": 2,
+          "bracket": 7,
+          "number": 7,
+          "name": "オーヴァザトラブル",
+          "jockey": "藤田凌",
+          "trainer": "中道啓二",
+          "time": "1:43.7",
+          "margin": "２ 1/2",
+          "lastFurlong": "39.6",
+          "popularity": 5
+        },
+        {
+          "rank": 3,
+          "bracket": 8,
+          "number": 9,
+          "name": "ヒュプシュ",
+          "jockey": "岡村健司",
+          "trainer": "村上頼章",
+          "time": "1:43.8",
+          "margin": "3/4",
+          "lastFurlong": "40.0",
+          "popularity": 3
+        },
+        {
+          "rank": 4,
+          "bracket": 1,
+          "number": 1,
+          "name": "ティーズアライト",
+          "jockey": "矢野貴之",
+          "trainer": "嶋田幸晴",
+          "time": "1:44.0",
+          "margin": "１ 1/4",
+          "lastFurlong": "40.4",
+          "popularity": 2
+        },
+        {
+          "rank": 5,
+          "bracket": 8,
+          "number": 8,
+          "name": "ディアシンバ",
+          "jockey": "笹川翼",
+          "trainer": "鈴木啓之",
+          "time": "1:44.3",
+          "margin": "１ 1/2",
+          "lastFurlong": "38.8",
+          "popularity": 4
+        },
+        {
+          "rank": 6,
+          "bracket": 3,
+          "number": 3,
+          "name": "シュガーバイン",
+          "jockey": "藤本現暉",
+          "trainer": "真島大輔",
+          "time": "1:44.7",
+          "margin": "２",
+          "lastFurlong": "40.6",
+          "popularity": 6
+        },
+        {
+          "rank": 7,
+          "bracket": 2,
+          "number": 2,
+          "name": "ワカチーコ",
+          "jockey": "吉井章",
+          "trainer": "松浦裕之",
+          "time": "1:45.0",
+          "margin": "１ 3/4",
+          "lastFurlong": "39.7",
+          "popularity": 8
+        },
+        {
+          "rank": 8,
+          "bracket": 4,
+          "number": 4,
+          "name": "トゥーナウィッシュ",
+          "jockey": "桑村真明",
+          "trainer": "高野毅",
+          "time": "1:45.4",
+          "margin": "２",
+          "lastFurlong": "40.3",
+          "popularity": 9
+        },
+        {
+          "rank": 9,
+          "bracket": 5,
+          "number": 5,
+          "name": "ラブミーカンヌ",
+          "jockey": "野畑凌",
+          "trainer": "赤嶺亮",
+          "time": "1:46.2",
+          "margin": "４",
+          "lastFurlong": "41.7",
+          "popularity": 7
+        }
+      ],
+      "payouts": {
+        "tansho": [
+          {
+            "number": "6",
+            "payout": 170,
+            "popularity": 1
+          }
+        ],
+        "fukusho": [
+          {
+            "number": "6",
+            "payout": 100,
+            "popularity": 1
+          },
+          {
+            "number": "7",
+            "payout": 240,
+            "popularity": 5
+          },
+          {
+            "number": "9",
+            "payout": 110,
+            "popularity": 2
+          }
+        ],
+        "wakuren": [
+          {
+            "combination": "6-7",
+            "payout": 1900,
+            "popularity": 4
+          }
+        ],
+        "umaren": [
+          {
+            "combination": "6-7",
+            "payout": 1620,
+            "popularity": 4
+          }
+        ],
+        "wakutan": [
+          {
+            "combination": "6-7",
+            "payout": 2560,
+            "popularity": 7
+          }
+        ],
+        "umatan": [
+          {
+            "combination": "6-7",
+            "payout": 2070,
+            "popularity": 7
+          }
+        ],
+        "wide": [
+          {
+            "combination": "6-7",
+            "payout": 400,
+            "popularity": 4
+          },
+          {
+            "combination": "6-9",
+            "payout": 180,
+            "popularity": 2
+          },
+          {
+            "combination": "7-9",
+            "payout": 570,
+            "popularity": 7
+          }
+        ],
+        "sanrenpuku": [
+          {
+            "combination": "6-7-9",
+            "payout": 1200,
+            "popularity": 3
+          }
+        ],
+        "sanrentan": [
+          {
+            "combination": "6-7-9",
+            "payout": 5630,
+            "popularity": 16
+          }
+        ]
+      },
+      "timeData": {
+        "last3F": 39.6,
+        "last4F": 52.3,
+        "furlongTimes": [
+          12.5,
+          11.9,
+          13.2,
+          13.3,
+          12.7,
+          13,
+          13.1,
+          13.5
+        ]
+      },
+      "cornerData": [
+        {
+          "corner": "１角",
+          "order": [
+            1,
+            6,
+            9,
+            3,
+            7,
+            5,
+            2,
+            4,
+            8
+          ]
+        },
+        {
+          "corner": "２角",
+          "order": [
+            1,
+            6,
+            9,
+            3,
+            7,
+            5,
+            2,
+            4,
+            8
+          ]
+        },
+        {
+          "corner": "３角",
+          "order": [
+            1,
+            6,
+            9,
+            3,
+            7,
+            5,
+            2,
+            4,
+            8
+          ]
+        },
+        {
+          "corner": "４角",
+          "order": [
+            6,
+            1,
+            9,
+            7,
+            3,
+            5,
+            2,
+            4,
+            8
+          ]
+        }
+      ],
+      "enteredAt": "2026-01-31T08:15:18.599Z",
+      "enteredBy": "staff-ui",
+      "commentary": "2026年1月30日大井競馬2レース（賞金 ダ1600m・9頭立）は、1番ティーズアライト（2番人気）がハナを切る展開の中、6番エクセレンティ（1番人気）が2番手で折り合い直線で抜け出し、勝ちタイム1:43.2で1着となった。鞍上は安藤洋一騎手と荒山勝徳厩舎のコンビ。2着には4番手から伸びた7番オーヴァザトラブル（5番人気）、3着には9番ヒュプシュ（3番人気）が入線。三連単6-7-9は5,630円（16番人気）で決着した。"
     }
   ],
   "dataVersion": "1.0"
-} 
+}
