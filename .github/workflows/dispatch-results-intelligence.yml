@@ -24,17 +24,32 @@ jobs:
 
           if [ -z "$CHANGED_FILES" ]; then
             echo "changed=false" >> $GITHUB_OUTPUT
-            echo "No result files changed"
+            echo "📊 No result files changed"
             exit 0
           fi
 
-          echo "changed=true" >> $GITHUB_OUTPUT
-
-          # Extract dates from all changed files
+          # 各ファイルのレース数をチェック
           DATES_ARRAY="["
           FIRST=true
+          ALL_COMPLETE=true
+
           while IFS= read -r file; do
             DATE=$(basename "$file" .json)
+
+            # JSONファイルのレース数をチェック
+            RACE_COUNT=$(cat "$file" | jq '.races | length')
+
+            echo "📋 $DATE: $RACE_COUNT レース"
+
+            if [ "$RACE_COUNT" -lt 12 ]; then
+              echo "⏳ スキップ: $DATE は ${RACE_COUNT}レースのみ（12レース未満）"
+              ALL_COMPLETE=false
+              continue
+            fi
+
+            echo "✅ 完了: $DATE は12レース揃っています"
+
+            # 12レース揃ったファイルのみdates配列に追加
             if [ "$FIRST" = true ]; then
               DATES_ARRAY="${DATES_ARRAY}\"${DATE}\""
               FIRST=false
@@ -44,9 +59,16 @@ jobs:
           done <<< "$CHANGED_FILES"
           DATES_ARRAY="${DATES_ARRAY}]"
 
+          # 12レース揃ったファイルがあるかチェック
+          if [ "$DATES_ARRAY" = "[]" ]; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+            echo "⏭️  全ファイルが12レース未満のためスキップ（速報のみ）"
+            exit 0
+          fi
+
+          echo "changed=true" >> $GITHUB_OUTPUT
           echo "dates=$DATES_ARRAY" >> $GITHUB_OUTPUT
-          echo "Extracted dates: $DATES_ARRAY"
-          echo "Files: $CHANGED_FILES"
+          echo "🎯 Dispatch対象: $DATES_ARRAY"
 
       - name: Dispatch to keiba-intelligence
         if: steps.changed-files.outputs.changed == 'true'
