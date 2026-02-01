@@ -87,19 +87,26 @@ try {
         if (jsonResponse.ok) {
           const jsonData = await jsonResponse.json();
 
-          archiveData.push({
-            date: jsonData.date,
-            venue: jsonData.venue,
-            venueCode: jsonData.venueCode,
-            raceCount: jsonData.races.length
-          });
+          // 必須フィールドが存在する場合のみ追加
+          if (jsonData.date && jsonData.venue && jsonData.races) {
+            archiveData.push({
+              date: jsonData.date,
+              venue: jsonData.venue,
+              venueCode: jsonData.venueCode || '',
+              raceCount: jsonData.races.length
+            });
+          }
         }
       } catch (e) {
         console.error(`Error fetching ${file.path}:`, e.message);
       }
     }
 
-    archiveData.sort((a, b) => b.date.localeCompare(a.date));
+    // 日付でソート（新しい順）
+    archiveData.sort((a, b) => {
+      if (!a.date || !b.date) return 0;
+      return b.date.localeCompare(a.date);
+    });
   }
 } catch (error) {
   console.error(`${year}年${month}月のアーカイブデータ取得エラー:`, error);
@@ -234,6 +241,7 @@ const canonicalUrl = `${Astro.site}nankan/results/${year}/${month}/`;
     <section class="archive-section">
       <div class="archive-grid">
         {archiveData.map(item => {
+          if (!item.date) return null;
           const [y, m, d] = item.date.split('-');
           return (
             <a href={`/nankan/results/${y}/${m}/${d}/`} class="archive-card">
