@@ -158,11 +158,14 @@ const breadcrumbs = [
 ];
 
 // title生成
-const title = `${year}年${month}月${day}日 ${venueName}競馬 第${raceNumber}R ${raceData.raceName} 結果 | ${raceData.surface}${raceData.distance}m ${raceData.horses}頭立て`;
+const distanceText = raceData.distance ? `${raceData.distance}m` : '';
+const horsesText = raceData.horses ? `${raceData.horses}頭立て` : '';
+const raceInfo = [raceData.surface, distanceText, horsesText].filter(Boolean).join(' ');
+const title = `${year}年${month}月${day}日 ${venueName}競馬 第${raceNumber}R ${raceData.raceName} 結果${raceInfo ? ' | ' + raceInfo : ''}`;
 
 // meta description生成
 const winner = raceData.results[0];
-const metaDescription = `${year}年${month}月${day}日 ${venueName}競馬 第${raceNumber}R ${raceData.raceName}の結果。1着${winner.name}（${winner.jockey}）${winner.time}。${raceData.surface}${raceData.distance}m ${raceData.horses}頭立て、着順・払戻金・ラップタイムを掲載。`;
+const metaDescription = `${year}年${month}月${day}日 ${venueName}競馬 第${raceNumber}R ${raceData.raceName}の結果。1着${winner.name}（${winner.jockey}）${winner.time}。${raceInfo}、着順・払戻金を掲載。`;
 
 // 天候絵文字を返す関数
 const getWeatherEmoji = (weather) => {
@@ -177,32 +180,75 @@ const getWeatherEmoji = (weather) => {
   return weatherEmojis[weather] || '';
 };
 
-// レース内容要約生成
+// レース内容要約生成（自動生成）
 const generateRaceSummary = () => {
+  if (!raceData.results || raceData.results.length === 0) {
+    return '結果データがありません。';
+  }
+
   const w = raceData.results[0];
   const second = raceData.results[1];
   const third = raceData.results[2];
 
-  let summary = `${w.popularity}番人気の${w.number}番${w.name}（${w.jockey}騎手）が`;
+  // 人気による表現
+  const popularityText = w.popularity === 1 ? '1番人気に応えた' : `${w.popularity}番人気から`;
 
+  let summary = `${popularityText}${w.number}番${w.name}（${w.jockey}騎手、${w.trainer}厩舎）が`;
+
+  // レース展開の説明
+  if (w.popularity === 1) {
+    summary += '力を発揮。';
+  } else if (w.popularity <= 3) {
+    summary += '好走を見せ、';
+  } else {
+    summary += '人気を裏切る走りで、';
+  }
+
+  // 2着馬との関係
   if (second) {
-    summary += `、直線で${second.number}番${second.name}を捕らえて`;
+    const marginText = w.margin && w.margin !== '-' ? `${w.margin}差` : '';
+    if (marginText) {
+      summary += `${second.number}番${second.name}を${marginText}で振り切って`;
+    } else {
+      summary += `${second.number}番${second.name}をかわして`;
+    }
   }
 
-  summary += `1着。`;
+  summary += `1着でゴール。`;
 
-  if (raceData.timeData?.last3F) {
-    summary += `上がり3ハロン${raceData.timeData.last3F}秒の脚を使い、`;
+  // タイム情報
+  if (w.time) {
+    summary += `勝ちタイム${w.time}。`;
   }
 
-  summary += `勝ちタイム${w.time}で快勝した。`;
-
-  if (raceData.raceName.includes('重賞') || raceData.raceName.match(/[ＳＧ][ＩI]/)) {
-    summary += `重賞${raceData.raceName}は、${w.name}が制した。`;
+  // 上がり3F
+  if (w.lastFurlong) {
+    summary += `上がり3F${w.lastFurlong}秒の脚を使った。`;
   }
 
+  // 重賞の場合の特別な表現
+  if (raceData.raceName && (raceData.raceName.includes('賞') && raceData.raceName.length > 3)) {
+    summary += `\n\n${raceData.raceName}を制した${w.name}は、`;
+    if (w.popularity === 1) {
+      summary += '順当に実力を見せつけた。';
+    } else {
+      summary += '素晴らしい走りを披露した。';
+    }
+  }
+
+  // 2着・3着の情報
   if (second && third) {
-    summary += `2着${second.name}は${second.popularity}番人気、3着には${third.popularity}番人気の${third.name}が入った。`;
+    summary += `\n\n2着には${second.popularity}番人気の${second.name}が入り、3着は${third.popularity}番人気の${third.name}。`;
+
+    // 上位3頭の人気傾向
+    const topThreePopularity = [w.popularity, second.popularity, third.popularity].sort((a, b) => a - b);
+    if (topThreePopularity[0] === 1 && topThreePopularity[1] === 2 && topThreePopularity[2] === 3) {
+      summary += '人気順の決着となった。';
+    } else if (topThreePopularity[2] >= 5) {
+      summary += '波乱の決着となった。';
+    } else {
+      summary += '実力通りの上位争いとなった。';
+    }
   }
 
   return summary;
@@ -1071,10 +1117,14 @@ const generateRaceSummary = () => {
           <dd>{raceData.raceName}</dd>
 
           <dt>距離・コース</dt>
-          <dd>{raceData.surface}{raceData.distance}m（{raceData.track}）</dd>
+          <dd>{raceData.surface}{raceData.distance ? `${raceData.distance}m` : ''}{raceData.track ? `（${raceData.track}）` : ''}</dd>
 
-          <dt>出走頭数</dt>
-          <dd>{raceData.horses}頭</dd>
+          {raceData.horses && (
+            <>
+              <dt>出走頭数</dt>
+              <dd>{raceData.horses}頭</dd>
+            </>
+          )}
 
           {raceData.weather && (
             <>
