@@ -100,6 +100,23 @@ keiba-data-shared/
 }
 ```
 
+**⚠️ 重要な注意事項：フォーマット仕様**
+
+1. **トップレベルフィールド（必須）**
+   - `date`: レース開催日（YYYY-MM-DD形式）
+   - `venue`: 競馬場名（大井/川崎/船橋/浦和）
+   - `venueCode`: 競馬場コード（OI/KA/FU/UR）
+   - `races`: レース配列
+   - `dataVersion`: バージョン（"1.0"）
+
+2. **禁止事項**
+   - トップレベルに `raceDate`, `track`, `totalRaces`, `lastUpdated` は使用しない（予想データとの混在を防ぐため）
+   - 各レース内に `date`, `venue` を重複して含めない（トップレベルにあれば十分）
+
+3. **複数レース一括追加時の注意**
+   - 必ずトップレベルに `date`, `venue` を配置
+   - 各レース内は `raceNumber` から開始
+
 ### **予想データ（predictions）**
 
 **ファイル名**: `nankan/predictions/YYYY/MM/YYYY-MM-DD.json`
