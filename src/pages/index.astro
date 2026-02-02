@@ -40,11 +40,14 @@ try {
           const fileContent = readFileSync(filePath, 'utf-8');
           const jsonData = JSON.parse(fileContent);
 
-          availableDates.push({
-            date: jsonData.date,
-            venue: jsonData.venue,
-            raceNumbers: jsonData.races.map(r => r.raceNumber).sort((a, b) => a - b)
-          });
+          // 結果データのみを対象とする（date, venueフィールドが必須）
+          if (jsonData.date && jsonData.venue && Array.isArray(jsonData.races)) {
+            availableDates.push({
+              date: jsonData.date,
+              venue: jsonData.venue,
+              raceNumbers: jsonData.races.map(r => r.raceNumber).sort((a, b) => a - b)
+            });
+          }
         } catch (e) {
           console.error(`Error reading ${file}:`, e.message);
         }
@@ -555,7 +558,7 @@ const venues = [
 
       {availableDates.length > 0 ? (
         <div class="results-grid">
-          {availableDates.map(item => {
+          {availableDates.filter(item => item.date && item.venue).map(item => {
             const [year, month, day] = item.date.split('-');
             const venueSlug = venues.find(v => v.name === item.venue)?.slug || 'ooi';
 

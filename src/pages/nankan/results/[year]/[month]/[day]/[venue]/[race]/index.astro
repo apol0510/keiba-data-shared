@@ -59,6 +59,12 @@ export async function getStaticPaths() {
           if (!jsonResponse.ok) continue;
 
           const jsonData = await jsonResponse.json();
+
+          // 結果データのみを対象とする（venue, date, racesフィールドが必須）
+          if (!jsonData.venue || !jsonData.date || !Array.isArray(jsonData.races)) {
+            continue;
+          }
+
           const venueSlug = venueSlugMap[jsonData.venue] || 'ooi';
 
           // 各レースごとにパスを生成
