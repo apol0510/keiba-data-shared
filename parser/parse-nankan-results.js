@@ -74,7 +74,15 @@ function extractRaceInfo(text) {
 
   // レース名: ガーネット２２００
   const raceNameMatch = text.match(/日\s+(.+?)\s+Ｂ|日\s+(.+?)$/m);
-  const raceName = raceNameMatch ? (raceNameMatch[1] || raceNameMatch[2] || '').trim() : '';
+  let raceName = raceNameMatch ? (raceNameMatch[1] || raceNameMatch[2] || '').trim() : '';
+
+  // 賞金・番組ポイント情報を削除（不要な情報）
+  if (raceName.includes('賞金')) {
+    raceName = raceName.split('賞金')[0].trim();
+  }
+  if (raceName === '賞金') {
+    raceName = '';
+  }
 
   // 距離: ダ2,200m
   const distanceMatch = text.match(/ダ|芝[\s\u3000]*(\d{1}),?(\d{3})m/);
