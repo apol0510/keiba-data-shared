@@ -41,16 +41,17 @@ git remote -v
 cd /Users/apolon/Projects/keiba-data-shared
 ```
 
-### **厳格な制約事項**
+### **作業可能な範囲**
 
 #### **✅ 許可される操作**
-- `/Users/apolon/Projects/keiba-data-shared/` 配下のみ
+- `/Users/apolon/Projects/keiba-data-shared/` 配下（メインプロジェクト）
+- `/Users/apolon/Projects/keiba-data-shared-admin/` 配下（管理画面プロジェクト）
 - すべてのサブディレクトリ（nankan/, jra/, parser/）
 - README.md、schema.json、CLAUDE.md
 
-#### **❌ 絶対禁止の操作**
-- 他のプロジェクトディレクトリへの一切のアクセス
-- 親ディレクトリ `/Users/apolon/Projects/` の直接走査・検索
+#### **⚠️ 注意事項**
+- プロジェクト間の依存関係を理解して作業する
+- 管理画面の修正時は、keiba-data-sharedのデータフォーマットに準拠する
 
 ---
 
