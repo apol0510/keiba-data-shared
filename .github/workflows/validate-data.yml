@@ -1,0 +1,46 @@
+name: Validate Results Data Format
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'nankan/results/**/*.json'
+      - 'nankan/predictions/**/*.json'
+  pull_request:
+    paths:
+      - 'nankan/results/**/*.json'
+      - 'nankan/predictions/**/*.json'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run validation
+        run: |
+          echo "🔍 結果データのバリデーションを開始します..."
+          node scripts/validate-results.js
+
+      - name: Validation success
+        if: success()
+        run: |
+          echo "✅ 全てのデータファイルが正しいフォーマットです"
+
+      - name: Validation failed
+        if: failure()
+        run: |
+          echo "❌ データフォーマットにエラーがあります"
+          echo "修正方法:"
+          echo "  1. 必須フィールド: date, venue, races"
+          echo "  2. 禁止フィールド: raceDate, track, totalRaces, lastUpdated"
+          echo "  3. venueCode を追加（OI, KA, FU, UR）"
+          exit 1
