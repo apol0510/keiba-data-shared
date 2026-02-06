@@ -1,0 +1,290 @@
+{
+  "date": "2026-02-06",
+  "venue": "川崎",
+  "venueCode": "KA",
+  "races": [
+    {
+      "raceNumber": 1,
+      "raceName": "川崎スプリントシリーズ",
+      "distance": null,
+      "surface": "ダート",
+      "track": "外",
+      "horses": 12,
+      "startTime": "15:00",
+      "weather": "晴",
+      "trackCondition": "良",
+      "results": [
+        {
+          "rank": 1,
+          "bracket": 3,
+          "number": 3,
+          "name": "アークオブライフ",
+          "jockey": "櫻井光輔",
+          "trainer": "平田正一",
+          "time": "55.9",
+          "margin": "-",
+          "lastFurlong": "38.5",
+          "popularity": 1
+        },
+        {
+          "rank": 2,
+          "bracket": 2,
+          "number": 2,
+          "name": "ポンドリップ",
+          "jockey": "中越琉世",
+          "trainer": "佐藤博紀",
+          "time": "56.6",
+          "margin": "３",
+          "lastFurlong": "38.2",
+          "popularity": 6
+        },
+        {
+          "rank": 3,
+          "bracket": 8,
+          "number": 11,
+          "name": "ホワイトフジ",
+          "jockey": "本田正重",
+          "trainer": "山田質",
+          "time": "56.7",
+          "margin": "1/2",
+          "lastFurlong": "38.8",
+          "popularity": 2
+        },
+        {
+          "rank": 4,
+          "bracket": 7,
+          "number": 9,
+          "name": "グアピシマ",
+          "jockey": "町田直希",
+          "trainer": "古澤悟",
+          "time": "56.7",
+          "margin": "アタマ",
+          "lastFurlong": "38.0",
+          "popularity": 5
+        },
+        {
+          "rank": 5,
+          "bracket": 6,
+          "number": 7,
+          "name": "イアソン",
+          "jockey": "服部茂史",
+          "trainer": "山田質",
+          "time": "57.1",
+          "margin": "２",
+          "lastFurlong": "38.4",
+          "popularity": 3
+        },
+        {
+          "rank": 6,
+          "bracket": 6,
+          "number": 8,
+          "name": "クツシタオトシタ",
+          "jockey": "西啓太",
+          "trainer": "高橋宏征",
+          "time": "57.3",
+          "margin": "１",
+          "lastFurlong": "38.0",
+          "popularity": 11
+        },
+        {
+          "rank": 7,
+          "bracket": 7,
+          "number": 10,
+          "name": "メロウアイズテオ",
+          "jockey": "藤江渉",
+          "trainer": "今井輝和",
+          "time": "57.7",
+          "margin": "２",
+          "lastFurlong": "38.4",
+          "popularity": 12
+        },
+        {
+          "rank": 8,
+          "bracket": 5,
+          "number": 6,
+          "name": "トラストテンホー",
+          "jockey": "野畑凌",
+          "trainer": "吉橋淳一",
+          "time": "57.9",
+          "margin": "3/4",
+          "lastFurlong": "39.9",
+          "popularity": 4
+        },
+        {
+          "rank": 9,
+          "bracket": 8,
+          "number": 12,
+          "name": "ローズピクチャー",
+          "jockey": "△中山遥人",
+          "trainer": "田邊陽一",
+          "time": "58.0",
+          "margin": "1/2",
+          "lastFurlong": "40.2",
+          "popularity": 8
+        },
+        {
+          "rank": 10,
+          "bracket": 5,
+          "number": 5,
+          "name": "カスミソウ",
+          "jockey": "池谷匠翔",
+          "trainer": "高橋宏征",
+          "time": "58.5",
+          "margin": "２ 1/2",
+          "lastFurlong": "40.9",
+          "popularity": 10
+        },
+        {
+          "rank": 11,
+          "bracket": 4,
+          "number": 4,
+          "name": "アオイノコスメ",
+          "jockey": "☆佐野遥久",
+          "trainer": "山崎裕也",
+          "time": "58.6",
+          "margin": "クビ",
+          "lastFurlong": "41.0",
+          "popularity": 7
+        },
+        {
+          "rank": 12,
+          "bracket": 1,
+          "number": 1,
+          "name": "モンクラージュ",
+          "jockey": "新原周馬",
+          "trainer": "鈴木義久",
+          "time": "58.7",
+          "margin": "1/2",
+          "lastFurlong": "40.0",
+          "popularity": 9
+        }
+      ],
+      "payouts": {
+        "tansho": [
+          {
+            "number": "3",
+            "payout": 270,
+            "popularity": 1
+          }
+        ],
+        "fukusho": [
+          {
+            "number": "3",
+            "payout": 190,
+            "popularity": 4
+          },
+          {
+            "number": "2",
+            "payout": 210,
+            "popularity": 6
+          },
+          {
+            "number": "11",
+            "payout": 150,
+            "popularity": 2
+          }
+        ],
+        "wakuren": [
+          {
+            "combination": "2-3",
+            "payout": 1610,
+            "popularity": 8
+          }
+        ],
+        "umaren": [
+          {
+            "combination": "2-3",
+            "payout": 1650,
+            "popularity": 6
+          }
+        ],
+        "wakutan": [
+          {
+            "combination": "3-2",
+            "payout": 2790,
+            "popularity": 15
+          }
+        ],
+        "umatan": [
+          {
+            "combination": "3-2",
+            "payout": 2400,
+            "popularity": 7
+          }
+        ],
+        "wide": [
+          {
+            "combination": "2-3",
+            "payout": 580,
+            "popularity": 9
+          }
+        ],
+        "sanrenpuku": [
+          {
+            "combination": "2-3-11",
+            "payout": 1890,
+            "popularity": 3
+          }
+        ],
+        "sanrentan": [
+          {
+            "combination": "3-2-11",
+            "payout": 9600,
+            "popularity": 15
+          }
+        ]
+      },
+      "timeData": {
+        "last3F": 38.5,
+        "last4F": 49.3,
+        "furlongTimes": [
+          6.6,
+          10.8,
+          12.4,
+          13.1,
+          13
+        ]
+      },
+      "cornerData": [
+        {
+          "corner": "３角",
+          "order": [
+            3,
+            5,
+            4,
+            12,
+            11,
+            6,
+            9,
+            2,
+            7,
+            1,
+            10,
+            8
+          ]
+        },
+        {
+          "corner": "４角",
+          "order": [
+            3,
+            5,
+            11,
+            4,
+            6,
+            2,
+            7,
+            12,
+            9,
+            10,
+            1,
+            8
+          ]
+        }
+      ],
+      "enteredAt": "2026-02-06T09:45:54.920Z",
+      "enteredBy": "staff-ui",
+      "comment": "2026年2月6日川崎競馬1レース（川崎スプリントシリーズ ダnullm・12頭立）は、3番アークオブライフ（1番人気）がスタートからハナを切って主導権を握る展開。直線でも粘り強く脚を使い、勝ちタイム55.9で1着、鞍上は櫻井光輔騎手と平田正一厩舎のコンビでした。2着には中団から追い込んだ2番ポンドリップ（6番人気）、3着には11番ホワイトフジ（2番人気）が入線。三連単3-2-11は9,600円（15番人気）で決着した。"
+    }
+  ],
+  "dataVersion": "1.0"
+}
