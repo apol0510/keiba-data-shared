@@ -136,6 +136,35 @@
           }
         ]
       }
+    },
+    "02": {
+      "06": {
+        "venue": "川崎",
+        "totalRaces": 1,
+        "hitRaces": 0,
+        "perfectHit": false,
+        "totalPayout": 0,
+        "recoveryRate": 0,
+        "races": [
+          {
+            "raceNumber": "1R",
+            "raceName": "川崎スプリントシリーズ",
+            "betType": "馬単",
+            "betPoints": 10,
+            "hit": false,
+            "hitType": null,
+            "payout": 0,
+            "debug": {
+              "hasPrediction": false,
+              "hasResult": true,
+              "predictionMain": [],
+              "predictionSub": [],
+              "resultCombo": null,
+              "resultPayout": 0
+            }
+          }
+        ]
+      }
     }
   }
 }
