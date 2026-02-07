@@ -30,14 +30,14 @@ export async function getStaticPaths() {
     const jsonFiles = data.tree.filter(item =>
       item.path.startsWith('central/results/') &&
       item.path.endsWith('.json') &&
-      item.path.match(/nankan\/results\/\d{4}\/\d{2}\/\d{4}-\d{2}-\d{2}\.json/)
+      item.path.match(/central\/results\/\d{4}\/\d{2}\/\d{4}-\d{2}-\d{2}\.json/)
     );
 
     // 重複を防ぐため、日付のみでユニーク化
     const uniqueDates = new Set();
 
     for (const file of jsonFiles) {
-      const match = file.path.match(/nankan\/results\/(\d{4})\/(\d{2})\/\d{4}-\d{2}-(\d{2})\.json/);
+      const match = file.path.match(/central\/results\/(\d{4})\/(\d{2})\/\d{4}-\d{2}-(\d{2})\.json/);
       if (match) {
         const [, year, month, day] = match;
         const dateKey = `${year}-${month}-${day}`;
