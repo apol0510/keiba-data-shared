@@ -1,0 +1,761 @@
+---
+/**
+ * 日付別結果一覧ページ（全競馬場）
+ * URL: /central/results/YYYY/MM/DD/
+ */
+
+/**
+ * GitHubからJSONファイルリストを取得してパスを生成
+ */
+export async function getStaticPaths() {
+  const paths = [];
+
+  try {
+    const GITHUB_API_URL = 'https://api.github.com/repos/apol0510/keiba-data-shared/git/trees/main?recursive=1';
+
+    const response = await fetch(GITHUB_API_URL, {
+      headers: {
+        'Accept': 'application/vnd.github.v3+json',
+        'User-Agent': 'keiba-data-shared-build'
+      }
+    });
+
+    if (!response.ok) {
+      console.error('GitHub API error:', response.status);
+      return paths;
+    }
+
+    const data = await response.json();
+
+    const jsonFiles = data.tree.filter(item =>
+      item.path.startsWith('central/results/') &&
+      item.path.endsWith('.json') &&
+      item.path.match(/nankan\/results\/\d{4}\/\d{2}\/\d{4}-\d{2}-\d{2}\.json/)
+    );
+
+    // 重複を防ぐため、日付のみでユニーク化
+    const uniqueDates = new Set();
+
+    for (const file of jsonFiles) {
+      const match = file.path.match(/nankan\/results\/(\d{4})\/(\d{2})\/\d{4}-\d{2}-(\d{2})\.json/);
+      if (match) {
+        const [, year, month, day] = match;
+        const dateKey = `${year}-${month}-${day}`;
+
+        if (!uniqueDates.has(dateKey)) {
+          uniqueDates.add(dateKey);
+          paths.push({
+            params: { year, month, day }
+          });
+        }
+      }
+    }
+
+    console.log(`[central-day] Total paths generated: ${paths.length}`);
+  } catch (error) {
+    console.error('[central-day] Fatal error in getStaticPaths:', error);
+  }
+
+  return paths;
+}
+
+const { year, month, day } = Astro.params;
+
+// GitHubからJSONデータを取得（キャッシュバスティング付き）
+const timestamp = Date.now();
+const jsonUrl = `https://raw.githubusercontent.com/apol0510/keiba-data-shared/main/central/results/${year}/${month.padStart(2, '0')}/${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}.json?t=${timestamp}`;
+
+let allVenuesData = [];
+
+try {
+  const response = await fetch(jsonUrl, {
+    cache: 'no-store',
+    headers: {
+      'Cache-Control': 'no-cache, no-store, must-revalidate',
+      'Pragma': 'no-cache'
+    }
+  });
+
+  if (response.ok) {
+    const data = await response.json();
+    allVenuesData = [{
+      venue: data.venue,
+      venueCode: data.venueCode,
+      races: data.races || []
+    }];
+  }
+} catch (error) {
+  console.error(`${year}年${month}月${day}日のデータ取得エラー:`, error);
+}
+
+// venueからslugへの変換
+const venueSlugMap = {
+  '東京': 'tokyo',
+  '中山': 'nakayama',
+  '京都': 'kyoto',
+  '阪神': 'hanshin',
+  '中京': 'chukyo',
+  '新潟': 'niigata',
+  '福島': 'fukushima',
+  '小倉': 'kokura',
+  '札幌': 'sapporo',
+  '函館': 'hakodate'
+};
+
+// 競馬場カラー
+const venueColors = {
+  '東京': '#e63946',
+  '中山': '#f4a261',
+  '京都': '#e76f51',
+  '阪神': '#2a9d8f',
+  '中京': '#264653',
+  '新潟': '#457b9d',
+  '福島': '#1d3557',
+  '小倉': '#a8dadc',
+  '札幌': '#06d6a0',
+  '函館': '#118ab2'
+};
+
+// title生成
+const venueNames = allVenuesData.map(v => v.venue).join('・');
+const title = `${year}年${parseInt(month)}月${parseInt(day)}日 中央競馬 結果一覧 | ${venueNames || '中央競馬結果速報'}`;
+const description = `${year}年${parseInt(month)}月${parseInt(day)}日の中央競馬レース結果一覧。${venueNames}競馬場の全レース結果を掲載。`;
+
+// 天候絵文字を返す関数
+const getWeatherEmoji = (weather) => {
+  const weatherEmojis = {
+    '晴': '☀️',
+    '曇': '☁️',
+    '雨': '☔',
+    '雪': '❄️',
+    '小雨': '🌧️',
+    '小雪': '🌨️'
+  };
+  return weatherEmojis[weather] || '';
+};
+
+// canonical URL
+const canonicalUrl = `${Astro.site}central/results/${year}/${month}/${day}/`;
+---
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>{title}</title>
+  <meta name="description" content={description}>
+
+  <!-- canonical URL -->
+  <link rel="canonical" href={canonicalUrl}>
+
+  <!-- OGP -->
+  <meta property="og:title" content={title}>
+  <meta property="og:description" content={description}>
+  <meta property="og:type" content="article">
+  <meta property="og:url" content={canonicalUrl}>
+
+  <!-- 構造化データ -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "SportsEvent",
+    "name": `${venueNames || '中央'}競馬`,
+    "sport": "競馬",
+    "startDate": `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`,
+    "location": {
+      "@type": "Place",
+      "name": allVenuesData.length > 0 ? `${venueNames}競馬場` : "中央地方競馬"
+    }
+  })} />
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif;
+      line-height: 1.6;
+      color: #2C3E50;
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      background-attachment: fixed;
+      min-height: 100vh;
+    }
+
+    /* ヘッダー */
+    header {
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 50%, #f093fb 100%);
+      color: white;
+      padding: 2.5rem 1rem;
+      box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: '📅';
+      position: absolute;
+      font-size: 12rem;
+      opacity: 0.1;
+      right: -1rem;
+      top: -2rem;
+      transform: rotate(-10deg);
+    }
+
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .breadcrumb {
+      font-size: 0.95rem;
+      margin-bottom: 1.25rem;
+      opacity: 0.95;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .breadcrumb::before {
+      content: '🏠';
+    }
+
+    .breadcrumb a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .breadcrumb a:hover {
+      text-shadow: 0 0 10px rgba(255,255,255,0.8);
+    }
+
+    .breadcrumb span {
+      opacity: 0.8;
+    }
+
+    h1 {
+      font-size: 2.25rem;
+      margin-bottom: 0.75rem;
+      font-weight: 800;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    h1::before {
+      content: '🏇';
+      font-size: 2rem;
+    }
+
+    .page-meta {
+      font-size: 1.05rem;
+      opacity: 0.95;
+      font-weight: 600;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .page-meta::before {
+      content: '🏟️';
+    }
+
+    /* メインコンテンツ */
+    main {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 1rem 3rem;
+    }
+
+    .summary-section {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+    }
+
+    .summary-section h2 {
+      font-size: 1.75rem;
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1.5rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 3px solid transparent;
+      border-image: linear-gradient(90deg, #f093fb, #f5576c, transparent) 1;
+    }
+
+    .summary-section h2::before {
+      content: '🏇';
+      font-size: 1.5rem;
+      -webkit-text-fill-color: initial;
+      background: none;
+    }
+
+    .summary-info {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .summary-item {
+      text-align: center;
+      padding: 1rem;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    .summary-item dt {
+      font-size: 0.875rem;
+      color: #666;
+      margin-bottom: 0.25rem;
+      font-weight: 600;
+    }
+
+    .summary-item dd {
+      font-size: 1.5rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* レースカードグリッド */
+    .races-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .race-card {
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      border: 2px solid transparent;
+    }
+
+    .race-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+      border-color: #f093fb;
+    }
+
+    .race-header {
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      color: white;
+      padding: 1.25rem;
+      position: relative;
+    }
+
+    .race-number {
+      font-size: 1.75rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .race-number::before {
+      content: '🏁';
+      font-size: 1.5rem;
+    }
+
+    .race-name {
+      font-size: 1.05rem;
+      opacity: 0.95;
+      font-weight: 600;
+    }
+
+    .race-info {
+      display: flex;
+      gap: 1rem;
+      font-size: 0.9rem;
+      margin-top: 0.75rem;
+      opacity: 0.9;
+      flex-wrap: wrap;
+    }
+
+    .race-info span::before {
+      margin-right: 0.25rem;
+    }
+
+    .race-info span:nth-child(1)::before {
+      content: '📏';
+    }
+
+    .race-info span:nth-child(2)::before {
+      content: '👥';
+    }
+
+    .race-info span:nth-child(3)::before {
+      content: '⏰';
+    }
+
+    .race-body {
+      padding: 1.25rem;
+    }
+
+    .winner-box {
+      background: linear-gradient(135deg, #FFF9C4 0%, #FFEB3B 100%);
+      border-left: 4px solid #FFD700;
+      border-radius: 12px;
+      padding: 1.25rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 2px 8px rgba(255, 215, 0, 0.2);
+    }
+
+    .winner-title {
+      font-size: 0.875rem;
+      color: #856404;
+      margin-bottom: 0.75rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .winner-title::before {
+      content: '👑';
+    }
+
+    .winner-name {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 0.5rem;
+    }
+
+    .winner-details {
+      font-size: 0.95rem;
+      color: #666;
+      font-weight: 600;
+    }
+
+    .payouts-preview {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+
+    .payout-item {
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      padding: 1rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      transition: all 0.3s ease;
+    }
+
+    .payout-item:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .payout-label {
+      font-size: 0.75rem;
+      color: #666;
+      margin-bottom: 0.5rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .payout-label::before {
+      content: '💰';
+    }
+
+    .payout-value {
+      font-size: 1.15rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .payout-combo {
+      font-size: 0.875rem;
+      color: #666;
+      margin-top: 0.25rem;
+      font-weight: 600;
+    }
+
+    .no-data {
+      text-align: center;
+      padding: 3rem;
+      color: #7f8c8d;
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    .no-data::before {
+      content: '📭';
+      display: block;
+      font-size: 4rem;
+      margin-bottom: 1rem;
+    }
+
+    /* フッター - ポップなデザイン */
+    footer {
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 50%, #f093fb 100%);
+      color: white;
+      text-align: center;
+      padding: 3rem 1rem;
+      margin-top: 0;
+      box-shadow: 0 -8px 32px rgba(102, 126, 234, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    footer::before {
+      content: '🏇';
+      position: absolute;
+      font-size: 10rem;
+      opacity: 0.1;
+      left: -2rem;
+      top: 50%;
+      transform: translateY(-50%) rotate(15deg);
+      animation: float-horse 6s ease-in-out infinite;
+    }
+
+    @keyframes float-horse {
+      0%, 100% {
+        transform: translateY(-50%) rotate(15deg) translateX(0);
+      }
+      50% {
+        transform: translateY(-50%) rotate(15deg) translateX(20px);
+      }
+    }
+
+    footer::after {
+      content: '🏆';
+      position: absolute;
+      font-size: 8rem;
+      opacity: 0.1;
+      right: -1rem;
+      top: 50%;
+      transform: translateY(-50%) rotate(-15deg);
+      animation: float-trophy 5s ease-in-out infinite;
+    }
+
+    @keyframes float-trophy {
+      0%, 100% {
+        transform: translateY(-50%) rotate(-15deg) translateX(0);
+      }
+      50% {
+        transform: translateY(-50%) rotate(-15deg) translateX(-20px);
+      }
+    }
+
+    footer p {
+      font-size: 1rem;
+      opacity: 0.95;
+      margin: 0.75rem 0;
+      font-weight: 600;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+      position: relative;
+      z-index: 1;
+    }
+
+    footer p:first-child {
+      font-size: 1.25rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    footer a {
+      color: white;
+      text-decoration: none;
+      font-weight: 700;
+      transition: all 0.3s ease;
+    }
+
+    footer a:hover {
+      text-shadow: 0 0 10px rgba(255,255,255,0.8);
+      transform: scale(1.05);
+      display: inline-block;
+    }
+
+    /* モバイル対応 */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 1.75rem;
+      }
+
+      header {
+        padding: 2rem 1rem;
+      }
+
+      .summary-section {
+        padding: 1.5rem;
+        border-radius: 16px;
+      }
+
+      .summary-section h2 {
+        font-size: 1.5rem;
+      }
+
+      .races-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .payouts-preview {
+        grid-template-columns: 1fr;
+      }
+
+      .summary-info {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .race-card {
+        padding: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="header-content">
+      <nav class="breadcrumb">
+        <a href="/">トップ</a>
+        <span>›</span>
+        <a href="/central/results/">アーカイブ</a>
+        <span>›</span>
+        <a href={`/central/results/${year}/`}>{year}年</a>
+        <span>›</span>
+        <a href={`/central/results/${year}/${month}/`}>{parseInt(month)}月</a>
+        <span>›</span>
+        <span>{parseInt(day)}日</span>
+      </nav>
+      <h1>{year}年{parseInt(month)}月{parseInt(day)}日 中央競馬 結果</h1>
+      <p class="page-meta">{allVenuesData.map(v => v.venue).join('・')}競馬</p>
+    </div>
+  </header>
+
+  <main>
+    {allVenuesData.length > 0 ? (
+      allVenuesData.map(venueData => {
+        const venueSlug = venueSlugMap[venueData.venue] || 'ooi';
+        const venueColor = venueColors[venueData.venue] || '#2e7d32';
+
+        return (
+          <>
+            <!-- サマリーセクション -->
+            <section class="summary-section">
+              <h2 style={`color: ${venueColor}; border-color: ${venueColor};`}>
+                {venueData.venue}競馬 全{venueData.races.length}レース
+              </h2>
+            </section>
+
+            <!-- レース一覧 -->
+            <div class="races-grid">
+              {venueData.races.map(race => {
+                const winner = race.results?.[0];
+                const tansho = race.payouts?.tansho?.[0];
+                const umatan = race.payouts?.umatan?.[0];
+
+                return (
+                  <a
+                    href={`/central/results/${year}/${month}/${day}/${venueSlug}/${race.raceNumber}/`}
+                    class="race-card"
+                  >
+                    <div class="race-header" style={`background: linear-gradient(135deg, ${venueColor} 0%, ${venueColor}dd 100%);`}>
+                      <div class="race-number">第{race.raceNumber}R</div>
+                      <div class="race-name">{race.raceName}</div>
+                      <div class="race-info">
+                        <span>{race.surface}{race.distance}m</span>
+                        <span>{race.horses}頭立て</span>
+                        {race.startTime && <span>{race.startTime}発走</span>}
+                        {race.weather && <span>{race.weather} {getWeatherEmoji(race.weather)}</span>}
+                        {race.trackCondition && <span>馬場 {race.trackCondition}</span>}
+                      </div>
+                    </div>
+
+                    <div class="race-body">
+                      {winner && (
+                        <div class="winner-box">
+                          <div class="winner-title">1着</div>
+                          <div class="winner-name">
+                            {winner.number}番 {winner.name}
+                          </div>
+                          <div class="winner-details">
+                            {winner.jockey} / {winner.time} / {winner.popularity}番人気
+                          </div>
+                        </div>
+                      )}
+
+                      <div class="payouts-preview">
+                        {tansho && (
+                          <div class="payout-item">
+                            <div class="payout-label">単勝</div>
+                            <div class="payout-value">{tansho.payout.toLocaleString()}円</div>
+                            <div class="payout-combo">{tansho.number}番</div>
+                          </div>
+                        )}
+
+                        {umatan && (
+                          <div class="payout-item">
+                            <div class="payout-label">馬単</div>
+                            <div class="payout-value">{umatan.payout.toLocaleString()}円</div>
+                            <div class="payout-combo">{umatan.combination}</div>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </a>
+                );
+              })}
+            </div>
+          </>
+        );
+      })
+    ) : (
+      <section class="summary-section">
+        <p class="no-data">
+          {year}年{parseInt(month)}月{parseInt(day)}日の結果データはまだありません
+        </p>
+      </section>
+    )}
+  </main>
+
+  <footer>
+    <p><a href="/">中央競馬結果速報トップへ戻る</a></p>
+    <p>&copy; 2026 中央競馬結果速報 - keiba-data-shared</p>
+  </footer>
+</body>
+</html>
