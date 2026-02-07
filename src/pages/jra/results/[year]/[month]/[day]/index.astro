@@ -30,7 +30,7 @@ export async function getStaticPaths() {
     const jsonFiles = data.tree.filter(item =>
       item.path.startsWith('jra/results/') &&
       item.path.endsWith('.json') &&
-      item.path.match(/jra\/results\/\d{4}\/\d{2}\/\d{4}-\d{2}-\d{2}\.json/)
+      item.path.match(/jra\/results\/\d{4}\/\d{2}\/\d{4}-\d{2}-\d{2}(-[A-Z]{2,3})?\.json/)
     );
 
     // 重複を防ぐため、日付のみでユニーク化
@@ -61,28 +61,56 @@ export async function getStaticPaths() {
 
 const { year, month, day } = Astro.params;
 
-// GitHubからJSONデータを取得（キャッシュバスティング付き）
+// GitHubから該当日の全会場のJSONファイルを取得
 const timestamp = Date.now();
-const jsonUrl = `https://raw.githubusercontent.com/apol0510/keiba-data-shared/main/jra/results/${year}/${month.padStart(2, '0')}/${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}.json?t=${timestamp}`;
-
 let allVenuesData = [];
 
 try {
-  const response = await fetch(jsonUrl, {
-    cache: 'no-store',
+  // GitHub APIで該当日のファイル一覧を取得
+  const GITHUB_API_URL = 'https://api.github.com/repos/apol0510/keiba-data-shared/git/trees/main?recursive=1';
+
+  const apiResponse = await fetch(GITHUB_API_URL, {
     headers: {
-      'Cache-Control': 'no-cache, no-store, must-revalidate',
-      'Pragma': 'no-cache'
+      'Accept': 'application/vnd.github.v3+json',
+      'User-Agent': 'keiba-data-shared-build'
     }
   });
 
-  if (response.ok) {
-    const data = await response.json();
-    allVenuesData = [{
-      venue: data.venue,
-      venueCode: data.venueCode,
-      races: data.races || []
-    }];
+  if (apiResponse.ok) {
+    const data = await apiResponse.json();
+
+    // 該当日のファイルをすべて抽出
+    const datePrefix = `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
+    const targetFiles = data.tree.filter(item =>
+      item.path.startsWith(`jra/results/${year}/${month.padStart(2, '0')}/`) &&
+      item.path.includes(datePrefix) &&
+      item.path.endsWith('.json')
+    );
+
+    // 各ファイルを取得
+    for (const file of targetFiles) {
+      try {
+        const jsonUrl = `https://raw.githubusercontent.com/apol0510/keiba-data-shared/main/${file.path}?t=${timestamp}`;
+        const jsonResponse = await fetch(jsonUrl, {
+          cache: 'no-store',
+          headers: {
+            'Cache-Control': 'no-cache, no-store, must-revalidate',
+            'Pragma': 'no-cache'
+          }
+        });
+
+        if (jsonResponse.ok) {
+          const venueData = await jsonResponse.json();
+          allVenuesData.push({
+            venue: venueData.venue,
+            venueCode: venueData.venueCode,
+            races: venueData.races || []
+          });
+        }
+      } catch (e) {
+        console.error(`ファイル ${file.path} の取得エラー:`, e);
+      }
+    }
   }
 } catch (error) {
   console.error(`${year}年${month}月${day}日のデータ取得エラー:`, error);

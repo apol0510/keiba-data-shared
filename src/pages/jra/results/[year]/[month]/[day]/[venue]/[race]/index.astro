@@ -42,11 +42,11 @@ export async function getStaticPaths() {
 
     const data = await response.json();
 
-    // jra/results/YYYY/MM/YYYY-MM-DD.jsonファイルを抽出
+    // jra/results/YYYY/MM/YYYY-MM-DD.json または YYYY-MM-DD-VENUE.json ファイルを抽出
     const jsonFiles = data.tree.filter(item =>
       item.path.startsWith('jra/results/') &&
       item.path.endsWith('.json') &&
-      item.path.match(/jra\/results\/\d{4}\/\d{2}\/\d{4}-\d{2}-\d{2}\.json/)
+      item.path.match(/jra\/results\/\d{4}\/\d{2}\/\d{4}-\d{2}-\d{2}(-[A-Z]{2,3})?\.json/)
     );
 
     console.log(`Found ${jsonFiles.length} JSON files`);
@@ -103,20 +103,52 @@ export async function getStaticPaths() {
 
 const { year, month, day, venue, race } = Astro.params;
 
-// venueSlugからvenue名への変換
+// venueSlugからvenue名への変換（JRA + 南関）
 const venueMap = {
+  'tokyo': '東京',
+  'nakayama': '中山',
+  'kyoto': '京都',
+  'hanshin': '阪神',
+  'chukyo': '中京',
+  'niigata': '新潟',
+  'fukushima': '福島',
+  'kokura': '小倉',
+  'sapporo': '札幌',
+  'hakodate': '函館',
   'ooi': '大井',
   'funabashi': '船橋',
   'kawasaki': '川崎',
   'urawa': '浦和'
 };
 
+// venue名からvenueCodeへの変換
+const venueCodeMap = {
+  '東京': 'TOK',
+  '中山': 'NAK',
+  '京都': 'KYO',
+  '阪神': 'HAN',
+  '中京': 'CHU',
+  '新潟': 'NII',
+  '福島': 'FUK',
+  '小倉': 'KOK',
+  '札幌': 'SAP',
+  '函館': 'HAK',
+  '大井': 'OOI',
+  '船橋': 'FUN',
+  '川崎': 'KAW',
+  '浦和': 'URA'
+};
+
 const venueName = venueMap[venue] || venue;
+const venueCode = venueCodeMap[venueName];
 const raceNumber = parseInt(race, 10);
 
-// JSONデータの取得（キャッシュバスティング付き）
+// JSONデータの取得（会場別ファイル対応）
 const timestamp = Date.now();
-const jsonUrl = `https://raw.githubusercontent.com/apol0510/keiba-data-shared/main/jra/results/${year}/${month.padStart(2, '0')}/${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}.json?t=${timestamp}`;
+const baseFileName = `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
+const jsonUrl = venueCode
+  ? `https://raw.githubusercontent.com/apol0510/keiba-data-shared/main/jra/results/${year}/${month.padStart(2, '0')}/${baseFileName}-${venueCode}.json?t=${timestamp}`
+  : `https://raw.githubusercontent.com/apol0510/keiba-data-shared/main/jra/results/${year}/${month.padStart(2, '0')}/${baseFileName}.json?t=${timestamp}`;
 
 let raceData = null;
 let allRaces = [];

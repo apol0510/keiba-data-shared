@@ -43,7 +43,7 @@ export async function getStaticPaths() {
     const jsonFiles = data.tree.filter(item =>
       item.path.startsWith('jra/results/') &&
       item.path.endsWith('.json') &&
-      item.path.match(/jra\/results\/\d{4}\/\d{2}\/\d{4}-\d{2}-\d{2}\.json/)
+      item.path.match(/jra\/results\/\d{4}\/\d{2}\/\d{4}-\d{2}-\d{2}(-[A-Z]{2,3})?\.json/)
     );
 
     for (const file of jsonFiles) {
@@ -97,9 +97,28 @@ const venueSlugToNameMap = {
 
 const venueName = venueSlugToNameMap[venue] || venue;
 
-// GitHubからJSONデータを取得（キャッシュバスティング付き）
+// venue名からvenueCodeへの変換
+const venueCodeMap = {
+  '東京': 'TOK',
+  '中山': 'NAK',
+  '京都': 'KYO',
+  '阪神': 'HAN',
+  '中京': 'CHU',
+  '新潟': 'NII',
+  '福島': 'FUK',
+  '小倉': 'KOK',
+  '札幌': 'SAP',
+  '函館': 'HAK'
+};
+
+const venueCode = venueCodeMap[venueName];
+
+// GitHubからJSONデータを取得（会場別ファイル対応）
 const timestamp = Date.now();
-const jsonUrl = `https://raw.githubusercontent.com/apol0510/keiba-data-shared/main/jra/results/${year}/${month.padStart(2, '0')}/${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}.json?t=${timestamp}`;
+const baseFileName = `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
+const jsonUrl = venueCode
+  ? `https://raw.githubusercontent.com/apol0510/keiba-data-shared/main/jra/results/${year}/${month.padStart(2, '0')}/${baseFileName}-${venueCode}.json?t=${timestamp}`
+  : `https://raw.githubusercontent.com/apol0510/keiba-data-shared/main/jra/results/${year}/${month.padStart(2, '0')}/${baseFileName}.json?t=${timestamp}`;
 
 let venueData = null;
 

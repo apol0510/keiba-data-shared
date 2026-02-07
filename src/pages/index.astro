@@ -28,9 +28,9 @@ try {
     for (const month of months) {
       const monthDir = join(yearDir, month);
 
-      // JSONファイルを取得（例: 2026-01-30.json）
+      // JSONファイルを取得（例: 2026-01-30.json または 2026-01-30-OOI.json）
       const files = readdirSync(monthDir)
-        .filter(name => /^\d{4}-\d{2}-\d{2}\.json$/.test(name))
+        .filter(name => /^\d{4}-\d{2}-\d{2}(-[A-Z]{2,3})?\.json$/.test(name))
         .sort()
         .reverse();
 
@@ -80,9 +80,9 @@ try {
       for (const month of months) {
         const monthDir = join(yearDir, month);
 
-        // JSONファイルを取得（例: 2026-02-01.json）
+        // JSONファイルを取得（例: 2026-02-01.json または 2026-02-01-KOK.json）
         const files = readdirSync(monthDir)
-          .filter(name => /^\d{4}-\d{2}-\d{2}\.json$/.test(name))
+          .filter(name => /^\d{4}-\d{2}-\d{2}(-[A-Z]{2,3})?\.json$/.test(name))
           .sort()
           .reverse();
 
