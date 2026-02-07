@@ -26,11 +26,11 @@ try {
     const jsonFiles = data.tree.filter(item =>
       item.path.startsWith('jra/results/') &&
       item.path.endsWith('.json') &&
-      item.path.match(/central\/results\/\d{4}\/\d{2}\/\d{4}-\d{2}-\d{2}\.json/)
+      item.path.match(/jra\/results\/\d{4}\/\d{2}\/\d{4}-\d{2}-\d{2}\.json/)
     );
 
     for (const file of jsonFiles) {
-      const match = file.path.match(/central\/results\/(\d{4})\/(\d{2})\//);
+      const match = file.path.match(/jra\/results\/(\d{4})\/(\d{2})\//);
       if (match) {
         const [, year, month] = match;
 
