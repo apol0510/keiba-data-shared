@@ -1,0 +1,560 @@
+---
+/**
+ * 中央競馬 競馬場別アーカイブ
+ * URL: /jra/results/venue/{venueSlug}/
+ */
+
+export async function getStaticPaths() {
+  const venues = ['tokyo', 'nakayama', 'kyoto', 'hanshin', 'chukyo', 'niigata', 'fukushima', 'kokura', 'sapporo', 'hakodate'];
+
+  return venues.map(venue => ({
+    params: { venue }
+  }));
+}
+
+const { venue } = Astro.params;
+
+// venueSlugから競馬場名への変換
+const venueMap = {
+  'tokyo': '東京',
+  'nakayama': '中山',
+  'kyoto': '京都',
+  'hanshin': '阪神',
+  'chukyo': '中京',
+  'niigata': '新潟',
+  'fukushima': '福島',
+  'kokura': '小倉',
+  'sapporo': '札幌',
+  'hakodate': '函館'
+};
+
+const venueName = venueMap[venue] || venue;
+
+const title = `${venueName}競馬場 結果アーカイブ | 中央競馬（JRA）`;
+const description = `${venueName}競馬場の全レース結果アーカイブ。過去の開催データを検索できます。`;
+
+// 全データから指定競馬場のデータをGitHubから抽出
+const archiveData = [];
+
+try {
+  const GITHUB_API_URL = 'https://api.github.com/repos/apol0510/keiba-data-shared/git/trees/main?recursive=1';
+
+  const response = await fetch(GITHUB_API_URL, {
+    headers: {
+      'Accept': 'application/vnd.github.v3+json',
+      'User-Agent': 'keiba-data-shared-build'
+    }
+  });
+
+  if (response.ok) {
+    const data = await response.json();
+
+    const jsonFiles = data.tree.filter(item =>
+      item.path.startsWith('jra/results/') &&
+      item.path.endsWith('.json') &&
+      item.path.match(/jra\/results\/\d{4}\/\d{2}\/\d{4}-\d{2}-\d{2}(-[A-Z]{2,3})?\.json/)
+    );
+
+    for (const file of jsonFiles) {
+      const match = file.path.match(/jra\/results\/(\d{4})\/(\d{2})\//);
+      if (match) {
+        const [, year, month] = match;
+
+        try {
+          const jsonUrl = `https://raw.githubusercontent.com/apol0510/keiba-data-shared/main/${file.path}`;
+          const jsonResponse = await fetch(jsonUrl);
+
+          if (jsonResponse.ok) {
+            const jsonData = await jsonResponse.json();
+
+            // 指定競馬場のデータのみ抽出
+            if (jsonData.venue === venueName) {
+              archiveData.push({
+                date: jsonData.date,
+                venue: jsonData.venue,
+                venueCode: jsonData.venueCode,
+                raceCount: jsonData.races.length,
+                year,
+                month
+              });
+            }
+          }
+        } catch (e) {
+          console.error(`Error fetching ${file.path}:`, e.message);
+        }
+      }
+    }
+
+    // 日付の新しい順にソート
+    archiveData.sort((a, b) => b.date.localeCompare(a.date));
+  }
+} catch (error) {
+  console.error(`${venueName}競馬のアーカイブデータ取得エラー:`, error);
+}
+
+// 年月別にグループ化
+const groupedByYearMonth = archiveData.reduce((acc, item) => {
+  const key = `${item.year}-${item.month}`;
+  if (!acc[key]) {
+    acc[key] = [];
+  }
+  acc[key].push(item);
+  return acc;
+}, {});
+
+const canonicalUrl = `${Astro.site}jra/results/venue/${venue}/`;
+
+// 競馬場カラーとグラデーション（トップページと統一）
+const venueData = {
+  'tokyo': {
+    emoji: '🗼',
+    gradient: 'linear-gradient(135deg, #e63946 0%, #f77f00 100%)',
+    textGradient: 'linear-gradient(135deg, #e63946 0%, #f77f00 100%)'
+  },
+  'nakayama': {
+    emoji: '🎌',
+    gradient: 'linear-gradient(135deg, #f4a261 0%, #e76f51 100%)',
+    textGradient: 'linear-gradient(135deg, #f4a261 0%, #e76f51 100%)'
+  },
+  'kyoto': {
+    emoji: '🏯',
+    gradient: 'linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%)',
+    textGradient: 'linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%)'
+  },
+  'hanshin': {
+    emoji: '🐯',
+    gradient: 'linear-gradient(135deg, #2a9d8f 0%, #264653 100%)',
+    textGradient: 'linear-gradient(135deg, #2a9d8f 0%, #264653 100%)'
+  },
+  'chukyo': {
+    emoji: '🏰',
+    gradient: 'linear-gradient(135deg, #06d6a0 0%, #1b9aaa 100%)',
+    textGradient: 'linear-gradient(135deg, #06d6a0 0%, #1b9aaa 100%)'
+  },
+  'niigata': {
+    emoji: '🌾',
+    gradient: 'linear-gradient(135deg, #457b9d 0%, #1d3557 100%)',
+    textGradient: 'linear-gradient(135deg, #457b9d 0%, #1d3557 100%)'
+  },
+  'fukushima': {
+    emoji: '🍑',
+    gradient: 'linear-gradient(135deg, #ff6b9d 0%, #c9184a 100%)',
+    textGradient: 'linear-gradient(135deg, #ff6b9d 0%, #c9184a 100%)'
+  },
+  'kokura': {
+    emoji: '🏁',
+    gradient: 'linear-gradient(135deg, #ffd166 0%, #ef476f 100%)',
+    textGradient: 'linear-gradient(135deg, #ffd166 0%, #ef476f 100%)'
+  },
+  'sapporo': {
+    emoji: '❄️',
+    gradient: 'linear-gradient(135deg, #4cc9f0 0%, #4361ee 100%)',
+    textGradient: 'linear-gradient(135deg, #4cc9f0 0%, #4361ee 100%)'
+  },
+  'hakodate': {
+    emoji: '🌊',
+    gradient: 'linear-gradient(135deg, #118ab2 0%, #073b4c 100%)',
+    textGradient: 'linear-gradient(135deg, #118ab2 0%, #073b4c 100%)'
+  }
+};
+const currentVenue = venueData[venue] || venueData['tokyo'];
+---
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>{title}</title>
+  <meta name="description" content={description}>
+
+  <link rel="canonical" href={canonicalUrl}>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif;
+      line-height: 1.6;
+      color: #2C3E50;
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      background-attachment: fixed;
+      min-height: 100vh;
+    }
+
+    header {
+      background: var(--venue-gradient);
+      color: white;
+      padding: 2.5rem 1rem;
+      box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: var(--venue-emoji);
+      position: absolute;
+      font-size: 12rem;
+      opacity: 0.15;
+      right: -1rem;
+      top: -2rem;
+      transform: rotate(-10deg);
+    }
+
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .breadcrumb {
+      font-size: 0.95rem;
+      margin-bottom: 1.25rem;
+      opacity: 0.95;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .breadcrumb::before {
+      content: '🏠';
+    }
+
+    .breadcrumb a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .breadcrumb a:hover {
+      text-shadow: 0 0 10px rgba(255,255,255,0.8);
+    }
+
+    h1 {
+      font-size: 2.25rem;
+      margin-bottom: 0.75rem;
+      font-weight: 800;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    h1::before {
+      content: var(--venue-emoji);
+      font-size: 2rem;
+    }
+
+    .page-meta {
+      font-size: 1.05rem;
+      opacity: 0.95;
+      font-weight: 600;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .page-meta::before {
+      content: '📊';
+    }
+
+    main {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    .archive-section {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 8px 32px rgba(240, 147, 251, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+    }
+
+    .archive-section h2 {
+      font-size: 1.75rem;
+      background: var(--venue-text-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1.5rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 3px solid transparent;
+      border-image: var(--venue-text-gradient) 1;
+    }
+
+    .archive-section h2::before {
+      content: '📅';
+      font-size: 1.5rem;
+      -webkit-text-fill-color: initial;
+      background: none;
+    }
+
+    .archive-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .archive-card {
+      display: block;
+      background: white;
+      border-radius: 16px;
+      padding: 1.5rem;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      border: 3px solid transparent;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .archive-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 5px;
+      background: var(--venue-gradient);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .archive-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+      border-color: var(--venue-color);
+    }
+
+    .archive-card:hover::before {
+      opacity: 1;
+    }
+
+    .archive-date {
+      font-size: 1.25rem;
+      font-weight: 700;
+      background: var(--venue-text-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .archive-date::before {
+      content: '📅';
+      -webkit-text-fill-color: initial;
+      background: none;
+    }
+
+    .archive-venue {
+      font-size: 1.05rem;
+      color: #555;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .archive-venue::before {
+      content: '🏇';
+    }
+
+    .archive-races {
+      font-size: 0.95rem;
+      color: #888;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .archive-races::before {
+      content: '🏁';
+    }
+
+    .no-data {
+      text-align: center;
+      padding: 3rem;
+      color: #7f8c8d;
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    .no-data::before {
+      content: '📭';
+      display: block;
+      font-size: 4rem;
+      margin-bottom: 1rem;
+    }
+
+    footer {
+      background: var(--venue-gradient);
+      color: white;
+      text-align: center;
+      padding: 3rem 1rem;
+      margin-top: 3rem;
+      box-shadow: 0 -8px 32px rgba(240, 147, 251, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    footer::before {
+      content: '🏇';
+      position: absolute;
+      font-size: 10rem;
+      opacity: 0.1;
+      left: -2rem;
+      top: 50%;
+      transform: translateY(-50%) rotate(15deg);
+      animation: float-horse 6s ease-in-out infinite;
+    }
+
+    @keyframes float-horse {
+      0%, 100% {
+        transform: translateY(-50%) rotate(15deg) translateX(0);
+      }
+      50% {
+        transform: translateY(-50%) rotate(15deg) translateX(20px);
+      }
+    }
+
+    footer::after {
+      content: var(--venue-emoji);
+      position: absolute;
+      font-size: 8rem;
+      opacity: 0.1;
+      right: -1rem;
+      top: 50%;
+      transform: translateY(-50%) rotate(-15deg);
+      animation: float-trophy 5s ease-in-out infinite;
+    }
+
+    @keyframes float-trophy {
+      0%, 100% {
+        transform: translateY(-50%) rotate(-15deg) translateX(0);
+      }
+      50% {
+        transform: translateY(-50%) rotate(-15deg) translateX(-20px);
+      }
+    }
+
+    footer p {
+      font-size: 1rem;
+      opacity: 0.95;
+      margin: 0.75rem 0;
+      font-weight: 600;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+      position: relative;
+      z-index: 1;
+    }
+
+    footer p:first-child {
+      font-size: 1.25rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 1.75rem;
+      }
+
+      header {
+        padding: 2rem 1rem;
+      }
+
+      .archive-section {
+        padding: 1.5rem;
+        border-radius: 16px;
+      }
+
+      .archive-section h2 {
+        font-size: 1.5rem;
+      }
+
+      .archive-grid {
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+        gap: 1rem;
+      }
+
+      .archive-card {
+        padding: 1.25rem;
+      }
+    }
+  </style>
+</head>
+
+<body style={`--venue-gradient: ${currentVenue.gradient}; --venue-text-gradient: ${currentVenue.textGradient}; --venue-emoji: '${currentVenue.emoji}';`}>
+  <header>
+    <div class="header-content">
+      <div class="breadcrumb">
+        <a href="/">トップ</a> &gt; <a href="/jra/results/">中央競馬アーカイブ</a> &gt; {venueName}競馬場
+      </div>
+      <h1>{venueName}競馬場 結果アーカイブ</h1>
+      <p class="page-meta">全{archiveData.length}開催の結果を掲載中</p>
+    </div>
+  </header>
+
+  <main>
+    {Object.entries(groupedByYearMonth).map(([yearMonth, items]) => {
+      const [year, month] = yearMonth.split('-');
+      return (
+        <section class="archive-section">
+          <h2>{year}年{parseInt(month)}月</h2>
+          <div class="archive-grid">
+            {items.map(item => {
+              if (!item.date) return null;
+              const [y, m, d] = item.date.split('-');
+              return (
+                <a href={`/jra/results/${y}/${m}/${d}/`} class="archive-card">
+                  <div class="archive-date">{y}年{parseInt(m)}月{parseInt(d)}日</div>
+                  <div class="archive-venue">{item.venue}競馬</div>
+                  <div class="archive-races">全{item.raceCount}レース</div>
+                </a>
+              );
+            })}
+          </div>
+        </section>
+      );
+    })}
+
+    {archiveData.length === 0 && (
+      <div class="archive-section">
+        <p class="no-data">現在表示できる結果データはありません</p>
+      </div>
+    )}
+  </main>
+
+  <footer>
+    <p>{currentVenue.emoji} {venueName}競馬場 結果アーカイブ</p>
+    <p>&copy; 2026 中央競馬結果速報 - keiba-data-shared</p>
+  </footer>
+</body>
+</html>

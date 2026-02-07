@@ -799,7 +799,7 @@ const jraVenues = [
       <div class="venue-grid">
         {jraVenues.map(venue => (
           <a
-            href={`/jra/results/`}
+            href={`/jra/results/venue/${venue.slug}/`}
             class="venue-card"
             style={`--venue-color: ${venue.color}; --venue-gradient: ${venue.gradient};`}
           >
