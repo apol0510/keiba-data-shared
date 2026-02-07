@@ -122,16 +122,16 @@ const venues = [
 ];
 
 const jraVenues = [
-  { name: '東京', slug: 'tokyo', emoji: '🗼' },
-  { name: '中山', slug: 'nakayama', emoji: '🎌' },
-  { name: '京都', slug: 'kyoto', emoji: '🏯' },
-  { name: '阪神', slug: 'hanshin', emoji: '🐯' },
-  { name: '中京', slug: 'chukyo', emoji: '🏰' },
-  { name: '新潟', slug: 'niigata', emoji: '🌾' },
-  { name: '福島', slug: 'fukushima', emoji: '🍑' },
-  { name: '小倉', slug: 'kokura', emoji: '🏯' },
-  { name: '札幌', slug: 'sapporo', emoji: '❄️' },
-  { name: '函館', slug: 'hakodate', emoji: '🌊' }
+  { name: '東京', slug: 'tokyo', color: '#e63946', gradient: 'linear-gradient(135deg, #e63946 0%, #f77f00 100%)', emoji: '🗼' },
+  { name: '中山', slug: 'nakayama', color: '#f4a261', gradient: 'linear-gradient(135deg, #f4a261 0%, #e76f51 100%)', emoji: '🎌' },
+  { name: '京都', slug: 'kyoto', color: '#9b59b6', gradient: 'linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%)', emoji: '🏯' },
+  { name: '阪神', slug: 'hanshin', color: '#2a9d8f', gradient: 'linear-gradient(135deg, #2a9d8f 0%, #264653 100%)', emoji: '🐯' },
+  { name: '中京', slug: 'chukyo', color: '#06d6a0', gradient: 'linear-gradient(135deg, #06d6a0 0%, #1b9aaa 100%)', emoji: '🏰' },
+  { name: '新潟', slug: 'niigata', color: '#457b9d', gradient: 'linear-gradient(135deg, #457b9d 0%, #1d3557 100%)', emoji: '🌾' },
+  { name: '福島', slug: 'fukushima', color: '#ff6b9d', gradient: 'linear-gradient(135deg, #ff6b9d 0%, #c9184a 100%)', emoji: '🍑' },
+  { name: '小倉', slug: 'kokura', color: '#ffd166', gradient: 'linear-gradient(135deg, #ffd166 0%, #ef476f 100%)', emoji: '🏁' },
+  { name: '札幌', slug: 'sapporo', color: '#4cc9f0', gradient: 'linear-gradient(135deg, #4cc9f0 0%, #4361ee 100%)', emoji: '❄️' },
+  { name: '函館', slug: 'hakodate', color: '#118ab2', gradient: 'linear-gradient(135deg, #118ab2 0%, #073b4c 100%)', emoji: '🌊' }
 ];
 ---
 
@@ -790,6 +790,28 @@ const jraVenues = [
         <a href="/nankan/results/" class="archive-btn">
           📚 南関全アーカイブを見る
         </a>
+      </div>
+    </section>
+
+    <!-- JRA競馬場別セクション -->
+    <section class="section">
+      <h2>🏇 中央競馬場から探す</h2>
+      <div class="venue-grid">
+        {jraVenues.map(venue => (
+          <a
+            href={`/jra/results/`}
+            class="venue-card"
+            style={`--venue-color: ${venue.color}; --venue-gradient: ${venue.gradient};`}
+          >
+            <span class="venue-emoji">{venue.emoji}</span>
+            <div class="venue-name">
+              {venue.name}競馬場
+            </div>
+            <div class="venue-status">
+              アーカイブを見る
+            </div>
+          </a>
+        ))}
       </div>
     </section>
 
