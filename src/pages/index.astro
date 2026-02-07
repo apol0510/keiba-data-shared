@@ -352,6 +352,37 @@ const jraVenues = [
       border-color: #667eea;
     }
 
+    /* 最新1件目のカード（全レース表示） */
+    .result-card-featured {
+      border-width: 3px;
+      box-shadow: 0 6px 30px rgba(0,0,0,0.12);
+    }
+
+    /* 2件目以降のサマリーカード */
+    .result-card-summary {
+      display: block;
+      padding: 1.25rem 1.5rem;
+    }
+
+    .result-card-summary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(0,0,0,0.1);
+    }
+
+    .summary-info {
+      font-size: 1.05rem;
+      color: #7f8c8d;
+      font-weight: 600;
+      margin-top: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .summary-info::before {
+      content: '📋';
+    }
+
     .result-header {
       display: flex;
       justify-content: space-between;
@@ -624,32 +655,56 @@ const jraVenues = [
 
       {jraAvailableDates.length > 0 ? (
         <div class="results-grid">
-          {jraAvailableDates.slice(0, 5).filter(item => item.date && item.venue).map(item => {
+          {jraAvailableDates.slice(0, 4).filter(item => item.date && item.venue).map((item, index) => {
             const [year, month, day] = item.date.split('-');
             const venueSlug = jraVenues.find(v => v.name === item.venue)?.slug || 'tokyo';
 
-            return (
-              <div class="result-card" style="border-color: #f093fb;">
-                <div class="result-header">
-                  <time class="result-date" datetime={item.date}>
-                    {year}年{parseInt(month)}月{parseInt(day)}日
-                  </time>
-                  <span class="result-venue" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
-                    {item.venue}競馬
-                  </span>
+            // 最新1件目のみ全レース表示
+            if (index === 0) {
+              return (
+                <div class="result-card result-card-featured" style="border-color: #f093fb;">
+                  <div class="result-header">
+                    <time class="result-date" datetime={item.date}>
+                      {year}年{parseInt(month)}月{parseInt(day)}日
+                    </time>
+                    <span class="result-venue" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                      {item.venue}競馬
+                    </span>
+                  </div>
+                  <div class="result-races">
+                    {item.raceNumbers.map(raceNum => (
+                      <a
+                        href={`/jra/results/${year}/${month}/${day}/${venueSlug}/${raceNum}/`}
+                        class="race-link"
+                      >
+                        第{raceNum}R
+                      </a>
+                    ))}
+                  </div>
                 </div>
-                <div class="result-races">
-                  {item.raceNumbers.map(raceNum => (
-                    <a
-                      href={`/jra/results/${year}/${month}/${day}/${venueSlug}/${raceNum}/`}
-                      class="race-link"
-                    >
-                      第{raceNum}R
-                    </a>
-                  ))}
-                </div>
-              </div>
-            );
+              );
+            } else {
+              // 2件目以降はサマリー表示
+              return (
+                <a
+                  href={`/jra/results/${year}/${month}/${day}/`}
+                  class="result-card result-card-summary"
+                  style="border-color: #f093fb; text-decoration: none; color: inherit; cursor: pointer;"
+                >
+                  <div class="result-header">
+                    <time class="result-date" datetime={item.date}>
+                      {year}年{parseInt(month)}月{parseInt(day)}日
+                    </time>
+                    <span class="result-venue" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                      {item.venue}競馬
+                    </span>
+                  </div>
+                  <div class="summary-info">
+                    全{item.raceNumbers.length}レース →
+                  </div>
+                </a>
+              );
+            }
           })}
         </div>
       ) : (
@@ -669,30 +724,52 @@ const jraVenues = [
 
       {availableDates.length > 0 ? (
         <div class="results-grid">
-          {availableDates.slice(0, 5).filter(item => item.date && item.venue).map(item => {
+          {availableDates.slice(0, 5).filter(item => item.date && item.venue).map((item, index) => {
             const [year, month, day] = item.date.split('-');
             const venueSlug = venues.find(v => v.name === item.venue)?.slug || 'ooi';
 
-            return (
-              <div class="result-card">
-                <div class="result-header">
-                  <time class="result-date" datetime={item.date}>
-                    {year}年{parseInt(month)}月{parseInt(day)}日
-                  </time>
-                  <span class="result-venue">{item.venue}競馬</span>
+            // 最新1件目のみ全レース表示
+            if (index === 0) {
+              return (
+                <div class="result-card result-card-featured">
+                  <div class="result-header">
+                    <time class="result-date" datetime={item.date}>
+                      {year}年{parseInt(month)}月{parseInt(day)}日
+                    </time>
+                    <span class="result-venue">{item.venue}競馬</span>
+                  </div>
+                  <div class="result-races">
+                    {item.raceNumbers.map(raceNum => (
+                      <a
+                        href={`/nankan/results/${year}/${month}/${day}/${venueSlug}/${raceNum}/`}
+                        class="race-link"
+                      >
+                        第{raceNum}R
+                      </a>
+                    ))}
+                  </div>
                 </div>
-                <div class="result-races">
-                  {item.raceNumbers.map(raceNum => (
-                    <a
-                      href={`/nankan/results/${year}/${month}/${day}/${venueSlug}/${raceNum}/`}
-                      class="race-link"
-                    >
-                      第{raceNum}R
-                    </a>
-                  ))}
-                </div>
-              </div>
-            );
+              );
+            } else {
+              // 2件目以降はサマリー表示
+              return (
+                <a
+                  href={`/nankan/results/${year}/${month}/${day}/`}
+                  class="result-card result-card-summary"
+                  style="text-decoration: none; color: inherit; cursor: pointer;"
+                >
+                  <div class="result-header">
+                    <time class="result-date" datetime={item.date}>
+                      {year}年{parseInt(month)}月{parseInt(day)}日
+                    </time>
+                    <span class="result-venue">{item.venue}競馬</span>
+                  </div>
+                  <div class="summary-info">
+                    全{item.raceNumbers.length}レース →
+                  </div>
+                </a>
+              );
+            }
           })}
         </div>
       ) : (
