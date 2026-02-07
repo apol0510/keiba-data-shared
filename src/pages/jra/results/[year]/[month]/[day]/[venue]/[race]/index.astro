@@ -46,14 +46,14 @@ export async function getStaticPaths() {
     const jsonFiles = data.tree.filter(item =>
       item.path.startsWith('jra/results/') &&
       item.path.endsWith('.json') &&
-      item.path.match(/nankan\/results\/\d{4}\/\d{2}\/\d{4}-\d{2}-\d{2}\.json/)
+      item.path.match(/jra\/results\/\d{4}\/\d{2}\/\d{4}-\d{2}-\d{2}\.json/)
     );
 
     console.log(`Found ${jsonFiles.length} JSON files`);
 
     // 各JSONファイルを取得してパスを生成
     for (const file of jsonFiles) {
-      const match = file.path.match(/nankan\/results\/(\d{4})\/(\d{2})\/\d{4}-\d{2}-(\d{2})\.json/);
+      const match = file.path.match(/jra\/results\/(\d{4})\/(\d{2})\/\d{4}-\d{2}-(\d{2})\.json/);
       if (match) {
         const [, year, month, day] = match;
 
