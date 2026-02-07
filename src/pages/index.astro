@@ -7,10 +7,10 @@
 import { readdirSync, readFileSync, existsSync } from 'fs';
 import { join } from 'path';
 
-const title = '南関競馬結果速報 - 大井・川崎・船橋・浦和の競馬結果';
-const description = '南関東4競馬場（大井・川崎・船橋・浦和）の最新レース結果を速報。着順・払戻金・ラップタイムなど詳細データを掲載。';
+const title = '競馬結果速報 - 南関競馬・中央競馬（JRA）の結果';
+const description = '南関東4競馬場（大井・川崎・船橋・浦和）と中央競馬（JRA）全10競馬場の最新レース結果を速報。着順・払戻金・ラップタイムなど詳細データを掲載。';
 
-// ローカルファイルから最新のレース結果を取得
+// ローカルファイルから最新のレース結果を取得（南関）
 const availableDates = [];
 
 try {
@@ -58,7 +58,60 @@ try {
   // 日付の新しい順にソート（すでにソート済みだが念のため）
   availableDates.sort((a, b) => b.date.localeCompare(a.date));
 } catch (error) {
-  console.error('結果データの読み込みエラー:', error);
+  console.error('南関結果データの読み込みエラー:', error);
+}
+
+// ローカルファイルから最新のレース結果を取得（JRA）
+const jraAvailableDates = [];
+
+try {
+  const jraResultsDir = join(process.cwd(), 'jra', 'results');
+
+  if (existsSync(jraResultsDir)) {
+    // 年ディレクトリを取得（例: 2026）
+    const years = readdirSync(jraResultsDir).filter(name => /^\d{4}$/.test(name)).sort().reverse();
+
+    for (const year of years) {
+      const yearDir = join(jraResultsDir, year);
+
+      // 月ディレクトリを取得（例: 01, 02, ...）
+      const months = readdirSync(yearDir).filter(name => /^\d{2}$/.test(name)).sort().reverse();
+
+      for (const month of months) {
+        const monthDir = join(yearDir, month);
+
+        // JSONファイルを取得（例: 2026-02-01.json）
+        const files = readdirSync(monthDir)
+          .filter(name => /^\d{4}-\d{2}-\d{2}\.json$/.test(name))
+          .sort()
+          .reverse();
+
+        for (const file of files) {
+          try {
+            const filePath = join(monthDir, file);
+            const fileContent = readFileSync(filePath, 'utf-8');
+            const jsonData = JSON.parse(fileContent);
+
+            // 結果データのみを対象とする（date, venueフィールドが必須）
+            if (jsonData.date && jsonData.venue && Array.isArray(jsonData.races)) {
+              jraAvailableDates.push({
+                date: jsonData.date,
+                venue: jsonData.venue,
+                raceNumbers: jsonData.races.map(r => r.raceNumber).sort((a, b) => a - b)
+              });
+            }
+          } catch (e) {
+            console.error(`Error reading ${file}:`, e.message);
+          }
+        }
+      }
+    }
+
+    // 日付の新しい順にソート
+    jraAvailableDates.sort((a, b) => b.date.localeCompare(a.date));
+  }
+} catch (error) {
+  console.error('JRA結果データの読み込みエラー:', error);
 }
 
 const venues = [
@@ -66,6 +119,19 @@ const venues = [
   { name: '船橋', slug: 'funabashi', color: '#4ECDC4', gradient: 'linear-gradient(135deg, #4ECDC4 0%, #44A08D 100%)', emoji: '⚓' },
   { name: '川崎', slug: 'kawasaki', color: '#45B7D1', gradient: 'linear-gradient(135deg, #45B7D1 0%, #2E86AB 100%)', emoji: '🌉' },
   { name: '浦和', slug: 'urawa', color: '#A770EF', gradient: 'linear-gradient(135deg, #A770EF 0%, #7B68EE 100%)', emoji: '🌸' }
+];
+
+const jraVenues = [
+  { name: '東京', slug: 'tokyo', emoji: '🗼' },
+  { name: '中山', slug: 'nakayama', emoji: '🎌' },
+  { name: '京都', slug: 'kyoto', emoji: '🏯' },
+  { name: '阪神', slug: 'hanshin', emoji: '🐯' },
+  { name: '中京', slug: 'chukyo', emoji: '🏰' },
+  { name: '新潟', slug: 'niigata', emoji: '🌾' },
+  { name: '福島', slug: 'fukushima', emoji: '🍑' },
+  { name: '小倉', slug: 'kokura', emoji: '🏯' },
+  { name: '札幌', slug: 'sapporo', emoji: '❄️' },
+  { name: '函館', slug: 'hakodate', emoji: '🌊' }
 ];
 ---
 
@@ -79,7 +145,7 @@ const venues = [
   <meta name="description" content={description}>
 
   <!-- SEO -->
-  <meta name="keywords" content="南関競馬,結果,大井競馬,川崎競馬,船橋競馬,浦和競馬,競馬結果,レース結果,払戻金">
+  <meta name="keywords" content="競馬結果,JRA,中央競馬,南関競馬,大井競馬,川崎競馬,船橋競馬,浦和競馬,東京競馬,中山競馬,京都競馬,阪神競馬,レース結果,払戻金">
   <link rel="canonical" href={Astro.site}>
 
   <!-- OGP -->
@@ -92,12 +158,12 @@ const venues = [
   <script type="application/ld+json" set:html={JSON.stringify({
     "@context": "https://schema.org",
     "@type": "WebSite",
-    "name": "南関競馬結果速報",
+    "name": "競馬結果速報",
     "url": Astro.site,
     "description": description,
     "publisher": {
       "@type": "Organization",
-      "name": "南関競馬結果速報"
+      "name": "競馬結果速報"
     }
   })} />
 
@@ -546,19 +612,64 @@ const venues = [
 <body>
   <header>
     <div class="header-content">
-      <h1>南関競馬結果速報</h1>
-      <p class="subtitle">大井・川崎・船橋・浦和の最新レース結果をお届け</p>
+      <h1>競馬結果速報</h1>
+      <p class="subtitle">中央競馬（JRA）・南関競馬の最新レース結果をお届け</p>
     </div>
   </header>
 
   <main>
-    <!-- 最新結果セクション -->
+    <!-- JRA最新結果セクション -->
     <section class="section">
-      <h2>📅 最新のレース結果</h2>
+      <h2>🏇 中央競馬（JRA）最新結果</h2>
+
+      {jraAvailableDates.length > 0 ? (
+        <div class="results-grid">
+          {jraAvailableDates.slice(0, 5).filter(item => item.date && item.venue).map(item => {
+            const [year, month, day] = item.date.split('-');
+            const venueSlug = jraVenues.find(v => v.name === item.venue)?.slug || 'tokyo';
+
+            return (
+              <div class="result-card" style="border-color: #f093fb;">
+                <div class="result-header">
+                  <time class="result-date" datetime={item.date}>
+                    {year}年{parseInt(month)}月{parseInt(day)}日
+                  </time>
+                  <span class="result-venue" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                    {item.venue}競馬
+                  </span>
+                </div>
+                <div class="result-races">
+                  {item.raceNumbers.map(raceNum => (
+                    <a
+                      href={`/jra/results/${year}/${month}/${day}/${venueSlug}/${raceNum}/`}
+                      class="race-link"
+                    >
+                      第{raceNum}R
+                    </a>
+                  ))}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      ) : (
+        <p class="no-data">現在表示できる結果データはありません</p>
+      )}
+
+      <div style="margin-top: 1.5rem; text-align: center;">
+        <a href="/jra/results/" class="archive-btn" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+          📚 JRA全アーカイブを見る
+        </a>
+      </div>
+    </section>
+
+    <!-- 南関最新結果セクション -->
+    <section class="section">
+      <h2>📅 南関競馬 最新結果</h2>
 
       {availableDates.length > 0 ? (
         <div class="results-grid">
-          {availableDates.filter(item => item.date && item.venue).map(item => {
+          {availableDates.slice(0, 5).filter(item => item.date && item.venue).map(item => {
             const [year, month, day] = item.date.split('-');
             const venueSlug = venues.find(v => v.name === item.venue)?.slug || 'ooi';
 
@@ -587,11 +698,17 @@ const venues = [
       ) : (
         <p class="no-data">現在表示できる結果データはありません</p>
       )}
+
+      <div style="margin-top: 1.5rem; text-align: center;">
+        <a href="/nankan/results/" class="archive-btn">
+          📚 南関全アーカイブを見る
+        </a>
+      </div>
     </section>
 
-    <!-- 競馬場別セクション -->
+    <!-- 南関競馬場別セクション -->
     <section class="section">
-      <h2>🏇 競馬場から探す</h2>
+      <h2>🏇 南関競馬場から探す</h2>
       <div class="venue-grid">
         {venues.map(venue => (
           <a
@@ -611,38 +728,12 @@ const venues = [
       </div>
     </section>
 
-    <!-- 中央競馬（JRA）セクション -->
-    <section class="section">
-      <h2>🏇 中央競馬（JRA）結果</h2>
-      <div class="description">
-        <p style="margin-bottom: 1.5rem;">
-          中央競馬（JRA）全10競馬場（東京・中山・京都・阪神・中京・新潟・福島・小倉・札幌・函館）のレース結果を掲載しています。
-        </p>
-        <a href="/jra/results/" class="archive-btn" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
-          🏇 中央競馬（JRA）結果アーカイブ
-        </a>
-      </div>
-    </section>
-
-    <!-- アーカイブセクション -->
-    <section class="section">
-      <h2>📚 過去の結果を見る</h2>
-      <div class="description">
-        <p style="margin-bottom: 1.5rem;">
-          過去の南関競馬の結果を年月別、競馬場別に検索できます。
-        </p>
-        <a href="/nankan/results/" class="archive-btn">
-          📚 全アーカイブを見る
-        </a>
-      </div>
-    </section>
-
     <!-- サイト説明 -->
     <section class="section">
-      <h2>📖 南関競馬結果速報について</h2>
+      <h2>📖 競馬結果速報について</h2>
       <div class="description">
         <p style="margin-bottom: 1rem;">
-          南関競馬結果速報は、南関東4競馬場（大井競馬・川崎競馬・船橋競馬・浦和競馬）のレース結果を掲載する情報サイトです。
+          競馬結果速報は、中央競馬（JRA）全10競馬場と南関東4競馬場（大井・川崎・船橋・浦和）のレース結果を掲載する情報サイトです。
         </p>
         <ul>
           <li>レース着順・タイム</li>
@@ -659,8 +750,8 @@ const venues = [
   </main>
 
   <footer>
-    <p>🏇 南関競馬結果速報 - keiba-data-shared</p>
-    <p>南関東地方競馬の結果情報を提供</p>
+    <p>🏇 競馬結果速報 - keiba-data-shared</p>
+    <p>中央競馬（JRA）・南関東地方競馬の結果情報を提供</p>
     <p style="margin-top: 1rem; font-size: 0.85rem;">&copy; 2026 All rights reserved</p>
   </footer>
 </body>
