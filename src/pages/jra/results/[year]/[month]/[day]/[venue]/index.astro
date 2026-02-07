@@ -1,7 +1,7 @@
 ---
 /**
  * 日付+競馬場別結果一覧ページ
- * URL: /central/results/YYYY/MM/DD/{venueSlug}/
+ * URL: /jra/results/YYYY/MM/DD/{venueSlug}/
  */
 
 /**
@@ -41,7 +41,7 @@ export async function getStaticPaths() {
     const data = await response.json();
 
     const jsonFiles = data.tree.filter(item =>
-      item.path.startsWith('central/results/') &&
+      item.path.startsWith('jra/results/') &&
       item.path.endsWith('.json') &&
       item.path.match(/central\/results\/\d{4}\/\d{2}\/\d{4}-\d{2}-\d{2}\.json/)
     );
@@ -99,7 +99,7 @@ const venueName = venueSlugToNameMap[venue] || venue;
 
 // GitHubからJSONデータを取得（キャッシュバスティング付き）
 const timestamp = Date.now();
-const jsonUrl = `https://raw.githubusercontent.com/apol0510/keiba-data-shared/main/central/results/${year}/${month.padStart(2, '0')}/${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}.json?t=${timestamp}`;
+const jsonUrl = `https://raw.githubusercontent.com/apol0510/keiba-data-shared/main/jra/results/${year}/${month.padStart(2, '0')}/${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}.json?t=${timestamp}`;
 
 let venueData = null;
 
@@ -147,7 +147,7 @@ const description = venueData
   : `${year}年${parseInt(month)}月${parseInt(day)}日の${venueName}競馬場の結果`;
 
 // canonical URL
-const canonicalUrl = `${Astro.site}central/results/${year}/${month}/${day}/${venue}/`;
+const canonicalUrl = `${Astro.site}jra/results/${year}/${month}/${day}/${venue}/`;
 ---
 
 <!DOCTYPE html>
@@ -443,13 +443,13 @@ const canonicalUrl = `${Astro.site}central/results/${year}/${month}/${day}/${ven
       <nav class="breadcrumb">
         <a href="/">トップ</a>
         <span>›</span>
-        <a href="/central/results/">アーカイブ</a>
+        <a href="/jra/results/">アーカイブ</a>
         <span>›</span>
-        <a href={`/central/results/${year}/`}>{year}年</a>
+        <a href={`/jra/results/${year}/`}>{year}年</a>
         <span>›</span>
-        <a href={`/central/results/${year}/${month}/`}>{parseInt(month)}月</a>
+        <a href={`/jra/results/${year}/${month}/`}>{parseInt(month)}月</a>
         <span>›</span>
-        <a href={`/central/results/${year}/${month}/${day}/`}>{parseInt(day)}日</a>
+        <a href={`/jra/results/${year}/${month}/${day}/`}>{parseInt(day)}日</a>
         <span>›</span>
         <span>{venueName}競馬</span>
       </nav>
@@ -477,7 +477,7 @@ const canonicalUrl = `${Astro.site}central/results/${year}/${month}/${day}/${ven
 
             return (
               <a
-                href={`/central/results/${year}/${month}/${day}/${venue}/${race.raceNumber}/`}
+                href={`/jra/results/${year}/${month}/${day}/${venue}/${race.raceNumber}/`}
                 class="race-card"
               >
                 <div class="race-header" style={`background: linear-gradient(135deg, ${venueColor} 0%, ${venueColor}dd 100%);`}>

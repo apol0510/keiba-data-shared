@@ -1,7 +1,7 @@
 ---
 /**
  * 中央競馬 結果アーカイブ（全体）
- * URL: /central/results/
+ * URL: /jra/results/
  */
 
 const title = '中央競馬 結果アーカイブ | JRA 10競馬場';
@@ -24,7 +24,7 @@ try {
     const data = await response.json();
 
     const jsonFiles = data.tree.filter(item =>
-      item.path.startsWith('central/results/') &&
+      item.path.startsWith('jra/results/') &&
       item.path.endsWith('.json') &&
       item.path.match(/central\/results\/\d{4}\/\d{2}\/\d{4}-\d{2}-\d{2}\.json/)
     );
@@ -79,7 +79,7 @@ const groupedByYearMonth = archiveData.reduce((acc, item) => {
   return acc;
 }, {});
 
-const canonicalUrl = `${Astro.site}central/results/`;
+const canonicalUrl = `${Astro.site}jra/results/`;
 ---
 
 <!DOCTYPE html>
@@ -459,7 +459,7 @@ const canonicalUrl = `${Astro.site}central/results/`;
               if (!item.date) return null;
               const [y, m, d] = item.date.split('-');
               return (
-                <a href={`/central/results/${y}/${m}/${d}/`} class="archive-card">
+                <a href={`/jra/results/${y}/${m}/${d}/`} class="archive-card">
                   <div class="archive-date">{y}年{parseInt(m)}月{parseInt(d)}日</div>
                   <div class="archive-venue">{item.venue}競馬</div>
                   <div class="archive-races">全{item.raceCount}レース</div>

@@ -1,7 +1,7 @@
 ---
 /**
  * 日付別結果一覧ページ（全競馬場）
- * URL: /central/results/YYYY/MM/DD/
+ * URL: /jra/results/YYYY/MM/DD/
  */
 
 /**
@@ -28,7 +28,7 @@ export async function getStaticPaths() {
     const data = await response.json();
 
     const jsonFiles = data.tree.filter(item =>
-      item.path.startsWith('central/results/') &&
+      item.path.startsWith('jra/results/') &&
       item.path.endsWith('.json') &&
       item.path.match(/central\/results\/\d{4}\/\d{2}\/\d{4}-\d{2}-\d{2}\.json/)
     );
@@ -51,9 +51,9 @@ export async function getStaticPaths() {
       }
     }
 
-    console.log(`[central-day] Total paths generated: ${paths.length}`);
+    console.log(`[jra-day] Total paths generated: ${paths.length}`);
   } catch (error) {
-    console.error('[central-day] Fatal error in getStaticPaths:', error);
+    console.error('[jra-day] Fatal error in getStaticPaths:', error);
   }
 
   return paths;
@@ -63,7 +63,7 @@ const { year, month, day } = Astro.params;
 
 // GitHubからJSONデータを取得（キャッシュバスティング付き）
 const timestamp = Date.now();
-const jsonUrl = `https://raw.githubusercontent.com/apol0510/keiba-data-shared/main/central/results/${year}/${month.padStart(2, '0')}/${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}.json?t=${timestamp}`;
+const jsonUrl = `https://raw.githubusercontent.com/apol0510/keiba-data-shared/main/jra/results/${year}/${month.padStart(2, '0')}/${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}.json?t=${timestamp}`;
 
 let allVenuesData = [];
 
@@ -135,7 +135,7 @@ const getWeatherEmoji = (weather) => {
 };
 
 // canonical URL
-const canonicalUrl = `${Astro.site}central/results/${year}/${month}/${day}/`;
+const canonicalUrl = `${Astro.site}jra/results/${year}/${month}/${day}/`;
 ---
 
 <!DOCTYPE html>
@@ -654,11 +654,11 @@ const canonicalUrl = `${Astro.site}central/results/${year}/${month}/${day}/`;
       <nav class="breadcrumb">
         <a href="/">トップ</a>
         <span>›</span>
-        <a href="/central/results/">アーカイブ</a>
+        <a href="/jra/results/">アーカイブ</a>
         <span>›</span>
-        <a href={`/central/results/${year}/`}>{year}年</a>
+        <a href={`/jra/results/${year}/`}>{year}年</a>
         <span>›</span>
-        <a href={`/central/results/${year}/${month}/`}>{parseInt(month)}月</a>
+        <a href={`/jra/results/${year}/${month}/`}>{parseInt(month)}月</a>
         <span>›</span>
         <span>{parseInt(day)}日</span>
       </nav>
@@ -691,7 +691,7 @@ const canonicalUrl = `${Astro.site}central/results/${year}/${month}/${day}/`;
 
                 return (
                   <a
-                    href={`/central/results/${year}/${month}/${day}/${venueSlug}/${race.raceNumber}/`}
+                    href={`/jra/results/${year}/${month}/${day}/${venueSlug}/${race.raceNumber}/`}
                     class="race-card"
                   >
                     <div class="race-header" style={`background: linear-gradient(135deg, ${venueColor} 0%, ${venueColor}dd 100%);`}>
