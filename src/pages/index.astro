@@ -733,7 +733,8 @@ const jraVenues = [
             // 最新の日付を取得
             const latestDate = availableDates[0]?.date;
 
-            return availableDates.slice(0, 10).filter(item => item.date && item.venue).map((item, index) => {
+            // 最新5日分のみ表示
+            return availableDates.slice(0, 5).filter(item => item.date && item.venue).map((item, index) => {
               const [year, month, day] = item.date.split('-');
               const venueSlug = venues.find(v => v.name === item.venue)?.slug || 'ooi';
 
