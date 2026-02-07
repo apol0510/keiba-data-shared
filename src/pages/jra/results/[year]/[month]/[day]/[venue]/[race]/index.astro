@@ -1,0 +1,1389 @@
+---
+/**
+ * SEO向け結果ページ
+ * URL: /jra/results/YYYY/MM/DD/{venueSlug}/{raceNumber}/
+ */
+
+/**
+ * GitHubからJSONファイルリストを取得してパスを生成
+ * ビルド時に最新データを取得して静的HTML生成
+ */
+export async function getStaticPaths() {
+  const paths = [];
+
+  const venueSlugMap = {
+    '東京': 'tokyo',
+    '中山': 'nakayama',
+    '京都': 'kyoto',
+    '阪神': 'hanshin',
+    '中京': 'chukyo',
+    '新潟': 'niigata',
+    '福島': 'fukushima',
+    '小倉': 'kokura',
+    '札幌': 'sapporo',
+    '函館': 'hakodate'
+  };
+
+  try {
+    // GitHub APIでjra/results/配下のディレクトリツリーを取得
+    const GITHUB_API_URL = 'https://api.github.com/repos/apol0510/keiba-data-shared/git/trees/main?recursive=1';
+
+    const response = await fetch(GITHUB_API_URL, {
+      headers: {
+        'Accept': 'application/vnd.github.v3+json',
+        'User-Agent': 'keiba-data-shared-build'
+      }
+    });
+
+    if (!response.ok) {
+      console.error('GitHub API error:', response.status);
+      return paths; // 空配列を返して失敗を防ぐ
+    }
+
+    const data = await response.json();
+
+    // jra/results/YYYY/MM/YYYY-MM-DD.jsonファイルを抽出
+    const jsonFiles = data.tree.filter(item =>
+      item.path.startsWith('jra/results/') &&
+      item.path.endsWith('.json') &&
+      item.path.match(/nankan\/results\/\d{4}\/\d{2}\/\d{4}-\d{2}-\d{2}\.json/)
+    );
+
+    console.log(`Found ${jsonFiles.length} JSON files`);
+
+    // 各JSONファイルを取得してパスを生成
+    for (const file of jsonFiles) {
+      const match = file.path.match(/nankan\/results\/(\d{4})\/(\d{2})\/\d{4}-\d{2}-(\d{2})\.json/);
+      if (match) {
+        const [, year, month, day] = match;
+
+        try {
+          // raw URLからJSON取得
+          const jsonUrl = `https://raw.githubusercontent.com/apol0510/keiba-data-shared/main/${file.path}`;
+          const jsonResponse = await fetch(jsonUrl);
+
+          if (!jsonResponse.ok) continue;
+
+          const jsonData = await jsonResponse.json();
+
+          // 結果データのみを対象とする（venue, date, racesフィールドが必須）
+          if (!jsonData.venue || !jsonData.date || !Array.isArray(jsonData.races)) {
+            continue;
+          }
+
+          const venueSlug = venueSlugMap[jsonData.venue] || 'tokyo';
+
+          // 各レースごとにパスを生成
+          for (const race of jsonData.races) {
+            paths.push({
+              params: {
+                year,
+                month,
+                day,
+                venue: venueSlug,
+                race: race.raceNumber.toString()
+              }
+            });
+          }
+
+          console.log(`Generated paths for ${year}-${month}-${day} ${jsonData.venue}: ${jsonData.races.length} races`);
+        } catch (e) {
+          console.error(`Error processing ${file.path}:`, e.message);
+        }
+      }
+    }
+
+    console.log(`Total paths generated: ${paths.length}`);
+  } catch (error) {
+    console.error('Fatal error in getStaticPaths:', error);
+  }
+
+  return paths;
+}
+
+const { year, month, day, venue, race } = Astro.params;
+
+// venueSlugからvenue名への変換
+const venueMap = {
+  'ooi': '大井',
+  'funabashi': '船橋',
+  'kawasaki': '川崎',
+  'urawa': '浦和'
+};
+
+const venueName = venueMap[venue] || venue;
+const raceNumber = parseInt(race, 10);
+
+// JSONデータの取得（キャッシュバスティング付き）
+const timestamp = Date.now();
+const jsonUrl = `https://raw.githubusercontent.com/apol0510/keiba-data-shared/main/jra/results/${year}/${month.padStart(2, '0')}/${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}.json?t=${timestamp}`;
+
+let raceData = null;
+let allRaces = [];
+let errorMessage = null;
+
+try {
+  const response = await fetch(jsonUrl, {
+    cache: 'no-store',
+    headers: {
+      'Cache-Control': 'no-cache, no-store, must-revalidate',
+      'Pragma': 'no-cache'
+    }
+  });
+
+  if (response.ok) {
+    const json = await response.json();
+    allRaces = json.races || [];
+    raceData = allRaces.find(r => r.raceNumber === raceNumber);
+  } else {
+    errorMessage = 'データが見つかりません';
+  }
+} catch (error) {
+  console.error('データ取得エラー:', error);
+  errorMessage = 'データの取得に失敗しました';
+}
+
+// 404チェック
+if (!raceData) {
+  return Astro.redirect('/404');
+}
+
+// canonical URL
+const canonicalUrl = `${Astro.site}jra/results/${year}/${month}/${day}/${venue}/${race}/`;
+
+// パンくずリスト
+const breadcrumbs = [
+  { name: 'トップ', url: '/' },
+  { name: 'JRA', url: '/nankan/' },
+  { name: '結果', url: '/jra/results/' },
+  { name: `${year}年`, url: `/jra/results/${year}/` },
+  { name: `${year}年${month}月`, url: `/jra/results/${year}/${month}/` },
+  { name: `${year}年${month}月${day}日`, url: `/jra/results/${year}/${month}/${day}/` },
+  { name: `${venueName}競馬`, url: `/jra/results/${year}/${month}/${day}/${venue}/` },
+  { name: `第${raceNumber}R` }
+];
+
+// title生成
+const distanceText = raceData.distance ? `${raceData.distance}m` : '';
+const horsesText = raceData.horses ? `${raceData.horses}頭立て` : '';
+const raceInfo = [raceData.surface, distanceText, horsesText].filter(Boolean).join(' ');
+const title = `${year}年${month}月${day}日 ${venueName}競馬 第${raceNumber}R ${raceData.raceName} 結果${raceInfo ? ' | ' + raceInfo : ''}`;
+
+// meta description生成
+const winner = raceData.results[0];
+const metaDescription = `${year}年${month}月${day}日 ${venueName}競馬 第${raceNumber}R ${raceData.raceName}の結果。1着${winner.name}（${winner.jockey}）${winner.time}。${raceInfo}、着順・払戻金を掲載。`;
+
+// 天候絵文字を返す関数
+const getWeatherEmoji = (weather) => {
+  const weatherEmojis = {
+    '晴': '☀️',
+    '曇': '☁️',
+    '雨': '☔',
+    '雪': '❄️',
+    '小雨': '🌧️',
+    '小雪': '🌨️'
+  };
+  return weatherEmojis[weather] || '';
+};
+
+// レース内容要約生成（自動生成）
+const generateRaceSummary = () => {
+  if (!raceData.results || raceData.results.length === 0) {
+    return '結果データがありません。';
+  }
+
+  const w = raceData.results[0];
+  const second = raceData.results[1];
+  const third = raceData.results[2];
+
+  // 人気による表現
+  const popularityText = w.popularity === 1 ? '1番人気に応えた' : `${w.popularity}番人気から`;
+
+  let summary = `${popularityText}${w.number}番${w.name}（${w.jockey}騎手、${w.trainer}厩舎）が`;
+
+  // レース展開の説明
+  if (w.popularity === 1) {
+    summary += '力を発揮。';
+  } else if (w.popularity <= 3) {
+    summary += '好走を見せ、';
+  } else {
+    summary += '人気を裏切る走りで、';
+  }
+
+  // 2着馬との関係
+  if (second) {
+    const marginText = w.margin && w.margin !== '-' ? `${w.margin}差` : '';
+    if (marginText) {
+      summary += `${second.number}番${second.name}を${marginText}で振り切って`;
+    } else {
+      summary += `${second.number}番${second.name}をかわして`;
+    }
+  }
+
+  summary += `1着でゴール。`;
+
+  // タイム情報
+  if (w.time) {
+    summary += `勝ちタイム${w.time}。`;
+  }
+
+  // 上がり3F
+  if (w.lastFurlong) {
+    summary += `上がり3F${w.lastFurlong}秒の脚を使った。`;
+  }
+
+  // 重賞の場合の特別な表現
+  if (raceData.raceName && (raceData.raceName.includes('賞') && raceData.raceName.length > 3)) {
+    summary += `\n\n${raceData.raceName}を制した${w.name}は、`;
+    if (w.popularity === 1) {
+      summary += '順当に実力を見せつけた。';
+    } else {
+      summary += '素晴らしい走りを披露した。';
+    }
+  }
+
+  // 2着・3着の情報
+  if (second && third) {
+    summary += `\n\n2着には${second.popularity}番人気の${second.name}が入り、3着は${third.popularity}番人気の${third.name}。`;
+
+    // 上位3頭の人気傾向
+    const topThreePopularity = [w.popularity, second.popularity, third.popularity].sort((a, b) => a - b);
+    if (topThreePopularity[0] === 1 && topThreePopularity[1] === 2 && topThreePopularity[2] === 3) {
+      summary += '人気順の決着となった。';
+    } else if (topThreePopularity[2] >= 5) {
+      summary += '波乱の決着となった。';
+    } else {
+      summary += '実力通りの上位争いとなった。';
+    }
+  }
+
+  return summary;
+};
+
+---
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>{title}</title>
+  <meta name="description" content={metaDescription}>
+
+  <!-- canonical URL -->
+  <link rel="canonical" href={canonicalUrl}>
+
+  <!-- JSON正本へのリンク -->
+  <link rel="alternate" type="application/json" href={jsonUrl}>
+
+  <!-- 構造化データ: BreadcrumbList -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": breadcrumbs.map((item, index) => ({
+      "@type": "ListItem",
+      "position": index + 1,
+      "name": item.name,
+      "item": item.url ? `${Astro.site}${item.url.slice(1)}` : undefined
+    }))
+  })} />
+
+  <!-- 構造化データ: SportsEvent（簡素版） -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "SportsEvent",
+    "name": raceData.raceName,
+    "sport": "競馬",
+    "startDate": `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}T${raceData.startTime || '00:00'}:00+09:00`,
+    "location": {
+      "@type": "Place",
+      "name": `${venueName}競馬場`
+    }
+  })} />
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif;
+      line-height: 1.6;
+      color: #2C3E50;
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      background-attachment: fixed;
+      min-height: 100vh;
+    }
+
+    /* ヘッダー - ポップなデザイン */
+    .page-header {
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 50%, #f093fb 100%);
+      color: white;
+      padding: 2rem 1rem;
+      box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .page-header::before {
+      content: '🏇';
+      position: absolute;
+      font-size: 12rem;
+      opacity: 0.1;
+      right: -2rem;
+      top: -2rem;
+      transform: rotate(-15deg);
+    }
+
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* パンくずリスト */
+    nav[aria-label="パンくずリスト"] {
+      margin-bottom: 1rem;
+      font-size: 0.875rem;
+      opacity: 0.95;
+    }
+
+    nav[aria-label="パンくずリスト"] ol {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      list-style: none;
+    }
+
+    nav[aria-label="パンくずリスト"] li::after {
+      content: '›';
+      margin-left: 0.5rem;
+    }
+
+    nav[aria-label="パンくずリスト"] li:last-child::after {
+      content: '';
+    }
+
+    nav[aria-label="パンくずリスト"] a {
+      color: white;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+
+    nav[aria-label="パンくずリスト"] a:hover {
+      opacity: 0.8;
+      text-decoration: underline;
+    }
+
+    nav[aria-label="パンくずリスト"] span {
+      color: white;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 0.75rem;
+      font-weight: 800;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    h1::before {
+      content: '🏆';
+      font-size: 1.75rem;
+    }
+
+    .race-meta {
+      margin-top: 0.75rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      font-size: 1rem;
+      opacity: 0.95;
+      font-weight: 500;
+    }
+
+    .race-meta span {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    main {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 1rem 2rem;
+    }
+
+    /* カードセクション */
+    section {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      margin: 0 0 1.5rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    /* 定義リスト */
+    dl {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 1rem 2rem;
+      margin-bottom: 1rem;
+    }
+
+    dt {
+      font-weight: 700;
+      color: #f093fb;
+      font-size: 0.95rem;
+    }
+
+    dd {
+      color: #2C3E50;
+      font-weight: 600;
+    }
+
+    /* 勝ち馬ハイライト - ポップなデザイン */
+    .winner-highlight {
+      background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+      border-radius: 16px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 8px 24px rgba(255, 215, 0, 0.4);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .winner-highlight::before {
+      content: '👑';
+      position: absolute;
+      font-size: 6rem;
+      opacity: 0.2;
+      right: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .winner-highlight strong {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.9);
+      color: #FF6B00;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+      font-weight: 800;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .winner-highlight p {
+      margin: 0.75rem 0;
+      font-size: 1.25rem;
+      color: white;
+      font-weight: 700;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+      position: relative;
+      z-index: 1;
+    }
+
+    /* テーブル - カラフルなデザイン */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+      font-size: 0.875rem;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    caption {
+      text-align: left;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      font-size: 1.1rem;
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    th, td {
+      padding: 1rem 0.75rem;
+      text-align: left;
+    }
+
+    th {
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      color: white;
+      font-weight: 700;
+      white-space: nowrap;
+      font-size: 0.875rem;
+    }
+
+    td:nth-child(1),
+    td:nth-child(2),
+    td:nth-child(3),
+    td:nth-child(7),
+    td:nth-child(8),
+    td:nth-child(9),
+    td:nth-child(10) {
+      text-align: center;
+    }
+
+    tbody tr {
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+      transition: all 0.3s ease;
+      background: white;
+    }
+
+    /* 4着以降 - 白背景 */
+    tbody tr:nth-child(n+4) {
+      background: white;
+    }
+
+    tbody tr:nth-child(n+4):hover {
+      background: #FAFAFA;
+      transform: translateX(4px);
+    }
+
+    /* 1着 - 金色 */
+    tbody tr:first-child {
+      background: linear-gradient(135deg, #FFF9C4 0%, #FFEB3B 100%);
+      font-weight: 700;
+    }
+
+    tbody tr:first-child:hover {
+      background: linear-gradient(135deg, #FFF176 0%, #FFEB3B 100%);
+    }
+
+    /* 2着 - 銀色 */
+    tbody tr:nth-child(2) {
+      background: linear-gradient(135deg, #F5F5F5 0%, #E0E0E0 100%);
+      font-weight: 700;
+    }
+
+    tbody tr:nth-child(2):hover {
+      background: linear-gradient(135deg, #EEEEEE 0%, #D5D5D5 100%);
+    }
+
+    /* 3着 - 銅色 */
+    tbody tr:nth-child(3) {
+      background: linear-gradient(135deg, #FFE4C4 0%, #E6BE8A 100%);
+      font-weight: 700;
+    }
+
+    tbody tr:nth-child(3):hover {
+      background: linear-gradient(135deg, #FFD7A8 0%, #DEB887 100%);
+    }
+
+    /* 払戻金 - 目立つカードデザイン */
+    .payouts-main {
+      background: linear-gradient(135deg, #4ECDC4 0%, #44A08D 100%);
+      padding: 2rem;
+      border-radius: 16px;
+      margin-bottom: 2rem;
+      box-shadow: 0 8px 24px rgba(78, 205, 196, 0.4);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .payouts-main::before {
+      content: '💰';
+      position: absolute;
+      font-size: 8rem;
+      opacity: 0.15;
+      right: 1rem;
+      bottom: -1rem;
+    }
+
+    .payouts-main dl {
+      grid-template-columns: 120px 1fr;
+      gap: 1.25rem 2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .payouts-main dt {
+      font-weight: 800;
+      color: white;
+      font-size: 1.1rem;
+    }
+
+    .payouts-main dd {
+      font-size: 1.25rem;
+      color: white;
+      font-weight: 700;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+    }
+
+    /* 折りたたみ */
+    details {
+      margin: 1.5rem 0;
+      border: 2px solid #e0e0e0;
+      border-radius: 12px;
+      padding: 1rem 1.5rem;
+      transition: all 0.3s ease;
+    }
+
+    details:hover {
+      border-color: #f093fb;
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+    }
+
+    summary {
+      cursor: pointer;
+      font-weight: 700;
+      padding: 0.5rem 0;
+      user-select: none;
+      color: #f093fb;
+      font-size: 1.05rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    summary::before {
+      content: '▶';
+      font-size: 0.75rem;
+      transition: transform 0.3s ease;
+    }
+
+    details[open] summary::before {
+      transform: rotate(90deg);
+    }
+
+    details[open] summary {
+      margin-bottom: 1.5rem;
+    }
+
+    .note {
+      font-size: 0.875rem;
+      color: #7f8c8d;
+      margin-top: 1rem;
+      font-style: italic;
+    }
+
+    /* レース内容セクション - 特別強調デザイン */
+    .race-commentary-section {
+      background: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 50%, #FFA500 100%);
+      border-radius: 24px;
+      padding: 2.5rem;
+      margin: 3rem 0;
+      box-shadow: 0 12px 48px rgba(255, 107, 107, 0.35);
+      border: 3px solid rgba(255, 255, 255, 0.3);
+      position: relative;
+      overflow: hidden;
+      animation: pulse-glow 3s ease-in-out infinite;
+    }
+
+    @keyframes pulse-glow {
+      0%, 100% {
+        box-shadow: 0 12px 48px rgba(255, 107, 107, 0.35);
+      }
+      50% {
+        box-shadow: 0 12px 60px rgba(255, 107, 107, 0.5), 0 0 30px rgba(255, 107, 107, 0.3);
+      }
+    }
+
+    .race-commentary-section::before {
+      content: '🏆';
+      position: absolute;
+      font-size: 20rem;
+      opacity: 0.08;
+      right: -3rem;
+      top: 50%;
+      transform: translateY(-50%) rotate(-15deg);
+      pointer-events: none;
+    }
+
+    .commentary-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 0.75rem 1.5rem;
+      border-radius: 50px;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+      position: relative;
+      z-index: 1;
+      animation: badge-bounce 2s ease-in-out infinite;
+    }
+
+    @keyframes badge-bounce {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-5px);
+      }
+    }
+
+    .badge-icon {
+      font-size: 1.25rem;
+      animation: spin-star 3s linear infinite;
+    }
+
+    @keyframes spin-star {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    .badge-text {
+      font-size: 0.95rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: 0.5px;
+    }
+
+    .commentary-title {
+      font-size: 2.5rem;
+      color: white;
+      margin-bottom: 2rem;
+      font-weight: 900;
+      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .title-icon {
+      font-size: 2.5rem;
+      filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+    }
+
+    .title-text {
+      letter-spacing: 2px;
+    }
+
+    .commentary-content {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 2.5rem;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+      position: relative;
+      z-index: 1;
+      border: 2px solid rgba(255, 255, 255, 0.5);
+    }
+
+    .commentary-content p {
+      line-height: 2.2;
+      font-size: 1.2rem;
+      color: #2C3E50;
+      font-weight: 500;
+      text-align: justify;
+      letter-spacing: 0.5px;
+      margin: 0;
+    }
+
+    .commentary-content::before {
+      content: '"';
+      position: absolute;
+      font-size: 8rem;
+      color: rgba(255, 107, 107, 0.15);
+      left: 1rem;
+      top: -2rem;
+      font-family: Georgia, serif;
+      line-height: 1;
+    }
+
+    /* モバイル対応 */
+    @media (max-width: 768px) {
+      .race-commentary-section {
+        padding: 2rem 1.5rem;
+        margin: 2rem 0;
+        border-radius: 20px;
+      }
+
+      .race-commentary-section::before {
+        font-size: 10rem;
+        right: -2rem;
+      }
+
+      .commentary-badge {
+        padding: 0.6rem 1.25rem;
+        font-size: 0.85rem;
+      }
+
+      .badge-text {
+        font-size: 0.85rem;
+      }
+
+      .commentary-title {
+        font-size: 1.75rem;
+        gap: 0.75rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .title-icon {
+        font-size: 1.75rem;
+      }
+
+      .commentary-content {
+        padding: 1.75rem;
+        border-radius: 16px;
+      }
+
+      .commentary-content p {
+        font-size: 1.05rem;
+        line-height: 1.9;
+      }
+
+      .commentary-content::before {
+        font-size: 5rem;
+        left: 0.5rem;
+        top: -1.5rem;
+      }
+    }
+
+    /* フッターナビゲーション - カラフルなボタン */
+    .race-footer {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 2rem;
+      margin-top: 2rem;
+      box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+    }
+
+    .race-footer h3 {
+      font-size: 1.25rem;
+      margin-bottom: 1.5rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .race-footer ul {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      list-style: none;
+    }
+
+    .race-footer li {
+      flex: 0 0 auto;
+    }
+
+    .race-footer a,
+    .race-footer strong {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.75rem 1.5rem;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      border-radius: 12px;
+      color: #2C3E50;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      font-weight: 700;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      min-width: 80px;
+    }
+
+    .race-footer a:hover {
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+    }
+
+    .race-footer strong {
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      color: white;
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+    }
+
+    /* サイトフッター - ポップなデザイン */
+    .site-footer {
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 50%, #f093fb 100%);
+      color: white;
+      text-align: center;
+      padding: 3rem 1rem;
+      margin-top: 3rem;
+      box-shadow: 0 -8px 32px rgba(102, 126, 234, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .site-footer::before {
+      content: '🏇';
+      position: absolute;
+      font-size: 10rem;
+      opacity: 0.1;
+      left: -2rem;
+      top: 50%;
+      transform: translateY(-50%) rotate(15deg);
+      animation: float-horse 6s ease-in-out infinite;
+    }
+
+    @keyframes float-horse {
+      0%, 100% {
+        transform: translateY(-50%) rotate(15deg) translateX(0);
+      }
+      50% {
+        transform: translateY(-50%) rotate(15deg) translateX(20px);
+      }
+    }
+
+    .site-footer::after {
+      content: '🏆';
+      position: absolute;
+      font-size: 8rem;
+      opacity: 0.1;
+      right: -1rem;
+      top: 50%;
+      transform: translateY(-50%) rotate(-15deg);
+      animation: float-trophy 5s ease-in-out infinite;
+    }
+
+    @keyframes float-trophy {
+      0%, 100% {
+        transform: translateY(-50%) rotate(-15deg) translateX(0);
+      }
+      50% {
+        transform: translateY(-50%) rotate(-15deg) translateX(-20px);
+      }
+    }
+
+    .site-footer p {
+      font-size: 1rem;
+      opacity: 0.95;
+      margin: 0.75rem 0;
+      font-weight: 600;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+      position: relative;
+      z-index: 1;
+    }
+
+    .site-footer p:first-child {
+      font-size: 1.25rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .site-footer a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      transition: opacity 0.2s;
+    }
+
+    .site-footer a:hover {
+      opacity: 0.8;
+      text-decoration: underline;
+    }
+
+    /* モバイル対応 */
+    @media (max-width: 768px) {
+      .page-header {
+        padding: 1.5rem 1rem;
+      }
+
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      main {
+        padding: 0 0.5rem 1.5rem;
+      }
+
+      section {
+        padding: 1.5rem;
+        border-radius: 16px;
+        margin-bottom: 1.5rem;
+      }
+
+      h2 {
+        font-size: 1.25rem;
+      }
+
+      table {
+        display: block;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        font-size: 0.75rem;
+      }
+
+      th, td {
+        padding: 0.75rem 0.5rem;
+      }
+
+      dl {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+      }
+
+      .payouts-main dl {
+        grid-template-columns: 1fr;
+      }
+
+      .winner-highlight {
+        padding: 1.5rem;
+      }
+
+      .winner-highlight p {
+        font-size: 1.05rem;
+      }
+
+      .race-footer ul {
+        gap: 0.5rem;
+      }
+
+      .race-footer a,
+      .race-footer strong {
+        padding: 0.6rem 1rem;
+        font-size: 0.875rem;
+        min-width: 70px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- ヘッダー -->
+  <header class="page-header">
+    <div class="header-content">
+      <!-- パンくずリスト -->
+      <nav aria-label="パンくずリスト">
+        <ol>
+          {breadcrumbs.map((item, index) => (
+            <li>
+              {item.url ? (
+                <a href={item.url}>{item.name}</a>
+              ) : (
+                <span>{item.name}</span>
+              )}
+            </li>
+          ))}
+        </ol>
+      </nav>
+
+      <h1>{raceData.raceName}</h1>
+      <div class="race-meta">
+        <time datetime={`${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`}>
+          📅 {year}年{month}月{day}日
+        </time>
+        <span>🏇 {venueName}競馬場</span>
+        <span>🏁 第{raceNumber}R</span>
+        {raceData.startTime && <span>⏰ {raceData.startTime}発走</span>}
+        {raceData.weather && <span>天候 {raceData.weather}{getWeatherEmoji(raceData.weather)}</span>}
+        {raceData.trackCondition && <span>馬場 {raceData.trackCondition}</span>}
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <article>
+
+      <!-- 1. レース概要 -->
+      <section>
+        <h2>📋 レース概要</h2>
+        <dl>
+          <dt>レース名</dt>
+          <dd>{raceData.raceName}</dd>
+
+          <dt>距離・コース</dt>
+          <dd>{raceData.surface}{raceData.distance ? `${raceData.distance}m` : ''}{raceData.track ? `（${raceData.track}）` : ''}</dd>
+
+          {raceData.horses && (
+            <>
+              <dt>出走頭数</dt>
+              <dd>{raceData.horses}頭</dd>
+            </>
+          )}
+
+          {raceData.weather && (
+            <>
+              <dt>天候</dt>
+              <dd>{raceData.weather} {getWeatherEmoji(raceData.weather)}</dd>
+            </>
+          )}
+
+          {raceData.trackCondition && (
+            <>
+              <dt>馬場状態</dt>
+              <dd>{raceData.trackCondition}</dd>
+            </>
+          )}
+        </dl>
+      </section>
+
+      <!-- 2. 着順結果 -->
+      <section>
+        <h2>🏆 着順結果</h2>
+
+        <div class="winner-highlight">
+          <strong>🥇 1着</strong>
+          <p>{winner.number}番 {winner.name}（{winner.jockey}）</p>
+          <p>タイム: {winner.time} / 人気: {winner.popularity}番人気</p>
+        </div>
+
+        <table>
+          <caption>第{raceNumber}R 着順表</caption>
+          <thead>
+            <tr>
+              <th>着順</th>
+              <th>枠</th>
+              <th>馬番</th>
+              <th>馬名</th>
+              <th>騎手</th>
+              <th>調教師</th>
+              <th>タイム</th>
+              <th>着差</th>
+              <th>上3F</th>
+              <th>人気</th>
+            </tr>
+          </thead>
+          <tbody>
+            {raceData.results.map(horse => (
+              <tr>
+                <td>{horse.rank}</td>
+                <td>{horse.bracket}</td>
+                <td>{horse.number}</td>
+                <td><strong>{horse.name}</strong></td>
+                <td>{horse.jockey}</td>
+                <td>{horse.trainer}</td>
+                <td>{horse.time}</td>
+                <td>{horse.margin}</td>
+                <td>{horse.lastFurlong}</td>
+                <td>{horse.popularity}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </section>
+
+      <!-- 3. 払戻金 -->
+      <section>
+        <h2>💰 払戻金</h2>
+
+        {raceData.payouts && (
+          <div class="payouts-main">
+            <dl>
+              {raceData.payouts.tansho && raceData.payouts.tansho[0] && (
+                <>
+                  <dt>単勝</dt>
+                  <dd>{raceData.payouts.tansho[0].number}番 {raceData.payouts.tansho[0].payout.toLocaleString()}円（{raceData.payouts.tansho[0].popularity}番人気）</dd>
+                </>
+              )}
+
+              {raceData.payouts.umatan && raceData.payouts.umatan[0] && (
+                <>
+                  <dt>馬単</dt>
+                  <dd>{raceData.payouts.umatan[0].combination} {raceData.payouts.umatan[0].payout.toLocaleString()}円（{raceData.payouts.umatan[0].popularity}番人気）</dd>
+                </>
+              )}
+
+              {raceData.payouts.sanrentan && raceData.payouts.sanrentan[0] && (
+                <>
+                  <dt>三連単</dt>
+                  <dd>{raceData.payouts.sanrentan[0].combination} {raceData.payouts.sanrentan[0].payout.toLocaleString()}円（{raceData.payouts.sanrentan[0].popularity}番人気）</dd>
+                </>
+              )}
+            </dl>
+          </div>
+        )}
+
+        <details>
+          <summary>全券種の払戻金を見る</summary>
+          <table>
+            <thead>
+              <tr>
+                <th>券種</th>
+                <th>組番</th>
+                <th>払戻金</th>
+                <th>人気</th>
+              </tr>
+            </thead>
+            <tbody>
+              {raceData.payouts?.fukusho?.map(item => (
+                <tr>
+                  <td>複勝</td>
+                  <td>{item.number}番</td>
+                  <td>{item.payout.toLocaleString()}円</td>
+                  <td>{item.popularity}</td>
+                </tr>
+              ))}
+
+              {raceData.payouts?.wakuren?.map(item => (
+                <tr>
+                  <td>枠連</td>
+                  <td>{item.combination}</td>
+                  <td>{item.payout.toLocaleString()}円</td>
+                  <td>{item.popularity}</td>
+                </tr>
+              ))}
+
+              {raceData.payouts?.umaren?.map(item => (
+                <tr>
+                  <td>馬連</td>
+                  <td>{item.combination}</td>
+                  <td>{item.payout.toLocaleString()}円</td>
+                  <td>{item.popularity}</td>
+                </tr>
+              ))}
+
+              {raceData.payouts?.wakutan?.map(item => (
+                <tr>
+                  <td>枠単</td>
+                  <td>{item.combination}</td>
+                  <td>{item.payout.toLocaleString()}円</td>
+                  <td>{item.popularity}</td>
+                </tr>
+              ))}
+
+              {raceData.payouts?.wide?.map(item => (
+                <tr>
+                  <td>ワイド</td>
+                  <td>{item.combination}</td>
+                  <td>{item.payout.toLocaleString()}円</td>
+                  <td>{item.popularity}</td>
+                </tr>
+              ))}
+
+              {raceData.payouts?.sanrenpuku?.map(item => (
+                <tr>
+                  <td>三連複</td>
+                  <td>{item.combination}</td>
+                  <td>{item.payout.toLocaleString()}円</td>
+                  <td>{item.popularity}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </details>
+      </section>
+
+      <!-- 4. レース内容回顧 - 特別強調セクション -->
+      <section class="race-commentary-section">
+        <div class="commentary-badge">
+          <span class="badge-icon">✨</span>
+          <span class="badge-text">レース展開解説</span>
+        </div>
+        <h2 class="commentary-title">
+          <span class="title-icon">📝</span>
+          <span class="title-text">レース内容回顧</span>
+        </h2>
+        <div class="commentary-content">
+          <p>{raceData.comment || generateRaceSummary()}</p>
+        </div>
+      </section>
+
+      <!-- 5. 詳細データ -->
+      <section>
+        <h2>📊 詳細データ</h2>
+
+        {raceData.timeData && (
+          <details>
+            <summary>⏱️ ラップタイム</summary>
+            <dl>
+              {raceData.timeData.last3F && (
+                <>
+                  <dt>上がり3F</dt>
+                  <dd>{raceData.timeData.last3F}秒</dd>
+                </>
+              )}
+
+              {raceData.timeData.last4F && (
+                <>
+                  <dt>上がり4F</dt>
+                  <dd>{raceData.timeData.last4F}秒</dd>
+                </>
+              )}
+
+              {raceData.timeData.furlongTimes && raceData.timeData.furlongTimes.length > 0 && (
+                <>
+                  <dt>ハロンタイム（200m毎）</dt>
+                  <dd>{raceData.timeData.furlongTimes.join(' - ')}</dd>
+                </>
+              )}
+            </dl>
+          </details>
+        )}
+
+        {raceData.cornerData && raceData.cornerData.length > 0 && (
+          <details>
+            <summary>📍 コーナー通過順</summary>
+            <dl>
+              {raceData.cornerData.map(corner => (
+                <>
+                  <dt>{corner.corner}</dt>
+                  <dd>{corner.order.join(',')}</dd>
+                </>
+              ))}
+            </dl>
+            <p class="note">※ 数字は馬番を示します</p>
+          </details>
+        )}
+      </section>
+
+      <!-- フッター: 関連レース -->
+      <div class="race-footer">
+        <nav aria-label="関連レース">
+          <h3>🏁 同日の他レース</h3>
+          <ul>
+            {allRaces.map(r => (
+              <li>
+                {r.raceNumber === raceNumber ? (
+                  <strong>第{r.raceNumber}R</strong>
+                ) : (
+                  <a href={`/jra/results/${year}/${month}/${day}/${venue}/${r.raceNumber}/`}>
+                    第{r.raceNumber}R
+                  </a>
+                )}
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </div>
+    </article>
+  </main>
+
+  <!-- サイトフッター -->
+  <footer class="site-footer">
+    <p><a href="/">🏇 JRA結果速報トップへ戻る</a></p>
+    <p>中央地方競馬の結果情報を提供</p>
+    <p style="margin-top: 1rem; font-size: 0.85rem;">&copy; 2026 All rights reserved</p>
+  </footer>
+</body>
+</html>
