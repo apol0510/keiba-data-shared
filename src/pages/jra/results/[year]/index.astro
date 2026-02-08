@@ -1,0 +1,277 @@
+---
+/**
+ * 中央競馬 年別アーカイブ
+ * URL: /jra/results/YYYY/
+ */
+
+import { readdirSync, readFileSync } from 'fs';
+import { join } from 'path';
+
+/**
+ * ローカルファイルシステムからJSONファイルを読み込んでパスを生成
+ */
+export async function getStaticPaths() {
+  const paths = [];
+
+  try {
+    const resultsDir = join(process.cwd(), 'jra', 'results');
+
+    // 年ディレクトリを取得
+    const years = readdirSync(resultsDir).filter(name => /^\d{4}$/.test(name));
+
+    for (const year of years) {
+      paths.push({ params: { year } });
+    }
+
+    console.log(`[jra-year] Total paths generated: ${paths.length}`);
+  } catch (error) {
+    console.error('[jra-year] Fatal error in getStaticPaths:', error);
+  }
+
+  return paths;
+}
+
+const { year } = Astro.params;
+
+const title = `${year}年 中央競馬（JRA） 結果アーカイブ | 全10競馬場`;
+const description = `${year}年の中央競馬（JRA）全10競馬場（東京・中山・京都・阪神・中京・新潟・福島・小倉・札幌・函館）の全レース結果アーカイブ。月別に検索できます。`;
+
+// ローカルファイルシステムから指定年のデータを取得
+const archiveData = [];
+
+try {
+  const yearDir = join(process.cwd(), 'jra', 'results', year);
+
+  // 月ディレクトリを取得
+  const months = readdirSync(yearDir).filter(name => /^\d{2}$/.test(name));
+
+  for (const month of months) {
+    const monthDir = join(yearDir, month);
+
+    // JSONファイルを取得（venue-code付きファイル対応）
+    const files = readdirSync(monthDir).filter(name =>
+      name.endsWith('.json') &&
+      name.match(/^\d{4}-\d{2}-\d{2}(-[A-Z]{2,3})?\.json$/)
+    );
+
+    for (const file of files) {
+      try {
+        const filePath = join(monthDir, file);
+        const content = readFileSync(filePath, 'utf-8');
+        const jsonData = JSON.parse(content);
+
+        // 必須フィールドが存在する場合のみ追加
+        if (jsonData.date && jsonData.venue && jsonData.races) {
+          archiveData.push({
+            date: jsonData.date,
+            venue: jsonData.venue,
+            venueCode: jsonData.venueCode || '',
+            raceCount: jsonData.races.length,
+            month
+          });
+        }
+      } catch (e) {
+        console.error(`Error reading ${file}:`, e.message);
+      }
+    }
+  }
+
+  // 日付の新しい順にソート
+  archiveData.sort((a, b) => {
+    if (!a.date || !b.date) return 0;
+    return b.date.localeCompare(a.date);
+  });
+} catch (error) {
+  console.error(`${year}年のアーカイブデータ取得エラー:`, error);
+}
+
+// 月別にグループ化
+const groupedByMonth = archiveData.reduce((acc, item) => {
+  const key = item.month;
+  if (!acc[key]) {
+    acc[key] = [];
+  }
+  acc[key].push(item);
+  return acc;
+}, {});
+
+const canonicalUrl = `${Astro.site}jra/results/${year}/`;
+---
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>{title}</title>
+  <meta name="description" content={description}>
+
+  <link rel="canonical" href={canonicalUrl}>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Hiragino Sans', sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background: #f5f5f5;
+    }
+
+    header {
+      background: linear-gradient(135deg, #e63946 0%, #f77f00 100%);
+      color: white;
+      padding: 1.5rem 1rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .breadcrumb {
+      font-size: 0.875rem;
+      margin-bottom: 1rem;
+      opacity: 0.9;
+    }
+
+    .breadcrumb a {
+      color: white;
+      text-decoration: none;
+    }
+
+    h1 {
+      font-size: 1.75rem;
+      margin-bottom: 0.5rem;
+      font-weight: 700;
+    }
+
+    main {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    .archive-section {
+      background: white;
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+
+    .archive-section h2 {
+      font-size: 1.25rem;
+      color: #e63946;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid #e63946;
+    }
+
+    .archive-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .archive-card {
+      display: block;
+      background: white;
+      border: 1px solid #e0e0e0;
+      border-radius: 6px;
+      padding: 1rem;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.2s ease;
+    }
+
+    .archive-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      border-color: #e63946;
+    }
+
+    .archive-date {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #e63946;
+      margin-bottom: 0.5rem;
+    }
+
+    .archive-venue {
+      font-size: 0.95rem;
+      color: #666;
+      margin-bottom: 0.25rem;
+    }
+
+    .archive-races {
+      font-size: 0.875rem;
+      color: #999;
+    }
+
+    footer {
+      background: #333;
+      color: white;
+      text-align: center;
+      padding: 2rem 1rem;
+      margin-top: 3rem;
+    }
+
+    footer a {
+      color: white;
+      text-decoration: none;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="header-content">
+      <div class="breadcrumb">
+        <a href="/">トップ</a> &gt; <a href="/jra/results/">アーカイブ</a> &gt; {year}年
+      </div>
+      <h1>{year}年 中央競馬（JRA） 結果</h1>
+      <p>全{archiveData.length}開催</p>
+    </div>
+  </header>
+
+  <main>
+    {Object.entries(groupedByMonth).sort((a, b) => b[0].localeCompare(a[0])).map(([month, items]) => (
+      <section class="archive-section">
+        <h2>{year}年{parseInt(month)}月</h2>
+        <div class="archive-grid">
+          {items.map(item => {
+            if (!item.date) return null;
+            const [y, m, d] = item.date.split('-');
+            return (
+              <a href={`/jra/results/${y}/${m}/${d}/`} class="archive-card">
+                <div class="archive-date">{parseInt(m)}月{parseInt(d)}日</div>
+                <div class="archive-venue">{item.venue}競馬</div>
+                <div class="archive-races">全{item.raceCount}レース</div>
+              </a>
+            );
+          })}
+        </div>
+      </section>
+    ))}
+
+    {archiveData.length === 0 && (
+      <div class="archive-section">
+        <p>{year}年のデータがありません</p>
+      </div>
+    )}
+  </main>
+
+  <footer>
+    <p><a href="/">中央競馬結果速報トップへ戻る</a></p>
+    <p>&copy; 2026 中央競馬結果速報 - keiba-data-shared</p>
+  </footer>
+</body>
+</html>
