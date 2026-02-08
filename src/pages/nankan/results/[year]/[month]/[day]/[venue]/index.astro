@@ -4,8 +4,11 @@
  * URL: /nankan/results/YYYY/MM/DD/{venueSlug}/
  */
 
+import { readdirSync, readFileSync } from 'fs';
+import { join } from 'path';
+
 /**
- * GitHubからJSONファイルリストを取得してパスを生成
+ * ローカルファイルシステムからJSONファイルを読み込んでパスを生成
  */
 export async function getStaticPaths() {
   const paths = [];
@@ -18,49 +21,43 @@ export async function getStaticPaths() {
   };
 
   try {
-    const GITHUB_API_URL = 'https://api.github.com/repos/apol0510/keiba-data-shared/git/trees/main?recursive=1';
+    const resultsDir = join(process.cwd(), 'nankan', 'results');
 
-    const response = await fetch(GITHUB_API_URL, {
-      headers: {
-        'Accept': 'application/vnd.github.v3+json',
-        'User-Agent': 'keiba-data-shared-build'
-      }
-    });
+    // 年ディレクトリを取得
+    const years = readdirSync(resultsDir).filter(name => /^\d{4}$/.test(name));
 
-    if (!response.ok) {
-      console.error('GitHub API error:', response.status);
-      return paths;
-    }
+    for (const year of years) {
+      const yearDir = join(resultsDir, year);
 
-    const data = await response.json();
+      // 月ディレクトリを取得
+      const months = readdirSync(yearDir).filter(name => /^\d{2}$/.test(name));
 
-    const jsonFiles = data.tree.filter(item =>
-      item.path.startsWith('nankan/results/') &&
-      item.path.endsWith('.json') &&
-      item.path.match(/nankan\/results\/\d{4}\/\d{2}\/\d{4}-\d{2}-\d{2}\.json/)
-    );
+      for (const month of months) {
+        const monthDir = join(yearDir, month);
 
-    for (const file of jsonFiles) {
-      const match = file.path.match(/nankan\/results\/(\d{4})\/(\d{2})\/\d{4}-\d{2}-(\d{2})\.json/);
-      if (match) {
-        const [, year, month, day] = match;
+        // JSONファイルを取得
+        const files = readdirSync(monthDir).filter(name => name.endsWith('.json'));
 
-        try {
-          const jsonUrl = `https://raw.githubusercontent.com/apol0510/keiba-data-shared/main/${file.path}`;
-          const jsonResponse = await fetch(jsonUrl);
+        for (const file of files) {
+          const match = file.match(/^(\d{4})-(\d{2})-(\d{2})\.json$/);
+          if (!match) continue;
 
-          if (!jsonResponse.ok) continue;
+          const [, fileYear, fileMonth, day] = match;
 
-          const jsonData = await jsonResponse.json();
-          const venueSlug = venueSlugMap[jsonData.venue];
+          try {
+            const filePath = join(monthDir, file);
+            const content = readFileSync(filePath, 'utf-8');
+            const jsonData = JSON.parse(content);
+            const venueSlug = venueSlugMap[jsonData.venue];
 
-          if (venueSlug) {
-            paths.push({
-              params: { year, month, day, venue: venueSlug }
-            });
+            if (venueSlug) {
+              paths.push({
+                params: { year: fileYear, month: fileMonth, day, venue: venueSlug }
+              });
+            }
+          } catch (e) {
+            console.error(`Error processing ${file}:`, e.message);
           }
-        } catch (e) {
-          console.error(`Error processing ${file.path}:`, e.message);
         }
       }
     }
@@ -85,32 +82,21 @@ const venueSlugToNameMap = {
 
 const venueName = venueSlugToNameMap[venue] || venue;
 
-// GitHubからJSONデータを取得（キャッシュバスティング付き）
-const timestamp = Date.now();
-const jsonUrl = `https://raw.githubusercontent.com/apol0510/keiba-data-shared/main/nankan/results/${year}/${month.padStart(2, '0')}/${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}.json?t=${timestamp}`;
-
+// ローカルファイルシステムからJSONデータを取得
 let venueData = null;
 
 try {
-  const response = await fetch(jsonUrl, {
-    cache: 'no-store',
-    headers: {
-      'Cache-Control': 'no-cache, no-store, must-revalidate',
-      'Pragma': 'no-cache'
-    }
-  });
+  const filePath = join(process.cwd(), 'nankan', 'results', year, month.padStart(2, '0'), `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}.json`);
+  const content = readFileSync(filePath, 'utf-8');
+  const data = JSON.parse(content);
 
-  if (response.ok) {
-    const data = await response.json();
-
-    // 該当競馬場のデータかチェック
-    if (data.venue === venueName) {
-      venueData = {
-        venue: data.venue,
-        venueCode: data.venueCode,
-        races: data.races || []
-      };
-    }
+  // 該当競馬場のデータかチェック
+  if (data.venue === venueName) {
+    venueData = {
+      venue: data.venue,
+      venueCode: data.venueCode,
+      races: data.races || []
+    };
   }
 } catch (error) {
   console.error(`${year}年${month}月${day}日のデータ取得エラー:`, error);

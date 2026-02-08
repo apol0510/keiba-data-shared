@@ -4,8 +4,11 @@
  * URL: /nankan/results/YYYY/MM/DD/{venueSlug}/{raceNumber}/
  */
 
+import { readdirSync, readFileSync } from 'fs';
+import { join } from 'path';
+
 /**
- * GitHubからJSONファイルリストを取得してパスを生成
+ * ローカルファイルシステムからJSONファイルを読み込んでパスを生成
  * ビルド時に最新データを取得して静的HTML生成
  */
 export async function getStaticPaths() {
@@ -19,70 +22,58 @@ export async function getStaticPaths() {
   };
 
   try {
-    // GitHub APIでnankan/results/配下のディレクトリツリーを取得
-    const GITHUB_API_URL = 'https://api.github.com/repos/apol0510/keiba-data-shared/git/trees/main?recursive=1';
+    const resultsDir = join(process.cwd(), 'nankan', 'results');
 
-    const response = await fetch(GITHUB_API_URL, {
-      headers: {
-        'Accept': 'application/vnd.github.v3+json',
-        'User-Agent': 'keiba-data-shared-build'
-      }
-    });
+    // 年ディレクトリを取得
+    const years = readdirSync(resultsDir).filter(name => /^\d{4}$/.test(name));
 
-    if (!response.ok) {
-      console.error('GitHub API error:', response.status);
-      return paths; // 空配列を返して失敗を防ぐ
-    }
+    for (const year of years) {
+      const yearDir = join(resultsDir, year);
 
-    const data = await response.json();
+      // 月ディレクトリを取得
+      const months = readdirSync(yearDir).filter(name => /^\d{2}$/.test(name));
 
-    // nankan/results/YYYY/MM/YYYY-MM-DD.jsonファイルを抽出
-    const jsonFiles = data.tree.filter(item =>
-      item.path.startsWith('nankan/results/') &&
-      item.path.endsWith('.json') &&
-      item.path.match(/nankan\/results\/\d{4}\/\d{2}\/\d{4}-\d{2}-\d{2}\.json/)
-    );
+      for (const month of months) {
+        const monthDir = join(yearDir, month);
 
-    console.log(`Found ${jsonFiles.length} JSON files`);
+        // JSONファイルを取得
+        const files = readdirSync(monthDir).filter(name => name.endsWith('.json'));
 
-    // 各JSONファイルを取得してパスを生成
-    for (const file of jsonFiles) {
-      const match = file.path.match(/nankan\/results\/(\d{4})\/(\d{2})\/\d{4}-\d{2}-(\d{2})\.json/);
-      if (match) {
-        const [, year, month, day] = match;
+        for (const file of files) {
+          const match = file.match(/^(\d{4})-(\d{2})-(\d{2})\.json$/);
+          if (!match) continue;
 
-        try {
-          // raw URLからJSON取得
-          const jsonUrl = `https://raw.githubusercontent.com/apol0510/keiba-data-shared/main/${file.path}`;
-          const jsonResponse = await fetch(jsonUrl);
+          const [, fileYear, fileMonth, day] = match;
 
-          if (!jsonResponse.ok) continue;
+          try {
+            const filePath = join(monthDir, file);
+            const content = readFileSync(filePath, 'utf-8');
+            const jsonData = JSON.parse(content);
 
-          const jsonData = await jsonResponse.json();
+            // 結果データのみを対象とする（venue, date, racesフィールドが必須）
+            if (!jsonData.venue || !jsonData.date || !Array.isArray(jsonData.races)) {
+              continue;
+            }
 
-          // 結果データのみを対象とする（venue, date, racesフィールドが必須）
-          if (!jsonData.venue || !jsonData.date || !Array.isArray(jsonData.races)) {
-            continue;
+            const venueSlug = venueSlugMap[jsonData.venue] || 'ooi';
+
+            // 各レースごとにパスを生成
+            for (const race of jsonData.races) {
+              paths.push({
+                params: {
+                  year: fileYear,
+                  month: fileMonth,
+                  day,
+                  venue: venueSlug,
+                  race: race.raceNumber.toString()
+                }
+              });
+            }
+
+            console.log(`Generated paths for ${fileYear}-${fileMonth}-${day} ${jsonData.venue}: ${jsonData.races.length} races`);
+          } catch (e) {
+            console.error(`Error processing ${file}:`, e.message);
           }
-
-          const venueSlug = venueSlugMap[jsonData.venue] || 'ooi';
-
-          // 各レースごとにパスを生成
-          for (const race of jsonData.races) {
-            paths.push({
-              params: {
-                year,
-                month,
-                day,
-                venue: venueSlug,
-                race: race.raceNumber.toString()
-              }
-            });
-          }
-
-          console.log(`Generated paths for ${year}-${month}-${day} ${jsonData.venue}: ${jsonData.races.length} races`);
-        } catch (e) {
-          console.error(`Error processing ${file.path}:`, e.message);
         }
       }
     }
@@ -108,30 +99,17 @@ const venueMap = {
 const venueName = venueMap[venue] || venue;
 const raceNumber = parseInt(race, 10);
 
-// JSONデータの取得（キャッシュバスティング付き）
-const timestamp = Date.now();
-const jsonUrl = `https://raw.githubusercontent.com/apol0510/keiba-data-shared/main/nankan/results/${year}/${month.padStart(2, '0')}/${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}.json?t=${timestamp}`;
-
+// ローカルファイルシステムからJSONデータを取得
 let raceData = null;
 let allRaces = [];
 let errorMessage = null;
 
 try {
-  const response = await fetch(jsonUrl, {
-    cache: 'no-store',
-    headers: {
-      'Cache-Control': 'no-cache, no-store, must-revalidate',
-      'Pragma': 'no-cache'
-    }
-  });
-
-  if (response.ok) {
-    const json = await response.json();
-    allRaces = json.races || [];
-    raceData = allRaces.find(r => r.raceNumber === raceNumber);
-  } else {
-    errorMessage = 'データが見つかりません';
-  }
+  const filePath = join(process.cwd(), 'nankan', 'results', year, month.padStart(2, '0'), `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}.json`);
+  const content = readFileSync(filePath, 'utf-8');
+  const json = JSON.parse(content);
+  allRaces = json.races || [];
+  raceData = allRaces.find(r => r.raceNumber === raceNumber);
 } catch (error) {
   console.error('データ取得エラー:', error);
   errorMessage = 'データの取得に失敗しました';
@@ -267,9 +245,6 @@ const generateRaceSummary = () => {
 
   <!-- canonical URL -->
   <link rel="canonical" href={canonicalUrl}>
-
-  <!-- JSON正本へのリンク -->
-  <link rel="alternate" type="application/json" href={jsonUrl}>
 
   <!-- 構造化データ: BreadcrumbList -->
   <script type="application/ld+json" set:html={JSON.stringify({

@@ -4,49 +4,41 @@
  * URL: /nankan/results/YYYY/MM/DD/
  */
 
+import { readdirSync } from 'fs';
+import { join } from 'path';
+
 /**
- * GitHubからJSONファイルリストを取得してパスを生成
+ * ローカルファイルシステムからJSONファイルを読み込んでパスを生成
  */
 export async function getStaticPaths() {
   const paths = [];
 
   try {
-    const GITHUB_API_URL = 'https://api.github.com/repos/apol0510/keiba-data-shared/git/trees/main?recursive=1';
+    const resultsDir = join(process.cwd(), 'nankan', 'results');
 
-    const response = await fetch(GITHUB_API_URL, {
-      headers: {
-        'Accept': 'application/vnd.github.v3+json',
-        'User-Agent': 'keiba-data-shared-build'
-      }
-    });
+    // 年ディレクトリを取得
+    const years = readdirSync(resultsDir).filter(name => /^\d{4}$/.test(name));
 
-    if (!response.ok) {
-      console.error('GitHub API error:', response.status);
-      return paths;
-    }
+    for (const year of years) {
+      const yearDir = join(resultsDir, year);
 
-    const data = await response.json();
+      // 月ディレクトリを取得
+      const months = readdirSync(yearDir).filter(name => /^\d{2}$/.test(name));
 
-    const jsonFiles = data.tree.filter(item =>
-      item.path.startsWith('nankan/results/') &&
-      item.path.endsWith('.json') &&
-      item.path.match(/nankan\/results\/\d{4}\/\d{2}\/\d{4}-\d{2}-\d{2}\.json/)
-    );
+      for (const month of months) {
+        const monthDir = join(yearDir, month);
 
-    // 重複を防ぐため、日付のみでユニーク化
-    const uniqueDates = new Set();
+        // JSONファイルを取得
+        const files = readdirSync(monthDir).filter(name => name.endsWith('.json'));
 
-    for (const file of jsonFiles) {
-      const match = file.path.match(/nankan\/results\/(\d{4})\/(\d{2})\/\d{4}-\d{2}-(\d{2})\.json/);
-      if (match) {
-        const [, year, month, day] = match;
-        const dateKey = `${year}-${month}-${day}`;
-
-        if (!uniqueDates.has(dateKey)) {
-          uniqueDates.add(dateKey);
-          paths.push({
-            params: { year, month, day }
-          });
+        for (const file of files) {
+          const match = file.match(/^(\d{4})-(\d{2})-(\d{2})\.json$/);
+          if (match) {
+            const [, fileYear, fileMonth, day] = match;
+            paths.push({
+              params: { year: fileYear, month: fileMonth, day }
+            });
+          }
         }
       }
     }
@@ -59,31 +51,22 @@ export async function getStaticPaths() {
   return paths;
 }
 
+import { readFileSync } from 'fs';
+
 const { year, month, day } = Astro.params;
 
-// GitHubからJSONデータを取得（キャッシュバスティング付き）
-const timestamp = Date.now();
-const jsonUrl = `https://raw.githubusercontent.com/apol0510/keiba-data-shared/main/nankan/results/${year}/${month.padStart(2, '0')}/${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}.json?t=${timestamp}`;
-
+// ローカルファイルシステムからJSONデータを取得
 let allVenuesData = [];
 
 try {
-  const response = await fetch(jsonUrl, {
-    cache: 'no-store',
-    headers: {
-      'Cache-Control': 'no-cache, no-store, must-revalidate',
-      'Pragma': 'no-cache'
-    }
-  });
-
-  if (response.ok) {
-    const data = await response.json();
-    allVenuesData = [{
-      venue: data.venue,
-      venueCode: data.venueCode,
-      races: data.races || []
-    }];
-  }
+  const filePath = join(process.cwd(), 'nankan', 'results', year, month.padStart(2, '0'), `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}.json`);
+  const content = readFileSync(filePath, 'utf-8');
+  const data = JSON.parse(content);
+  allVenuesData = [{
+    venue: data.venue,
+    venueCode: data.venueCode,
+    races: data.races || []
+  }];
 } catch (error) {
   console.error(`${year}年${month}月${day}日のデータ取得エラー:`, error);
 }

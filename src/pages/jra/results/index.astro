@@ -7,64 +7,63 @@
 const title = '中央競馬 結果アーカイブ | JRA 10競馬場';
 const description = '中央競馬（JRA）全10競馬場（東京・中山・京都・阪神・中京・新潟・福島・小倉・札幌・函館）の過去のレース結果アーカイブ。年月別に検索できます。';
 
-// 全結果データをGitHubから取得
+// ローカルファイルシステムから全結果データを取得
+import { readdirSync, readFileSync } from 'fs';
+import { join } from 'path';
+
 const archiveData = [];
 
 try {
-  const GITHUB_API_URL = 'https://api.github.com/repos/apol0510/keiba-data-shared/git/trees/main?recursive=1';
+  const resultsDir = join(process.cwd(), 'jra', 'results');
 
-  const response = await fetch(GITHUB_API_URL, {
-    headers: {
-      'Accept': 'application/vnd.github.v3+json',
-      'User-Agent': 'keiba-data-shared-build'
-    }
-  });
+  // 年ディレクトリを取得
+  const years = readdirSync(resultsDir).filter(name => /^\d{4}$/.test(name));
 
-  if (response.ok) {
-    const data = await response.json();
+  for (const year of years) {
+    const yearDir = join(resultsDir, year);
 
-    const jsonFiles = data.tree.filter(item =>
-      item.path.startsWith('jra/results/') &&
-      item.path.endsWith('.json') &&
-      item.path.match(/jra\/results\/\d{4}\/\d{2}\/\d{4}-\d{2}-\d{2}(-[A-Z]{2,3})?\.json/)
-    );
+    // 月ディレクトリを取得
+    const months = readdirSync(yearDir).filter(name => /^\d{2}$/.test(name));
 
-    for (const file of jsonFiles) {
-      const match = file.path.match(/jra\/results\/(\d{4})\/(\d{2})\//);
-      if (match) {
-        const [, year, month] = match;
+    for (const month of months) {
+      const monthDir = join(yearDir, month);
+
+      // JSONファイルを取得
+      const files = readdirSync(monthDir).filter(name =>
+        name.endsWith('.json') &&
+        name.match(/^\d{4}-\d{2}-\d{2}(-[A-Z]{2,3})?\.json$/)
+      );
+
+      for (const file of files) {
+        const filePath = join(monthDir, file);
 
         try {
-          const jsonUrl = `https://raw.githubusercontent.com/apol0510/keiba-data-shared/main/${file.path}`;
-          const jsonResponse = await fetch(jsonUrl);
+          const content = readFileSync(filePath, 'utf-8');
+          const jsonData = JSON.parse(content);
 
-          if (jsonResponse.ok) {
-            const jsonData = await jsonResponse.json();
-
-            // 必須フィールドが存在する場合のみ追加
-            if (jsonData.date && jsonData.venue && jsonData.races) {
-              archiveData.push({
-                date: jsonData.date,
-                venue: jsonData.venue,
-                venueCode: jsonData.venueCode || '',
-                raceCount: jsonData.races.length,
-                year,
-                month
-              });
-            }
+          // 必須フィールドが存在する場合のみ追加
+          if (jsonData.date && jsonData.venue && jsonData.races) {
+            archiveData.push({
+              date: jsonData.date,
+              venue: jsonData.venue,
+              venueCode: jsonData.venueCode || '',
+              raceCount: jsonData.races.length,
+              year,
+              month
+            });
           }
         } catch (e) {
-          console.error(`Error fetching ${file.path}:`, e.message);
+          console.error(`Error reading ${file}:`, e.message);
         }
       }
     }
-
-    // 日付の新しい順にソート
-    archiveData.sort((a, b) => {
-      if (!a.date || !b.date) return 0;
-      return b.date.localeCompare(a.date);
-    });
   }
+
+  // 日付の新しい順にソート
+  archiveData.sort((a, b) => {
+    if (!a.date || !b.date) return 0;
+    return b.date.localeCompare(a.date);
+  });
 } catch (error) {
   console.error('アーカイブデータ取得エラー:', error);
 }

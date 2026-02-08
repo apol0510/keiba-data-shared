@@ -5,8 +5,11 @@
  */
 
 /**
- * GitHubからJSONファイルリストを取得してパスを生成
+ * ローカルファイルシステムからパスを生成
  */
+import { readdirSync, readFileSync } from 'fs';
+import { join } from 'path';
+
 export async function getStaticPaths() {
   const paths = [];
 
@@ -24,49 +27,41 @@ export async function getStaticPaths() {
   };
 
   try {
-    const GITHUB_API_URL = 'https://api.github.com/repos/apol0510/keiba-data-shared/git/trees/main?recursive=1';
+    const resultsDir = join(process.cwd(), 'jra', 'results');
+    const years = readdirSync(resultsDir).filter(name => /^\d{4}$/.test(name));
 
-    const response = await fetch(GITHUB_API_URL, {
-      headers: {
-        'Accept': 'application/vnd.github.v3+json',
-        'User-Agent': 'keiba-data-shared-build'
-      }
-    });
+    for (const year of years) {
+      const yearDir = join(resultsDir, year);
+      const months = readdirSync(yearDir).filter(name => /^\d{2}$/.test(name));
 
-    if (!response.ok) {
-      console.error('GitHub API error:', response.status);
-      return paths;
-    }
+      for (const month of months) {
+        const monthDir = join(yearDir, month);
+        const files = readdirSync(monthDir).filter(name =>
+          name.endsWith('.json') &&
+          name.match(/^\d{4}-\d{2}-\d{2}(-[A-Z]{2,3})?\.json$/)
+        );
 
-    const data = await response.json();
+        for (const file of files) {
+          const filePath = join(monthDir, file);
 
-    const jsonFiles = data.tree.filter(item =>
-      item.path.startsWith('jra/results/') &&
-      item.path.endsWith('.json') &&
-      item.path.match(/jra\/results\/\d{4}\/\d{2}\/\d{4}-\d{2}-\d{2}(-[A-Z]{2,3})?\.json/)
-    );
+          try {
+            const content = readFileSync(filePath, 'utf-8');
+            const jsonData = JSON.parse(content);
 
-    for (const file of jsonFiles) {
-      const match = file.path.match(/jra\/results\/(\d{4})\/(\d{2})\/\d{4}-\d{2}-(\d{2})\.json/);
-      if (match) {
-        const [, year, month, day] = match;
+            const dateMatch = file.match(/^(\d{4})-(\d{2})-(\d{2})/);
+            if (!dateMatch) continue;
 
-        try {
-          const jsonUrl = `https://raw.githubusercontent.com/apol0510/keiba-data-shared/main/${file.path}`;
-          const jsonResponse = await fetch(jsonUrl);
+            const [, fileYear, fileMonth, day] = dateMatch;
+            const venueSlug = venueSlugMap[jsonData.venue];
 
-          if (!jsonResponse.ok) continue;
-
-          const jsonData = await jsonResponse.json();
-          const venueSlug = venueSlugMap[jsonData.venue];
-
-          if (venueSlug) {
-            paths.push({
-              params: { year, month, day, venue: venueSlug }
-            });
+            if (venueSlug) {
+              paths.push({
+                params: { year: fileYear, month: fileMonth, day, venue: venueSlug }
+              });
+            }
+          } catch (e) {
+            console.error(`Error reading ${file}:`, e.message);
           }
-        } catch (e) {
-          console.error(`Error processing ${file.path}:`, e.message);
         }
       }
     }
@@ -113,38 +108,27 @@ const venueCodeMap = {
 
 const venueCode = venueCodeMap[venueName];
 
-// GitHubからJSONデータを取得（会場別ファイル対応）
-const timestamp = Date.now();
+// ローカルファイルシステムからJSONデータを取得（会場別ファイル対応）
 const baseFileName = `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
-const jsonUrl = venueCode
-  ? `https://raw.githubusercontent.com/apol0510/keiba-data-shared/main/jra/results/${year}/${month.padStart(2, '0')}/${baseFileName}-${venueCode}.json?t=${timestamp}`
-  : `https://raw.githubusercontent.com/apol0510/keiba-data-shared/main/jra/results/${year}/${month.padStart(2, '0')}/${baseFileName}.json?t=${timestamp}`;
+const fileName = venueCode ? `${baseFileName}-${venueCode}.json` : `${baseFileName}.json`;
+const filePath = join(process.cwd(), 'jra', 'results', year, month.padStart(2, '0'), fileName);
 
 let venueData = null;
 
 try {
-  const response = await fetch(jsonUrl, {
-    cache: 'no-store',
-    headers: {
-      'Cache-Control': 'no-cache, no-store, must-revalidate',
-      'Pragma': 'no-cache'
-    }
-  });
+  const content = readFileSync(filePath, 'utf-8');
+  const data = JSON.parse(content);
 
-  if (response.ok) {
-    const data = await response.json();
-
-    // 該当競馬場のデータかチェック
-    if (data.venue === venueName) {
-      venueData = {
-        venue: data.venue,
-        venueCode: data.venueCode,
-        races: data.races || []
-      };
-    }
+  // 該当競馬場のデータかチェック
+  if (data.venue === venueName) {
+    venueData = {
+      venue: data.venue,
+      venueCode: data.venueCode,
+      races: data.races || []
+    };
   }
 } catch (error) {
-  console.error(`${year}年${month}月${day}日のデータ取得エラー:`, error);
+  console.error(`${year}年${month}月${day}日のデータ取得エラー:`, error.message);
 }
 
 // 競馬場カラー

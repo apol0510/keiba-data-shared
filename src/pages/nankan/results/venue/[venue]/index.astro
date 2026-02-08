@@ -22,66 +22,61 @@ const venueMap = {
   'urawa': '浦和'
 };
 
+import { readdirSync, readFileSync } from 'fs';
+import { join } from 'path';
+
 const venueName = venueMap[venue] || venue;
 
 const title = `${venueName}競馬 結果アーカイブ | 南関競馬`;
 const description = `${venueName}競馬場の全レース結果アーカイブ。過去の開催データを検索できます。`;
 
-// 全データから指定競馬場のデータをGitHubから抽出
+// ローカルファイルシステムから指定競馬場のデータを抽出
 const archiveData = [];
 
 try {
-  const GITHUB_API_URL = 'https://api.github.com/repos/apol0510/keiba-data-shared/git/trees/main?recursive=1';
+  const resultsDir = join(process.cwd(), 'nankan', 'results');
 
-  const response = await fetch(GITHUB_API_URL, {
-    headers: {
-      'Accept': 'application/vnd.github.v3+json',
-      'User-Agent': 'keiba-data-shared-build'
-    }
-  });
+  // 年ディレクトリを取得
+  const years = readdirSync(resultsDir).filter(name => /^\d{4}$/.test(name));
 
-  if (response.ok) {
-    const data = await response.json();
+  for (const year of years) {
+    const yearDir = join(resultsDir, year);
 
-    const jsonFiles = data.tree.filter(item =>
-      item.path.startsWith('nankan/results/') &&
-      item.path.endsWith('.json') &&
-      item.path.match(/nankan\/results\/\d{4}\/\d{2}\/\d{4}-\d{2}-\d{2}\.json/)
-    );
+    // 月ディレクトリを取得
+    const months = readdirSync(yearDir).filter(name => /^\d{2}$/.test(name));
 
-    for (const file of jsonFiles) {
-      const match = file.path.match(/nankan\/results\/(\d{4})\/(\d{2})\//);
-      if (match) {
-        const [, year, month] = match;
+    for (const month of months) {
+      const monthDir = join(yearDir, month);
 
+      // JSONファイルを取得
+      const files = readdirSync(monthDir).filter(name => name.endsWith('.json'));
+
+      for (const file of files) {
         try {
-          const jsonUrl = `https://raw.githubusercontent.com/apol0510/keiba-data-shared/main/${file.path}`;
-          const jsonResponse = await fetch(jsonUrl);
+          const filePath = join(monthDir, file);
+          const content = readFileSync(filePath, 'utf-8');
+          const jsonData = JSON.parse(content);
 
-          if (jsonResponse.ok) {
-            const jsonData = await jsonResponse.json();
-
-            // 指定競馬場のデータのみ抽出
-            if (jsonData.venue === venueName) {
-              archiveData.push({
-                date: jsonData.date,
-                venue: jsonData.venue,
-                venueCode: jsonData.venueCode,
-                raceCount: jsonData.races.length,
-                year,
-                month
-              });
-            }
+          // 指定競馬場のデータのみ抽出
+          if (jsonData.venue === venueName) {
+            archiveData.push({
+              date: jsonData.date,
+              venue: jsonData.venue,
+              venueCode: jsonData.venueCode,
+              raceCount: jsonData.races.length,
+              year,
+              month
+            });
           }
         } catch (e) {
-          console.error(`Error fetching ${file.path}:`, e.message);
+          console.error(`Error reading ${file}:`, e.message);
         }
       }
     }
-
-    // 日付の新しい順にソート
-    archiveData.sort((a, b) => b.date.localeCompare(a.date));
   }
+
+  // 日付の新しい順にソート
+  archiveData.sort((a, b) => b.date.localeCompare(a.date));
 } catch (error) {
   console.error(`${venueName}競馬のアーカイブデータ取得エラー:`, error);
 }
