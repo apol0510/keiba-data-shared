@@ -5,9 +5,12 @@
  */
 
 /**
- * GitHubからJSONファイルリストを取得してパスを生成
- * ビルド時に最新データを取得して静的HTML生成
+ * ローカルファイルシステムからJSONファイルを読み込んでパスを生成
+ * GitHub API rate limitを回避するため、ローカルファイルシステムを使用
  */
+import { readdirSync, readFileSync } from 'fs';
+import { join } from 'path';
+
 export async function getStaticPaths() {
   const paths = [];
 
@@ -25,75 +28,72 @@ export async function getStaticPaths() {
   };
 
   try {
-    // GitHub APIでjra/results/配下のディレクトリツリーを取得
-    const GITHUB_API_URL = 'https://api.github.com/repos/apol0510/keiba-data-shared/git/trees/main?recursive=1';
+    const resultsDir = join(process.cwd(), 'jra', 'results');
 
-    const response = await fetch(GITHUB_API_URL, {
-      headers: {
-        'Accept': 'application/vnd.github.v3+json',
-        'User-Agent': 'keiba-data-shared-build'
-      }
-    });
+    // 年ディレクトリを取得（4桁数字のみ）
+    const years = readdirSync(resultsDir).filter(name => /^\d{4}$/.test(name));
 
-    if (!response.ok) {
-      console.error('GitHub API error:', response.status);
-      return paths; // 空配列を返して失敗を防ぐ
-    }
+    for (const year of years) {
+      const yearDir = join(resultsDir, year);
 
-    const data = await response.json();
+      // 月ディレクトリを取得（2桁数字のみ）
+      const months = readdirSync(yearDir).filter(name => /^\d{2}$/.test(name));
 
-    // jra/results/YYYY/MM/YYYY-MM-DD.json または YYYY-MM-DD-VENUE.json ファイルを抽出
-    const jsonFiles = data.tree.filter(item =>
-      item.path.startsWith('jra/results/') &&
-      item.path.endsWith('.json') &&
-      item.path.match(/jra\/results\/\d{4}\/\d{2}\/\d{4}-\d{2}-\d{2}(-[A-Z]{2,3})?\.json/)
-    );
+      for (const month of months) {
+        const monthDir = join(yearDir, month);
 
-    console.log(`Found ${jsonFiles.length} JSON files`);
+        // JSONファイルを取得（YYYY-MM-DD.json または YYYY-MM-DD-VENUE.json）
+        const files = readdirSync(monthDir).filter(name =>
+          name.endsWith('.json') &&
+          name.match(/^\d{4}-\d{2}-\d{2}(-[A-Z]{2,3})?\.json$/)
+        );
 
-    // 各JSONファイルを取得してパスを生成
-    for (const file of jsonFiles) {
-      const match = file.path.match(/jra\/results\/(\d{4})\/(\d{2})\/\d{4}-\d{2}-(\d{2})\.json/);
-      if (match) {
-        const [, year, month, day] = match;
+        for (const file of files) {
+          const filePath = join(monthDir, file);
 
-        try {
-          // raw URLからJSON取得
-          const jsonUrl = `https://raw.githubusercontent.com/apol0510/keiba-data-shared/main/${file.path}`;
-          const jsonResponse = await fetch(jsonUrl);
+          try {
+            const content = readFileSync(filePath, 'utf-8');
+            const jsonData = JSON.parse(content);
 
-          if (!jsonResponse.ok) continue;
+            // 結果データのみを対象とする
+            if (!jsonData.venue || !jsonData.date || !Array.isArray(jsonData.races)) {
+              continue;
+            }
 
-          const jsonData = await jsonResponse.json();
+            // 日付を抽出（YYYY-MM-DD形式）
+            const dateMatch = file.match(/^(\d{4})-(\d{2})-(\d{2})/);
+            if (!dateMatch) continue;
 
-          // 結果データのみを対象とする（venue, date, racesフィールドが必須）
-          if (!jsonData.venue || !jsonData.date || !Array.isArray(jsonData.races)) {
-            continue;
+            const [, fileYear, fileMonth, day] = dateMatch;
+            const venueSlug = venueSlugMap[jsonData.venue];
+
+            if (!venueSlug) {
+              console.warn(`Unknown venue: ${jsonData.venue} in file ${file}`);
+              continue;
+            }
+
+            // 各レースごとにパスを生成
+            for (const race of jsonData.races) {
+              paths.push({
+                params: {
+                  year: fileYear,
+                  month: fileMonth,
+                  day,
+                  venue: venueSlug,
+                  race: race.raceNumber.toString()
+                }
+              });
+            }
+
+            console.log(`Generated ${jsonData.races.length} race paths for ${jsonData.date} ${jsonData.venue}`);
+          } catch (e) {
+            console.error(`Error processing ${file}:`, e.message);
           }
-
-          const venueSlug = venueSlugMap[jsonData.venue] || 'tokyo';
-
-          // 各レースごとにパスを生成
-          for (const race of jsonData.races) {
-            paths.push({
-              params: {
-                year,
-                month,
-                day,
-                venue: venueSlug,
-                race: race.raceNumber.toString()
-              }
-            });
-          }
-
-          console.log(`Generated paths for ${year}-${month}-${day} ${jsonData.venue}: ${jsonData.races.length} races`);
-        } catch (e) {
-          console.error(`Error processing ${file.path}:`, e.message);
         }
       }
     }
 
-    console.log(`Total paths generated: ${paths.length}`);
+    console.log(`Total race paths generated: ${paths.length}`);
   } catch (error) {
     console.error('Fatal error in getStaticPaths:', error);
   }
