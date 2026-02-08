@@ -1,0 +1,100 @@
+name: Dispatch JRA Results to keiba-intelligence
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'jra/results/**/*.json'
+
+jobs:
+  dispatch:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Get changed JRA result files
+        id: changed-files
+        run: |
+          CHANGED_FILES=$(git diff --name-only HEAD^ HEAD | grep 'jra/results/.*\.json' || true)
+
+          if [ -z "$CHANGED_FILES" ]; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+            echo "📊 No JRA result files changed"
+            exit 0
+          fi
+
+          # 各ファイルのレース数をチェック
+          DATES_ARRAY="["
+          FIRST=true
+          ALL_COMPLETE=true
+
+          while IFS= read -r file; do
+            DATE=$(basename "$file" .json)
+
+            # JSONファイルのレース数をチェック
+            RACE_COUNT=$(cat "$file" | jq '.races | length')
+
+            echo "📋 $DATE (JRA): $RACE_COUNT レース"
+
+            if [ "$RACE_COUNT" -lt 12 ]; then
+              echo "⏳ スキップ: $DATE は ${RACE_COUNT}レースのみ（12レース未満）"
+              ALL_COMPLETE=false
+              continue
+            fi
+
+            echo "✅ 完了: $DATE (JRA) は12レース揃っています"
+
+            # 12レース揃ったファイルのみdates配列に追加
+            if [ "$FIRST" = true ]; then
+              DATES_ARRAY="${DATES_ARRAY}\"${DATE}\""
+              FIRST=false
+            else
+              DATES_ARRAY="${DATES_ARRAY},\"${DATE}\""
+            fi
+          done <<< "$CHANGED_FILES"
+          DATES_ARRAY="${DATES_ARRAY}]"
+
+          # 12レース揃ったファイルがあるかチェック
+          if [ "$DATES_ARRAY" = "[]" ]; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+            echo "⏭️  全ファイルが12レース未満のためスキップ（速報のみ）"
+            exit 0
+          fi
+
+          echo "changed=true" >> $GITHUB_OUTPUT
+          echo "dates=$DATES_ARRAY" >> $GITHUB_OUTPUT
+          echo "🎯 Dispatch対象 (JRA): $DATES_ARRAY"
+
+      - name: Dispatch to keiba-intelligence
+        if: steps.changed-files.outputs.changed == 'true'
+        uses: peter-evans/repository-dispatch@v3
+        with:
+          token: ${{ secrets.INTELLIGENCE_REPO_DISPATCH_TOKEN }}
+          repository: apol0510/keiba-intelligence
+          event-type: results-jra-updated
+          client-payload: |
+            {
+              "dates": ${{ steps.changed-files.outputs.dates }},
+              "source": "keiba-data-shared",
+              "venue": "jra",
+              "trigger": "auto",
+              "commit_sha": "${{ github.sha }}"
+            }
+
+      - name: Success notification
+        if: steps.changed-files.outputs.changed == 'true'
+        run: |
+          echo "✅ Dispatched JRA results to keiba-intelligence"
+          echo "   Dates: ${{ steps.changed-files.outputs.dates }}"
+          echo "   Event type: results-jra-updated"
+          echo "   Target repo: apol0510/keiba-intelligence"
+
+      - name: Skip notification
+        if: steps.changed-files.outputs.changed != 'true'
+        run: |
+          echo "⏭️  Skipped: No JRA result files changed in this push"
