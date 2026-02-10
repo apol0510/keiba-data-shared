@@ -36,18 +36,22 @@ jobs:
           while IFS= read -r file; do
             DATE=$(basename "$file" .json)
 
-            # JSONファイルのレース数をチェック
+            # JSONファイルのレース数をチェック（中央競馬は10レース以上で処理）
             RACE_COUNT=$(cat "$file" | jq '.races | length')
 
             echo "📋 $DATE (JRA): $RACE_COUNT レース"
 
-            if [ "$RACE_COUNT" -lt 12 ]; then
-              echo "⏳ スキップ: $DATE は ${RACE_COUNT}レースのみ（12レース未満）"
+            if [ "$RACE_COUNT" -lt 10 ]; then
+              echo "⏳ スキップ: $DATE は ${RACE_COUNT}レースのみ（10レース未満）"
               ALL_COMPLETE=false
               continue
             fi
 
-            echo "✅ 完了: $DATE (JRA) は12レース揃っています"
+            if [ "$RACE_COUNT" -ge 10 ] && [ "$RACE_COUNT" -lt 12 ]; then
+              echo "⚠️  注意: $DATE は ${RACE_COUNT}レース（レース中止・天候不良の可能性）"
+            fi
+
+            echo "✅ 完了: $DATE (JRA) は${RACE_COUNT}レース揃っています"
 
             # 12レース揃ったファイルのみdates配列に追加
             if [ "$FIRST" = true ]; then
