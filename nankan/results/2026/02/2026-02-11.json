@@ -1,0 +1,3623 @@
+{
+  "date": "2026-02-11",
+  "venue": "船橋",
+  "venueCode": "FU",
+  "races": [
+    {
+      "date": "2026-02-11",
+      "venue": "船橋",
+      "raceNumber": 1,
+      "raceName": "３歳(七)",
+      "distance": 1200,
+      "surface": "ダート",
+      "startTime": "14:40",
+      "weather": "曇",
+      "trackCondition": "稍重",
+      "results": [
+        {
+          "rank": 1,
+          "bracket": 2,
+          "number": 2,
+          "name": "マサノカトレア",
+          "jockey": "岡村健司",
+          "trainer": "齊藤敏",
+          "time": "1:17.0",
+          "margin": "-",
+          "lastFurlong": "39.9",
+          "popularity": 4
+        },
+        {
+          "rank": 2,
+          "bracket": 7,
+          "number": 9,
+          "name": "バブリーヒーロー",
+          "jockey": "町田直希",
+          "trainer": "矢野義幸",
+          "time": "1:17.9",
+          "margin": "４",
+          "lastFurlong": "40.6",
+          "popularity": 9
+        },
+        {
+          "rank": 3,
+          "bracket": 8,
+          "number": 12,
+          "name": "リバースター",
+          "jockey": "野澤憲彦",
+          "trainer": "齊藤敏",
+          "time": "1:18.0",
+          "margin": "クビ",
+          "lastFurlong": "41.0",
+          "popularity": 1
+        },
+        {
+          "rank": 6,
+          "bracket": 7,
+          "number": 10,
+          "name": "ケンシユウキ",
+          "jockey": "山中悠希",
+          "trainer": "佐藤裕太",
+          "time": "1:19.4",
+          "margin": "２",
+          "lastFurlong": "42.2",
+          "popularity": 2
+        },
+        {
+          "rank": 7,
+          "bracket": 6,
+          "number": 7,
+          "name": "エムブイピーコール",
+          "jockey": "▲椿聡太",
+          "trainer": "齊藤敏",
+          "time": "1:19.4",
+          "margin": "ハナ",
+          "lastFurlong": "41.7",
+          "popularity": 11
+        },
+        {
+          "rank": 8,
+          "bracket": 3,
+          "number": 3,
+          "name": "トーケンマティーニ",
+          "jockey": "山本聡紀",
+          "trainer": "石崎駿",
+          "time": "1:19.5",
+          "margin": "クビ",
+          "lastFurlong": "42.6",
+          "popularity": 5
+        },
+        {
+          "rank": 9,
+          "bracket": 5,
+          "number": 6,
+          "name": "コンバットジゴロ",
+          "jockey": "室陽一朗",
+          "trainer": "工藤伸輔",
+          "time": "1:20.2",
+          "margin": "３",
+          "lastFurlong": "41.9",
+          "popularity": 10
+        },
+        {
+          "rank": 10,
+          "bracket": 6,
+          "number": 8,
+          "name": "メイジョウスター",
+          "jockey": "△中山遥人",
+          "trainer": "酒井一則",
+          "time": "1:20.6",
+          "margin": "２",
+          "lastFurlong": "43.8",
+          "popularity": 12
+        },
+        {
+          "rank": 11,
+          "bracket": 1,
+          "number": 1,
+          "name": "トーセンクリステル",
+          "jockey": "西啓太",
+          "trainer": "小久保智",
+          "time": "1:21.8",
+          "margin": "６",
+          "lastFurlong": "44.1",
+          "popularity": 3
+        },
+        {
+          "rank": 12,
+          "bracket": 8,
+          "number": 11,
+          "name": "ティーズスナイパー",
+          "jockey": "石川倭",
+          "trainer": "山中尊徳",
+          "time": "1:22.9",
+          "margin": "５",
+          "lastFurlong": "44.0",
+          "popularity": 7
+        }
+      ],
+      "payouts": {
+        "tansho": [
+          {
+            "number": "2",
+            "payout": 790,
+            "popularity": 4
+          }
+        ],
+        "fukusho": [
+          {
+            "number": "2",
+            "payout": 170,
+            "popularity": 2
+          },
+          {
+            "number": "9",
+            "payout": 790,
+            "popularity": 9
+          },
+          {
+            "number": "12",
+            "payout": 130,
+            "popularity": 1
+          }
+        ],
+        "wakuren": [
+          {
+            "combination": "2-7",
+            "payout": 2440,
+            "popularity": 8
+          }
+        ],
+        "umaren": [
+          {
+            "combination": "2-9",
+            "payout": 17230,
+            "popularity": 35
+          }
+        ],
+        "wakutan": [
+          {
+            "combination": "2-7",
+            "payout": 5720,
+            "popularity": 17
+          }
+        ],
+        "umatan": [
+          {
+            "combination": "2-9",
+            "payout": 35780,
+            "popularity": 68
+          }
+        ],
+        "wide": [
+          {
+            "combination": "2-9",
+            "payout": 3080,
+            "popularity": 32
+          },
+          {
+            "combination": "2-12",
+            "payout": 300,
+            "popularity": 2
+          },
+          {
+            "combination": "9-12",
+            "payout": 1140,
+            "popularity": 17
+          }
+        ],
+        "sanrenpuku": [
+          {
+            "combination": "2-9-12",
+            "payout": 6630,
+            "popularity": 19
+          }
+        ],
+        "sanrentan": [
+          {
+            "combination": "2-9-12",
+            "payout": 93090,
+            "popularity": 277
+          }
+        ]
+      },
+      "timeData": {
+        "last3F": 40.2,
+        "last4F": 52.8,
+        "furlongTimes": [
+          12.4,
+          11.8,
+          12.6,
+          13.2,
+          13.2,
+          13.8
+        ]
+      },
+      "cornerData": [
+        {
+          "corner": "２角",
+          "order": [
+            8,
+            2,
+            12,
+            3,
+            1,
+            10,
+            7,
+            6,
+            9,
+            11,
+            4,
+            5
+          ]
+        },
+        {
+          "corner": "３角",
+          "order": [
+            8,
+            3,
+            12,
+            2,
+            10,
+            9,
+            1,
+            7,
+            6,
+            11,
+            4,
+            5
+          ]
+        },
+        {
+          "corner": "４角",
+          "order": [
+            8,
+            3,
+            12,
+            2,
+            9,
+            10,
+            7,
+            1,
+            6,
+            4,
+            11,
+            5
+          ]
+        }
+      ],
+      "comment": "2026年2月11日船橋競馬1レース（３歳(七) ダ1200m・10頭立）は、8番メイジョウスター（12番人気）がハナを切る展開の中、2番マサノカトレア（4番人気）が好位で脚を溜め直線ではしぶとく差し切り、勝ちタイム1:17.0で1着となった。鞍上は岡村健司騎手と齊藤敏厩舎のコンビ。2着には5番手から伸びた9番バブリーヒーロー（9番人気）、3着には12番リバースター（1番人気）が入線。三連単2-9-12は93,090円（277番人気）で決着した。馬単は35,780円の高配当となった。"
+    },
+    {
+      "date": "2026-02-11",
+      "venue": "船橋",
+      "raceNumber": 2,
+      "raceName": "３歳(六)",
+      "distance": 1200,
+      "surface": "ダート",
+      "startTime": "15:10",
+      "weather": "曇",
+      "trackCondition": "稍重",
+      "results": [
+        {
+          "rank": 1,
+          "bracket": 8,
+          "number": 9,
+          "name": "メルドーレ",
+          "jockey": "本田正重",
+          "trainer": "川島正一",
+          "time": "1:18.1",
+          "margin": "-",
+          "lastFurlong": "41.2",
+          "popularity": 1
+        },
+        {
+          "rank": 2,
+          "bracket": 2,
+          "number": 2,
+          "name": "ダイセンシリウス",
+          "jockey": "本橋孝太",
+          "trainer": "石井勝男",
+          "time": "1:18.2",
+          "margin": "1/2",
+          "lastFurlong": "41.6",
+          "popularity": 8
+        },
+        {
+          "rank": 3,
+          "bracket": 8,
+          "number": 10,
+          "name": "リプサリス",
+          "jockey": "小杉亮",
+          "trainer": "伊藤滋規",
+          "time": "1:18.3",
+          "margin": "1/2",
+          "lastFurlong": "41.0",
+          "popularity": 3
+        },
+        {
+          "rank": 5,
+          "bracket": 7,
+          "number": 7,
+          "name": "トーヤマノゴールド",
+          "jockey": "笠野雄大",
+          "trainer": "山中尊徳",
+          "time": "1:18.8",
+          "margin": "アタマ",
+          "lastFurlong": "40.1",
+          "popularity": 7
+        },
+        {
+          "rank": 6,
+          "bracket": 7,
+          "number": 8,
+          "name": "モルゲンレーテ",
+          "jockey": "木間塚龍馬",
+          "trainer": "矢野義幸",
+          "time": "1:19.0",
+          "margin": "１",
+          "lastFurlong": "41.7",
+          "popularity": 6
+        },
+        {
+          "rank": 7,
+          "bracket": 3,
+          "number": 3,
+          "name": "マックスハート",
+          "jockey": "山中悠希",
+          "trainer": "長谷川剛史",
+          "time": "1:19.4",
+          "margin": "２",
+          "lastFurlong": "41.5",
+          "popularity": 9
+        },
+        {
+          "rank": 8,
+          "bracket": 6,
+          "number": 6,
+          "name": "ゴーレム",
+          "jockey": "岡村健司",
+          "trainer": "渋谷信博",
+          "time": "1:19.5",
+          "margin": "クビ",
+          "lastFurlong": "41.8",
+          "popularity": 5
+        },
+        {
+          "rank": 9,
+          "bracket": 1,
+          "number": 1,
+          "name": "コグマザセカンド",
+          "jockey": "七夕裕次郎",
+          "trainer": "宇野木博徳",
+          "time": "1:19.9",
+          "margin": "２",
+          "lastFurlong": "42.2",
+          "popularity": 10
+        },
+        {
+          "rank": 10,
+          "bracket": 4,
+          "number": 4,
+          "name": "ピタカゲ",
+          "jockey": "矢野貴之",
+          "trainer": "川島正一",
+          "time": "1:21.1",
+          "margin": "６",
+          "lastFurlong": "42.8",
+          "popularity": 4
+        }
+      ],
+      "payouts": {
+        "tansho": [
+          {
+            "number": "9",
+            "payout": 140,
+            "popularity": 1
+          }
+        ],
+        "fukusho": [
+          {
+            "number": "9",
+            "payout": 120,
+            "popularity": 1
+          },
+          {
+            "number": "2",
+            "payout": 330,
+            "popularity": 8
+          },
+          {
+            "number": "10",
+            "payout": 140,
+            "popularity": 2
+          }
+        ],
+        "wakuren": [
+          {
+            "combination": "2-8",
+            "payout": 1420,
+            "popularity": 6
+          }
+        ],
+        "umaren": [
+          {
+            "combination": "2-9",
+            "payout": 2440,
+            "popularity": 7
+          }
+        ],
+        "wakutan": [
+          {
+            "combination": "8-2",
+            "payout": 1900,
+            "popularity": 7
+          }
+        ],
+        "umatan": [
+          {
+            "combination": "9-2",
+            "payout": 2410,
+            "popularity": 8
+          }
+        ],
+        "wide": [
+          {
+            "combination": "2-9",
+            "payout": 610,
+            "popularity": 7
+          },
+          {
+            "combination": "9-10",
+            "payout": 210,
+            "popularity": 2
+          },
+          {
+            "combination": "2-10",
+            "payout": 1250,
+            "popularity": 17
+          }
+        ],
+        "sanrenpuku": [
+          {
+            "combination": "2-9-10",
+            "payout": 2640,
+            "popularity": 9
+          }
+        ],
+        "sanrentan": [
+          {
+            "combination": "9-2-10",
+            "payout": 11120,
+            "popularity": 34
+          }
+        ]
+      },
+      "timeData": {
+        "last3F": 41.5,
+        "last4F": 53.8,
+        "furlongTimes": [
+          12.4,
+          11.9,
+          12.3,
+          13.1,
+          14,
+          14.4
+        ]
+      },
+      "cornerData": [
+        {
+          "corner": "２角",
+          "order": [
+            2,
+            5,
+            9,
+            6,
+            1,
+            8,
+            10,
+            3,
+            4,
+            7
+          ]
+        },
+        {
+          "corner": "３角",
+          "order": [
+            2,
+            5,
+            9,
+            10,
+            8,
+            6,
+            1,
+            3,
+            4,
+            7
+          ]
+        },
+        {
+          "corner": "４角",
+          "order": [
+            2,
+            5,
+            9,
+            10,
+            8,
+            1,
+            6,
+            3,
+            4,
+            7
+          ]
+        }
+      ],
+      "comment": "2026年2月11日船橋競馬2レース（３歳(六) ダ1200m・9頭立）は、2番ダイセンシリウス（8番人気）がハナを切る展開の中、9番メルドーレ（1番人気）が好位で脚を溜め直線ではしぶとく差し切り、勝ちタイム1:18.1で1着となった。鞍上は本田正重騎手と川島正一厩舎のコンビ。2着には粘り込んだ2番ダイセンシリウス（8番人気）、3着には10番リプサリス（3番人気）が入線。三連単9-2-10は11,120円（34番人気）で決着した。"
+    },
+    {
+      "date": "2026-02-11",
+      "venue": "船橋",
+      "raceNumber": 3,
+      "raceName": "Ｃ２(九)(十)",
+      "distance": 1500,
+      "surface": "ダート",
+      "startTime": "15:40",
+      "weather": "曇",
+      "trackCondition": "稍重",
+      "results": [
+        {
+          "rank": 1,
+          "bracket": 2,
+          "number": 2,
+          "name": "ブライトビギニング",
+          "jockey": "矢野貴之",
+          "trainer": "稲益貴弘",
+          "time": "1:39.8",
+          "margin": "-",
+          "lastFurlong": "39.9",
+          "popularity": 1
+        },
+        {
+          "rank": 2,
+          "bracket": 8,
+          "number": 12,
+          "name": "トゥアオウフ",
+          "jockey": "町田直希",
+          "trainer": "山田信大",
+          "time": "1:40.5",
+          "margin": "３",
+          "lastFurlong": "40.4",
+          "popularity": 3
+        },
+        {
+          "rank": 3,
+          "bracket": 7,
+          "number": 10,
+          "name": "キョウエイロード",
+          "jockey": "實川純一",
+          "trainer": "佐々木功",
+          "time": "1:40.9",
+          "margin": "２",
+          "lastFurlong": "40.6",
+          "popularity": 11
+        },
+        {
+          "rank": 4,
+          "bracket": 1,
+          "number": 1,
+          "name": "ロジドレフォン",
+          "jockey": "秋元耕成",
+          "trainer": "薮口一麻",
+          "time": "1:41.3",
+          "margin": "２",
+          "lastFurlong": "41.2",
+          "popularity": 8
+        },
+        {
+          "rank": 5,
+          "bracket": 3,
+          "number": 3,
+          "name": "ピリナマアナ",
+          "jockey": "岡村健司",
+          "trainer": "山中尊徳",
+          "time": "1:41.3",
+          "margin": "クビ",
+          "lastFurlong": "41.0",
+          "popularity": 2
+        },
+        {
+          "rank": 6,
+          "bracket": 8,
+          "number": 11,
+          "name": "エコロルキナ",
+          "jockey": "野畑凌",
+          "trainer": "新井清重",
+          "time": "1:41.7",
+          "margin": "２",
+          "lastFurlong": "41.6",
+          "popularity": 6
+        },
+        {
+          "rank": 7,
+          "bracket": 6,
+          "number": 8,
+          "name": "ウインコンパス",
+          "jockey": "庄司大輔",
+          "trainer": "坂本昇",
+          "time": "1:41.7",
+          "margin": "クビ",
+          "lastFurlong": "41.1",
+          "popularity": 9
+        },
+        {
+          "rank": 8,
+          "bracket": 6,
+          "number": 7,
+          "name": "スナドケイ",
+          "jockey": "木間塚龍馬",
+          "trainer": "山本学",
+          "time": "1:42.1",
+          "margin": "２",
+          "lastFurlong": "41.5",
+          "popularity": 4
+        },
+        {
+          "rank": 9,
+          "bracket": 7,
+          "number": 9,
+          "name": "ザボドフスキー",
+          "jockey": "▲椿聡太",
+          "trainer": "伊藤滋規",
+          "time": "1:42.2",
+          "margin": "1/2",
+          "lastFurlong": "41.4",
+          "popularity": 12
+        },
+        {
+          "rank": 10,
+          "bracket": 5,
+          "number": 5,
+          "name": "ピースオーシャン",
+          "jockey": "山中悠希",
+          "trainer": "宇野木博徳",
+          "time": "1:42.6",
+          "margin": "２",
+          "lastFurlong": "42.3",
+          "popularity": 5
+        },
+        {
+          "rank": 11,
+          "bracket": 4,
+          "number": 4,
+          "name": "プリヤンカー",
+          "jockey": "△中山遥人",
+          "trainer": "小林真治",
+          "time": "1:42.6",
+          "margin": "クビ",
+          "lastFurlong": "42.5",
+          "popularity": 7
+        },
+        {
+          "rank": 12,
+          "bracket": 5,
+          "number": 6,
+          "name": "フェリスラリー",
+          "jockey": "本橋孝太",
+          "trainer": "阿井正雄",
+          "time": "1:45.3",
+          "margin": "大差",
+          "lastFurlong": "44.9",
+          "popularity": 10
+        }
+      ],
+      "payouts": {
+        "tansho": [
+          {
+            "number": "2",
+            "payout": 130,
+            "popularity": 1
+          }
+        ],
+        "fukusho": [
+          {
+            "number": "2",
+            "payout": 110,
+            "popularity": 1
+          },
+          {
+            "number": "12",
+            "payout": 200,
+            "popularity": 3
+          },
+          {
+            "number": "10",
+            "payout": 840,
+            "popularity": 9
+          }
+        ],
+        "wakuren": [
+          {
+            "combination": "2-8",
+            "payout": 550,
+            "popularity": 2
+          }
+        ],
+        "umaren": [
+          {
+            "combination": "2-12",
+            "payout": 710,
+            "popularity": 2
+          }
+        ],
+        "wakutan": [
+          {
+            "combination": "2-8",
+            "payout": 700,
+            "popularity": 3
+          }
+        ],
+        "umatan": [
+          {
+            "combination": "2-12",
+            "payout": 740,
+            "popularity": 3
+          }
+        ],
+        "wide": [
+          {
+            "combination": "2-12",
+            "payout": 350,
+            "popularity": 3
+          },
+          {
+            "combination": "2-10",
+            "payout": 1400,
+            "popularity": 14
+          },
+          {
+            "combination": "10-12",
+            "payout": 7440,
+            "popularity": 39
+          }
+        ],
+        "sanrenpuku": [
+          {
+            "combination": "2-10-12",
+            "payout": 11380,
+            "popularity": 22
+          }
+        ],
+        "sanrentan": [
+          {
+            "combination": "2-12-10",
+            "payout": 29910,
+            "popularity": 66
+          }
+        ]
+      },
+      "timeData": {
+        "last3F": 39.9,
+        "last4F": 53,
+        "furlongTimes": [
+          6.9,
+          12.6,
+          13.8,
+          13.5,
+          13.1,
+          13,
+          13.4,
+          13.5
+        ]
+      },
+      "cornerData": [
+        {
+          "corner": "１角",
+          "order": [
+            2,
+            4,
+            11,
+            12,
+            1,
+            3,
+            5,
+            8,
+            6,
+            7,
+            10,
+            9
+          ]
+        },
+        {
+          "corner": "２角",
+          "order": [
+            2,
+            4,
+            11,
+            1,
+            12,
+            3,
+            5,
+            8,
+            6,
+            7,
+            10,
+            9
+          ]
+        },
+        {
+          "corner": "３角",
+          "order": [
+            2,
+            4,
+            11,
+            1,
+            12,
+            3,
+            5,
+            10,
+            6,
+            8,
+            7,
+            9
+          ]
+        },
+        {
+          "corner": "４角",
+          "order": [
+            2,
+            1,
+            11,
+            12,
+            4,
+            10,
+            3,
+            6,
+            7,
+            5,
+            8,
+            9
+          ]
+        }
+      ],
+      "comment": "2026年2月11日船橋競馬3レース（Ｃ２(九)(十) ダ1500m・12頭立）は、2番ブライトビギニング（1番人気）がスタートからハナを切って主導権を握る展開。直線でも粘り強く脚を使い、勝ちタイム1:39.8で1着。2着には4番手から追い込んだ12番トゥアオウフ（3番人気）、3着には10番キョウエイロード（11番人気）が入線。三連単2-12-10は29,910円（66番人気）で決着した。鞍上は矢野貴之騎手と稲益貴弘厩舎のコンビだった。"
+    },
+    {
+      "date": "2026-02-11",
+      "venue": "船橋",
+      "raceNumber": 4,
+      "raceName": "Ｃ３(三)",
+      "distance": 1200,
+      "surface": "ダート",
+      "startTime": "16:15",
+      "weather": "曇",
+      "trackCondition": "稍重",
+      "results": [
+        {
+          "rank": 1,
+          "bracket": 8,
+          "number": 11,
+          "name": "ケイアイワカポノ",
+          "jockey": "矢野貴之",
+          "trainer": "田中力",
+          "time": "1:17.8",
+          "margin": "-",
+          "lastFurlong": "39.8",
+          "popularity": 1
+        },
+        {
+          "rank": 2,
+          "bracket": 7,
+          "number": 9,
+          "name": "デルマカタスカシ",
+          "jockey": "小杉亮",
+          "trainer": "坂本昇",
+          "time": "1:17.9",
+          "margin": "クビ",
+          "lastFurlong": "39.7",
+          "popularity": 2
+        },
+        {
+          "rank": 3,
+          "bracket": 6,
+          "number": 8,
+          "name": "クリスプオブウォー",
+          "jockey": "山中悠希",
+          "trainer": "佐々木清明",
+          "time": "1:18.6",
+          "margin": "３",
+          "lastFurlong": "40.7",
+          "popularity": 3
+        },
+        {
+          "rank": 5,
+          "bracket": 3,
+          "number": 3,
+          "name": "マジカルレインボー",
+          "jockey": "仲野光馬",
+          "trainer": "阿井正雄",
+          "time": "1:19.1",
+          "margin": "アタマ",
+          "lastFurlong": "40.5",
+          "popularity": 4
+        },
+        {
+          "rank": 6,
+          "bracket": 8,
+          "number": 12,
+          "name": "リュウノファントム",
+          "jockey": "☆佐野遥久",
+          "trainer": "野口孝",
+          "time": "1:19.2",
+          "margin": "クビ",
+          "lastFurlong": "41.0",
+          "popularity": 8
+        },
+        {
+          "rank": 7,
+          "bracket": 6,
+          "number": 7,
+          "name": "ボタンブーケ",
+          "jockey": "濱田達也",
+          "trainer": "石井勝男",
+          "time": "1:19.6",
+          "margin": "２",
+          "lastFurlong": "41.0",
+          "popularity": 10
+        },
+        {
+          "rank": 8,
+          "bracket": 5,
+          "number": 5,
+          "name": "ラブミーエール",
+          "jockey": "服部茂史",
+          "trainer": "渋谷信博",
+          "time": "1:19.8",
+          "margin": "１",
+          "lastFurlong": "41.0",
+          "popularity": 7
+        },
+        {
+          "rank": 9,
+          "bracket": 5,
+          "number": 6,
+          "name": "キューランブラー",
+          "jockey": "篠谷葵",
+          "trainer": "林正人",
+          "time": "1:19.9",
+          "margin": "3/4",
+          "lastFurlong": "41.5",
+          "popularity": 5
+        },
+        {
+          "rank": 12,
+          "bracket": 2,
+          "number": 2,
+          "name": "トキノジーク",
+          "jockey": "高橋利幸",
+          "trainer": "玉井昇",
+          "time": "1:20.8",
+          "margin": "1/2",
+          "lastFurlong": "42.2",
+          "popularity": 11
+        }
+      ],
+      "payouts": {
+        "tansho": [
+          {
+            "number": "11",
+            "payout": 150,
+            "popularity": 1
+          }
+        ],
+        "fukusho": [
+          {
+            "number": "11",
+            "payout": 110,
+            "popularity": 1
+          },
+          {
+            "number": "9",
+            "payout": 110,
+            "popularity": 2
+          },
+          {
+            "number": "8",
+            "payout": 130,
+            "popularity": 3
+          }
+        ],
+        "wakuren": [
+          {
+            "combination": "7-8",
+            "payout": 230,
+            "popularity": 1
+          }
+        ],
+        "umaren": [
+          {
+            "combination": "9-11",
+            "payout": 250,
+            "popularity": 1
+          }
+        ],
+        "wakutan": [
+          {
+            "combination": "8-7",
+            "payout": 360,
+            "popularity": 1
+          }
+        ],
+        "umatan": [
+          {
+            "combination": "11-9",
+            "payout": 350,
+            "popularity": 1
+          }
+        ],
+        "wide": [
+          {
+            "combination": "9-11",
+            "payout": 160,
+            "popularity": 1
+          },
+          {
+            "combination": "8-11",
+            "payout": 230,
+            "popularity": 2
+          },
+          {
+            "combination": "8-9",
+            "payout": 290,
+            "popularity": 3
+          }
+        ],
+        "sanrenpuku": [
+          {
+            "combination": "8-9-11",
+            "payout": 430,
+            "popularity": 1
+          }
+        ],
+        "sanrentan": [
+          {
+            "combination": "11-9-8",
+            "payout": 1220,
+            "popularity": 1
+          }
+        ]
+      },
+      "timeData": {
+        "last3F": 39.9,
+        "last4F": 52.8,
+        "furlongTimes": [
+          12.5,
+          12.5,
+          12.9,
+          13,
+          13.3,
+          13.6
+        ]
+      },
+      "cornerData": [
+        {
+          "corner": "２角",
+          "order": [
+            8,
+            11,
+            1,
+            12,
+            2,
+            9,
+            4,
+            6,
+            7,
+            3,
+            10,
+            5
+          ]
+        },
+        {
+          "corner": "３角",
+          "order": [
+            8,
+            11,
+            12,
+            9,
+            1,
+            10,
+            6,
+            2,
+            7,
+            3,
+            4,
+            5
+          ]
+        },
+        {
+          "corner": "４角",
+          "order": [
+            8,
+            11,
+            9,
+            12,
+            1,
+            10,
+            6,
+            3,
+            7,
+            2,
+            4,
+            5
+          ]
+        }
+      ],
+      "comment": "2026年2月11日船橋競馬4レース（Ｃ３(三) ダ1200m・9頭立）は、8番クリスプオブウォー（3番人気）がハナを切る展開の中、11番ケイアイワカポノ（1番人気）が2番手で折り合い直線で抜け出し、勝ちタイム1:17.8で1着となった。鞍上は矢野貴之騎手と田中力厩舎のコンビ。2着には3番手から伸びた9番デルマカタスカシ（2番人気）、3着には逃げた8番クリスプオブウォー（3番人気）が入線。三連単11-9-8は1,220円（1番人気）で決着した。"
+    },
+    {
+      "date": "2026-02-11",
+      "venue": "船橋",
+      "raceNumber": 5,
+      "raceName": "Ｃ３(二)",
+      "distance": 1200,
+      "surface": "ダート",
+      "startTime": "16:45",
+      "weather": "曇",
+      "trackCondition": "稍重",
+      "results": [
+        {
+          "rank": 1,
+          "bracket": 6,
+          "number": 7,
+          "name": "クリノセノーテ",
+          "jockey": "山中悠希",
+          "trainer": "新井清重",
+          "time": "1:17.0",
+          "margin": "-",
+          "lastFurlong": "39.1",
+          "popularity": 1
+        },
+        {
+          "rank": 2,
+          "bracket": 1,
+          "number": 1,
+          "name": "ジェイルブレイク",
+          "jockey": "庄司大輔",
+          "trainer": "阿井正雄",
+          "time": "1:17.9",
+          "margin": "４",
+          "lastFurlong": "40.0",
+          "popularity": 4
+        },
+        {
+          "rank": 3,
+          "bracket": 4,
+          "number": 4,
+          "name": "フィオーレ",
+          "jockey": "小杉亮",
+          "trainer": "林幻",
+          "time": "1:18.1",
+          "margin": "3/4",
+          "lastFurlong": "40.0",
+          "popularity": 5
+        },
+        {
+          "rank": 4,
+          "bracket": 8,
+          "number": 12,
+          "name": "ランハルト",
+          "jockey": "濱田達也",
+          "trainer": "佐々木功",
+          "time": "1:18.1",
+          "margin": "クビ",
+          "lastFurlong": "40.7",
+          "popularity": 7
+        },
+        {
+          "rank": 5,
+          "bracket": 8,
+          "number": 11,
+          "name": "メイショウボンゴチ",
+          "jockey": "山口達弥",
+          "trainer": "玉井勝",
+          "time": "1:18.1",
+          "margin": "ハナ",
+          "lastFurlong": "39.9",
+          "popularity": 8
+        },
+        {
+          "rank": 6,
+          "bracket": 6,
+          "number": 8,
+          "name": "アルゴフィリオ",
+          "jockey": "△所蛍",
+          "trainer": "玉井等",
+          "time": "1:18.5",
+          "margin": "２",
+          "lastFurlong": "39.8",
+          "popularity": 11
+        },
+        {
+          "rank": 8,
+          "bracket": 7,
+          "number": 10,
+          "name": "チャンスメーカー",
+          "jockey": "石川倭",
+          "trainer": "山田信大",
+          "time": "1:19.1",
+          "margin": "1/2",
+          "lastFurlong": "40.5",
+          "popularity": 6
+        },
+        {
+          "rank": 9,
+          "bracket": 5,
+          "number": 5,
+          "name": "ニシノミモザ",
+          "jockey": "秋元耕成",
+          "trainer": "吉田正美",
+          "time": "1:19.2",
+          "margin": "クビ",
+          "lastFurlong": "40.1",
+          "popularity": 12
+        },
+        {
+          "rank": 10,
+          "bracket": 7,
+          "number": 9,
+          "name": "セイダンシング",
+          "jockey": "高橋利幸",
+          "trainer": "玉井昇",
+          "time": "1:19.3",
+          "margin": "1/2",
+          "lastFurlong": "40.6",
+          "popularity": 10
+        },
+        {
+          "rank": 11,
+          "bracket": 5,
+          "number": 6,
+          "name": "マリノテレージア",
+          "jockey": "篠谷葵",
+          "trainer": "石井勝男",
+          "time": "1:19.3",
+          "margin": "アタマ",
+          "lastFurlong": "41.5",
+          "popularity": 3
+        },
+        {
+          "rank": 12,
+          "bracket": 3,
+          "number": 3,
+          "name": "エターナルジュエル",
+          "jockey": "西啓太",
+          "trainer": "藤原智行",
+          "time": "1:21.2",
+          "margin": "９",
+          "lastFurlong": "43.6",
+          "popularity": 9
+        }
+      ],
+      "payouts": {
+        "tansho": [
+          {
+            "number": "7",
+            "payout": 170,
+            "popularity": 1
+          }
+        ],
+        "fukusho": [
+          {
+            "number": "7",
+            "payout": 120,
+            "popularity": 1
+          },
+          {
+            "number": "1",
+            "payout": 240,
+            "popularity": 6
+          },
+          {
+            "number": "4",
+            "payout": 220,
+            "popularity": 5
+          }
+        ],
+        "wakuren": [
+          {
+            "combination": "1-6",
+            "payout": 1000,
+            "popularity": 4
+          }
+        ],
+        "umaren": [
+          {
+            "combination": "1-7",
+            "payout": 950,
+            "popularity": 4
+          }
+        ],
+        "wakutan": [
+          {
+            "combination": "6-1",
+            "payout": 1410,
+            "popularity": 5
+          }
+        ],
+        "umatan": [
+          {
+            "combination": "7-1",
+            "payout": 1320,
+            "popularity": 5
+          }
+        ],
+        "wide": [
+          {
+            "combination": "1-7",
+            "payout": 350,
+            "popularity": 3
+          },
+          {
+            "combination": "4-7",
+            "payout": 360,
+            "popularity": 4
+          },
+          {
+            "combination": "1-4",
+            "payout": 670,
+            "popularity": 11
+          }
+        ],
+        "sanrenpuku": [
+          {
+            "combination": "1-4-7",
+            "payout": 1560,
+            "popularity": 5
+          }
+        ],
+        "sanrentan": [
+          {
+            "combination": "7-1-4",
+            "payout": 5810,
+            "popularity": 14
+          }
+        ]
+      },
+      "timeData": {
+        "last3F": 39.6,
+        "last4F": 52.2,
+        "furlongTimes": [
+          12.5,
+          12.3,
+          12.6,
+          12.9,
+          13.2,
+          13.5
+        ]
+      },
+      "cornerData": [
+        {
+          "corner": "２角",
+          "order": [
+            12,
+            1,
+            3,
+            6,
+            2,
+            7,
+            11,
+            9,
+            4,
+            10,
+            8,
+            5
+          ]
+        },
+        {
+          "corner": "３角",
+          "order": [
+            12,
+            3,
+            6,
+            1,
+            7,
+            4,
+            2,
+            11,
+            10,
+            9,
+            8,
+            5
+          ]
+        },
+        {
+          "corner": "４角",
+          "order": [
+            12,
+            6,
+            7,
+            3,
+            1,
+            4,
+            2,
+            11,
+            10,
+            9,
+            8,
+            5
+          ]
+        }
+      ],
+      "comment": "2026年2月11日船橋競馬5レース（Ｃ３(二) ダ1200m・11頭立）は、12番ランハルト（7番人気）がハナを切る展開の中、7番クリノセノーテ（1番人気）が好位で脚を溜め直線では上がり39.1秒をマークして差し切り、勝ちタイム1:17.0で1着となった。鞍上は山中悠希騎手と新井清重厩舎のコンビ。2着には5番手から伸びた1番ジェイルブレイク（4番人気）、3着には4番フィオーレ（5番人気）が入線。三連単7-1-4は5,810円（14番人気）で決着した。"
+    },
+    {
+      "date": "2026-02-11",
+      "venue": "船橋",
+      "raceNumber": 6,
+      "raceName": "駿光ダッシュ Ｃ１ 選抜馬",
+      "distance": 1000,
+      "surface": "ダート",
+      "startTime": "17:15",
+      "weather": "曇",
+      "trackCondition": "稍重",
+      "results": [
+        {
+          "rank": 1,
+          "bracket": 6,
+          "number": 10,
+          "name": "サッポロキタコ",
+          "jockey": "笠野雄大",
+          "trainer": "稲益貴弘",
+          "time": "1:02.6",
+          "margin": "-",
+          "lastFurlong": "38.9",
+          "popularity": 1
+        },
+        {
+          "rank": 2,
+          "bracket": 7,
+          "number": 12,
+          "name": "ダンシングクライ",
+          "jockey": "菅原涼太",
+          "trainer": "藤原智行",
+          "time": "1:02.7",
+          "margin": "1/2",
+          "lastFurlong": "39.4",
+          "popularity": 4
+        },
+        {
+          "rank": 3,
+          "bracket": 4,
+          "number": 6,
+          "name": "レイシン",
+          "jockey": "本田正重",
+          "trainer": "石井勝男",
+          "time": "1:02.9",
+          "margin": "１",
+          "lastFurlong": "38.6",
+          "popularity": 2
+        },
+        {
+          "rank": 4,
+          "bracket": 5,
+          "number": 7,
+          "name": "キャンディブーケ",
+          "jockey": "矢野貴之",
+          "trainer": "玉井昇",
+          "time": "1:02.9",
+          "margin": "ハナ",
+          "lastFurlong": "39.0",
+          "popularity": 7
+        },
+        {
+          "rank": 5,
+          "bracket": 5,
+          "number": 8,
+          "name": "セキテイレア",
+          "jockey": "△所蛍",
+          "trainer": "張田京",
+          "time": "1:02.9",
+          "margin": "ハナ",
+          "lastFurlong": "38.4",
+          "popularity": 6
+        },
+        {
+          "rank": 6,
+          "bracket": 8,
+          "number": 13,
+          "name": "モーニングタンポポ",
+          "jockey": "福原杏",
+          "trainer": "箕輪武",
+          "time": "1:03.0",
+          "margin": "クビ",
+          "lastFurlong": "38.7",
+          "popularity": 8
+        },
+        {
+          "rank": 9,
+          "bracket": 7,
+          "number": 11,
+          "name": "ミホノキセキ",
+          "jockey": "濱田達也",
+          "trainer": "山田信大",
+          "time": "1:03.6",
+          "margin": "ハナ",
+          "lastFurlong": "40.4",
+          "popularity": 3
+        },
+        {
+          "rank": 10,
+          "bracket": 4,
+          "number": 5,
+          "name": "シウラグランデ",
+          "jockey": "七夕裕次郎",
+          "trainer": "川村守男",
+          "time": "1:03.8",
+          "margin": "１",
+          "lastFurlong": "38.3",
+          "popularity": 14
+        },
+        {
+          "rank": 11,
+          "bracket": 3,
+          "number": 3,
+          "name": "マルモリスパークル",
+          "jockey": "野畑凌",
+          "trainer": "米谷康秀",
+          "time": "1:04.0",
+          "margin": "１",
+          "lastFurlong": "39.9",
+          "popularity": 9
+        },
+        {
+          "rank": 12,
+          "bracket": 6,
+          "number": 9,
+          "name": "ハクサンセレーネ",
+          "jockey": "秋元耕成",
+          "trainer": "矢野義幸",
+          "time": "1:05.0",
+          "margin": "５",
+          "lastFurlong": "41.5",
+          "popularity": 11
+        },
+        {
+          "rank": 13,
+          "bracket": 2,
+          "number": 2,
+          "name": "ミズイロアウダクス",
+          "jockey": "△中山遥人",
+          "trainer": "伊藤滋規",
+          "time": "1:05.1",
+          "margin": "1/2",
+          "lastFurlong": "39.2",
+          "popularity": 13
+        }
+      ],
+      "payouts": {
+        "tansho": [
+          {
+            "number": "10",
+            "payout": 150,
+            "popularity": 1
+          }
+        ],
+        "fukusho": [
+          {
+            "number": "10",
+            "payout": 110,
+            "popularity": 1
+          },
+          {
+            "number": "12",
+            "payout": 200,
+            "popularity": 4
+          },
+          {
+            "number": "6",
+            "payout": 140,
+            "popularity": 2
+          }
+        ],
+        "wakuren": [
+          {
+            "combination": "6-7",
+            "payout": 360,
+            "popularity": 1
+          }
+        ],
+        "umaren": [
+          {
+            "combination": "10-12",
+            "payout": 870,
+            "popularity": 4
+          }
+        ],
+        "wakutan": [
+          {
+            "combination": "6-7",
+            "payout": 540,
+            "popularity": 1
+          }
+        ],
+        "umatan": [
+          {
+            "combination": "10-12",
+            "payout": 1060,
+            "popularity": 2
+          }
+        ],
+        "wide": [
+          {
+            "combination": "10-12",
+            "payout": 420,
+            "popularity": 4
+          },
+          {
+            "combination": "6-10",
+            "payout": 280,
+            "popularity": 2
+          },
+          {
+            "combination": "6-12",
+            "payout": 730,
+            "popularity": 8
+          }
+        ],
+        "sanrenpuku": [
+          {
+            "combination": "6-10-12",
+            "payout": 1760,
+            "popularity": 1
+          }
+        ],
+        "sanrentan": [
+          {
+            "combination": "10-12-6",
+            "payout": 5490,
+            "popularity": 3
+          }
+        ]
+      },
+      "timeData": {
+        "last3F": 39.4,
+        "last4F": 50.7,
+        "furlongTimes": [
+          11.9,
+          11.3,
+          12.4,
+          13.3,
+          13.7
+        ]
+      },
+      "cornerData": [
+        {
+          "corner": "３角",
+          "order": [
+            11,
+            12,
+            9,
+            10,
+            7,
+            3,
+            14,
+            6,
+            13,
+            8,
+            1,
+            5,
+            2
+          ]
+        },
+        {
+          "corner": "４角",
+          "order": [
+            11,
+            12,
+            9,
+            10,
+            7,
+            14,
+            3,
+            6,
+            13,
+            8,
+            1,
+            5,
+            2
+          ]
+        }
+      ],
+      "comment": "2026年2月11日船橋競馬6レース（駿光ダッシュ Ｃ１ 選抜馬 ダ1000m・11頭立）は、11番ミホノキセキ（3番人気）がハナを切る展開の中、10番サッポロキタコ（1番人気）が好位で脚を溜め直線では上がり38.9秒をマークして差し切り、勝ちタイム1:02.6で1着となった。鞍上は笠野雄大騎手と稲益貴弘厩舎のコンビ。2着には2番手から伸びた12番ダンシングクライ（4番人気）、3着には6番レイシン（2番人気）が入線。三連単10-12-6は5,490円（3番人気）で決着した。"
+    },
+    {
+      "date": "2026-02-11",
+      "venue": "船橋",
+      "raceNumber": 7,
+      "raceName": "馬い！唐津レモンと淡路玉ねぎ記念 Ｃ２(九)(十)",
+      "distance": 1200,
+      "surface": "ダート",
+      "startTime": "17:45",
+      "weather": "曇",
+      "trackCondition": "稍重",
+      "results": [
+        {
+          "rank": 1,
+          "bracket": 4,
+          "number": 4,
+          "name": "シンボリライト",
+          "jockey": "本橋孝太",
+          "trainer": "森泰斗",
+          "time": "1:17.1",
+          "margin": "-",
+          "lastFurlong": "39.0",
+          "popularity": 1
+        },
+        {
+          "rank": 2,
+          "bracket": 6,
+          "number": 8,
+          "name": "エスケイキャット",
+          "jockey": "藤本現暉",
+          "trainer": "林正人",
+          "time": "1:17.5",
+          "margin": "２",
+          "lastFurlong": "39.8",
+          "popularity": 2
+        },
+        {
+          "rank": 3,
+          "bracket": 5,
+          "number": 5,
+          "name": "マケタラアカン",
+          "jockey": "笠野雄大",
+          "trainer": "佐々木清明",
+          "time": "1:18.4",
+          "margin": "４",
+          "lastFurlong": "39.9",
+          "popularity": 5
+        },
+        {
+          "rank": 4,
+          "bracket": 8,
+          "number": 11,
+          "name": "シェルヴァレイ",
+          "jockey": "古岡勇樹",
+          "trainer": "玉井昇",
+          "time": "1:18.4",
+          "margin": "ハナ",
+          "lastFurlong": "39.5",
+          "popularity": 7
+        },
+        {
+          "rank": 5,
+          "bracket": 1,
+          "number": 1,
+          "name": "タイニービキニ",
+          "jockey": "臼井健太郎",
+          "trainer": "山本学",
+          "time": "1:19.6",
+          "margin": "６",
+          "lastFurlong": "40.0",
+          "popularity": 11
+        },
+        {
+          "rank": 6,
+          "bracket": 7,
+          "number": 9,
+          "name": "スマイルナゴミ",
+          "jockey": "濱田達也",
+          "trainer": "凾館一昭",
+          "time": "1:19.7",
+          "margin": "1/2",
+          "lastFurlong": "40.5",
+          "popularity": 12
+        },
+        {
+          "rank": 7,
+          "bracket": 2,
+          "number": 2,
+          "name": "マルモジーニー",
+          "jockey": "國分祐仁",
+          "trainer": "冨田敏男",
+          "time": "1:19.7",
+          "margin": "クビ",
+          "lastFurlong": "40.8",
+          "popularity": 8
+        },
+        {
+          "rank": 8,
+          "bracket": 6,
+          "number": 7,
+          "name": "レジェンド",
+          "jockey": "矢野貴之",
+          "trainer": "山田信大",
+          "time": "1:19.7",
+          "margin": "アタマ",
+          "lastFurlong": "42.3",
+          "popularity": 3
+        },
+        {
+          "rank": 9,
+          "bracket": 8,
+          "number": 12,
+          "name": "ロバリアノキセキ",
+          "jockey": "赤津和希",
+          "trainer": "箕輪武",
+          "time": "1:20.1",
+          "margin": "２",
+          "lastFurlong": "43.1",
+          "popularity": 6
+        },
+        {
+          "rank": 10,
+          "bracket": 3,
+          "number": 3,
+          "name": "ウインディポイント",
+          "jockey": "山本聡紀",
+          "trainer": "齊藤敏",
+          "time": "1:20.7",
+          "margin": "３",
+          "lastFurlong": "41.6",
+          "popularity": 10
+        },
+        {
+          "rank": 11,
+          "bracket": 5,
+          "number": 6,
+          "name": "アドラマリク",
+          "jockey": "岡村健司",
+          "trainer": "新井清重",
+          "time": "1:21.5",
+          "margin": "４",
+          "lastFurlong": "43.9",
+          "popularity": 4
+        },
+        {
+          "rank": 12,
+          "bracket": 7,
+          "number": 10,
+          "name": "カクシンドリーム",
+          "jockey": "吉留孝司",
+          "trainer": "薮口一麻",
+          "time": "1:22.1",
+          "margin": "３",
+          "lastFurlong": "44.9",
+          "popularity": 9
+        }
+      ],
+      "payouts": {
+        "tansho": [
+          {
+            "number": "4",
+            "payout": 120,
+            "popularity": 1
+          }
+        ],
+        "fukusho": [
+          {
+            "number": "4",
+            "payout": 100,
+            "popularity": 1
+          },
+          {
+            "number": "8",
+            "payout": 120,
+            "popularity": 2
+          },
+          {
+            "number": "5",
+            "payout": 210,
+            "popularity": 5
+          }
+        ],
+        "wakuren": [
+          {
+            "combination": "4-6",
+            "payout": 120,
+            "popularity": 1
+          }
+        ],
+        "umaren": [
+          {
+            "combination": "4-8",
+            "payout": 230,
+            "popularity": 1
+          }
+        ],
+        "wakutan": [
+          {
+            "combination": "4-6",
+            "payout": 140,
+            "popularity": 1
+          }
+        ],
+        "umatan": [
+          {
+            "combination": "4-8",
+            "payout": 280,
+            "popularity": 2
+          }
+        ],
+        "wide": [
+          {
+            "combination": "4-8",
+            "payout": 150,
+            "popularity": 1
+          },
+          {
+            "combination": "4-5",
+            "payout": 410,
+            "popularity": 5
+          },
+          {
+            "combination": "5-8",
+            "payout": 870,
+            "popularity": 9
+          }
+        ],
+        "sanrenpuku": [
+          {
+            "combination": "4-5-8",
+            "payout": 1460,
+            "popularity": 4
+          }
+        ],
+        "sanrentan": [
+          {
+            "combination": "4-8-5",
+            "payout": 2450,
+            "popularity": 7
+          }
+        ]
+      },
+      "timeData": {
+        "last3F": 40.1,
+        "last4F": 52.7,
+        "furlongTimes": [
+          12.2,
+          12.2,
+          12.6,
+          13.4,
+          13.9,
+          12.8
+        ]
+      },
+      "cornerData": [
+        {
+          "corner": "２角",
+          "order": [
+            12,
+            7,
+            10,
+            6,
+            4,
+            8,
+            5,
+            2,
+            3,
+            11,
+            9,
+            1
+          ]
+        },
+        {
+          "corner": "３角",
+          "order": [
+            12,
+            10,
+            7,
+            6,
+            8,
+            4,
+            5,
+            11,
+            2,
+            3,
+            9,
+            1
+          ]
+        },
+        {
+          "corner": "４角",
+          "order": [
+            12,
+            10,
+            7,
+            6,
+            8,
+            4,
+            5,
+            2,
+            11,
+            9,
+            3,
+            1
+          ]
+        }
+      ],
+      "comment": "2026年2月11日船橋競馬7レース（馬い！唐津レモンと淡路玉ねぎ記念 Ｃ２(九)(十) ダ1200m・12頭立）は、12番ロバリアノキセキ（6番人気）がハナを切る展開の中、4番シンボリライト（1番人気）が中団で脚を溜め直線では上がり39.0秒をマークして差し切り、勝ちタイム1:17.1で1着となった。鞍上は本橋孝太騎手と森泰斗厩舎のコンビ。2着には5番手から伸びた8番エスケイキャット（2番人気）、3着には5番マケタラアカン（5番人気）が入線。三連単4-8-5は2,450円（7番人気）で決着した。"
+    },
+    {
+      "date": "2026-02-11",
+      "venue": "船橋",
+      "raceNumber": 8,
+      "raceName": "桜梅桃李賞 Ｂ２",
+      "distance": 1600,
+      "surface": "ダート",
+      "startTime": "18:15",
+      "weather": "曇",
+      "trackCondition": "稍重",
+      "results": [
+        {
+          "rank": 1,
+          "bracket": 7,
+          "number": 10,
+          "name": "モルジブフレイバー",
+          "jockey": "川島正太郎",
+          "trainer": "稲益貴弘",
+          "time": "1:45.3",
+          "margin": "-",
+          "lastFurlong": "39.8",
+          "popularity": 6
+        },
+        {
+          "rank": 3,
+          "bracket": 3,
+          "number": 3,
+          "name": "グリーンダイヤル",
+          "jockey": "御神本訓史",
+          "trainer": "川島正一",
+          "time": "1:45.8",
+          "margin": "クビ",
+          "lastFurlong": "39.7",
+          "popularity": 2
+        },
+        {
+          "rank": 5,
+          "bracket": 4,
+          "number": 5,
+          "name": "ザロック",
+          "jockey": "町田直希",
+          "trainer": "矢野義幸",
+          "time": "1:46.2",
+          "margin": "3/4",
+          "lastFurlong": "40.3",
+          "popularity": 5
+        },
+        {
+          "rank": 6,
+          "bracket": 6,
+          "number": 9,
+          "name": "アルアインオアシス",
+          "jockey": "本田正重",
+          "trainer": "川島正一",
+          "time": "1:46.3",
+          "margin": "1/2",
+          "lastFurlong": "40.9",
+          "popularity": 8
+        },
+        {
+          "rank": 7,
+          "bracket": 8,
+          "number": 13,
+          "name": "キタサンエルピス",
+          "jockey": "[岩]山本聡哉",
+          "trainer": "石崎駿",
+          "time": "1:46.4",
+          "margin": "1/2",
+          "lastFurlong": "40.5",
+          "popularity": 7
+        },
+        {
+          "rank": 8,
+          "bracket": 5,
+          "number": 7,
+          "name": "ボルドーネセバル",
+          "jockey": "△中山遥人",
+          "trainer": "齊藤敏",
+          "time": "1:46.6",
+          "margin": "3/4",
+          "lastFurlong": "40.9",
+          "popularity": 13
+        },
+        {
+          "rank": 9,
+          "bracket": 6,
+          "number": 8,
+          "name": "モイラ",
+          "jockey": "岡村健司",
+          "trainer": "佐藤裕太",
+          "time": "1:46.6",
+          "margin": "ハナ",
+          "lastFurlong": "40.9",
+          "popularity": 1
+        },
+        {
+          "rank": 11,
+          "bracket": 2,
+          "number": 2,
+          "name": "ミュステーリオン",
+          "jockey": "西啓太",
+          "trainer": "小久保智",
+          "time": "1:47.3",
+          "margin": "２",
+          "lastFurlong": "42.2",
+          "popularity": 11
+        },
+        {
+          "rank": 12,
+          "bracket": 4,
+          "number": 4,
+          "name": "ヘンリー",
+          "jockey": "野畑凌",
+          "trainer": "山下貴之",
+          "time": "1:47.5",
+          "margin": "１",
+          "lastFurlong": "41.6",
+          "popularity": 4
+        },
+        {
+          "rank": 13,
+          "bracket": 7,
+          "number": 11,
+          "name": "ヒーローショー",
+          "jockey": "張田昂",
+          "trainer": "林幻",
+          "time": "1:47.9",
+          "margin": "２",
+          "lastFurlong": "42.6",
+          "popularity": 9
+        }
+      ],
+      "payouts": {
+        "tansho": [
+          {
+            "number": "10",
+            "payout": 1350,
+            "popularity": 6
+          }
+        ],
+        "fukusho": [
+          {
+            "number": "10",
+            "payout": 250,
+            "popularity": 4
+          },
+          {
+            "number": "6",
+            "payout": 170,
+            "popularity": 3
+          },
+          {
+            "number": "3",
+            "payout": 130,
+            "popularity": 1
+          }
+        ],
+        "wakuren": [
+          {
+            "combination": "5-7",
+            "payout": 3230,
+            "popularity": 10
+          }
+        ],
+        "umaren": [
+          {
+            "combination": "6-10",
+            "payout": 4120,
+            "popularity": 13
+          }
+        ],
+        "wakutan": [
+          {
+            "combination": "7-5",
+            "payout": 6280,
+            "popularity": 23
+          }
+        ],
+        "umatan": [
+          {
+            "combination": "10-6",
+            "payout": 8670,
+            "popularity": 29
+          }
+        ],
+        "wide": [
+          {
+            "combination": "6-10",
+            "payout": 1170,
+            "popularity": 16
+          },
+          {
+            "combination": "3-10",
+            "payout": 440,
+            "popularity": 4
+          },
+          {
+            "combination": "3-6",
+            "payout": 280,
+            "popularity": 2
+          }
+        ],
+        "sanrenpuku": [
+          {
+            "combination": "3-6-10",
+            "payout": 2580,
+            "popularity": 8
+          }
+        ],
+        "sanrentan": [
+          {
+            "combination": "10-6-3",
+            "payout": 33360,
+            "popularity": 103
+          }
+        ]
+      },
+      "timeData": {
+        "last3F": 40.2,
+        "last4F": 53.1,
+        "furlongTimes": [
+          12.2,
+          13,
+          13.4,
+          13.6,
+          12.9,
+          12.9,
+          13.9,
+          13.4
+        ]
+      },
+      "cornerData": [
+        {
+          "corner": "１角",
+          "order": [
+            2,
+            11,
+            9,
+            1,
+            7,
+            10,
+            4,
+            8,
+            12,
+            5,
+            13,
+            3,
+            6
+          ]
+        },
+        {
+          "corner": "２角",
+          "order": [
+            2,
+            11,
+            9,
+            1,
+            7,
+            10,
+            4,
+            8,
+            12,
+            5,
+            13,
+            3,
+            6
+          ]
+        },
+        {
+          "corner": "３角",
+          "order": [
+            2,
+            11,
+            9,
+            10,
+            1,
+            7,
+            8,
+            13,
+            4,
+            5,
+            3,
+            12,
+            6
+          ]
+        },
+        {
+          "corner": "４角",
+          "order": [
+            2,
+            11,
+            9,
+            10,
+            1,
+            7,
+            4,
+            8,
+            5,
+            13,
+            12,
+            3,
+            6
+          ]
+        }
+      ],
+      "comment": "2026年2月11日船橋競馬8レース（桜梅桃李賞 Ｂ２ ダ1600m・10頭立）は、2番ミュステーリオン（11番人気）がハナを切る展開の中、10番モルジブフレイバー（6番人気）が好位で脚を溜め直線ではしぶとく差し切り、勝ちタイム1:45.3で1着となった。鞍上は川島正太郎騎手と稲益貴弘厩舎のコンビ。2着には後方から伸びた3番グリーンダイヤル（2番人気）、3着には5番ザロック（5番人気）が入線。三連単10-6-3は33,360円（103番人気）で決着した。"
+    },
+    {
+      "date": "2026-02-11",
+      "venue": "船橋",
+      "raceNumber": 9,
+      "raceName": "",
+      "distance": 1200,
+      "surface": "ダート",
+      "startTime": "18:50",
+      "weather": "曇",
+      "trackCondition": "稍重",
+      "results": [
+        {
+          "rank": 1,
+          "bracket": 7,
+          "number": 8,
+          "name": "アトレーヴフェイス",
+          "jockey": "張田昂",
+          "trainer": "張田京",
+          "time": "1:15.7",
+          "margin": "-",
+          "lastFurlong": "38.8",
+          "popularity": 2
+        },
+        {
+          "rank": 2,
+          "bracket": 6,
+          "number": 7,
+          "name": "プレストエンペラー",
+          "jockey": "本橋孝太",
+          "trainer": "山下貴之",
+          "time": "1:16.9",
+          "margin": "６",
+          "lastFurlong": "40.1",
+          "popularity": 3
+        },
+        {
+          "rank": 3,
+          "bracket": 5,
+          "number": 5,
+          "name": "メイクセンス",
+          "jockey": "本田正重",
+          "trainer": "川島正一",
+          "time": "1:16.9",
+          "margin": "アタマ",
+          "lastFurlong": "39.8",
+          "popularity": 1
+        },
+        {
+          "rank": 4,
+          "bracket": 4,
+          "number": 4,
+          "name": "ラウダーティオ",
+          "jockey": "山本聡紀",
+          "trainer": "森泰斗",
+          "time": "1:17.0",
+          "margin": "クビ",
+          "lastFurlong": "40.6",
+          "popularity": 4
+        },
+        {
+          "rank": 5,
+          "bracket": 3,
+          "number": 3,
+          "name": "サンエイタロー",
+          "jockey": "石川倭",
+          "trainer": "高月賢一",
+          "time": "1:17.2",
+          "margin": "１",
+          "lastFurlong": "38.9",
+          "popularity": 8
+        },
+        {
+          "rank": 7,
+          "bracket": 8,
+          "number": 11,
+          "name": "シンエンコゲツ",
+          "jockey": "澤田龍哉",
+          "trainer": "小久保智",
+          "time": "1:17.8",
+          "margin": "1/2",
+          "lastFurlong": "39.9",
+          "popularity": 9
+        },
+        {
+          "rank": 8,
+          "bracket": 6,
+          "number": 6,
+          "name": "オルタスグロウ",
+          "jockey": "岡村健司",
+          "trainer": "渋谷信博",
+          "time": "1:17.9",
+          "margin": "3/4",
+          "lastFurlong": "41.3",
+          "popularity": 7
+        },
+        {
+          "rank": 9,
+          "bracket": 8,
+          "number": 10,
+          "name": "サスケベラ",
+          "jockey": "西啓太",
+          "trainer": "渡邊貴光",
+          "time": "1:18.0",
+          "margin": "1/2",
+          "lastFurlong": "40.7",
+          "popularity": 6
+        },
+        {
+          "rank": 10,
+          "bracket": 2,
+          "number": 2,
+          "name": "ラブラブセイナ",
+          "jockey": "[岩]山本聡哉",
+          "trainer": "川島正一",
+          "time": "1:18.6",
+          "margin": "３",
+          "lastFurlong": "41.6",
+          "popularity": 5
+        },
+        {
+          "rank": 11,
+          "bracket": 7,
+          "number": 9,
+          "name": "マッドスピード",
+          "jockey": "笠野雄大",
+          "trainer": "山中尊徳",
+          "time": "1:18.7",
+          "margin": "クビ",
+          "lastFurlong": "40.6",
+          "popularity": 11
+        }
+      ],
+      "payouts": {
+        "tansho": [
+          {
+            "number": "8",
+            "payout": 210,
+            "popularity": 2
+          }
+        ],
+        "fukusho": [
+          {
+            "number": "8",
+            "payout": 100,
+            "popularity": 2
+          },
+          {
+            "number": "7",
+            "payout": 130,
+            "popularity": 3
+          },
+          {
+            "number": "5",
+            "payout": 100,
+            "popularity": 1
+          }
+        ],
+        "wakuren": [
+          {
+            "combination": "6-7",
+            "payout": 790,
+            "popularity": 3
+          }
+        ],
+        "umaren": [
+          {
+            "combination": "7-8",
+            "payout": 990,
+            "popularity": 2
+          }
+        ],
+        "wakutan": [
+          {
+            "combination": "7-6",
+            "payout": 1080,
+            "popularity": 4
+          }
+        ],
+        "umatan": [
+          {
+            "combination": "8-7",
+            "payout": 1300,
+            "popularity": 4
+          }
+        ],
+        "wide": [
+          {
+            "combination": "7-8",
+            "payout": 260,
+            "popularity": 3
+          },
+          {
+            "combination": "5-8",
+            "payout": 120,
+            "popularity": 1
+          },
+          {
+            "combination": "5-7",
+            "payout": 230,
+            "popularity": 2
+          }
+        ],
+        "sanrenpuku": [
+          {
+            "combination": "5-7-8",
+            "payout": 300,
+            "popularity": 1
+          }
+        ],
+        "sanrentan": [
+          {
+            "combination": "8-7-5",
+            "payout": 2120,
+            "popularity": 3
+          }
+        ]
+      },
+      "timeData": {
+        "last3F": 39.3,
+        "last4F": 51.7,
+        "furlongTimes": [
+          12,
+          12,
+          12.4,
+          12.8,
+          13,
+          13.5
+        ]
+      },
+      "cornerData": [
+        {
+          "corner": "２角",
+          "order": [
+            4,
+            6,
+            7,
+            2,
+            8,
+            5,
+            1,
+            10,
+            11,
+            9,
+            3
+          ]
+        },
+        {
+          "corner": "３角",
+          "order": [
+            4,
+            6,
+            7,
+            8,
+            2,
+            5,
+            10,
+            1,
+            11,
+            9,
+            3
+          ]
+        },
+        {
+          "corner": "４角",
+          "order": [
+            4,
+            7,
+            6,
+            8,
+            2,
+            5,
+            1,
+            10,
+            3,
+            9,
+            11
+          ]
+        }
+      ],
+      "comment": "2026年2月11日船橋競馬9レース（C3 ダ1200m・10頭立）は、4番ラウダーティオ（4番人気）がハナを切る展開の中、8番アトレーヴフェイス（2番人気）が好位で脚を溜め直線では上がり38.8秒をマークして差し切り、勝ちタイム1:15.7で1着となった。鞍上は張田昂騎手と張田京厩舎のコンビ。2着には2番手から伸びた7番プレストエンペラー（3番人気）、3着には5番メイクセンス（1番人気）が入線。三連単8-7-5は2,120円（3番人気）で決着した。"
+    },
+    {
+      "date": "2026-02-11",
+      "venue": "船橋",
+      "raceNumber": 10,
+      "raceName": "野島崎特別 Ｂ３(一)",
+      "distance": 1600,
+      "surface": "ダート",
+      "startTime": "19:25",
+      "weather": "曇",
+      "trackCondition": "稍重",
+      "results": [
+        {
+          "rank": 1,
+          "bracket": 5,
+          "number": 7,
+          "name": "カーニバルマーチ",
+          "jockey": "野畑凌",
+          "trainer": "佐藤裕太",
+          "time": "1:45.1",
+          "margin": "-",
+          "lastFurlong": "39.3",
+          "popularity": 8
+        },
+        {
+          "rank": 2,
+          "bracket": 8,
+          "number": 14,
+          "name": "レルアバド",
+          "jockey": "張田昂",
+          "trainer": "森泰斗",
+          "time": "1:45.5",
+          "margin": "２",
+          "lastFurlong": "39.9",
+          "popularity": 1
+        },
+        {
+          "rank": 3,
+          "bracket": 6,
+          "number": 10,
+          "name": "マクト",
+          "jockey": "矢野貴之",
+          "trainer": "川島正一",
+          "time": "1:45.5",
+          "margin": "ハナ",
+          "lastFurlong": "39.5",
+          "popularity": 2
+        },
+        {
+          "rank": 4,
+          "bracket": 4,
+          "number": 5,
+          "name": "スメラギ",
+          "jockey": "本田正重",
+          "trainer": "山下貴之",
+          "time": "1:45.9",
+          "margin": "２",
+          "lastFurlong": "40.5",
+          "popularity": 3
+        },
+        {
+          "rank": 5,
+          "bracket": 7,
+          "number": 11,
+          "name": "キャプテンブルー",
+          "jockey": "石川倭",
+          "trainer": "伊藤滋規",
+          "time": "1:46.1",
+          "margin": "１",
+          "lastFurlong": "40.6",
+          "popularity": 6
+        },
+        {
+          "rank": 6,
+          "bracket": 3,
+          "number": 4,
+          "name": "ブレイヴアウト",
+          "jockey": "仲野光馬",
+          "trainer": "渡邊貴光",
+          "time": "1:46.3",
+          "margin": "１",
+          "lastFurlong": "40.0",
+          "popularity": 11
+        },
+        {
+          "rank": 7,
+          "bracket": 8,
+          "number": 13,
+          "name": "ランドプラネット",
+          "jockey": "秋元耕成",
+          "trainer": "矢野義幸",
+          "time": "1:46.3",
+          "margin": "クビ",
+          "lastFurlong": "40.1",
+          "popularity": 9
+        },
+        {
+          "rank": 8,
+          "bracket": 4,
+          "number": 6,
+          "name": "ルーラーオブダート",
+          "jockey": "保園翔也",
+          "trainer": "川島正一",
+          "time": "1:47.8",
+          "margin": "７",
+          "lastFurlong": "41.5",
+          "popularity": 5
+        },
+        {
+          "rank": 10,
+          "bracket": 6,
+          "number": 9,
+          "name": "カレンタクト",
+          "jockey": "川島正太郎",
+          "trainer": "大津剛",
+          "time": "1:48.3",
+          "margin": "3/4",
+          "lastFurlong": "42.7",
+          "popularity": 4
+        },
+        {
+          "rank": 14,
+          "bracket": 5,
+          "number": 8,
+          "name": "レオスパーク",
+          "jockey": "西啓太",
+          "trainer": "渡邊貴光",
+          "time": "1:49.4",
+          "margin": "クビ",
+          "lastFurlong": "42.9",
+          "popularity": 7
+        }
+      ],
+      "payouts": {
+        "tansho": [
+          {
+            "number": "7",
+            "payout": 2870,
+            "popularity": 8
+          }
+        ],
+        "fukusho": [
+          {
+            "number": "7",
+            "payout": 370,
+            "popularity": 7
+          },
+          {
+            "number": "14",
+            "payout": 130,
+            "popularity": 1
+          },
+          {
+            "number": "10",
+            "payout": 160,
+            "popularity": 2
+          }
+        ],
+        "wakuren": [
+          {
+            "combination": "5-8",
+            "payout": 1210,
+            "popularity": 4
+          }
+        ],
+        "umaren": [
+          {
+            "combination": "7-14",
+            "payout": 3500,
+            "popularity": 14
+          }
+        ],
+        "wakutan": [
+          {
+            "combination": "5-8",
+            "payout": 3560,
+            "popularity": 16
+          }
+        ],
+        "umatan": [
+          {
+            "combination": "7-14",
+            "payout": 12360,
+            "popularity": 37
+          }
+        ],
+        "wide": [
+          {
+            "combination": "7-14",
+            "payout": 970,
+            "popularity": 15
+          },
+          {
+            "combination": "7-10",
+            "payout": 950,
+            "popularity": 14
+          },
+          {
+            "combination": "10-14",
+            "payout": 240,
+            "popularity": 1
+          }
+        ],
+        "sanrenpuku": [
+          {
+            "combination": "7-10-14",
+            "payout": 3140,
+            "popularity": 10
+          }
+        ],
+        "sanrentan": [
+          {
+            "combination": "7-14-10",
+            "payout": 45460,
+            "popularity": 158
+          }
+        ]
+      },
+      "timeData": {
+        "last3F": 39.7,
+        "last4F": 52.8,
+        "furlongTimes": [
+          12.1,
+          12.9,
+          13.5,
+          13.8,
+          13.1,
+          12.7,
+          13.2,
+          13.8
+        ]
+      },
+      "cornerData": [
+        {
+          "corner": "１角",
+          "order": [
+            5,
+            11,
+            9,
+            14,
+            6,
+            13,
+            10,
+            8,
+            12,
+            1,
+            2,
+            7,
+            4,
+            3
+          ]
+        },
+        {
+          "corner": "２角",
+          "order": [
+            5,
+            11,
+            9,
+            14,
+            6,
+            13,
+            10,
+            8,
+            1,
+            12,
+            7,
+            2,
+            4,
+            3
+          ]
+        },
+        {
+          "corner": "３角",
+          "order": [
+            5,
+            11,
+            9,
+            14,
+            7,
+            10,
+            13,
+            4,
+            6,
+            12,
+            8,
+            2,
+            1,
+            3
+          ]
+        },
+        {
+          "corner": "４角",
+          "order": [
+            5,
+            11,
+            9,
+            14,
+            7,
+            10,
+            4,
+            13,
+            6,
+            12,
+            1,
+            8,
+            2,
+            3
+          ]
+        }
+      ],
+      "comment": "2026年2月11日船橋競馬10レース（野島崎特別 Ｂ３(一) ダ1600m・10頭立）は、5番スメラギ（3番人気）がハナを切る展開の中、7番カーニバルマーチ（8番人気）が後方で追走待機し直線では上がり39.3秒をマークして差し切り、勝ちタイム1:45.1で1着となった。鞍上は野畑凌騎手と佐藤裕太厩舎のコンビ。2着には4番手から伸びた14番レルアバド（1番人気）、3着には10番マクト（2番人気）が入線。三連単7-14-10は45,460円（158番人気）で決着した。馬単は12,360円の高配当となった。"
+    },
+    {
+      "date": "2026-02-11",
+      "venue": "船橋",
+      "raceNumber": 11,
+      "raceName": "第７２回 クイーン賞（ＪｐｎIII）（指定交流）",
+      "distance": 1800,
+      "surface": "ダート",
+      "startTime": "20:05",
+      "weather": "曇",
+      "trackCondition": "稍重",
+      "results": [
+        {
+          "rank": 1,
+          "bracket": 4,
+          "number": 5,
+          "name": "[J]テンカジョウ",
+          "jockey": "[J]松山弘平",
+          "trainer": "岡田稲男",
+          "time": "1:54.8",
+          "margin": "-",
+          "lastFurlong": "38.7",
+          "popularity": 1
+        },
+        {
+          "rank": 4,
+          "bracket": 8,
+          "number": 12,
+          "name": "[J]アピーリングルック",
+          "jockey": "[J]大野拓弥",
+          "trainer": "辻哲英",
+          "time": "1:56.2",
+          "margin": "３",
+          "lastFurlong": "40.4",
+          "popularity": 3
+        },
+        {
+          "rank": 5,
+          "bracket": 5,
+          "number": 6,
+          "name": "ホーリーグレイル",
+          "jockey": "矢野貴之",
+          "trainer": "内田勝義",
+          "time": "1:56.9",
+          "margin": "３",
+          "lastFurlong": "40.4",
+          "popularity": 5
+        },
+        {
+          "rank": 6,
+          "bracket": 5,
+          "number": 7,
+          "name": "ジゼル",
+          "jockey": "岡村健司",
+          "trainer": "山中尊徳",
+          "time": "1:57.5",
+          "margin": "３",
+          "lastFurlong": "39.8",
+          "popularity": 10
+        },
+        {
+          "rank": 8,
+          "bracket": 1,
+          "number": 1,
+          "name": "[J]ライオットガール",
+          "jockey": "[J]岩田望来",
+          "trainer": "中村直也",
+          "time": "1:58.1",
+          "margin": "２",
+          "lastFurlong": "41.8",
+          "popularity": 4
+        },
+        {
+          "rank": 11,
+          "bracket": 6,
+          "number": 9,
+          "name": "ウィルシャイン",
+          "jockey": "本田正重",
+          "trainer": "佐藤裕太",
+          "time": "1:59.1",
+          "margin": "２",
+          "lastFurlong": "42.0",
+          "popularity": 9
+        },
+        {
+          "rank": 12,
+          "bracket": 3,
+          "number": 3,
+          "name": "ドナギニー",
+          "jockey": "藤田凌",
+          "trainer": "中道啓二",
+          "time": "2:00.1",
+          "margin": "５",
+          "lastFurlong": "42.6",
+          "popularity": 8
+        },
+        {
+          "rank": 13,
+          "bracket": 2,
+          "number": 2,
+          "name": "リヴェルベロ",
+          "jockey": "小杉亮",
+          "trainer": "矢野義幸",
+          "time": "2:02.2",
+          "margin": "大差",
+          "lastFurlong": "44.3",
+          "popularity": 13
+        }
+      ],
+      "payouts": {
+        "tansho": [
+          {
+            "number": "5",
+            "payout": 210,
+            "popularity": 1
+          }
+        ],
+        "fukusho": [
+          {
+            "number": "5",
+            "payout": 110,
+            "popularity": 1
+          },
+          {
+            "number": "13",
+            "payout": 460,
+            "popularity": 7
+          },
+          {
+            "number": "4",
+            "payout": 130,
+            "popularity": 2
+          }
+        ],
+        "wakuren": [
+          {
+            "combination": "4-8",
+            "payout": 240,
+            "popularity": 1
+          }
+        ],
+        "umaren": [
+          {
+            "combination": "5-13",
+            "payout": 5550,
+            "popularity": 14
+          }
+        ],
+        "wakutan": [
+          {
+            "combination": "4-8",
+            "payout": 410,
+            "popularity": 2
+          }
+        ],
+        "umatan": [
+          {
+            "combination": "5-13",
+            "payout": 7640,
+            "popularity": 21
+          }
+        ],
+        "wide": [
+          {
+            "combination": "5-13",
+            "payout": 1040,
+            "popularity": 12
+          },
+          {
+            "combination": "4-5",
+            "payout": 190,
+            "popularity": 1
+          },
+          {
+            "combination": "4-13",
+            "payout": 2270,
+            "popularity": 19
+          }
+        ],
+        "sanrenpuku": [
+          {
+            "combination": "4-5-13",
+            "payout": 5170,
+            "popularity": 15
+          }
+        ],
+        "sanrentan": [
+          {
+            "combination": "5-13-4",
+            "payout": 35290,
+            "popularity": 91
+          }
+        ]
+      },
+      "timeData": {
+        "last3F": 39.1,
+        "last4F": 51.3,
+        "furlongTimes": [
+          12,
+          11.8,
+          13.1,
+          13.5,
+          13.1,
+          12.2,
+          12.8,
+          13.4,
+          12.9
+        ]
+      },
+      "cornerData": [
+        {
+          "corner": "１角",
+          "order": [
+            8,
+            4,
+            12,
+            13,
+            1,
+            11,
+            6,
+            5,
+            9,
+            2,
+            3,
+            10,
+            7
+          ]
+        },
+        {
+          "corner": "２角",
+          "order": [
+            8,
+            4,
+            12,
+            1,
+            13,
+            11,
+            5,
+            6,
+            9,
+            10,
+            2,
+            3,
+            7
+          ]
+        },
+        {
+          "corner": "３角",
+          "order": [
+            4,
+            12,
+            13,
+            5,
+            8,
+            1,
+            6,
+            11,
+            9,
+            10,
+            3,
+            7,
+            2
+          ]
+        },
+        {
+          "corner": "４角",
+          "order": [
+            4,
+            12,
+            13,
+            5,
+            1,
+            8,
+            6,
+            9,
+            11,
+            10,
+            7,
+            3,
+            2
+          ]
+        }
+      ],
+      "comment": "2026年2月11日船橋競馬11レース（第７２回 クイーン賞（ＪｐｎIII）（指定交流） ダ1800m・8頭立）は、5番[J]テンカジョウ（1番人気）が4番手から抜け出し、上がり38.7秒の末脚で勝ちタイム1:54.8で1着。鞍上は[J]松山弘平騎手と岡田稲男厩舎のコンビ。2着に12番[J]アピーリングルック（3番人気）、3着に6番ホーリーグレイル（5番人気）が入線。三連単5-13-4は35,290円（91番人気）で決着した。"
+    },
+    {
+      "date": "2026-02-11",
+      "venue": "船橋",
+      "raceNumber": 12,
+      "raceName": "２０２５ＪｏｃｋｅｙｓＦｅｓｔｉｖａｌＦｉｎａｌ２ Ｃ２ 選抜馬",
+      "distance": 2200,
+      "surface": "ダート",
+      "startTime": "20:50",
+      "weather": "曇",
+      "trackCondition": "稍重",
+      "results": [
+        {
+          "rank": 1,
+          "bracket": 3,
+          "number": 3,
+          "name": "ラップランド",
+          "jockey": "篠谷葵",
+          "trainer": "矢内博",
+          "time": "2:32.6",
+          "margin": "-",
+          "lastFurlong": "42.1",
+          "popularity": 6
+        },
+        {
+          "rank": 2,
+          "bracket": 4,
+          "number": 5,
+          "name": "フェイスカワサキ",
+          "jockey": "本田正重",
+          "trainer": "石崎駿",
+          "time": "2:32.8",
+          "margin": "3/4",
+          "lastFurlong": "40.2",
+          "popularity": 5
+        },
+        {
+          "rank": 3,
+          "bracket": 7,
+          "number": 11,
+          "name": "エクメディノキセキ",
+          "jockey": "川島正太郎",
+          "trainer": "石井勝男",
+          "time": "2:33.6",
+          "margin": "４",
+          "lastFurlong": "42.6",
+          "popularity": 4
+        },
+        {
+          "rank": 4,
+          "bracket": 4,
+          "number": 6,
+          "name": "ノンリミタシオン",
+          "jockey": "岡村健司",
+          "trainer": "林正人",
+          "time": "2:33.8",
+          "margin": "１",
+          "lastFurlong": "42.4",
+          "popularity": 10
+        },
+        {
+          "rank": 5,
+          "bracket": 7,
+          "number": 12,
+          "name": "ルグランシャリオ",
+          "jockey": "臼井健太郎",
+          "trainer": "山田信大",
+          "time": "2:33.9",
+          "margin": "1/2",
+          "lastFurlong": "43.4",
+          "popularity": 2
+        },
+        {
+          "rank": 6,
+          "bracket": 5,
+          "number": 7,
+          "name": "ボニファシオ",
+          "jockey": "山中悠希",
+          "trainer": "山本学",
+          "time": "2:33.9",
+          "margin": "クビ",
+          "lastFurlong": "43.4",
+          "popularity": 11
+        },
+        {
+          "rank": 7,
+          "bracket": 6,
+          "number": 9,
+          "name": "ボルダーオパール",
+          "jockey": "庄司大輔",
+          "trainer": "長谷川剛史",
+          "time": "2:34.8",
+          "margin": "４",
+          "lastFurlong": "43.9",
+          "popularity": 8
+        },
+        {
+          "rank": 8,
+          "bracket": 8,
+          "number": 14,
+          "name": "ジャスマン",
+          "jockey": "西村栄喜",
+          "trainer": "佐々木功",
+          "time": "2:34.8",
+          "margin": "クビ",
+          "lastFurlong": "43.9",
+          "popularity": 3
+        },
+        {
+          "rank": 9,
+          "bracket": 8,
+          "number": 13,
+          "name": "ティナバローズ",
+          "jockey": "本橋孝太",
+          "trainer": "佐々木清明",
+          "time": "2:35.7",
+          "margin": "４",
+          "lastFurlong": "41.8",
+          "popularity": 9
+        },
+        {
+          "rank": 10,
+          "bracket": 6,
+          "number": 10,
+          "name": "マインドザヘルム",
+          "jockey": "笠野雄大",
+          "trainer": "佐々木清明",
+          "time": "2:36.3",
+          "margin": "３",
+          "lastFurlong": "42.8",
+          "popularity": 14
+        },
+        {
+          "rank": 11,
+          "bracket": 2,
+          "number": 2,
+          "name": "コスモグッドラック",
+          "jockey": "仲野光馬",
+          "trainer": "岩崎真樹",
+          "time": "2:36.4",
+          "margin": "クビ",
+          "lastFurlong": "45.9",
+          "popularity": 1
+        },
+        {
+          "rank": 12,
+          "bracket": 1,
+          "number": 1,
+          "name": "ココリアイランド",
+          "jockey": "山口達弥",
+          "trainer": "工藤伸輔",
+          "time": "2:37.2",
+          "margin": "４",
+          "lastFurlong": "45.2",
+          "popularity": 7
+        },
+        {
+          "rank": 13,
+          "bracket": 5,
+          "number": 8,
+          "name": "イッポンミチ",
+          "jockey": "小杉亮",
+          "trainer": "石井勝男",
+          "time": "2:39.5",
+          "margin": "大差",
+          "lastFurlong": "47.1",
+          "popularity": 12
+        },
+        {
+          "rank": 14,
+          "bracket": 3,
+          "number": 4,
+          "name": "マッドルビー",
+          "jockey": "▲椿聡太",
+          "trainer": "長谷川忍",
+          "time": "2:39.7",
+          "margin": "１",
+          "lastFurlong": "46.3",
+          "popularity": 13
+        }
+      ],
+      "payouts": {
+        "tansho": [
+          {
+            "number": "3",
+            "payout": 1430,
+            "popularity": 6
+          }
+        ],
+        "fukusho": [
+          {
+            "number": "3",
+            "payout": 370,
+            "popularity": 6
+          },
+          {
+            "number": "5",
+            "payout": 310,
+            "popularity": 5
+          },
+          {
+            "number": "11",
+            "payout": 250,
+            "popularity": 4
+          }
+        ],
+        "wakuren": [
+          {
+            "combination": "3-4",
+            "payout": 3430,
+            "popularity": 13
+          }
+        ],
+        "umaren": [
+          {
+            "combination": "3-5",
+            "payout": 5440,
+            "popularity": 27
+          }
+        ],
+        "wakutan": [
+          {
+            "combination": "3-4",
+            "payout": 8080,
+            "popularity": 30
+          }
+        ],
+        "umatan": [
+          {
+            "combination": "3-5",
+            "payout": 12100,
+            "popularity": 51
+          }
+        ],
+        "wide": [
+          {
+            "combination": "3-5",
+            "payout": 1580,
+            "popularity": 26
+          },
+          {
+            "combination": "3-11",
+            "payout": 940,
+            "popularity": 10
+          },
+          {
+            "combination": "5-11",
+            "payout": 830,
+            "popularity": 8
+          }
+        ],
+        "sanrenpuku": [
+          {
+            "combination": "3-5-11",
+            "payout": 9450,
+            "popularity": 40
+          }
+        ],
+        "sanrentan": [
+          {
+            "combination": "3-5-11",
+            "payout": 57160,
+            "popularity": 224
+          }
+        ]
+      },
+      "timeData": {
+        "last3F": 42.1,
+        "last4F": 55.1,
+        "furlongTimes": [
+          13.2,
+          13.1,
+          14.6,
+          14.1,
+          14.4,
+          14.4,
+          13.7,
+          13,
+          13.5,
+          14.4,
+          14.2
+        ]
+      },
+      "cornerData": [
+        {
+          "corner": "３角",
+          "order": [
+            2,
+            4,
+            12,
+            9,
+            1,
+            6,
+            14,
+            11,
+            7,
+            8,
+            5,
+            13,
+            10,
+            3
+          ]
+        },
+        {
+          "corner": "４角",
+          "order": [
+            2,
+            4,
+            12,
+            1,
+            9,
+            14,
+            6,
+            11,
+            7,
+            8,
+            5,
+            3,
+            13,
+            10
+          ]
+        },
+        {
+          "corner": "１角",
+          "order": [
+            7,
+            2,
+            12,
+            3,
+            1,
+            14,
+            9,
+            4,
+            11,
+            6,
+            8,
+            5,
+            13,
+            10
+          ]
+        },
+        {
+          "corner": "２角",
+          "order": [
+            7,
+            2,
+            12,
+            3,
+            1,
+            9,
+            14,
+            11,
+            6,
+            4,
+            8,
+            5,
+            10,
+            13
+          ]
+        },
+        {
+          "corner": "３角",
+          "order": [
+            12,
+            2,
+            7,
+            3,
+            9,
+            14,
+            11,
+            6,
+            1,
+            8,
+            5,
+            4,
+            10,
+            13
+          ]
+        },
+        {
+          "corner": "４角",
+          "order": [
+            7,
+            12,
+            3,
+            2,
+            11,
+            14,
+            9,
+            6,
+            5,
+            1,
+            8,
+            10,
+            13,
+            4
+          ]
+        }
+      ],
+      "comment": "2026年2月11日船橋競馬12レース（２０２５ＪｏｃｋｅｙｓＦｅｓｔｉｖａｌＦｉｎａｌ２ Ｃ２ 選抜馬 ダ2200m・14頭立）は、2番コスモグッドラック（1番人気）がハナを切る展開の中、3番ラップランド（6番人気）が中団で脚を溜め直線ではしぶとく差し切り、勝ちタイム2:32.6で1着となった。鞍上は篠谷葵騎手と矢内博厩舎のコンビ。2着には後方から伸びた5番フェイスカワサキ（5番人気）、3着には11番エクメディノキセキ（4番人気）が入線。"
+    }
+  ]
+}
