@@ -10,6 +10,8 @@ on:
 jobs:
   merge:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write  # git pushに必要
 
     steps:
       - name: Checkout
