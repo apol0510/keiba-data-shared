@@ -34,19 +34,35 @@ jobs:
           FIRST=true
 
           while IFS= read -r file; do
-            DATE=$(basename "$file" .json)
+            FILENAME=$(basename "$file" .json)
 
-            # JSONファイルのレース数をチェック
-            RACE_COUNT=$(cat "$file" | jq '.races | length')
+            # 会場コード付きファイル（2026-02-14-TKY.json）はスキップ
+            if [[ "$FILENAME" =~ -[A-Z]{3}$ ]]; then
+              echo "⏭️  スキップ: $FILENAME（会場別ファイル、統合ファイルで処理）"
+              continue
+            fi
 
-            echo "📋 $DATE (JRA): $RACE_COUNT レース"
+            DATE="$FILENAME"
+
+            # JSONファイルの構造をチェック（統合形式 or 単一会場形式）
+            HAS_VENUES=$(cat "$file" | jq -r 'has("venues")' 2>/dev/null || echo "false")
+
+            if [ "$HAS_VENUES" = "true" ]; then
+              # 統合形式（venues配列）
+              RACE_COUNT=$(cat "$file" | jq '.totalRaces // 0')
+              echo "📋 $DATE (JRA統合): $RACE_COUNT レース"
+            else
+              # 単一会場形式（races配列）
+              RACE_COUNT=$(cat "$file" | jq '.races | length')
+              echo "📋 $DATE (JRA単一): $RACE_COUNT レース"
+            fi
 
             if [ "$RACE_COUNT" -lt 12 ]; then
               echo "⏳ スキップ: $DATE は ${RACE_COUNT}レースのみ（12レース未満）"
               continue
             fi
 
-            echo "✅ 完了: $DATE (JRA) は12レース揃っています"
+            echo "✅ 完了: $DATE (JRA) は${RACE_COUNT}レース揃っています"
 
             # 12レース揃ったファイルのみdates配列に追加
             if [ "$FIRST" = true ]; then
