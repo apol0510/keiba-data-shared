@@ -91,16 +91,7 @@ jobs:
             echo "⏭️  No changes to commit (files already exist)"
           else
             DATES="${{ steps.merge-check.outputs.dates }}"
-            git commit -m "$(cat <<EOF
-🔄 JRA予想自動統合: ${DATES}
-
-Auto-merged venue-specific files into unified prediction files.
-
-🤖 Generated with [Claude Code](https://claude.com/claude-code)
-
-Co-Authored-By: Claude <noreply@anthropic.com>
-EOF
-)"
+            git commit -m "🔄 JRA予想自動統合: ${DATES} [Auto-merged by GitHub Actions]"
             git push
             echo "✅ Pushed merged files for: ${DATES}"
           fi
