@@ -92,6 +92,11 @@ try {
             const fileContent = readFileSync(filePath, 'utf-8');
             const jsonData = JSON.parse(fileContent);
 
+            // 統合ファイル（venues配列を持つ）を除外
+            if (jsonData.venues && Array.isArray(jsonData.venues)) {
+              continue; // 統合ファイルはスキップ（内部処理用）
+            }
+
             // 結果データのみを対象とする（date, venueフィールドが必須）
             if (jsonData.date && jsonData.venue && Array.isArray(jsonData.races)) {
               jraAvailableDates.push({
