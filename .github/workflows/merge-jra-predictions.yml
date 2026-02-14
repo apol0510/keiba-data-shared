@@ -102,6 +102,51 @@ jobs:
             echo "✅ Pushed merged files for: ${DATES}"
           fi
 
+      - name: Convert dates to JSON array
+        if: steps.merge-check.outputs.merged == 'true'
+        id: convert-dates
+        run: |
+          # カンマ区切り文字列をJSON配列に変換
+          DATES_STR="${{ steps.merge-check.outputs.dates }}"
+          DATES_ARRAY="["
+          FIRST=true
+          IFS=', ' read -ra DATES <<< "$DATES_STR"
+          for date in "${DATES[@]}"; do
+            if [ "$FIRST" = true ]; then
+              DATES_ARRAY="${DATES_ARRAY}\"${date}\""
+              FIRST=false
+            else
+              DATES_ARRAY="${DATES_ARRAY},\"${date}\""
+            fi
+          done
+          DATES_ARRAY="${DATES_ARRAY}]"
+          echo "dates_json=$DATES_ARRAY" >> $GITHUB_OUTPUT
+          echo "📅 Converted dates: $DATES_ARRAY"
+
+      - name: Dispatch to keiba-intelligence
+        if: steps.merge-check.outputs.merged == 'true'
+        uses: peter-evans/repository-dispatch@v3
+        with:
+          token: ${{ secrets.INTELLIGENCE_REPO_DISPATCH_TOKEN }}
+          repository: apol0510/keiba-intelligence
+          event-type: prediction-jra-updated
+          client-payload: |
+            {
+              "dates": ${{ steps.convert-dates.outputs.dates_json }},
+              "source": "keiba-data-shared",
+              "venue": "jra",
+              "trigger": "auto-merge",
+              "commit_sha": "${{ github.sha }}"
+            }
+
+      - name: Dispatch success notification
+        if: steps.merge-check.outputs.merged == 'true'
+        run: |
+          echo "✅ Dispatched to keiba-intelligence"
+          echo "   Event type: prediction-jra-updated"
+          echo "   Dates: ${{ steps.convert-dates.outputs.dates_json }}"
+          echo "   Target repo: apol0510/keiba-intelligence"
+
       - name: Skip notification
         if: steps.merge-check.outputs.merged != 'true'
         run: |
