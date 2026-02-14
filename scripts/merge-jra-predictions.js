@@ -26,13 +26,17 @@ function mergeJraPredictions(date) {
     process.exit(1);
   }
 
-  // 指定日付の全会場ファイルを取得
+  // 指定日付の会場別ファイルのみを取得（統合ファイルを除外）
   const files = readdirSync(dirPath)
-    .filter(f => f.startsWith(date) && f.endsWith('.json'))
+    .filter(f => {
+      // YYYY-MM-DD-{VENUE}.json のパターンにマッチ
+      const pattern = new RegExp(`^${date}-[A-Z]{3}\\.json$`);
+      return pattern.test(f);
+    })
     .sort();
 
   if (files.length === 0) {
-    console.error(`❌ ${date}の予想データが見つかりません`);
+    console.error(`❌ ${date}の会場別予想データが見つかりません`);
     process.exit(1);
   }
 
