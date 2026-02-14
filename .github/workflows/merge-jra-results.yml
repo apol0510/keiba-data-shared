@@ -1,0 +1,108 @@
+name: Merge JRA Result Files
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'jra/results/**/*.json'
+
+jobs:
+  merge:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write  # git pushに必要
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2  # 差分確認用
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Check for venue-specific files and merge
+        id: merge-check
+        run: |
+          # 更新されたファイルを取得
+          CHANGED_FILES=$(git diff --name-only HEAD^ HEAD | grep 'jra/results/.*\.json' || true)
+
+          if [ -z "$CHANGED_FILES" ]; then
+            echo "merged=false" >> $GITHUB_OUTPUT
+            echo "📊 No JRA result files changed"
+            exit 0
+          fi
+
+          # 会場コード付きファイル（-KYO.json等）が含まれているかチェック
+          VENUE_FILES=$(echo "$CHANGED_FILES" | grep -E 'jra/results/.*/[0-9]{4}-[0-9]{2}-[0-9]{2}-[A-Z]{3}\.json' || true)
+
+          if [ -z "$VENUE_FILES" ]; then
+            echo "merged=false" >> $GITHUB_OUTPUT
+            echo "⏭️  No venue-specific files found (already merged files only)"
+            exit 0
+          fi
+
+          echo "📋 会場別ファイル検出:"
+          echo "$VENUE_FILES"
+
+          # 日付を抽出（重複排除）
+          DATES=$(echo "$VENUE_FILES" | sed -E 's|.*/([0-9]{4}-[0-9]{2}-[0-9]{2})-[A-Z]{3}\.json|\1|' | sort -u)
+
+          echo "🎯 統合対象日付:"
+          echo "$DATES"
+
+          MERGED_DATES=""
+          while IFS= read -r date; do
+            echo ""
+            echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+            echo "📅 $date の統合処理開始"
+            echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+
+            # merge-jra-results.js を実行
+            node scripts/merge-jra-results.js "$date"
+
+            if [ $? -eq 0 ]; then
+              echo "✅ $date 統合完了"
+              if [ -z "$MERGED_DATES" ]; then
+                MERGED_DATES="$date"
+              else
+                MERGED_DATES="$MERGED_DATES, $date"
+              fi
+            else
+              echo "❌ $date 統合失敗"
+            fi
+          done <<< "$DATES"
+
+          if [ -n "$MERGED_DATES" ]; then
+            echo "merged=true" >> $GITHUB_OUTPUT
+            echo "dates=$MERGED_DATES" >> $GITHUB_OUTPUT
+          else
+            echo "merged=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Commit merged files
+        if: steps.merge-check.outputs.merged == 'true'
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+          # WORKFLOW_PATを使用してgit pushの認証を設定（他のワークフローをトリガーするため）
+          git remote set-url origin https://x-access-token:${{ secrets.WORKFLOW_PAT }}@github.com/apol0510/keiba-data-shared.git
+
+          git add jra/results/
+          if git diff --cached --quiet; then
+            echo "⏭️  No changes to commit (files already exist)"
+          else
+            DATES="${{ steps.merge-check.outputs.dates }}"
+            git commit -m "🔄 JRA結果自動統合: ${DATES} [Auto-merged by GitHub Actions]"
+            git push
+            echo "✅ Pushed merged files for: ${DATES}"
+          fi
+
+      - name: Skip notification
+        if: steps.merge-check.outputs.merged != 'true'
+        run: |
+          echo "⏭️  Skipped: No venue-specific files to merge"
