@@ -92,9 +92,11 @@ try {
             const fileContent = readFileSync(filePath, 'utf-8');
             const jsonData = JSON.parse(fileContent);
 
-            // 統合ファイル（venues配列を持つ）を除外
-            if (jsonData.venues && Array.isArray(jsonData.venues)) {
-              continue; // 統合ファイルはスキップ（内部処理用）
+            // 統合ファイルを除外（内部処理専用）
+            // - venues配列を持つファイル（予想の統合ファイル）
+            // - venue="JRA統合"のファイル（結果の統合ファイル）
+            if ((jsonData.venues && Array.isArray(jsonData.venues)) || jsonData.venue === 'JRA統合') {
+              continue; // 統合ファイルはスキップ
             }
 
             // 結果データのみを対象とする（date, venueフィールドが必須）
