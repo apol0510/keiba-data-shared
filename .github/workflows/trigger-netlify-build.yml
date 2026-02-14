@@ -1,4 +1,4 @@
-name: Trigger Netlify Build on Data Update
+name: Trigger Netlify Build on Data Update (南関・JRA)
 
 on:
   push:
@@ -7,6 +7,8 @@ on:
     paths:
       - 'nankan/results/**/*.json'
       - 'nankan/predictions/**/*.json'
+      - 'jra/results/**/*.json'
+      - 'jra/predictions/**/*.json'
 
 jobs:
   trigger-netlify:
@@ -15,12 +17,13 @@ jobs:
     steps:
       - name: Trigger Netlify Build Hook
         run: |
-          echo "🚀 Netlifyビルドフックを呼び出します..."
+          echo "🚀 Netlifyビルドフックを呼び出します（南関・JRA結果/予想データ更新）..."
           response=$(curl -X POST -d {} -w "\nHTTP_CODE:%{http_code}" "${{ secrets.NETLIFY_BUILD_HOOK_URL }}")
           http_code=$(echo "$response" | grep "HTTP_CODE" | cut -d: -f2)
 
           if [ "$http_code" = "200" ] || [ "$http_code" = "204" ]; then
             echo "✅ Netlifyビルドを正常にトリガーしました (HTTP $http_code)"
+            echo "📄 新しいページが5-10分以内に生成されます"
           else
             echo "❌ Netlifyビルドのトリガーに失敗しました (HTTP $http_code)"
             echo "Response: $response"
