@@ -1,6 +1,6 @@
 # 南関競馬 コンピ指数データ
 
-日刊コンピ指数のデータを格納するディレクトリです。
+コンピ指数のデータを格納するディレクトリです。
 
 ## ディレクトリ構造
 
@@ -24,7 +24,7 @@ computer/
   "venue": "大井",
   "venueCode": "OI",
   "category": "nankan",
-  "dataSource": "nikkan-computer",
+  "dataSource": "computer-index",
   "races": [
     {
       "raceNumber": 1,
@@ -57,7 +57,7 @@ computer/
 ## フィールド説明
 
 ### 馬データ
-- `computerIndex`: コンピ指数（日刊コンピ）
+- `computerIndex`: コンピ指数
 - `popularity`: 人気順位
 - `jockey`: 騎手名（予想データから自動補完）
 - `trainer`: 調教師名（予想データから自動補完）
