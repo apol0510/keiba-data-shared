@@ -43,7 +43,7 @@ computer/
           "trainer": "(大)林正人",
           "weight": 55.0,
           "ageGender": "牡4",
-          "enrichedFrom": "keiba-book"
+          "enrichedFrom": "predictions"
         }
       ]
     }
@@ -59,10 +59,10 @@ computer/
 ### 馬データ
 - `computerIndex`: コンピ指数（日刊コンピ）
 - `popularity`: 人気順位
-- `jockey`: 騎手名（競馬ブックから自動補完）
-- `trainer`: 調教師名（競馬ブックから自動補完）
-- `weight`: 斤量（競馬ブックから自動補完）
-- `ageGender`: 馬齢・性別（競馬ブックから自動補完）
+- `jockey`: 騎手名（予想データから自動補完）
+- `trainer`: 調教師名（予想データから自動補完）
+- `weight`: 斤量（予想データから自動補完）
+- `ageGender`: 馬齢・性別（予想データから自動補完）
 - `enrichedFrom`: 補完元データソース
 
 ## データ入力
