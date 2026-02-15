@@ -8,8 +8,13 @@
 computer/
 └── YYYY/
     └── MM/
-        └── YYYY-MM-DD.json
+        ├── YYYY-MM-DD-OOI.json  (大井)
+        ├── YYYY-MM-DD-KAW.json  (川崎)
+        ├── YYYY-MM-DD-FUN.json  (船橋)
+        └── YYYY-MM-DD-URA.json  (浦和)
 ```
+
+**複数会場対応**: 同日に複数会場がある場合、3文字の会場コード付きで保存されます。
 
 ## データ形式
 
