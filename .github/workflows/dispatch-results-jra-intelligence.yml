@@ -36,6 +36,12 @@ jobs:
           while IFS= read -r file; do
             DATE=$(basename "$file" .json)
 
+            # 会場別ファイル（-TOK, -KYO等）をスキップ（統合ファイルのみ処理）
+            if [[ "$DATE" =~ -[A-Z]{3}$ ]]; then
+              echo "⏭️  スキップ: $DATE（会場別ファイル）"
+              continue
+            fi
+
             # JSONファイルのレース数をチェック（中央競馬は10レース以上で処理）
             RACE_COUNT=$(cat "$file" | jq '.races | length')
 
