@@ -80,21 +80,23 @@ jobs:
           echo "dates=$DATES_ARRAY" >> $GITHUB_OUTPUT
           echo "🎯 Dispatch対象 (JRA): $DATES_ARRAY"
 
-      - name: Dispatch to keiba-intelligence
+      - name: Dispatch to keiba-intelligence (with retry)
         if: steps.changed-files.outputs.changed == 'true'
-        uses: peter-evans/repository-dispatch@v3
+        uses: nick-fields/retry@v3
         with:
-          token: ${{ secrets.INTELLIGENCE_REPO_DISPATCH_TOKEN }}
-          repository: apol0510/keiba-intelligence
-          event-type: results-jra-updated
-          client-payload: |
-            {
-              "dates": ${{ steps.changed-files.outputs.dates }},
-              "source": "keiba-data-shared",
-              "venue": "jra",
-              "trigger": "auto",
-              "commit_sha": "${{ github.sha }}"
-            }
+          timeout_minutes: 2
+          max_attempts: 3
+          retry_wait_seconds: 10
+          command: |
+            echo "📤 Dispatching to keiba-intelligence..."
+            gh api repos/apol0510/keiba-intelligence/dispatches \
+              --method POST \
+              -H "Accept: application/vnd.github+json" \
+              -H "X-GitHub-Api-Version: 2022-11-28" \
+              -f event_type='results-jra-updated' \
+              -f "client_payload={\"dates\":${{ steps.changed-files.outputs.dates }},\"source\":\"keiba-data-shared\",\"venue\":\"jra\",\"trigger\":\"auto\",\"commit_sha\":\"${{ github.sha }}\"}"
+        env:
+          GH_TOKEN: ${{ secrets.INTELLIGENCE_REPO_DISPATCH_TOKEN }}
 
       - name: Success notification
         if: steps.changed-files.outputs.changed == 'true'
@@ -103,8 +105,32 @@ jobs:
           echo "   Dates: ${{ steps.changed-files.outputs.dates }}"
           echo "   Event type: results-jra-updated"
           echo "   Target repo: apol0510/keiba-intelligence"
+          echo "   Commit: ${{ github.sha }}"
+          echo "   Triggered by: ${{ github.actor }}"
+          echo ""
+          echo "📋 Dispatch details:"
+          echo "   - Repository: apol0510/keiba-intelligence"
+          echo "   - Event type: results-jra-updated"
+          echo "   - Dates: ${{ steps.changed-files.outputs.dates }}"
+          echo "   - Source: keiba-data-shared"
+          echo "   - Venue: jra"
+          echo ""
+          echo "🔍 To verify dispatch was received:"
+          echo "   gh run list --repo apol0510/keiba-intelligence --workflow import-results-jra.yml --limit 3"
 
       - name: Skip notification
         if: steps.changed-files.outputs.changed != 'true'
         run: |
           echo "⏭️  Skipped: No JRA result files changed in this push"
+
+      - name: Failure alert
+        if: failure()
+        run: |
+          echo "🚨 Dispatch failed!"
+          echo "   Dates: ${{ steps.changed-files.outputs.dates }}"
+          echo "   Target: apol0510/keiba-intelligence"
+          echo "   Event: results-jra-updated"
+          echo ""
+          echo "⚠️  Manual action required:"
+          echo "   cd /path/to/keiba-intelligence"
+          echo "   gh workflow run import-results-jra.yml -f date=YYYY-MM-DD"
