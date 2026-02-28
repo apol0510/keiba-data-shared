@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - 'jra/predictions/**/*.json'
+      - '!jra/predictions/computer/**'  # コンピ指数は除外
 
 jobs:
   merge:
@@ -27,17 +28,18 @@ jobs:
       - name: Check for venue-specific files and merge
         id: merge-check
         run: |
-          # 更新されたファイルを取得
-          CHANGED_FILES=$(git diff --name-only HEAD^ HEAD | grep 'jra/predictions/.*\.json' || true)
+          # 更新されたファイルを取得（computerディレクトリを除外）
+          CHANGED_FILES=$(git diff --name-only HEAD^ HEAD | grep 'jra/predictions/.*\.json' | grep -v 'jra/predictions/computer/' || true)
 
           if [ -z "$CHANGED_FILES" ]; then
             echo "merged=false" >> $GITHUB_OUTPUT
-            echo "📊 No JRA prediction files changed"
+            echo "📊 No JRA prediction files changed (excluding computer index files)"
             exit 0
           fi
 
           # 会場コード付きファイル（-TKY.json等）が含まれているかチェック
-          VENUE_FILES=$(echo "$CHANGED_FILES" | grep -E 'jra/predictions/.*/[0-9]{4}-[0-9]{2}-[0-9]{2}-[A-Z]{3}\.json' || true)
+          # computerディレクトリは除外
+          VENUE_FILES=$(echo "$CHANGED_FILES" | grep -E 'jra/predictions/[0-9]{4}/[0-9]{2}/[0-9]{4}-[0-9]{2}-[0-9]{2}-[A-Z]{3}\.json' || true)
 
           if [ -z "$VENUE_FILES" ]; then
             echo "merged=false" >> $GITHUB_OUTPUT
