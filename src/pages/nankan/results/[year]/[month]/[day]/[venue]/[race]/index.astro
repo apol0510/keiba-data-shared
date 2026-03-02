@@ -788,8 +788,137 @@ const generateRaceSummary = () => {
       line-height: 1;
     }
 
+    /* keiba-intelligence導線スタイル */
+    .intelligence-promo {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-radius: 20px;
+      padding: 2.5rem;
+      margin: 3rem 0;
+      box-shadow: 0 8px 32px rgba(102, 126, 234, 0.3);
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .intelligence-promo::before {
+      content: '🔮';
+      position: absolute;
+      font-size: 12rem;
+      opacity: 0.1;
+      right: -2rem;
+      top: -2rem;
+      transform: rotate(-15deg);
+    }
+
+    .promo-title {
+      font-size: 2rem;
+      color: white;
+      margin-bottom: 1.5rem;
+      font-weight: 800;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .promo-icon {
+      font-size: 2rem;
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+    }
+
+    .promo-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .promo-description {
+      color: white;
+      font-size: 1.1rem;
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+      font-weight: 500;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    }
+
+    .promo-features {
+      display: flex;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+      padding: 0.75rem 1.25rem;
+      border-radius: 12px;
+      color: white;
+      font-weight: 600;
+      font-size: 0.95rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .feature-icon {
+      font-size: 1.25rem;
+    }
+
+    .promo-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 1rem 2rem;
+      background: white;
+      color: #667eea;
+      text-decoration: none;
+      border-radius: 12px;
+      font-weight: 800;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .promo-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+      background: linear-gradient(135deg, #FFF9C4 0%, #FFEB3B 100%);
+      color: #5D4E00;
+    }
+
     /* モバイル対応 */
     @media (max-width: 768px) {
+      .intelligence-promo {
+        padding: 2rem 1.5rem;
+        margin: 2rem 0;
+      }
+
+      .intelligence-promo::before {
+        font-size: 8rem;
+      }
+
+      .promo-title {
+        font-size: 1.5rem;
+      }
+
+      .promo-description {
+        font-size: 1rem;
+      }
+
+      .promo-features {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .promo-button {
+        width: 100%;
+        justify-content: center;
+        font-size: 1rem;
+      }
+
       .race-commentary-section {
         padding: 2rem 1.5rem;
         margin: 2rem 0;
@@ -1275,6 +1404,37 @@ const generateRaceSummary = () => {
         </h2>
         <div class="commentary-content">
           <p>{raceData.comment || generateRaceSummary()}</p>
+        </div>
+      </section>
+
+      <!-- keiba-intelligence導線 -->
+      <section class="intelligence-promo">
+        <h2 class="promo-title">
+          <span class="promo-icon">🔮</span>
+          次回のレースに向けて
+        </h2>
+        <div class="promo-content">
+          <p class="promo-description">
+            このレース結果データを活用したAI予想をご覧になれます。<br>
+            南関競馬・中央競馬（JRA）全場対応の本格予想プラットフォーム
+          </p>
+          <div class="promo-features">
+            <div class="feature-item">
+              <span class="feature-icon">🎯</span>
+              <span>AI馬単買い目</span>
+            </div>
+            <div class="feature-item">
+              <span class="feature-icon">📊</span>
+              <span>的中率・回収率グラフ</span>
+            </div>
+            <div class="feature-item">
+              <span class="feature-icon">💰</span>
+              <span>買い切りプラン有</span>
+            </div>
+          </div>
+          <a href="https://keiba-intelligence.netlify.app/" class="promo-button" target="_blank" rel="noopener noreferrer">
+            KEIBA Intelligence で予想を見る →
+          </a>
         </div>
       </section>
 
