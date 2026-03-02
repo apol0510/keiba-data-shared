@@ -666,7 +666,12 @@ const jraVenues = [
             // 最新の日付を取得
             const latestDate = jraAvailableDates[0]?.date;
 
-            return jraAvailableDates.slice(0, 10).filter(item => item.date && item.venue).map((item, index) => {
+            // 直近2日分の日付を取得
+            const uniqueDates = [...new Set(jraAvailableDates.map(item => item.date))];
+            const last2Days = uniqueDates.slice(0, 2);
+
+            // 直近2日分のデータのみフィルタリング
+            return jraAvailableDates.filter(item => last2Days.includes(item.date) && item.date && item.venue).map((item, index) => {
               const [year, month, day] = item.date.split('-');
               const venueSlug = jraVenues.find(v => v.name === item.venue)?.slug || 'tokyo';
 
