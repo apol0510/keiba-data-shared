@@ -496,7 +496,7 @@ const canonicalUrl = `${Astro.site}nankan/results/${year}/${month}/${day}/`;
       margin-bottom: 1rem;
     }
 
-    /* keiba-intelligence導線（日付別一覧用） */
+    /* keiba-intelligence導線（日付別一覧用） - 明るくポップなデザイン */
     .intelligence-promo-section {
       max-width: 1200px;
       margin: 3rem auto 0;
@@ -504,23 +504,46 @@ const canonicalUrl = `${Astro.site}nankan/results/${year}/${month}/${day}/`;
     }
 
     .promo-container {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      border-radius: 20px;
-      padding: 2.5rem;
+      background: linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FF6B6B 100%);
+      border-radius: 24px;
+      padding: 3rem;
       text-align: center;
-      box-shadow: 0 8px 32px rgba(102, 126, 234, 0.3);
+      box-shadow: 0 12px 48px rgba(255, 107, 107, 0.4);
+      border: 3px solid rgba(255, 255, 255, 0.8);
       position: relative;
       overflow: hidden;
+      animation: float-box 3s ease-in-out infinite;
+    }
+
+    @keyframes float-box {
+      0%, 100% {
+        transform: translateY(0);
+        box-shadow: 0 12px 48px rgba(255, 107, 107, 0.4);
+      }
+      50% {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 60px rgba(255, 107, 107, 0.5);
+      }
     }
 
     .promo-container::before {
       content: '🔮';
       position: absolute;
       font-size: 10rem;
-      opacity: 0.1;
+      opacity: 0.15;
       right: -2rem;
       top: 50%;
       transform: translateY(-50%) rotate(-15deg);
+      animation: rotate-icon 10s linear infinite;
+    }
+
+    @keyframes rotate-icon {
+      0% {
+        transform: translateY(-50%) rotate(-15deg);
+      }
+      100% {
+        transform: translateY(-50%) rotate(345deg);
+      }
     }
 
     .promo-title {
@@ -562,37 +585,55 @@ const canonicalUrl = `${Astro.site}nankan/results/${year}/${month}/${day}/`;
     }
 
     .feature-badge {
-      background: rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.95);
       backdrop-filter: blur(10px);
-      padding: 0.6rem 1.25rem;
-      border-radius: 12px;
-      color: white;
-      font-weight: 600;
-      font-size: 0.9rem;
+      padding: 0.75rem 1.5rem;
+      border-radius: 16px;
+      color: #FF6B6B;
+      font-weight: 700;
+      font-size: 0.95rem;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+      transition: transform 0.3s ease;
+    }
+
+    .feature-badge:hover {
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
     }
 
     .promo-btn {
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      padding: 1rem 2rem;
+      padding: 1.25rem 2.5rem;
       background: white;
-      color: #667eea;
+      color: #FF6B6B;
       text-decoration: none;
-      border-radius: 12px;
-      font-weight: 800;
-      font-size: 1.1rem;
+      border-radius: 50px;
+      font-weight: 900;
+      font-size: 1.2rem;
       transition: all 0.3s ease;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
       position: relative;
       z-index: 1;
+      animation: pulse-button 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse-button {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.05);
+      }
     }
 
     .promo-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-      background: linear-gradient(135deg, #FFF9C4 0%, #FFEB3B 100%);
+      transform: translateY(-3px) scale(1.08);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+      background: linear-gradient(135deg, #FFE66D 0%, #FFA500 100%);
       color: #5D4E00;
+      animation: none;
     }
 
     /* フッター - ポップなデザイン */
