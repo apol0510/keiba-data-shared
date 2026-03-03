@@ -321,6 +321,7 @@ function calculateStats(matchedData) {
 
     // 馬単的中判定
     const umatanHit = checkUmatanHit(prediction, result);
+
     if (umatanHit) {
       stats.tickets.umatan.hit++;
       stats.venues[venue].umatanHit++;
@@ -329,11 +330,10 @@ function calculateStats(matchedData) {
       const second = result.results.find(r => r.rank === 2);
       const umatanReturn = getPayout(result, 'umatan', [first.number, second.number]);
       stats.tickets.umatan.totalReturn += umatanReturn;
-      stats.venues[venue].totalReturn += umatanReturn;
     }
     stats.tickets.umatan.total++;
-    stats.recovery.totalBet += 100; // 馬単100円
-    stats.venues[venue].totalBet += 100; // 馬単100円
+    // keiba-intelligenceと同じロジック: 固定8点/レース
+    stats.recovery.totalBet += 800; // 8点 × 100円
 
     // 三連複的中判定
     const sanrenpukuHit = checkSanrenpukuHit(prediction, result);
@@ -371,13 +371,36 @@ function calculateStats(matchedData) {
     stats.recovery.recoveryRate = Math.round(stats.recovery.totalReturn / stats.recovery.totalBet * 1000) / 10;
   }
 
-  // 競馬場別勝率・回収率
+  // 競馬場別勝率・回収率（馬単のみ）
   for (const [venue, data] of Object.entries(stats.venues)) {
     if (data.totalRaces > 0) {
       data.winRate = Math.round(data.honmeiWin / data.totalRaces * 1000) / 10;
       data.umatanRate = Math.round(data.umatanHit / data.totalRaces * 1000) / 10;
     }
 
+    // 該当競馬場の馬単投資額・払戻を再計算
+    data.totalBet = 0;
+    data.totalReturn = 0;
+  }
+
+  // 競馬場別の投資額・払戻を再集計
+  for (const { prediction, result } of matchedData) {
+    const venue = result.venue;
+    const umatanHit = checkUmatanHit(prediction, result);
+
+    // keiba-intelligenceと同じロジック: 固定8点/レース
+    stats.venues[venue].totalBet += 800;
+
+    if (umatanHit) {
+      const first = result.results.find(r => r.rank === 1);
+      const second = result.results.find(r => r.rank === 2);
+      const umatanReturn = getPayout(result, 'umatan', [first.number, second.number]);
+      stats.venues[venue].totalReturn += umatanReturn;
+    }
+  }
+
+  // 競馬場別回収率を計算
+  for (const [venue, data] of Object.entries(stats.venues)) {
     if (data.totalBet > 0) {
       data.recoveryRate = Math.round(data.totalReturn / data.totalBet * 1000) / 10;
     }
