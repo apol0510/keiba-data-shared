@@ -6,9 +6,6 @@
 import { readFileSync } from 'fs';
 import { join } from 'path';
 
-const title = '馬単予想成績統計 - KEIBA Intelligence 馬単的中率・回収率ダッシュボード';
-const description = '南関競馬の馬単予想成績を公開。馬単的中率45.2%、回収率339.2%の実績データ。競馬場別成績も確認できます。';
-
 // 統計データ読み込み
 let stats = null;
 try {
@@ -18,6 +15,11 @@ try {
 } catch (error) {
   console.error('統計データ読み込みエラー:', error);
 }
+
+const title = '馬単予想成績統計 - KEIBA Intelligence 馬単的中率・回収率ダッシュボード';
+const description = stats
+  ? `南関競馬の馬単予想成績を公開。馬単的中率${stats.tickets.umatan.rate}%、回収率${stats.recovery.recoveryRate}%の実績データ。競馬場別成績も確認できます。`
+  : '南関競馬の馬単予想成績を公開。馬単的中率63.5%、回収率651.2%の実績データ。競馬場別成績も確認できます。';
 
 // 生成日時のフォーマット
 function formatDateTime(isoString: string) {
@@ -487,7 +489,7 @@ function formatDateTime(isoString: string) {
   <header>
     <div class="header-content">
       <h1>📊 馬単予想成績統計</h1>
-      <p class="subtitle">KEIBA Intelligence - 南関競馬 馬単的中率45.2%・回収率339.2%</p>
+      <p class="subtitle">KEIBA Intelligence - 南関競馬 馬単的中率{stats.tickets.umatan.rate}%・回収率{stats.recovery.recoveryRate}%</p>
     </div>
   </header>
 

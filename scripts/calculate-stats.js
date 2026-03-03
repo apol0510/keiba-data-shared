@@ -139,6 +139,9 @@ function checkHonmeiHit(prediction, result) {
 
 /**
  * 馬単的中判定
+ * keiba-intelligenceのimportResults.jsと同じロジック
+ * - パターン1: 軸が1着、相手が2着
+ * - パターン2: 相手が1着、軸が2着（ボックス的扱い）
  */
 function checkUmatanHit(prediction, result) {
   const first = result.results.find(r => r.rank === 1);
@@ -146,20 +149,37 @@ function checkUmatanHit(prediction, result) {
 
   if (!first || !second) return false;
 
-  // 予想の馬単フォーマット: "2-3.4.5.6" → 2→3,4,5,6
+  // 予想の馬単フォーマット: "4-1.11.2.5.7.9(抑え10.8.6)"
   const umatanLines = prediction.bettingLines?.umatan || [];
 
   for (const line of umatanLines) {
     const match = line.match(/^(\d+)-(.+)$/);
     if (!match) continue;
 
-    const from = parseInt(match[1]);
-    const toNumbers = match[2]
-      .replace(/\(.+?\)/g, '') // (抑え1.4.5)を削除
-      .split('.')
-      .map(n => parseInt(n.trim()));
+    const axis = parseInt(match[1]);
+    const aitePart = match[2];
 
-    if (from === first.number && toNumbers.includes(second.number)) {
+    // 本線相手馬を抽出
+    const mainPart = aitePart.replace(/\(.+?\)/g, ''); // (抑え...)を削除
+    const mainAite = mainPart.split('.').map(n => parseInt(n.trim())).filter(n => !isNaN(n));
+
+    // 抑え馬を抽出
+    let osaeAite = [];
+    const osaeMatch = aitePart.match(/\(抑え([0-9.]+)\)/);
+    if (osaeMatch) {
+      osaeAite = osaeMatch[1].split('.').map(n => parseInt(n.trim())).filter(n => !isNaN(n));
+    }
+
+    // 全相手馬（本線+抑え）
+    const allAite = [...mainAite, ...osaeAite];
+
+    // パターン1: 軸が1着、相手が2着
+    if (axis === first.number && allAite.includes(second.number)) {
+      return true;
+    }
+
+    // パターン2: 相手が1着、軸が2着（ボックス的扱い）
+    if (allAite.includes(first.number) && axis === second.number) {
       return true;
     }
   }
