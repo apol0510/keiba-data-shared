@@ -410,6 +410,57 @@ function calculateStats(matchedData) {
 }
 
 /**
+ * 月別統計を計算
+ */
+function calculateMonthlyStats(matchedData) {
+  const monthlyStats = {};
+
+  for (const { prediction, result } of matchedData) {
+    const date = result.date || prediction.raceInfo.date;
+    const yearMonth = date.substring(0, 7); // "2026-01"
+
+    if (!monthlyStats[yearMonth]) {
+      monthlyStats[yearMonth] = {
+        yearMonth,
+        totalRaces: 0,
+        umatanHit: 0,
+        umatanRate: 0,
+        totalBet: 0,
+        totalReturn: 0,
+        recoveryRate: 0
+      };
+    }
+
+    const month = monthlyStats[yearMonth];
+    month.totalRaces++;
+    month.totalBet += 800; // 8点/レース
+
+    const umatanHit = checkUmatanHit(prediction, result);
+    if (umatanHit) {
+      month.umatanHit++;
+
+      const first = result.results.find(r => r.rank === 1);
+      const second = result.results.find(r => r.rank === 2);
+      const umatanReturn = getPayout(result, 'umatan', [first.number, second.number]);
+      month.totalReturn += umatanReturn;
+    }
+  }
+
+  // 月別の的中率・回収率を計算
+  for (const month of Object.values(monthlyStats)) {
+    if (month.totalRaces > 0) {
+      month.umatanRate = Math.round(month.umatanHit / month.totalRaces * 1000) / 10;
+    }
+    if (month.totalBet > 0) {
+      month.recoveryRate = Math.round(month.totalReturn / month.totalBet * 1000) / 10;
+    }
+  }
+
+  // 日付順にソート
+  return Object.values(monthlyStats).sort((a, b) => a.yearMonth.localeCompare(b.yearMonth));
+}
+
+/**
  * メイン処理
  */
 function main() {
@@ -430,7 +481,11 @@ function main() {
   // 3. 統計計算
   const stats = calculateStats(matchedData);
 
-  // 4. 保存
+  // 4. 月別統計計算
+  const monthlyStats = calculateMonthlyStats(matchedData);
+  stats.monthly = monthlyStats;
+
+  // 5. 保存
   fs.writeFileSync(OUTPUT_PATH, JSON.stringify(stats, null, 2), 'utf8');
 
   console.log(`\n✅ 統計データ保存完了: ${OUTPUT_PATH}`);

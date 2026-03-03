@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-03T07:32:56.455Z",
+  "generatedAt": "2026-03-03T07:49:11.802Z",
   "totalRaces": 252,
   "honmei": {
     "totalRaces": 252,
@@ -74,5 +74,25 @@
       "totalBet": 38400,
       "recoveryRate": 171.8
     }
-  }
+  },
+  "monthly": [
+    {
+      "yearMonth": "2026-01",
+      "totalRaces": 24,
+      "umatanHit": 16,
+      "umatanRate": 66.7,
+      "totalBet": 19200,
+      "totalReturn": 30410,
+      "recoveryRate": 158.4
+    },
+    {
+      "yearMonth": "2026-02",
+      "totalRaces": 228,
+      "umatanHit": 144,
+      "umatanRate": 63.2,
+      "totalBet": 182400,
+      "totalReturn": 419430,
+      "recoveryRate": 230
+    }
+  ]
 }
