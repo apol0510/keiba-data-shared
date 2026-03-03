@@ -628,7 +628,7 @@ function formatDateTime(isoString: string) {
           <div class="chart-container">
             <div class="chart-header">
               <h3 class="chart-title">🎯 競馬場別 馬単的中率の推移</h3>
-              <p class="chart-subtitle">各競馬場ごとの的中率パフォーマンス</p>
+              <p class="chart-subtitle">各競馬場ごとの的中率パフォーマンス｜✨ 50%超（ゴールド点）が優秀！</p>
             </div>
             <canvas id="hitRateChart"></canvas>
           </div>
@@ -743,18 +743,20 @@ function formatDateTime(isoString: string) {
           // 全日付に対してデータを配置（ない日はnull）
           const data = sortedDates.map(date => dataMap[date] || null);
 
+          // 的中率の場合、50%超をゴールドで強調
           // 回収率の場合、100%超をゴールドで強調
-          const pointBackgroundColors = metric === 'recoveryRate'
-            ? data.map(value => value !== null && value > 100 ? '#FFD700' : config.color)
-            : config.color;
+          const threshold = metric === 'hitRate' ? 50 : 100;
+          const pointBackgroundColors = data.map(value =>
+            value !== null && value > threshold ? '#FFD700' : config.color
+          );
 
-          const pointBorderColors = metric === 'recoveryRate'
-            ? data.map(value => value !== null && value > 100 ? '#FFA500' : '#fff')
-            : '#fff';
+          const pointBorderColors = data.map(value =>
+            value !== null && value > threshold ? '#FFA500' : '#fff'
+          );
 
-          const pointRadii = metric === 'recoveryRate'
-            ? data.map(value => value !== null && value > 100 ? 7 : 5)
-            : 5;
+          const pointRadii = data.map(value =>
+            value !== null && value > threshold ? 7 : 5
+          );
 
           return {
             label: `${config.emoji} ${venue}`,
@@ -769,12 +771,12 @@ function formatDateTime(isoString: string) {
             pointBackgroundColor: pointBackgroundColors,
             pointBorderColor: pointBorderColors,
             pointBorderWidth: 2,
-            pointHoverBackgroundColor: metric === 'recoveryRate'
-              ? data.map(value => value !== null && value > 100 ? '#FFD700' : '#fff')
-              : '#fff',
-            pointHoverBorderColor: metric === 'recoveryRate'
-              ? data.map(value => value !== null && value > 100 ? '#FFA500' : config.color)
-              : config.color,
+            pointHoverBackgroundColor: data.map(value =>
+              value !== null && value > threshold ? '#FFD700' : '#fff'
+            ),
+            pointHoverBorderColor: data.map(value =>
+              value !== null && value > threshold ? '#FFA500' : config.color
+            ),
             pointHoverBorderWidth: 3,
             spanGaps: true // 欠損値を線で繋ぐ
           };
@@ -884,13 +886,54 @@ function formatDateTime(isoString: string) {
       // 的中率グラフ（競馬場別）
       const hitRateCtx = document.getElementById('hitRateChart');
       if (hitRateCtx) {
+        // 的中率グラフ専用オプション（50%超を強調）
+        const hitRateOptions = JSON.parse(JSON.stringify(commonOptions));
+
+        // Y軸の設定を調整（50%を強調）
+        hitRateOptions.scales.y.ticks.callback = function(value) {
+          if (value === 50) {
+            return '✨ ' + value + '%';
+          }
+          return value + '%';
+        };
+
+        // ツールチップに50%超の表示を追加
+        hitRateOptions.plugins.tooltip.callbacks.label = function(context) {
+          const value = context.parsed.y;
+          const emoji = value > 50 ? '🎉 ' : '';
+          const suffix = value > 50 ? ' 【優秀！】' : '';
+          return '  ' + emoji + value.toFixed(1) + '%' + suffix;
+        };
+        hitRateOptions.plugins.tooltip.callbacks.afterLabel = function(context) {
+          const value = context.parsed.y;
+          if (value > 50) {
+            return '✨ 2回に1回以上的中';
+          }
+          return '';
+        };
+
+        // 50%基準線用のダミーデータセットを追加
+        const datasets = createDatasets('hitRate');
+        datasets.push({
+          label: '✨ 優秀ライン',
+          data: new Array(labels.length).fill(50),
+          borderColor: '#F59E0B',
+          backgroundColor: 'rgba(245, 158, 11, 0.1)',
+          borderWidth: 2,
+          borderDash: [10, 5],
+          fill: false,
+          pointRadius: 0,
+          pointHoverRadius: 0,
+          tension: 0
+        });
+
         new Chart(hitRateCtx, {
           type: 'line',
           data: {
             labels: labels,
-            datasets: createDatasets('hitRate')
+            datasets: datasets
           },
-          options: commonOptions
+          options: hitRateOptions
         });
       }
 
