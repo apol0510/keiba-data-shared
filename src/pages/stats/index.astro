@@ -517,12 +517,6 @@ function formatDateTime(isoString: string) {
               <div class="stat-value">{stats.recovery.recoveryRate}</div>
               <div class="stat-subtext">%</div>
             </div>
-
-            <div class="stat-card">
-              <div class="stat-label">🏆 本命複勝率</div>
-              <div class="stat-value">{stats.honmei.inMoneyRate}</div>
-              <div class="stat-subtext">%（参考）</div>
-            </div>
           </div>
 
           <div class="updated-at">
@@ -609,10 +603,6 @@ function formatDateTime(isoString: string) {
                   <div class="venue-stat-row">
                     <span class="venue-stat-label">💰 馬単回収率</span>
                     <span class="venue-stat-value">{venueData.recoveryRate}%</span>
-                  </div>
-                  <div class="venue-stat-row">
-                    <span class="venue-stat-label">🏆 本命複勝率</span>
-                    <span class="venue-stat-value">{venueData.winRate}%</span>
                   </div>
                 </div>
               );
