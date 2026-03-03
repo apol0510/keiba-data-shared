@@ -6,8 +6,8 @@
 import { readFileSync } from 'fs';
 import { join } from 'path';
 
-const title = '予想成績統計 - KEIBA Intelligence 的中率・回収率ダッシュボード';
-const description = '南関競馬の予想成績を公開。本命的中率、馬単的中率、三連複的中率、回収率、競馬場別成績を確認できます。';
+const title = '馬単予想成績統計 - KEIBA Intelligence 馬単的中率・回収率ダッシュボード';
+const description = '南関競馬の馬単予想成績を公開。馬単的中率45.2%、回収率339.2%の実績データ。競馬場別成績も確認できます。';
 
 // 統計データ読み込み
 let stats = null;
@@ -359,8 +359,8 @@ function formatDateTime(isoString: string) {
 <body>
   <header>
     <div class="header-content">
-      <h1>📊 予想成績統計</h1>
-      <p class="subtitle">KEIBA Intelligence - 南関競馬 的中率・回収率ダッシュボード</p>
+      <h1>📊 馬単予想成績統計</h1>
+      <p class="subtitle">KEIBA Intelligence - 南関競馬 馬単的中率45.2%・回収率339.2%</p>
     </div>
   </header>
 
@@ -369,7 +369,7 @@ function formatDateTime(isoString: string) {
       <>
         <!-- 総合成績 -->
         <section class="section">
-          <h2>🎯 総合成績</h2>
+          <h2>🎯 馬単予想 総合成績</h2>
           <div class="stats-grid">
             <div class="stat-card">
               <div class="stat-label">総レース数</div>
@@ -378,21 +378,21 @@ function formatDateTime(isoString: string) {
             </div>
 
             <div class="stat-card highlight">
-              <div class="stat-label">本命的中率</div>
-              <div class="stat-value">{stats.honmei.winRate}</div>
+              <div class="stat-label">馬単的中率</div>
+              <div class="stat-value">{stats.tickets.umatan.rate}</div>
+              <div class="stat-subtext">%</div>
+            </div>
+
+            <div class="stat-card highlight">
+              <div class="stat-label">馬単回収率</div>
+              <div class="stat-value">{stats.recovery.recoveryRate}</div>
               <div class="stat-subtext">%</div>
             </div>
 
             <div class="stat-card">
               <div class="stat-label">本命複勝率</div>
               <div class="stat-value">{stats.honmei.inMoneyRate}</div>
-              <div class="stat-subtext">%</div>
-            </div>
-
-            <div class="stat-card highlight">
-              <div class="stat-label">回収率</div>
-              <div class="stat-value">{stats.recovery.recoveryRate}</div>
-              <div class="stat-subtext">%</div>
+              <div class="stat-subtext">%（参考）</div>
             </div>
           </div>
 
@@ -401,44 +401,51 @@ function formatDateTime(isoString: string) {
           </div>
         </section>
 
-        <!-- 券種別成績 -->
+        <!-- 馬単詳細成績 -->
         <section class="section">
-          <h2>🎫 券種別成績</h2>
-          <table class="tickets-table">
-            <thead>
-              <tr>
-                <th>券種</th>
-                <th>的中数</th>
-                <th>総レース数</th>
-                <th>的中率</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>単勝（本命）</td>
-                <td>{stats.tickets.tansho.hit}R</td>
-                <td>{stats.tickets.tansho.total}R</td>
-                <td class="rate-cell">{stats.tickets.tansho.rate}%</td>
-              </tr>
-              <tr>
-                <td>馬単</td>
-                <td>{stats.tickets.umatan.hit}R</td>
-                <td>{stats.tickets.umatan.total}R</td>
-                <td class="rate-cell">{stats.tickets.umatan.rate}%</td>
-              </tr>
-              <tr>
-                <td>三連複</td>
-                <td>{stats.tickets.sanrenpuku.hit}R</td>
-                <td>{stats.tickets.sanrenpuku.total}R</td>
-                <td class="rate-cell">{stats.tickets.sanrenpuku.rate}%</td>
-              </tr>
-            </tbody>
-          </table>
+          <h2>🎫 馬単詳細成績</h2>
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-label">馬単的中</div>
+              <div class="stat-value">{stats.tickets.umatan.hit}</div>
+              <div class="stat-subtext">R</div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-label">馬単不的中</div>
+              <div class="stat-value">{stats.tickets.umatan.total - stats.tickets.umatan.hit}</div>
+              <div class="stat-subtext">R</div>
+            </div>
+
+            <div class="stat-card highlight">
+              <div class="stat-label">馬単的中率</div>
+              <div class="stat-value">{stats.tickets.umatan.rate}</div>
+              <div class="stat-subtext">%</div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-label">馬単総投資額</div>
+              <div class="stat-value">{(stats.recovery.totalBet / 10000).toFixed(1)}</div>
+              <div class="stat-subtext">万円</div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-label">馬単総払戻</div>
+              <div class="stat-value">{(stats.recovery.totalReturn / 10000).toFixed(1)}</div>
+              <div class="stat-subtext">万円</div>
+            </div>
+
+            <div class="stat-card highlight">
+              <div class="stat-label">馬単利益</div>
+              <div class="stat-value">{((stats.recovery.totalReturn - stats.recovery.totalBet) / 10000).toFixed(1)}</div>
+              <div class="stat-subtext">万円</div>
+            </div>
+          </div>
         </section>
 
         <!-- 競馬場別成績 -->
         <section class="section">
-          <h2>🏇 競馬場別成績</h2>
+          <h2>🏇 競馬場別 馬単成績</h2>
           <div class="venue-stats-grid">
             {Object.entries(stats.venues).map(([venueName, venueData]: [string, any]) => {
               const venueColors = {
@@ -457,16 +464,12 @@ function formatDateTime(isoString: string) {
                     <span class="venue-stat-value">{venueData.totalRaces}R</span>
                   </div>
                   <div class="venue-stat-row">
-                    <span class="venue-stat-label">本命的中</span>
-                    <span class="venue-stat-value">{venueData.honmeiWin}R</span>
-                  </div>
-                  <div class="venue-stat-row">
-                    <span class="venue-stat-label">的中率</span>
-                    <span class="venue-stat-value">{venueData.winRate}%</span>
-                  </div>
-                  <div class="venue-stat-row">
-                    <span class="venue-stat-label">回収率</span>
+                    <span class="venue-stat-label">馬単回収率</span>
                     <span class="venue-stat-value">{venueData.recoveryRate}%</span>
+                  </div>
+                  <div class="venue-stat-row">
+                    <span class="venue-stat-label">本命複勝率</span>
+                    <span class="venue-stat-value">{venueData.winRate}%</span>
                   </div>
                 </div>
               );
@@ -474,29 +477,6 @@ function formatDateTime(isoString: string) {
           </div>
         </section>
 
-        <!-- 回収率詳細 -->
-        <section class="section">
-          <h2>💰 回収率詳細</h2>
-          <div class="stats-grid">
-            <div class="stat-card">
-              <div class="stat-label">総投資額</div>
-              <div class="stat-value">{(stats.recovery.totalBet / 10000).toFixed(1)}</div>
-              <div class="stat-subtext">万円</div>
-            </div>
-
-            <div class="stat-card">
-              <div class="stat-label">総払戻額</div>
-              <div class="stat-value">{(stats.recovery.totalReturn / 10000).toFixed(1)}</div>
-              <div class="stat-subtext">万円</div>
-            </div>
-
-            <div class="stat-card highlight">
-              <div class="stat-label">利益</div>
-              <div class="stat-value">{((stats.recovery.totalReturn - stats.recovery.totalBet) / 10000).toFixed(1)}</div>
-              <div class="stat-subtext">万円</div>
-            </div>
-          </div>
-        </section>
       </>
     ) : (
       <section class="section">
