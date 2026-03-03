@@ -55,52 +55,42 @@ function formatDateTime(isoString: string) {
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif;
       line-height: 1.6;
-      color: #2C3E50;
-      background: linear-gradient(135deg, #FFD700 0%, #FFA500 25%, #FF69B4 50%, #9B59B6 75%, #3498DB 100%);
-      background-size: 400% 400%;
-      animation: gradientShift 15s ease infinite;
-      background-attachment: fixed;
+      color: #E0E0E0;
+      background: #0a0e27;
+      background-image:
+        radial-gradient(at 0% 0%, rgba(13, 110, 253, 0.15) 0px, transparent 50%),
+        radial-gradient(at 100% 0%, rgba(220, 38, 127, 0.15) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(13, 110, 253, 0.15) 0px, transparent 50%),
+        radial-gradient(at 0% 100%, rgba(220, 38, 127, 0.15) 0px, transparent 50%);
       min-height: 100vh;
-    }
-
-    @keyframes gradientShift {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
     }
 
     /* ヘッダー */
     header {
-      background: linear-gradient(135deg, #FF6B6B 0%, #FFD93D 25%, #6BCB77 50%, #4D96FF 75%, #9B59B6 100%);
-      background-size: 200% 200%;
-      animation: headerGradient 10s ease infinite;
+      background: linear-gradient(135deg, rgba(13, 110, 253, 0.1) 0%, rgba(220, 38, 127, 0.1) 100%);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
       color: white;
       padding: 3rem 1rem;
-      box-shadow: 0 8px 32px rgba(255, 215, 0, 0.5);
       position: relative;
       overflow: hidden;
     }
 
-    @keyframes headerGradient {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
     header::before {
-      content: '📊';
+      content: '';
       position: absolute;
-      font-size: 15rem;
-      opacity: 0.15;
-      right: -2rem;
-      top: -3rem;
-      transform: rotate(-15deg);
-      animation: floatEmoji 6s ease-in-out infinite;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.03), transparent);
+      animation: shimmer 3s infinite;
     }
 
-    @keyframes floatEmoji {
-      0%, 100% { transform: rotate(-15deg) translateY(0); }
-      50% { transform: rotate(-15deg) translateY(-20px); }
+    @keyframes shimmer {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
     }
 
     .header-content {
@@ -111,17 +101,27 @@ function formatDateTime(isoString: string) {
     }
 
     h1 {
-      font-size: 2.5rem;
+      font-size: 2.8rem;
       margin-bottom: 0.5rem;
-      font-weight: 800;
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+      font-weight: 900;
+      background: linear-gradient(135deg, #0D6EFD 0%, #DC267F 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -0.02em;
+      position: relative;
+      z-index: 1;
+      text-shadow: 0 0 40px rgba(13, 110, 253, 0.5);
     }
 
     .subtitle {
       font-size: 1.1rem;
-      opacity: 0.95;
-      font-weight: 500;
-      text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+      opacity: 0.8;
+      font-weight: 400;
+      color: #B0B0B0;
+      position: relative;
+      z-index: 1;
+      letter-spacing: 0.02em;
     }
 
     /* メインコンテンツ */
@@ -132,32 +132,42 @@ function formatDateTime(isoString: string) {
     }
 
     .section {
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(10px);
-      border-radius: 20px;
-      padding: 2rem;
+      background: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(20px);
+      border-radius: 24px;
+      padding: 2.5rem;
       margin-bottom: 2rem;
-      box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
-      border: 1px solid rgba(255, 255, 255, 0.5);
+      box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(13, 110, 253, 0.5), transparent);
     }
 
     .section h2 {
       font-size: 1.75rem;
-      background: linear-gradient(135deg, #FF6B6B 0%, #FFD93D 50%, #4D96FF 100%);
+      background: linear-gradient(135deg, #0D6EFD 0%, #DC267F 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
       margin-bottom: 1.5rem;
-      font-weight: 800;
+      font-weight: 900;
       display: flex;
       align-items: center;
       gap: 0.5rem;
-      animation: rainbowText 3s ease infinite;
-    }
-
-    @keyframes rainbowText {
-      0%, 100% { filter: hue-rotate(0deg); }
-      50% { filter: hue-rotate(30deg); }
+      letter-spacing: -0.01em;
+      filter: drop-shadow(0 0 20px rgba(13, 110, 253, 0.3));
     }
 
     /* 主要指標カード */
@@ -169,13 +179,16 @@ function formatDateTime(isoString: string) {
     }
 
     .stat-card {
-      background: linear-gradient(135deg, #FFFFFF 0%, #FFF9F0 100%);
-      border-radius: 20px;
+      background: rgba(30, 41, 59, 0.5);
+      backdrop-filter: blur(10px);
+      border-radius: 16px;
       padding: 2rem;
       text-align: center;
-      box-shadow: 0 8px 25px rgba(255, 105, 180, 0.3);
-      border: 3px solid transparent;
-      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-shadow:
+        0 4px 16px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       position: relative;
       overflow: hidden;
     }
@@ -187,8 +200,8 @@ function formatDateTime(isoString: string) {
       left: -100%;
       width: 100%;
       height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-      transition: left 0.5s;
+      background: linear-gradient(90deg, transparent, rgba(13, 110, 253, 0.2), transparent);
+      transition: left 0.6s;
     }
 
     .stat-card:hover::before {
@@ -196,69 +209,73 @@ function formatDateTime(isoString: string) {
     }
 
     .stat-card:hover {
-      transform: translateY(-8px) scale(1.03);
-      box-shadow: 0 12px 40px rgba(255, 105, 180, 0.5);
+      transform: translateY(-4px);
+      box-shadow:
+        0 12px 32px rgba(0, 0, 0, 0.4),
+        0 0 0 1px rgba(13, 110, 253, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+      border-color: rgba(13, 110, 253, 0.3);
     }
 
     .stat-card.highlight {
-      border: 3px solid transparent;
-      background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
-      box-shadow: 0 8px 30px rgba(255, 215, 0, 0.6);
-      animation: pulseGlow 2s ease-in-out infinite;
+      background: linear-gradient(135deg, rgba(13, 110, 253, 0.15) 0%, rgba(220, 38, 127, 0.15) 100%);
+      border: 1px solid rgba(13, 110, 253, 0.3);
+      box-shadow:
+        0 8px 24px rgba(13, 110, 253, 0.3),
+        0 0 40px rgba(13, 110, 253, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
     }
 
-    @keyframes pulseGlow {
-      0%, 100% { box-shadow: 0 8px 30px rgba(255, 215, 0, 0.6); }
-      50% { box-shadow: 0 8px 40px rgba(255, 215, 0, 0.9); }
+    .stat-card.highlight:hover {
+      box-shadow:
+        0 12px 32px rgba(13, 110, 253, 0.4),
+        0 0 60px rgba(13, 110, 253, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
     }
 
     .stat-label {
-      font-size: 0.95rem;
-      color: #7f8c8d;
-      font-weight: 600;
-      margin-bottom: 0.75rem;
+      font-size: 0.85rem;
+      color: #94A3B8;
+      font-weight: 700;
+      margin-bottom: 1rem;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
+      letter-spacing: 0.1em;
     }
 
     .stat-value {
-      font-size: 3rem;
-      font-weight: 800;
-      background: linear-gradient(135deg, #FF6B6B 0%, #FFD93D 50%, #4D96FF 100%);
-      background-size: 200% 200%;
-      animation: rainbowValue 3s ease infinite;
+      font-size: 3.5rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, #0D6EFD 0%, #DC267F 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
       margin-bottom: 0.5rem;
-      text-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
-    }
-
-    @keyframes rainbowValue {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+      line-height: 1;
+      letter-spacing: -0.03em;
+      filter: drop-shadow(0 0 30px rgba(13, 110, 253, 0.4));
     }
 
     .stat-card.highlight .stat-value {
-      background: linear-gradient(135deg, #FF1493 0%, #FF6347 50%, #FF8C00 100%);
-      background-size: 200% 200%;
-      animation: goldValue 2s ease infinite;
+      background: linear-gradient(135deg, #0D6EFD 0%, #DC267F 50%, #F59E0B 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.8));
+      filter: drop-shadow(0 0 40px rgba(13, 110, 253, 0.6));
+      animation: pulse 2s ease-in-out infinite;
     }
 
-    @keyframes goldValue {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+    @keyframes pulse {
+      0%, 100% {
+        filter: drop-shadow(0 0 40px rgba(13, 110, 253, 0.6));
+      }
+      50% {
+        filter: drop-shadow(0 0 60px rgba(220, 38, 127, 0.8));
+      }
     }
 
     .stat-subtext {
       font-size: 0.9rem;
-      color: #95a5a6;
+      color: #64748B;
       font-weight: 600;
     }
 
@@ -312,165 +329,165 @@ function formatDateTime(isoString: string) {
     }
 
     .venue-stat-card {
-      background: linear-gradient(135deg, #FFFFFF 0%, #FFF5F5 100%);
-      border-radius: 20px;
+      background: rgba(30, 41, 59, 0.5);
+      backdrop-filter: blur(10px);
+      border-radius: 16px;
       padding: 1.5rem;
-      box-shadow: 0 8px 25px rgba(255, 105, 180, 0.3);
-      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      border: 3px solid;
+      box-shadow:
+        0 4px 16px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      border: 1px solid;
+      border-left-width: 3px;
       position: relative;
       overflow: hidden;
     }
 
-    .venue-stat-card::before {
+    .venue-stat-card::after {
       content: '';
       position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
-      animation: rotateGlow 4s linear infinite;
-    }
-
-    @keyframes rotateGlow {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
+      top: 0;
+      right: 0;
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.03));
+      pointer-events: none;
     }
 
     .venue-stat-card:hover {
-      transform: translateY(-8px) scale(1.03) rotate(1deg);
-      box-shadow: 0 12px 40px rgba(255, 105, 180, 0.5);
+      transform: translateY(-4px);
+      box-shadow:
+        0 12px 32px rgba(0, 0, 0, 0.4),
+        0 0 40px var(--venue-glow, rgba(13, 110, 253, 0.3)),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
     }
 
     .venue-name {
       font-size: 1.5rem;
-      font-weight: 800;
-      margin-bottom: 1rem;
-      background: linear-gradient(135deg, #FF6B6B 0%, #FFD93D 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      position: relative;
-      z-index: 1;
+      font-weight: 900;
+      margin-bottom: 1.25rem;
+      color: #E2E8F0;
+      letter-spacing: -0.01em;
     }
 
     .venue-stat-row {
       display: flex;
       justify-content: space-between;
+      align-items: center;
       margin-bottom: 0.75rem;
-      padding: 0.75rem;
-      background: rgba(255, 255, 255, 0.7);
-      border-radius: 12px;
-      transition: all 0.3s ease;
-      position: relative;
-      z-index: 1;
+      padding: 0.875rem 1rem;
+      background: rgba(15, 23, 42, 0.4);
+      border-radius: 8px;
+      transition: all 0.2s ease;
+      border-left: 2px solid transparent;
     }
 
     .venue-stat-row:hover {
-      background: rgba(255, 215, 0, 0.2);
-      transform: translateX(5px);
+      background: rgba(13, 110, 253, 0.1);
+      border-left-color: var(--venue-color, #0D6EFD);
+      transform: translateX(4px);
     }
 
     .venue-stat-row:last-child {
-      border-bottom: none;
+      margin-bottom: 0;
     }
 
     .venue-stat-label {
-      font-size: 0.95rem;
-      color: #555;
-      font-weight: 700;
+      font-size: 0.85rem;
+      color: #94A3B8;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
 
     .venue-stat-value {
-      font-size: 1.25rem;
+      font-size: 1.35rem;
       font-weight: 800;
-      background: linear-gradient(135deg, #FF1493 0%, #FF6347 50%, #FFA500 100%);
-      background-size: 200% 200%;
-      animation: rainbowValue 3s ease infinite;
+      background: linear-gradient(135deg, #0D6EFD 0%, #DC267F 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+      letter-spacing: -0.02em;
     }
 
     /* データ更新日時 */
     .updated-at {
       text-align: center;
-      color: #7f8c8d;
-      font-size: 0.9rem;
-      margin-top: 1rem;
-      font-weight: 600;
+      color: #64748B;
+      font-size: 0.85rem;
+      margin-top: 1.5rem;
+      font-weight: 500;
+      padding: 0.75rem;
+      background: rgba(15, 23, 42, 0.4);
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
     }
 
     /* フッター */
     footer {
-      background: linear-gradient(135deg, #FF6B6B 0%, #FFD93D 25%, #6BCB77 50%, #4D96FF 75%, #9B59B6 100%);
-      background-size: 200% 200%;
-      animation: footerGradient 10s ease infinite;
+      background: rgba(15, 23, 42, 0.8);
+      backdrop-filter: blur(20px);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.3);
       color: white;
       text-align: center;
       padding: 3rem 1rem;
       margin-top: 3rem;
-      box-shadow: 0 -8px 32px rgba(255, 215, 0, 0.5);
       position: relative;
       overflow: hidden;
     }
 
-    @keyframes footerGradient {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
     footer::before {
-      content: '🏆';
+      content: '';
       position: absolute;
-      font-size: 10rem;
-      opacity: 0.1;
-      left: 10%;
-      top: 50%;
-      transform: translateY(-50%);
-      animation: bounce 3s ease-in-out infinite;
-    }
-
-    footer::after {
-      content: '💰';
-      position: absolute;
-      font-size: 8rem;
-      opacity: 0.1;
-      right: 10%;
-      top: 50%;
-      transform: translateY(-50%);
-      animation: bounce 3s ease-in-out infinite 0.5s;
-    }
-
-    @keyframes bounce {
-      0%, 100% { transform: translateY(-50%) scale(1); }
-      50% { transform: translateY(-60%) scale(1.1); }
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(13, 110, 253, 0.5), transparent);
     }
 
     footer p {
       font-size: 1rem;
-      opacity: 0.95;
       margin: 0.75rem 0;
-      font-weight: 600;
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+      font-weight: 500;
+      color: #94A3B8;
       position: relative;
       z-index: 1;
     }
 
+    footer p:first-child {
+      color: #E2E8F0;
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+
     footer a {
-      color: #FFD700;
-      text-decoration: underline;
+      color: #0D6EFD;
+      text-decoration: none;
       font-weight: 700;
       transition: all 0.3s ease;
-      text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+      position: relative;
+    }
+
+    footer a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(135deg, #0D6EFD 0%, #DC267F 100%);
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
     }
 
     footer a:hover {
-      color: #FFF;
-      text-shadow: 0 0 20px rgba(255, 215, 0, 1);
-      transform: scale(1.05);
+      color: #3B82F6;
+    }
+
+    footer a:hover::after {
+      transform: scaleX(1);
     }
 
     /* モバイル対応 */
@@ -600,10 +617,16 @@ function formatDateTime(isoString: string) {
           <div class="venue-stats-grid">
             {Object.entries(stats.venues).map(([venueName, venueData]: [string, any]) => {
               const venueColors = {
-                '大井': '#FF6B6B',
-                '川崎': '#45B7D1',
-                '船橋': '#4ECDC4',
-                '浦和': '#A770EF'
+                '大井': '#DC267F',
+                '川崎': '#0D6EFD',
+                '船橋': '#06B6D4',
+                '浦和': '#8B5CF6'
+              };
+              const venueGlows = {
+                '大井': 'rgba(220, 38, 127, 0.3)',
+                '川崎': 'rgba(13, 110, 253, 0.3)',
+                '船橋': 'rgba(6, 182, 212, 0.3)',
+                '浦和': 'rgba(139, 92, 246, 0.3)'
               };
               const venueEmojis = {
                 '大井': '🌃',
@@ -611,11 +634,12 @@ function formatDateTime(isoString: string) {
                 '船橋': '⚓',
                 '浦和': '🌸'
               };
-              const color = venueColors[venueName as keyof typeof venueColors] || '#667eea';
+              const color = venueColors[venueName as keyof typeof venueColors] || '#0D6EFD';
+              const glow = venueGlows[venueName as keyof typeof venueGlows] || 'rgba(13, 110, 253, 0.3)';
               const emoji = venueEmojis[venueName as keyof typeof venueEmojis] || '🏇';
 
               return (
-                <div class="venue-stat-card" style={`border-color: ${color};`}>
+                <div class="venue-stat-card" style={`border-color: ${color}; --venue-color: ${color}; --venue-glow: ${glow};`}>
                   <div class="venue-name">{emoji} {venueName}競馬場</div>
                   <div class="venue-stat-row">
                     <span class="venue-stat-label">🏇 総レース数</span>
