@@ -410,18 +410,29 @@ function calculateStats(matchedData) {
 }
 
 /**
- * 月別統計を計算
+ * 週の開始日（月曜日）を取得
  */
-function calculateMonthlyStats(matchedData) {
-  const monthlyStats = {};
+function getWeekStart(dateString) {
+  const date = new Date(dateString);
+  const day = date.getDay();
+  const diff = date.getDate() - day + (day === 0 ? -6 : 1); // 月曜日を週の開始とする
+  const monday = new Date(date.setDate(diff));
+  return monday.toISOString().split('T')[0];
+}
+
+/**
+ * 週別統計を計算
+ */
+function calculateWeeklyStats(matchedData) {
+  const weeklyStats = {};
 
   for (const { prediction, result } of matchedData) {
     const date = result.date || prediction.raceInfo.date;
-    const yearMonth = date.substring(0, 7); // "2026-01"
+    const weekStart = getWeekStart(date);
 
-    if (!monthlyStats[yearMonth]) {
-      monthlyStats[yearMonth] = {
-        yearMonth,
+    if (!weeklyStats[weekStart]) {
+      weeklyStats[weekStart] = {
+        weekStart,
         totalRaces: 0,
         umatanHit: 0,
         umatanRate: 0,
@@ -431,33 +442,33 @@ function calculateMonthlyStats(matchedData) {
       };
     }
 
-    const month = monthlyStats[yearMonth];
-    month.totalRaces++;
-    month.totalBet += 800; // 8点/レース
+    const week = weeklyStats[weekStart];
+    week.totalRaces++;
+    week.totalBet += 800; // 8点/レース
 
     const umatanHit = checkUmatanHit(prediction, result);
     if (umatanHit) {
-      month.umatanHit++;
+      week.umatanHit++;
 
       const first = result.results.find(r => r.rank === 1);
       const second = result.results.find(r => r.rank === 2);
       const umatanReturn = getPayout(result, 'umatan', [first.number, second.number]);
-      month.totalReturn += umatanReturn;
+      week.totalReturn += umatanReturn;
     }
   }
 
-  // 月別の的中率・回収率を計算
-  for (const month of Object.values(monthlyStats)) {
-    if (month.totalRaces > 0) {
-      month.umatanRate = Math.round(month.umatanHit / month.totalRaces * 1000) / 10;
+  // 週別の的中率・回収率を計算
+  for (const week of Object.values(weeklyStats)) {
+    if (week.totalRaces > 0) {
+      week.umatanRate = Math.round(week.umatanHit / week.totalRaces * 1000) / 10;
     }
-    if (month.totalBet > 0) {
-      month.recoveryRate = Math.round(month.totalReturn / month.totalBet * 1000) / 10;
+    if (week.totalBet > 0) {
+      week.recoveryRate = Math.round(week.totalReturn / week.totalBet * 1000) / 10;
     }
   }
 
   // 日付順にソート
-  return Object.values(monthlyStats).sort((a, b) => a.yearMonth.localeCompare(b.yearMonth));
+  return Object.values(weeklyStats).sort((a, b) => a.weekStart.localeCompare(b.weekStart));
 }
 
 /**
@@ -481,9 +492,9 @@ function main() {
   // 3. 統計計算
   const stats = calculateStats(matchedData);
 
-  // 4. 月別統計計算
-  const monthlyStats = calculateMonthlyStats(matchedData);
-  stats.monthly = monthlyStats;
+  // 4. 週別統計計算
+  const weeklyStats = calculateWeeklyStats(matchedData);
+  stats.weekly = weeklyStats;
 
   // 5. 保存
   fs.writeFileSync(OUTPUT_PATH, JSON.stringify(stats, null, 2), 'utf8');

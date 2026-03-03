@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-03T07:49:11.802Z",
+  "generatedAt": "2026-03-03T07:58:10.144Z",
   "totalRaces": 252,
   "honmei": {
     "totalRaces": 252,
@@ -75,24 +75,60 @@
       "recoveryRate": 171.8
     }
   },
-  "monthly": [
+  "weekly": [
     {
-      "yearMonth": "2026-01",
-      "totalRaces": 24,
-      "umatanHit": 16,
+      "weekStart": "2026-01-19",
+      "totalRaces": 12,
+      "umatanHit": 8,
       "umatanRate": 66.7,
-      "totalBet": 19200,
-      "totalReturn": 30410,
-      "recoveryRate": 158.4
+      "totalBet": 9600,
+      "totalReturn": 15080,
+      "recoveryRate": 157.1
     },
     {
-      "yearMonth": "2026-02",
-      "totalRaces": 228,
-      "umatanHit": 144,
-      "umatanRate": 63.2,
-      "totalBet": 182400,
-      "totalReturn": 419430,
-      "recoveryRate": 230
+      "weekStart": "2026-01-26",
+      "totalRaces": 12,
+      "umatanHit": 8,
+      "umatanRate": 66.7,
+      "totalBet": 9600,
+      "totalReturn": 15330,
+      "recoveryRate": 159.7
+    },
+    {
+      "weekStart": "2026-02-02",
+      "totalRaces": 60,
+      "umatanHit": 35,
+      "umatanRate": 58.3,
+      "totalBet": 48000,
+      "totalReturn": 72920,
+      "recoveryRate": 151.9
+    },
+    {
+      "weekStart": "2026-02-09",
+      "totalRaces": 60,
+      "umatanHit": 34,
+      "umatanRate": 56.7,
+      "totalBet": 48000,
+      "totalReturn": 134840,
+      "recoveryRate": 280.9
+    },
+    {
+      "weekStart": "2026-02-16",
+      "totalRaces": 60,
+      "umatanHit": 46,
+      "umatanRate": 76.7,
+      "totalBet": 48000,
+      "totalReturn": 145680,
+      "recoveryRate": 303.5
+    },
+    {
+      "weekStart": "2026-02-23",
+      "totalRaces": 48,
+      "umatanHit": 29,
+      "umatanRate": 60.4,
+      "totalBet": 38400,
+      "totalReturn": 65990,
+      "recoveryRate": 171.8
     }
   ]
 }
