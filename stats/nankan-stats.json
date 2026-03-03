@@ -1,37 +1,37 @@
 {
-  "generatedAt": "2026-03-03T13:52:53.094Z",
-  "totalRaces": 264,
+  "generatedAt": "2026-03-03T13:53:44.224Z",
+  "totalRaces": 276,
   "honmei": {
-    "totalRaces": 264,
-    "win": 103,
-    "inMoney": 177,
-    "winRate": 39,
-    "inMoneyRate": 67
+    "totalRaces": 276,
+    "win": 107,
+    "inMoney": 189,
+    "winRate": 38.8,
+    "inMoneyRate": 68.5
   },
   "tickets": {
     "tansho": {
-      "hit": 103,
-      "total": 264,
-      "rate": 39,
-      "totalReturn": 20190
+      "hit": 107,
+      "total": 276,
+      "rate": 38.8,
+      "totalReturn": 20850
     },
     "umatan": {
-      "hit": 118,
-      "total": 264,
-      "rate": 44.7,
-      "totalReturn": 244290
+      "hit": 124,
+      "total": 276,
+      "rate": 44.9,
+      "totalReturn": 253740
     },
     "sanrenpuku": {
-      "hit": 20,
-      "total": 264,
-      "rate": 7.6,
-      "totalReturn": 12950
+      "hit": 22,
+      "total": 276,
+      "rate": 8,
+      "totalReturn": 14280
     }
   },
   "recovery": {
-    "totalBet": 264000,
-    "totalReturn": 277430,
-    "recoveryRate": 105.1
+    "totalBet": 276000,
+    "totalReturn": 288870,
+    "recoveryRate": 104.7
   },
   "venues": {
     "大井": {
@@ -45,14 +45,14 @@
       "recoveryRate": 82.5
     },
     "川崎": {
-      "totalRaces": 72,
-      "honmeiWin": 36,
-      "winRate": 50,
-      "umatanHit": 32,
-      "umatanRate": 44.4,
-      "totalReturn": 42600,
-      "totalBet": 57600,
-      "recoveryRate": 74
+      "totalRaces": 84,
+      "honmeiWin": 40,
+      "winRate": 47.6,
+      "umatanHit": 38,
+      "umatanRate": 45.2,
+      "totalReturn": 52050,
+      "totalBet": 67200,
+      "recoveryRate": 77.5
     },
     "船橋": {
       "totalRaces": 60,
@@ -198,6 +198,16 @@
         "totalBet": 9600,
         "totalReturn": 10710,
         "recoveryRate": 111.6
+      },
+      {
+        "date": "2026-03-03",
+        "venue": "川崎",
+        "totalRaces": 12,
+        "umatanHit": 6,
+        "umatanRate": 50,
+        "totalBet": 9600,
+        "totalReturn": 9450,
+        "recoveryRate": 98.4
       }
     ],
     "船橋": [
