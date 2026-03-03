@@ -49,6 +49,7 @@ function formatDateTime(isoString: string) {
 
   <!-- Chart.js -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.0.1/dist/chartjs-plugin-annotation.min.js"></script>
 
   <style>
     * {
@@ -636,7 +637,7 @@ function formatDateTime(isoString: string) {
           <div class="chart-container">
             <div class="chart-header">
               <h3 class="chart-title">💰 競馬場別 馬単回収率の推移</h3>
-              <p class="chart-subtitle">各競馬場ごとの投資回収パフォーマンス</p>
+              <p class="chart-subtitle">各競馬場ごとの投資回収パフォーマンス｜✨ 100%超（ゴールド点）が優秀！</p>
             </div>
             <canvas id="recoveryRateChart"></canvas>
           </div>
@@ -743,6 +744,19 @@ function formatDateTime(isoString: string) {
           // 全日付に対してデータを配置（ない日はnull）
           const data = sortedDates.map(date => dataMap[date] || null);
 
+          // 回収率の場合、100%超をゴールドで強調
+          const pointBackgroundColors = metric === 'recoveryRate'
+            ? data.map(value => value !== null && value > 100 ? '#FFD700' : config.color)
+            : config.color;
+
+          const pointBorderColors = metric === 'recoveryRate'
+            ? data.map(value => value !== null && value > 100 ? '#FFA500' : '#fff')
+            : '#fff';
+
+          const pointRadii = metric === 'recoveryRate'
+            ? data.map(value => value !== null && value > 100 ? 7 : 5)
+            : 5;
+
           return {
             label: `${config.emoji} ${venue}`,
             data: data,
@@ -751,13 +765,17 @@ function formatDateTime(isoString: string) {
             borderWidth: 3,
             fill: false,
             tension: 0.4,
-            pointRadius: 5,
-            pointHoverRadius: 8,
-            pointBackgroundColor: config.color,
-            pointBorderColor: '#fff',
+            pointRadius: pointRadii,
+            pointHoverRadius: 10,
+            pointBackgroundColor: pointBackgroundColors,
+            pointBorderColor: pointBorderColors,
             pointBorderWidth: 2,
-            pointHoverBackgroundColor: '#fff',
-            pointHoverBorderColor: config.color,
+            pointHoverBackgroundColor: metric === 'recoveryRate'
+              ? data.map(value => value !== null && value > 100 ? '#FFD700' : '#fff')
+              : '#fff',
+            pointHoverBorderColor: metric === 'recoveryRate'
+              ? data.map(value => value !== null && value > 100 ? '#FFA500' : config.color)
+              : config.color,
             pointHoverBorderWidth: 3,
             spanGaps: true // 欠損値を線で繋ぐ
           };
@@ -880,13 +898,84 @@ function formatDateTime(isoString: string) {
       // 回収率グラフ（競馬場別）
       const recoveryRateCtx = document.getElementById('recoveryRateChart');
       if (recoveryRateCtx) {
+        // 回収率グラフ専用オプション（100%超を強調）
+        const recoveryRateOptions = JSON.parse(JSON.stringify(commonOptions));
+
+        // 100%の基準線を追加
+        recoveryRateOptions.plugins.annotation = {
+          annotations: {
+            line100: {
+              type: 'line',
+              yMin: 100,
+              yMax: 100,
+              borderColor: '#22C55E',
+              borderWidth: 3,
+              borderDash: [10, 5],
+              label: {
+                display: true,
+                content: '💯 損益分岐点（100%）',
+                enabled: true,
+                position: 'end',
+                backgroundColor: 'rgba(34, 197, 94, 0.9)',
+                color: 'white',
+                font: {
+                  size: 12,
+                  weight: 'bold'
+                },
+                padding: 8,
+                borderRadius: 6
+              }
+            },
+            box100Over: {
+              type: 'box',
+              yMin: 100,
+              yMax: 500,
+              backgroundColor: 'rgba(34, 197, 94, 0.05)',
+              borderWidth: 0
+            }
+          }
+        };
+
+        // Y軸の設定を調整（100%を強調）
+        recoveryRateOptions.scales.y.ticks.callback = function(value) {
+          if (value === 100) {
+            return '💯 ' + value + '%';
+          }
+          return value + '%';
+        };
+        recoveryRateOptions.scales.y.ticks.color = function(context) {
+          return context.tick.value === 100 ? '#22C55E' : '#6B7280';
+        };
+        recoveryRateOptions.scales.y.ticks.font = function(context) {
+          return {
+            size: context.tick.value === 100 ? 14 : 13,
+            weight: context.tick.value === 100 ? '800' : '600',
+            family: "'Inter', -apple-system, sans-serif"
+          };
+        };
+
+        // ツールチップに100%超の表示を追加
+        recoveryRateOptions.plugins.tooltip.callbacks.label = function(context) {
+          const value = context.parsed.y;
+          const emoji = value > 100 ? '🎉 ' : '';
+          const suffix = value > 100 ? ' 【優秀！】' : '';
+          return '  ' + emoji + value.toFixed(1) + '%' + suffix;
+        };
+        recoveryRateOptions.plugins.tooltip.callbacks.afterLabel = function(context) {
+          const value = context.parsed.y;
+          if (value > 100) {
+            return '\n✨ 投資額以上の回収に成功';
+          }
+          return '';
+        };
+
         new Chart(recoveryRateCtx, {
           type: 'line',
           data: {
             labels: labels,
             datasets: createDatasets('recoveryRate')
           },
-          options: commonOptions
+          options: recoveryRateOptions
         });
       }
     });
