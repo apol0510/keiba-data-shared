@@ -55,22 +55,15 @@ function formatDateTime(isoString: string) {
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif;
       line-height: 1.6;
-      color: #E0E0E0;
-      background: #0a0e27;
-      background-image:
-        radial-gradient(at 0% 0%, rgba(13, 110, 253, 0.15) 0px, transparent 50%),
-        radial-gradient(at 100% 0%, rgba(220, 38, 127, 0.15) 0px, transparent 50%),
-        radial-gradient(at 100% 100%, rgba(13, 110, 253, 0.15) 0px, transparent 50%),
-        radial-gradient(at 0% 100%, rgba(220, 38, 127, 0.15) 0px, transparent 50%);
+      color: #1F2937;
+      background: linear-gradient(135deg, #F0F4F8 0%, #E1E8ED 100%);
       min-height: 100vh;
     }
 
     /* ヘッダー */
     header {
-      background: linear-gradient(135deg, rgba(13, 110, 253, 0.1) 0%, rgba(220, 38, 127, 0.1) 100%);
-      backdrop-filter: blur(20px);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+      background: linear-gradient(135deg, #0D6EFD 0%, #DC267F 100%);
+      box-shadow: 0 4px 20px rgba(13, 110, 253, 0.2);
       color: white;
       padding: 3rem 1rem;
       position: relative;
@@ -84,13 +77,13 @@ function formatDateTime(isoString: string) {
       left: 0;
       right: 0;
       bottom: 0;
-      background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.03), transparent);
-      animation: shimmer 3s infinite;
+      background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+      animation: shimmer 4s infinite;
     }
 
     @keyframes shimmer {
-      0% { transform: translateX(-100%); }
-      100% { transform: translateX(100%); }
+      0% { transform: translateX(-100%) skewX(-15deg); }
+      100% { transform: translateX(100%) skewX(-15deg); }
     }
 
     .header-content {
@@ -101,27 +94,23 @@ function formatDateTime(isoString: string) {
     }
 
     h1 {
-      font-size: 2.8rem;
+      font-size: 2.5rem;
       margin-bottom: 0.5rem;
-      font-weight: 900;
-      background: linear-gradient(135deg, #0D6EFD 0%, #DC267F 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      letter-spacing: -0.02em;
+      font-weight: 800;
+      color: white;
+      letter-spacing: -0.01em;
       position: relative;
       z-index: 1;
-      text-shadow: 0 0 40px rgba(13, 110, 253, 0.5);
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
     }
 
     .subtitle {
       font-size: 1.1rem;
-      opacity: 0.8;
+      opacity: 0.95;
       font-weight: 400;
-      color: #B0B0B0;
+      color: rgba(255, 255, 255, 0.9);
       position: relative;
       z-index: 1;
-      letter-spacing: 0.02em;
     }
 
     /* メインコンテンツ */
@@ -132,15 +121,12 @@ function formatDateTime(isoString: string) {
     }
 
     .section {
-      background: rgba(15, 23, 42, 0.6);
-      backdrop-filter: blur(20px);
-      border-radius: 24px;
+      background: white;
+      border-radius: 16px;
       padding: 2.5rem;
       margin-bottom: 2rem;
-      box-shadow:
-        0 8px 32px rgba(0, 0, 0, 0.4),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      border: 1px solid rgba(0, 0, 0, 0.05);
       position: relative;
       overflow: hidden;
     }
@@ -151,8 +137,8 @@ function formatDateTime(isoString: string) {
       top: 0;
       left: 0;
       right: 0;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(13, 110, 253, 0.5), transparent);
+      height: 3px;
+      background: linear-gradient(90deg, #0D6EFD 0%, #DC267F 100%);
     }
 
     .section h2 {
@@ -162,12 +148,10 @@ function formatDateTime(isoString: string) {
       -webkit-text-fill-color: transparent;
       background-clip: text;
       margin-bottom: 1.5rem;
-      font-weight: 900;
+      font-weight: 800;
       display: flex;
       align-items: center;
       gap: 0.5rem;
-      letter-spacing: -0.01em;
-      filter: drop-shadow(0 0 20px rgba(13, 110, 253, 0.3));
     }
 
     /* 主要指標カード */
@@ -179,15 +163,12 @@ function formatDateTime(isoString: string) {
     }
 
     .stat-card {
-      background: rgba(30, 41, 59, 0.5);
-      backdrop-filter: blur(10px);
-      border-radius: 16px;
+      background: linear-gradient(135deg, #FAFBFC 0%, #FFFFFF 100%);
+      border-radius: 12px;
       padding: 2rem;
       text-align: center;
-      box-shadow:
-        0 4px 16px rgba(0, 0, 0, 0.3),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+      border: 1px solid rgba(0, 0, 0, 0.08);
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       position: relative;
       overflow: hidden;
@@ -200,7 +181,7 @@ function formatDateTime(isoString: string) {
       left: -100%;
       width: 100%;
       height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(13, 110, 253, 0.2), transparent);
+      background: linear-gradient(90deg, transparent, rgba(13, 110, 253, 0.08), transparent);
       transition: left 0.6s;
     }
 
@@ -210,72 +191,56 @@ function formatDateTime(isoString: string) {
 
     .stat-card:hover {
       transform: translateY(-4px);
-      box-shadow:
-        0 12px 32px rgba(0, 0, 0, 0.4),
-        0 0 0 1px rgba(13, 110, 253, 0.5),
-        inset 0 1px 0 rgba(255, 255, 255, 0.2);
-      border-color: rgba(13, 110, 253, 0.3);
+      box-shadow: 0 8px 24px rgba(13, 110, 253, 0.15);
+      border-color: rgba(13, 110, 253, 0.2);
     }
 
     .stat-card.highlight {
-      background: linear-gradient(135deg, rgba(13, 110, 253, 0.15) 0%, rgba(220, 38, 127, 0.15) 100%);
-      border: 1px solid rgba(13, 110, 253, 0.3);
+      background: linear-gradient(135deg, #F0F7FF 0%, #FFF5F7 100%);
+      border: 2px solid transparent;
+      background-clip: padding-box;
       box-shadow:
-        0 8px 24px rgba(13, 110, 253, 0.3),
-        0 0 40px rgba(13, 110, 253, 0.2),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        0 4px 16px rgba(13, 110, 253, 0.15),
+        0 0 0 1px rgba(13, 110, 253, 0.1);
     }
 
     .stat-card.highlight:hover {
       box-shadow:
-        0 12px 32px rgba(13, 110, 253, 0.4),
-        0 0 60px rgba(13, 110, 253, 0.3),
-        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        0 8px 28px rgba(13, 110, 253, 0.2),
+        0 0 0 1px rgba(13, 110, 253, 0.2);
     }
 
     .stat-label {
       font-size: 0.85rem;
-      color: #94A3B8;
+      color: #6B7280;
       font-weight: 700;
       margin-bottom: 1rem;
       text-transform: uppercase;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.05em;
     }
 
     .stat-value {
-      font-size: 3.5rem;
-      font-weight: 900;
+      font-size: 3rem;
+      font-weight: 800;
       background: linear-gradient(135deg, #0D6EFD 0%, #DC267F 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
       margin-bottom: 0.5rem;
       line-height: 1;
-      letter-spacing: -0.03em;
-      filter: drop-shadow(0 0 30px rgba(13, 110, 253, 0.4));
+      letter-spacing: -0.02em;
     }
 
     .stat-card.highlight .stat-value {
-      background: linear-gradient(135deg, #0D6EFD 0%, #DC267F 50%, #F59E0B 100%);
+      background: linear-gradient(135deg, #0D6EFD 0%, #DC267F 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      filter: drop-shadow(0 0 40px rgba(13, 110, 253, 0.6));
-      animation: pulse 2s ease-in-out infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% {
-        filter: drop-shadow(0 0 40px rgba(13, 110, 253, 0.6));
-      }
-      50% {
-        filter: drop-shadow(0 0 60px rgba(220, 38, 127, 0.8));
-      }
     }
 
     .stat-subtext {
       font-size: 0.9rem;
-      color: #64748B;
+      color: #9CA3AF;
       font-weight: 600;
     }
 
@@ -329,16 +294,13 @@ function formatDateTime(isoString: string) {
     }
 
     .venue-stat-card {
-      background: rgba(30, 41, 59, 0.5);
-      backdrop-filter: blur(10px);
-      border-radius: 16px;
+      background: white;
+      border-radius: 12px;
       padding: 1.5rem;
-      box-shadow:
-        0 4px 16px rgba(0, 0, 0, 0.3),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      border: 1px solid;
-      border-left-width: 3px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      border-left-width: 4px;
       position: relative;
       overflow: hidden;
     }
@@ -348,25 +310,23 @@ function formatDateTime(isoString: string) {
       position: absolute;
       top: 0;
       right: 0;
-      width: 50%;
+      width: 30%;
       height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.03));
+      background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.01));
       pointer-events: none;
     }
 
     .venue-stat-card:hover {
       transform: translateY(-4px);
-      box-shadow:
-        0 12px 32px rgba(0, 0, 0, 0.4),
-        0 0 40px var(--venue-glow, rgba(13, 110, 253, 0.3)),
-        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+      border-left-color: var(--venue-color, #0D6EFD);
     }
 
     .venue-name {
-      font-size: 1.5rem;
-      font-weight: 900;
+      font-size: 1.4rem;
+      font-weight: 800;
       margin-bottom: 1.25rem;
-      color: #E2E8F0;
+      color: #1F2937;
       letter-spacing: -0.01em;
     }
 
@@ -375,15 +335,15 @@ function formatDateTime(isoString: string) {
       justify-content: space-between;
       align-items: center;
       margin-bottom: 0.75rem;
-      padding: 0.875rem 1rem;
-      background: rgba(15, 23, 42, 0.4);
+      padding: 0.75rem 1rem;
+      background: #F9FAFB;
       border-radius: 8px;
       transition: all 0.2s ease;
       border-left: 2px solid transparent;
     }
 
     .venue-stat-row:hover {
-      background: rgba(13, 110, 253, 0.1);
+      background: #F3F4F6;
       border-left-color: var(--venue-color, #0D6EFD);
       transform: translateX(4px);
     }
@@ -394,42 +354,41 @@ function formatDateTime(isoString: string) {
 
     .venue-stat-label {
       font-size: 0.85rem;
-      color: #94A3B8;
+      color: #6B7280;
       font-weight: 600;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.03em;
     }
 
     .venue-stat-value {
-      font-size: 1.35rem;
+      font-size: 1.25rem;
       font-weight: 800;
       background: linear-gradient(135deg, #0D6EFD 0%, #DC267F 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      letter-spacing: -0.02em;
+      letter-spacing: -0.01em;
     }
 
     /* データ更新日時 */
     .updated-at {
       text-align: center;
-      color: #64748B;
+      color: #9CA3AF;
       font-size: 0.85rem;
       margin-top: 1.5rem;
       font-weight: 500;
       padding: 0.75rem;
-      background: rgba(15, 23, 42, 0.4);
+      background: #F9FAFB;
       border-radius: 8px;
-      border: 1px solid rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(0, 0, 0, 0.05);
     }
 
     /* フッター */
     footer {
-      background: rgba(15, 23, 42, 0.8);
-      backdrop-filter: blur(20px);
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-      box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.3);
-      color: white;
+      background: white;
+      border-top: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.05);
+      color: #6B7280;
       text-align: center;
       padding: 3rem 1rem;
       margin-top: 3rem;
@@ -443,21 +402,21 @@ function formatDateTime(isoString: string) {
       top: 0;
       left: 0;
       right: 0;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(13, 110, 253, 0.5), transparent);
+      height: 3px;
+      background: linear-gradient(90deg, #0D6EFD 0%, #DC267F 100%);
     }
 
     footer p {
       font-size: 1rem;
       margin: 0.75rem 0;
       font-weight: 500;
-      color: #94A3B8;
+      color: #6B7280;
       position: relative;
       z-index: 1;
     }
 
     footer p:first-child {
-      color: #E2E8F0;
+      color: #1F2937;
       font-weight: 700;
       font-size: 1.1rem;
     }
@@ -483,7 +442,7 @@ function formatDateTime(isoString: string) {
     }
 
     footer a:hover {
-      color: #3B82F6;
+      color: #DC267F;
     }
 
     footer a:hover::after {
