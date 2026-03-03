@@ -15,7 +15,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // パス設定
-const PREDICTIONS_DIR = '/Users/apolon/Projects/keiba-intelligence/astro-site/.netlify/v1/functions/ssr/src/data/predictions';
+const PREDICTIONS_DIR = path.join(__dirname, '../nankan/predictions');
 const RESULTS_DIR = path.join(__dirname, '../nankan/results');
 const OUTPUT_PATH = path.join(__dirname, '../stats/nankan-stats.json');
 
@@ -25,19 +25,37 @@ const OUTPUT_PATH = path.join(__dirname, '../stats/nankan-stats.json');
 function loadPredictions() {
   const predictions = [];
 
-  // 2026-01-23-funabashi.json 形式のファイルを読み込み
-  const files = fs.readdirSync(PREDICTIONS_DIR).filter(f => f.endsWith('.json') && !f.includes('jra'));
+  // nankan/predictions/2026/01/2026-01-23.json 形式のファイルを読み込み
+  const yearsDir = PREDICTIONS_DIR;
 
-  for (const file of files) {
-    try {
-      const filePath = path.join(PREDICTIONS_DIR, file);
-      const data = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+  if (!fs.existsSync(yearsDir)) {
+    console.warn(`⚠️  予想ディレクトリが存在しません: ${yearsDir}`);
+    return predictions;
+  }
 
-      if (data.predictions && Array.isArray(data.predictions)) {
-        predictions.push(...data.predictions);
+  const years = fs.readdirSync(yearsDir).filter(d => d.match(/^\d{4}$/));
+
+  for (const year of years) {
+    const yearPath = path.join(yearsDir, year);
+    const months = fs.readdirSync(yearPath).filter(d => d.match(/^\d{2}$/));
+
+    for (const month of months) {
+      const monthPath = path.join(yearPath, month);
+      const files = fs.readdirSync(monthPath).filter(f => f.endsWith('.json'));
+
+      for (const file of files) {
+        try {
+          const filePath = path.join(monthPath, file);
+          const data = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+
+          // data.races から各レースの予想を取得
+          if (data.races && Array.isArray(data.races)) {
+            predictions.push(...data.races);
+          }
+        } catch (error) {
+          console.warn(`⚠️  予想データ読み込みエラー: ${file}`, error.message);
+        }
       }
-    } catch (error) {
-      console.warn(`⚠️  予想データ読み込みエラー: ${file}`, error.message);
     }
   }
 
@@ -96,18 +114,42 @@ function loadResults() {
 }
 
 /**
+ * 日本語日付を YYYY-MM-DD 形式に変換
+ * @param {string} japaneseDate - "2026年3月3日" 形式
+ * @returns {string} "2026-03-03" 形式
+ */
+function convertJapaneseDateToISO(japaneseDate) {
+  const match = japaneseDate.match(/(\d{4})年(\d{1,2})月(\d{1,2})日/);
+  if (!match) return null;
+
+  const [, year, month, day] = match;
+  return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
+}
+
+/**
+ * レース番号を数値に変換
+ * @param {string} raceNumber - "1R" 形式
+ * @returns {number} 1
+ */
+function convertRaceNumberToInt(raceNumber) {
+  return parseInt(raceNumber.replace('R', ''), 10);
+}
+
+/**
  * 予想と結果を照合
  */
 function matchPredictionsWithResults(predictions, results) {
   const matched = [];
 
   for (const prediction of predictions) {
-    const { date, venue, raceNumber } = prediction.raceInfo;
+    const predictionDate = convertJapaneseDateToISO(prediction.raceInfo.date);
+    const predictionVenue = prediction.raceInfo.track;
+    const predictionRaceNumber = convertRaceNumberToInt(prediction.raceInfo.raceNumber);
 
     const result = results.find(r =>
-      r.date === date &&
-      r.venue === venue &&
-      r.raceNumber === raceNumber
+      r.date === predictionDate &&
+      r.venue === predictionVenue &&
+      r.raceNumber === predictionRaceNumber
     );
 
     if (result) {
@@ -123,25 +165,25 @@ function matchPredictionsWithResults(predictions, results) {
  * 本命的中判定
  */
 function checkHonmeiHit(prediction, result) {
-  const honmei = prediction.horses.find(h => h.role === '本命');
+  const honmei = prediction.horses.find(h => h.assignment === '本命');
   if (!honmei) return { win: false, inMoney: false };
 
   const winner = result.results.find(r => r.rank === 1);
   const inMoney = result.results.filter(r => r.rank <= 3);
 
   return {
-    win: winner?.number === honmei.horseNumber,
-    inMoney: inMoney.some(r => r.number === honmei.horseNumber),
-    honmeiNumber: honmei.horseNumber,
+    win: winner?.number === honmei.number,
+    inMoney: inMoney.some(r => r.number === honmei.number),
+    honmeiNumber: honmei.number,
     winnerNumber: winner?.number
   };
 }
 
 /**
  * 馬単的中判定
- * keiba-intelligenceのimportResults.jsと同じロジック
- * - パターン1: 軸が1着、相手が2着
- * - パターン2: 相手が1着、軸が2着（ボックス的扱い）
+ * 本命を軸、対抗・単穴・連下をボックスで買う前提
+ * - パターン1: 本命が1着、相手が2着
+ * - パターン2: 相手が1着、本命が2着（ボックス的扱い）
  */
 function checkUmatanHit(prediction, result) {
   const first = result.results.find(r => r.rank === 1);
@@ -149,39 +191,30 @@ function checkUmatanHit(prediction, result) {
 
   if (!first || !second) return false;
 
-  // 予想の馬単フォーマット: "4-1.11.2.5.7.9(抑え10.8.6)"
-  const umatanLines = prediction.bettingLines?.umatan || [];
+  // 軸馬（本命）
+  const honmei = prediction.horses.find(h => h.assignment === '本命');
+  if (!honmei) return false;
 
-  for (const line of umatanLines) {
-    const match = line.match(/^(\d+)-(.+)$/);
-    if (!match) continue;
+  // 相手馬（対抗、単穴、連下最上位、連下）
+  const aiteHorses = prediction.horses.filter(h =>
+    h.assignment === '対抗' ||
+    h.assignment === '単穴' ||
+    h.assignment === '連下最上位' ||
+    h.assignment === '連下'
+  );
 
-    const axis = parseInt(match[1]);
-    const aitePart = match[2];
+  if (aiteHorses.length === 0) return false;
 
-    // 本線相手馬を抽出
-    const mainPart = aitePart.replace(/\(.+?\)/g, ''); // (抑え...)を削除
-    const mainAite = mainPart.split('.').map(n => parseInt(n.trim())).filter(n => !isNaN(n));
+  const aiteNumbers = aiteHorses.map(h => h.number);
 
-    // 抑え馬を抽出
-    let osaeAite = [];
-    const osaeMatch = aitePart.match(/\(抑え([0-9.]+)\)/);
-    if (osaeMatch) {
-      osaeAite = osaeMatch[1].split('.').map(n => parseInt(n.trim())).filter(n => !isNaN(n));
-    }
+  // パターン1: 本命が1着、相手が2着
+  if (honmei.number === first.number && aiteNumbers.includes(second.number)) {
+    return true;
+  }
 
-    // 全相手馬（本線+抑え）
-    const allAite = [...mainAite, ...osaeAite];
-
-    // パターン1: 軸が1着、相手が2着
-    if (axis === first.number && allAite.includes(second.number)) {
-      return true;
-    }
-
-    // パターン2: 相手が1着、軸が2着（ボックス的扱い）
-    if (allAite.includes(first.number) && axis === second.number) {
-      return true;
-    }
+  // パターン2: 相手が1着、本命が2着（ボックス的扱い）
+  if (aiteNumbers.includes(first.number) && honmei.number === second.number) {
+    return true;
   }
 
   return false;
@@ -195,15 +228,15 @@ function checkSanrenpukuHit(prediction, result) {
   if (top3.length !== 3) return false;
 
   // 本命・対抗・単穴の組み合わせ
-  const honmei = prediction.horses.find(h => h.role === '本命');
-  const taikou = prediction.horses.find(h => h.role === '対抗');
-  const tanaana = prediction.horses.filter(h => h.role === '単穴');
+  const honmei = prediction.horses.find(h => h.assignment === '本命');
+  const taikou = prediction.horses.find(h => h.assignment === '対抗');
+  const tanaana = prediction.horses.filter(h => h.assignment === '単穴');
 
   if (!honmei || !taikou || tanaana.length === 0) return false;
 
   // 本命-対抗-単穴のいずれかの組み合わせ
   for (const tana of tanaana) {
-    const combo = [honmei.horseNumber, taikou.horseNumber, tana.horseNumber].sort((a, b) => a - b);
+    const combo = [honmei.number, taikou.number, tana.number].sort((a, b) => a - b);
     if (JSON.stringify(combo) === JSON.stringify(top3)) {
       return true;
     }
