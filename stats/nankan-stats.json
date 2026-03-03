@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-03T07:58:10.144Z",
+  "generatedAt": "2026-03-03T08:20:26.017Z",
   "totalRaces": 252,
   "honmei": {
     "totalRaces": 252,
@@ -75,60 +75,224 @@
       "recoveryRate": 171.8
     }
   },
-  "weekly": [
-    {
-      "weekStart": "2026-01-19",
-      "totalRaces": 12,
-      "umatanHit": 8,
-      "umatanRate": 66.7,
-      "totalBet": 9600,
-      "totalReturn": 15080,
-      "recoveryRate": 157.1
-    },
-    {
-      "weekStart": "2026-01-26",
-      "totalRaces": 12,
-      "umatanHit": 8,
-      "umatanRate": 66.7,
-      "totalBet": 9600,
-      "totalReturn": 15330,
-      "recoveryRate": 159.7
-    },
-    {
-      "weekStart": "2026-02-02",
-      "totalRaces": 60,
-      "umatanHit": 35,
-      "umatanRate": 58.3,
-      "totalBet": 48000,
-      "totalReturn": 72920,
-      "recoveryRate": 151.9
-    },
-    {
-      "weekStart": "2026-02-09",
-      "totalRaces": 60,
-      "umatanHit": 34,
-      "umatanRate": 56.7,
-      "totalBet": 48000,
-      "totalReturn": 134840,
-      "recoveryRate": 280.9
-    },
-    {
-      "weekStart": "2026-02-16",
-      "totalRaces": 60,
-      "umatanHit": 46,
-      "umatanRate": 76.7,
-      "totalBet": 48000,
-      "totalReturn": 145680,
-      "recoveryRate": 303.5
-    },
-    {
-      "weekStart": "2026-02-23",
-      "totalRaces": 48,
-      "umatanHit": 29,
-      "umatanRate": 60.4,
-      "totalBet": 38400,
-      "totalReturn": 65990,
-      "recoveryRate": 171.8
-    }
-  ]
+  "venueTimeSeries": {
+    "大井": [
+      {
+        "date": "2026-01-30",
+        "venue": "大井",
+        "totalRaces": 12,
+        "umatanHit": 8,
+        "umatanRate": 66.7,
+        "totalBet": 9600,
+        "totalReturn": 15330,
+        "recoveryRate": 159.7
+      },
+      {
+        "date": "2026-02-16",
+        "venue": "大井",
+        "totalRaces": 12,
+        "umatanHit": 12,
+        "umatanRate": 100,
+        "totalBet": 9600,
+        "totalReturn": 31150,
+        "recoveryRate": 324.5
+      },
+      {
+        "date": "2026-02-17",
+        "venue": "大井",
+        "totalRaces": 12,
+        "umatanHit": 9,
+        "umatanRate": 75,
+        "totalBet": 9600,
+        "totalReturn": 36780,
+        "recoveryRate": 383.1
+      },
+      {
+        "date": "2026-02-18",
+        "venue": "大井",
+        "totalRaces": 12,
+        "umatanHit": 8,
+        "umatanRate": 66.7,
+        "totalBet": 9600,
+        "totalReturn": 11890,
+        "recoveryRate": 123.9
+      },
+      {
+        "date": "2026-02-19",
+        "venue": "大井",
+        "totalRaces": 12,
+        "umatanHit": 8,
+        "umatanRate": 66.7,
+        "totalBet": 9600,
+        "totalReturn": 24100,
+        "recoveryRate": 251
+      },
+      {
+        "date": "2026-02-20",
+        "venue": "大井",
+        "totalRaces": 12,
+        "umatanHit": 9,
+        "umatanRate": 75,
+        "totalBet": 9600,
+        "totalReturn": 41760,
+        "recoveryRate": 435
+      }
+    ],
+    "川崎": [
+      {
+        "date": "2026-02-02",
+        "venue": "川崎",
+        "totalRaces": 12,
+        "umatanHit": 7,
+        "umatanRate": 58.3,
+        "totalBet": 9600,
+        "totalReturn": 20320,
+        "recoveryRate": 211.7
+      },
+      {
+        "date": "2026-02-03",
+        "venue": "川崎",
+        "totalRaces": 12,
+        "umatanHit": 5,
+        "umatanRate": 41.7,
+        "totalBet": 9600,
+        "totalReturn": 6880,
+        "recoveryRate": 71.7
+      },
+      {
+        "date": "2026-02-04",
+        "venue": "川崎",
+        "totalRaces": 12,
+        "umatanHit": 7,
+        "umatanRate": 58.3,
+        "totalBet": 9600,
+        "totalReturn": 9710,
+        "recoveryRate": 101.1
+      },
+      {
+        "date": "2026-02-05",
+        "venue": "川崎",
+        "totalRaces": 12,
+        "umatanHit": 10,
+        "umatanRate": 83.3,
+        "totalBet": 9600,
+        "totalReturn": 31890,
+        "recoveryRate": 332.2
+      },
+      {
+        "date": "2026-02-06",
+        "venue": "川崎",
+        "totalRaces": 12,
+        "umatanHit": 6,
+        "umatanRate": 50,
+        "totalBet": 9600,
+        "totalReturn": 4120,
+        "recoveryRate": 42.9
+      }
+    ],
+    "船橋": [
+      {
+        "date": "2026-01-23",
+        "venue": "船橋",
+        "totalRaces": 12,
+        "umatanHit": 8,
+        "umatanRate": 66.7,
+        "totalBet": 9600,
+        "totalReturn": 15080,
+        "recoveryRate": 157.1
+      },
+      {
+        "date": "2026-02-09",
+        "venue": "船橋",
+        "totalRaces": 12,
+        "umatanHit": 6,
+        "umatanRate": 50,
+        "totalBet": 9600,
+        "totalReturn": 46380,
+        "recoveryRate": 483.1
+      },
+      {
+        "date": "2026-02-10",
+        "venue": "船橋",
+        "totalRaces": 12,
+        "umatanHit": 5,
+        "umatanRate": 41.7,
+        "totalBet": 9600,
+        "totalReturn": 22600,
+        "recoveryRate": 235.4
+      },
+      {
+        "date": "2026-02-11",
+        "venue": "船橋",
+        "totalRaces": 12,
+        "umatanHit": 8,
+        "umatanRate": 66.7,
+        "totalBet": 9600,
+        "totalReturn": 19820,
+        "recoveryRate": 206.5
+      },
+      {
+        "date": "2026-02-12",
+        "venue": "船橋",
+        "totalRaces": 12,
+        "umatanHit": 5,
+        "umatanRate": 41.7,
+        "totalBet": 9600,
+        "totalReturn": 19390,
+        "recoveryRate": 202
+      },
+      {
+        "date": "2026-02-13",
+        "venue": "船橋",
+        "totalRaces": 12,
+        "umatanHit": 10,
+        "umatanRate": 83.3,
+        "totalBet": 9600,
+        "totalReturn": 26650,
+        "recoveryRate": 277.6
+      }
+    ],
+    "浦和": [
+      {
+        "date": "2026-02-23",
+        "venue": "浦和",
+        "totalRaces": 12,
+        "umatanHit": 7,
+        "umatanRate": 58.3,
+        "totalBet": 9600,
+        "totalReturn": 28690,
+        "recoveryRate": 298.9
+      },
+      {
+        "date": "2026-02-25",
+        "venue": "浦和",
+        "totalRaces": 12,
+        "umatanHit": 7,
+        "umatanRate": 58.3,
+        "totalBet": 9600,
+        "totalReturn": 15730,
+        "recoveryRate": 163.9
+      },
+      {
+        "date": "2026-02-26",
+        "venue": "浦和",
+        "totalRaces": 12,
+        "umatanHit": 6,
+        "umatanRate": 50,
+        "totalBet": 9600,
+        "totalReturn": 8790,
+        "recoveryRate": 91.6
+      },
+      {
+        "date": "2026-02-27",
+        "venue": "浦和",
+        "totalRaces": 12,
+        "umatanHit": 9,
+        "umatanRate": 75,
+        "totalBet": 9600,
+        "totalReturn": 12780,
+        "recoveryRate": 133.1
+      }
+    ]
+  }
 }

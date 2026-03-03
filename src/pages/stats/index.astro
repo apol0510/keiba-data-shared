@@ -621,22 +621,22 @@ function formatDateTime(isoString: string) {
           </div>
         </section>
 
-        <!-- 週別推移グラフ -->
+        <!-- 競馬場別推移グラフ -->
         <section class="section">
-          <h2>📈 週別推移グラフ</h2>
+          <h2>📈 競馬場別推移グラフ</h2>
 
           <div class="chart-container">
             <div class="chart-header">
-              <h3 class="chart-title">🎯 馬単的中率の推移</h3>
-              <p class="chart-subtitle">週ごとの的中率パフォーマンス</p>
+              <h3 class="chart-title">🎯 競馬場別 馬単的中率の推移</h3>
+              <p class="chart-subtitle">各競馬場ごとの的中率パフォーマンス</p>
             </div>
             <canvas id="hitRateChart"></canvas>
           </div>
 
           <div class="chart-container">
             <div class="chart-header">
-              <h3 class="chart-title">💰 馬単回収率の推移</h3>
-              <p class="chart-subtitle">週ごとの投資回収パフォーマンス</p>
+              <h3 class="chart-title">💰 競馬場別 馬単回収率の推移</h3>
+              <p class="chart-subtitle">各競馬場ごとの投資回収パフォーマンス</p>
             </div>
             <canvas id="recoveryRateChart"></canvas>
           </div>
@@ -701,21 +701,68 @@ function formatDateTime(isoString: string) {
     )}
   </main>
 
-  <script is:inline define:vars={{ weeklyStats: stats?.weekly || [] }}>
+  <script is:inline define:vars={{ venueTimeSeries: stats?.venueTimeSeries || {} }}>
     document.addEventListener('DOMContentLoaded', function() {
-      if (typeof Chart === 'undefined' || !weeklyStats || weeklyStats.length === 0) {
+      if (typeof Chart === 'undefined' || !venueTimeSeries) {
         return;
       }
 
-      // データ準備
-      const labels = weeklyStats.map((w, i) => {
-        const date = new Date(w.weekStart);
-        const month = date.getMonth() + 1;
-        const day = date.getDate();
-        return `Week ${i + 1}\n(${month}/${day}〜)`;
+      // 競馬場の設定
+      const venueConfig = {
+        '大井': { color: '#DC267F', emoji: '🌃' },
+        '川崎': { color: '#0D6EFD', emoji: '🌉' },
+        '船橋': { color: '#06B6D4', emoji: '⚓' },
+        '浦和': { color: '#8B5CF6', emoji: '🌸' }
+      };
+
+      // 全ての日付を収集（横軸用）
+      const allDates = new Set();
+      Object.values(venueTimeSeries).forEach(entries => {
+        entries.forEach(e => allDates.add(e.date));
       });
-      const hitRates = weeklyStats.map(w => w.umatanRate);
-      const recoveryRates = weeklyStats.map(w => w.recoveryRate);
+      const sortedDates = Array.from(allDates).sort();
+
+      // ラベル作成
+      const labels = sortedDates.map(date => {
+        const d = new Date(date);
+        return `${d.getMonth() + 1}/${d.getDate()}`;
+      });
+
+      // 競馬場別のデータセットを作成
+      const createDatasets = (metric) => {
+        return Object.keys(venueConfig).map(venue => {
+          const config = venueConfig[venue];
+          const entries = venueTimeSeries[venue] || [];
+
+          // 日付ごとのマッピング
+          const dataMap = {};
+          entries.forEach(e => {
+            dataMap[e.date] = metric === 'hitRate' ? e.umatanRate : e.recoveryRate;
+          });
+
+          // 全日付に対してデータを配置（ない日はnull）
+          const data = sortedDates.map(date => dataMap[date] || null);
+
+          return {
+            label: `${config.emoji} ${venue}`,
+            data: data,
+            borderColor: config.color,
+            backgroundColor: config.color,
+            borderWidth: 3,
+            fill: false,
+            tension: 0.4,
+            pointRadius: 5,
+            pointHoverRadius: 8,
+            pointBackgroundColor: config.color,
+            pointBorderColor: '#fff',
+            pointBorderWidth: 2,
+            pointHoverBackgroundColor: '#fff',
+            pointHoverBorderColor: config.color,
+            pointHoverBorderWidth: 3,
+            spanGaps: true // 欠損値を線で繋ぐ
+          };
+        });
+      };
 
       // 現代風の共通設定
       const commonOptions = {
@@ -727,7 +774,19 @@ function formatDateTime(isoString: string) {
         },
         plugins: {
           legend: {
-            display: false
+            display: true,
+            position: 'top',
+            labels: {
+              usePointStyle: true,
+              pointStyle: 'circle',
+              padding: 15,
+              font: {
+                size: 13,
+                weight: '600',
+                family: "'Inter', -apple-system, sans-serif"
+              },
+              color: '#374151'
+            }
           },
           tooltip: {
             backgroundColor: 'rgba(17, 24, 39, 0.95)',
@@ -805,71 +864,27 @@ function formatDateTime(isoString: string) {
         }
       };
 
-      // 的中率グラフ（現代風スタイル）
+      // 的中率グラフ（競馬場別）
       const hitRateCtx = document.getElementById('hitRateChart');
       if (hitRateCtx) {
         new Chart(hitRateCtx, {
           type: 'line',
           data: {
             labels: labels,
-            datasets: [{
-              label: '馬単的中率',
-              data: hitRates,
-              borderColor: '#0D6EFD',
-              backgroundColor: function(context) {
-                const ctx = context.chart.ctx;
-                const gradient = ctx.createLinearGradient(0, 0, 0, 300);
-                gradient.addColorStop(0, 'rgba(13, 110, 253, 0.2)');
-                gradient.addColorStop(1, 'rgba(13, 110, 253, 0.01)');
-                return gradient;
-              },
-              borderWidth: 3,
-              fill: true,
-              tension: 0.4,
-              pointRadius: 6,
-              pointHoverRadius: 10,
-              pointBackgroundColor: '#0D6EFD',
-              pointBorderColor: '#fff',
-              pointBorderWidth: 3,
-              pointHoverBackgroundColor: '#fff',
-              pointHoverBorderColor: '#0D6EFD',
-              pointHoverBorderWidth: 3
-            }]
+            datasets: createDatasets('hitRate')
           },
           options: commonOptions
         });
       }
 
-      // 回収率グラフ（現代風スタイル）
+      // 回収率グラフ（競馬場別）
       const recoveryRateCtx = document.getElementById('recoveryRateChart');
       if (recoveryRateCtx) {
         new Chart(recoveryRateCtx, {
           type: 'line',
           data: {
             labels: labels,
-            datasets: [{
-              label: '馬単回収率',
-              data: recoveryRates,
-              borderColor: '#DC267F',
-              backgroundColor: function(context) {
-                const ctx = context.chart.ctx;
-                const gradient = ctx.createLinearGradient(0, 0, 0, 300);
-                gradient.addColorStop(0, 'rgba(220, 38, 127, 0.2)');
-                gradient.addColorStop(1, 'rgba(220, 38, 127, 0.01)');
-                return gradient;
-              },
-              borderWidth: 3,
-              fill: true,
-              tension: 0.4,
-              pointRadius: 6,
-              pointHoverRadius: 10,
-              pointBackgroundColor: '#DC267F',
-              pointBorderColor: '#fff',
-              pointBorderWidth: 3,
-              pointHoverBackgroundColor: '#fff',
-              pointHoverBorderColor: '#DC267F',
-              pointHoverBorderWidth: 3
-            }]
+            datasets: createDatasets('recoveryRate')
           },
           options: commonOptions
         });

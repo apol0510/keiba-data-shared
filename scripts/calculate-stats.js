@@ -410,29 +410,21 @@ function calculateStats(matchedData) {
 }
 
 /**
- * 週の開始日（月曜日）を取得
+ * 競馬場別の時系列統計を計算（開催日ごと）
  */
-function getWeekStart(dateString) {
-  const date = new Date(dateString);
-  const day = date.getDay();
-  const diff = date.getDate() - day + (day === 0 ? -6 : 1); // 月曜日を週の開始とする
-  const monday = new Date(date.setDate(diff));
-  return monday.toISOString().split('T')[0];
-}
+function calculateVenueTimeSeriesStats(matchedData) {
+  const venueTimeSeries = {};
 
-/**
- * 週別統計を計算
- */
-function calculateWeeklyStats(matchedData) {
-  const weeklyStats = {};
-
+  // 競馬場別・日付別にグループ化
   for (const { prediction, result } of matchedData) {
     const date = result.date || prediction.raceInfo.date;
-    const weekStart = getWeekStart(date);
+    const venue = result.venue;
+    const key = `${venue}-${date}`;
 
-    if (!weeklyStats[weekStart]) {
-      weeklyStats[weekStart] = {
-        weekStart,
+    if (!venueTimeSeries[key]) {
+      venueTimeSeries[key] = {
+        date,
+        venue,
         totalRaces: 0,
         umatanHit: 0,
         umatanRate: 0,
@@ -442,33 +434,43 @@ function calculateWeeklyStats(matchedData) {
       };
     }
 
-    const week = weeklyStats[weekStart];
-    week.totalRaces++;
-    week.totalBet += 800; // 8点/レース
+    const entry = venueTimeSeries[key];
+    entry.totalRaces++;
+    entry.totalBet += 800; // 8点/レース
 
     const umatanHit = checkUmatanHit(prediction, result);
     if (umatanHit) {
-      week.umatanHit++;
+      entry.umatanHit++;
 
       const first = result.results.find(r => r.rank === 1);
       const second = result.results.find(r => r.rank === 2);
       const umatanReturn = getPayout(result, 'umatan', [first.number, second.number]);
-      week.totalReturn += umatanReturn;
+      entry.totalReturn += umatanReturn;
     }
   }
 
-  // 週別の的中率・回収率を計算
-  for (const week of Object.values(weeklyStats)) {
-    if (week.totalRaces > 0) {
-      week.umatanRate = Math.round(week.umatanHit / week.totalRaces * 1000) / 10;
+  // 的中率・回収率を計算
+  for (const entry of Object.values(venueTimeSeries)) {
+    if (entry.totalRaces > 0) {
+      entry.umatanRate = Math.round(entry.umatanHit / entry.totalRaces * 1000) / 10;
     }
-    if (week.totalBet > 0) {
-      week.recoveryRate = Math.round(week.totalReturn / week.totalBet * 1000) / 10;
+    if (entry.totalBet > 0) {
+      entry.recoveryRate = Math.round(entry.totalReturn / entry.totalBet * 1000) / 10;
     }
   }
 
   // 日付順にソート
-  return Object.values(weeklyStats).sort((a, b) => a.weekStart.localeCompare(b.weekStart));
+  const sorted = Object.values(venueTimeSeries).sort((a, b) => a.date.localeCompare(b.date));
+
+  // 競馬場ごとに分ける
+  const byVenue = {
+    '大井': sorted.filter(e => e.venue === '大井'),
+    '川崎': sorted.filter(e => e.venue === '川崎'),
+    '船橋': sorted.filter(e => e.venue === '船橋'),
+    '浦和': sorted.filter(e => e.venue === '浦和')
+  };
+
+  return byVenue;
 }
 
 /**
@@ -492,9 +494,9 @@ function main() {
   // 3. 統計計算
   const stats = calculateStats(matchedData);
 
-  // 4. 週別統計計算
-  const weeklyStats = calculateWeeklyStats(matchedData);
-  stats.weekly = weeklyStats;
+  // 4. 競馬場別時系列統計計算
+  const venueTimeSeries = calculateVenueTimeSeriesStats(matchedData);
+  stats.venueTimeSeries = venueTimeSeries;
 
   // 5. 保存
   fs.writeFileSync(OUTPUT_PATH, JSON.stringify(stats, null, 2), 'utf8');
