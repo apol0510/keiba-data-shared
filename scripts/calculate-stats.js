@@ -286,6 +286,8 @@ function calculateStats(matchedData) {
         totalRaces: 0,
         honmeiWin: 0,
         winRate: 0,
+        umatanHit: 0,
+        umatanRate: 0,
         totalReturn: 0,
         totalBet: 0,
         recoveryRate: 0
@@ -321,14 +323,17 @@ function calculateStats(matchedData) {
     const umatanHit = checkUmatanHit(prediction, result);
     if (umatanHit) {
       stats.tickets.umatan.hit++;
+      stats.venues[venue].umatanHit++;
 
       const first = result.results.find(r => r.rank === 1);
       const second = result.results.find(r => r.rank === 2);
       const umatanReturn = getPayout(result, 'umatan', [first.number, second.number]);
       stats.tickets.umatan.totalReturn += umatanReturn;
+      stats.venues[venue].totalReturn += umatanReturn;
     }
     stats.tickets.umatan.total++;
     stats.recovery.totalBet += 100; // 馬単100円
+    stats.venues[venue].totalBet += 100; // 馬単100円
 
     // 三連複的中判定
     const sanrenpukuHit = checkSanrenpukuHit(prediction, result);
@@ -370,12 +375,12 @@ function calculateStats(matchedData) {
   for (const [venue, data] of Object.entries(stats.venues)) {
     if (data.totalRaces > 0) {
       data.winRate = Math.round(data.honmeiWin / data.totalRaces * 1000) / 10;
+      data.umatanRate = Math.round(data.umatanHit / data.totalRaces * 1000) / 10;
     }
 
-    // 簡易計算（本来は競馬場ごとに払戻を追跡すべき）
-    data.totalBet = data.totalRaces * 300; // 仮: 1R あたり300円
-    data.totalReturn = Math.round(data.totalBet * stats.recovery.recoveryRate / 100);
-    data.recoveryRate = stats.recovery.recoveryRate;
+    if (data.totalBet > 0) {
+      data.recoveryRate = Math.round(data.totalReturn / data.totalBet * 1000) / 10;
+    }
   }
 
   return stats;
