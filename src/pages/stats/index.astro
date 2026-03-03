@@ -1,0 +1,522 @@
+---
+/**
+ * 的中率ダッシュボード - 予想成績統計ページ
+ */
+
+import { readFileSync } from 'fs';
+import { join } from 'path';
+
+const title = '予想成績統計 - KEIBA Intelligence 的中率・回収率ダッシュボード';
+const description = '南関競馬の予想成績を公開。本命的中率、馬単的中率、三連複的中率、回収率、競馬場別成績を確認できます。';
+
+// 統計データ読み込み
+let stats = null;
+try {
+  const statsPath = join(process.cwd(), 'stats', 'nankan-stats.json');
+  const statsData = readFileSync(statsPath, 'utf-8');
+  stats = JSON.parse(statsData);
+} catch (error) {
+  console.error('統計データ読み込みエラー:', error);
+}
+
+// 生成日時のフォーマット
+function formatDateTime(isoString: string) {
+  const date = new Date(isoString);
+  return `${date.getFullYear()}年${date.getMonth() + 1}月${date.getDate()}日 ${date.getHours()}:${String(date.getMinutes()).padStart(2, '0')}`;
+}
+---
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>{title}</title>
+  <meta name="description" content={description}>
+
+  <!-- SEO -->
+  <meta name="keywords" content="競馬,予想,的中率,回収率,南関競馬,大井,川崎,船橋,浦和,統計,成績">
+  <link rel="canonical" href={`${Astro.site}stats/`}>
+
+  <!-- OGP -->
+  <meta property="og:title" content={title}>
+  <meta property="og:description" content={description}>
+  <meta property="og:type" content="website">
+  <meta property="og:url" content={`${Astro.site}stats/`}>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif;
+      line-height: 1.6;
+      color: #2C3E50;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background-attachment: fixed;
+      min-height: 100vh;
+    }
+
+    /* ヘッダー */
+    header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+      color: white;
+      padding: 3rem 1rem;
+      box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: '📊';
+      position: absolute;
+      font-size: 15rem;
+      opacity: 0.1;
+      right: -2rem;
+      top: -3rem;
+      transform: rotate(-15deg);
+    }
+
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+      font-weight: 800;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    }
+
+    .subtitle {
+      font-size: 1.1rem;
+      opacity: 0.95;
+      font-weight: 500;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+    }
+
+    /* メインコンテンツ */
+    main {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    .section {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+    }
+
+    .section h2 {
+      font-size: 1.75rem;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1.5rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    /* 主要指標カード */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .stat-card {
+      background: white;
+      border-radius: 16px;
+      padding: 2rem;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      border: 3px solid transparent;
+      transition: all 0.3s ease;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+    }
+
+    .stat-card.highlight {
+      border-color: #FFD700;
+      background: linear-gradient(135deg, #FFF9C4 0%, #FFF59D 100%);
+    }
+
+    .stat-label {
+      font-size: 0.95rem;
+      color: #7f8c8d;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .stat-value {
+      font-size: 3rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-card.highlight .stat-value {
+      background: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .stat-subtext {
+      font-size: 0.9rem;
+      color: #95a5a6;
+      font-weight: 600;
+    }
+
+    /* 券種別成績テーブル */
+    .tickets-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+
+    .tickets-table th,
+    .tickets-table td {
+      padding: 1rem;
+      text-align: left;
+      border-bottom: 2px solid #ecf0f1;
+    }
+
+    .tickets-table th {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-size: 0.9rem;
+    }
+
+    .tickets-table tr:hover {
+      background: #f8f9fa;
+    }
+
+    .tickets-table td {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #2C3E50;
+    }
+
+    .rate-cell {
+      font-size: 1.5rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* 競馬場別成績カード */
+    .venue-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .venue-stat-card {
+      background: white;
+      border-radius: 16px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      transition: all 0.3s ease;
+      border-left: 6px solid;
+    }
+
+    .venue-stat-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+    }
+
+    .venue-name {
+      font-size: 1.5rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      color: #2C3E50;
+    }
+
+    .venue-stat-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.75rem;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #ecf0f1;
+    }
+
+    .venue-stat-row:last-child {
+      border-bottom: none;
+    }
+
+    .venue-stat-label {
+      font-size: 0.95rem;
+      color: #7f8c8d;
+      font-weight: 600;
+    }
+
+    .venue-stat-value {
+      font-size: 1.25rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* データ更新日時 */
+    .updated-at {
+      text-align: center;
+      color: #7f8c8d;
+      font-size: 0.9rem;
+      margin-top: 1rem;
+      font-weight: 600;
+    }
+
+    /* フッター */
+    footer {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+      color: white;
+      text-align: center;
+      padding: 3rem 1rem;
+      margin-top: 3rem;
+      box-shadow: 0 -8px 32px rgba(102, 126, 234, 0.3);
+    }
+
+    footer p {
+      font-size: 1rem;
+      opacity: 0.95;
+      margin: 0.75rem 0;
+      font-weight: 600;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+    }
+
+    footer a {
+      color: #FFD700;
+      text-decoration: underline;
+      font-weight: 700;
+    }
+
+    /* モバイル対応 */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 1.75rem;
+      }
+
+      header {
+        padding: 2rem 1rem;
+      }
+
+      .section {
+        padding: 1.5rem;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .stat-value {
+        font-size: 2.5rem;
+      }
+
+      .tickets-table {
+        font-size: 0.9rem;
+      }
+
+      .tickets-table th,
+      .tickets-table td {
+        padding: 0.75rem 0.5rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="header-content">
+      <h1>📊 予想成績統計</h1>
+      <p class="subtitle">KEIBA Intelligence - 南関競馬 的中率・回収率ダッシュボード</p>
+    </div>
+  </header>
+
+  <main>
+    {stats ? (
+      <>
+        <!-- 総合成績 -->
+        <section class="section">
+          <h2>🎯 総合成績</h2>
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-label">総レース数</div>
+              <div class="stat-value">{stats.totalRaces}</div>
+              <div class="stat-subtext">R</div>
+            </div>
+
+            <div class="stat-card highlight">
+              <div class="stat-label">本命的中率</div>
+              <div class="stat-value">{stats.honmei.winRate}</div>
+              <div class="stat-subtext">%</div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-label">本命複勝率</div>
+              <div class="stat-value">{stats.honmei.inMoneyRate}</div>
+              <div class="stat-subtext">%</div>
+            </div>
+
+            <div class="stat-card highlight">
+              <div class="stat-label">回収率</div>
+              <div class="stat-value">{stats.recovery.recoveryRate}</div>
+              <div class="stat-subtext">%</div>
+            </div>
+          </div>
+
+          <div class="updated-at">
+            最終更新: {formatDateTime(stats.generatedAt)}
+          </div>
+        </section>
+
+        <!-- 券種別成績 -->
+        <section class="section">
+          <h2>🎫 券種別成績</h2>
+          <table class="tickets-table">
+            <thead>
+              <tr>
+                <th>券種</th>
+                <th>的中数</th>
+                <th>総レース数</th>
+                <th>的中率</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>単勝（本命）</td>
+                <td>{stats.tickets.tansho.hit}R</td>
+                <td>{stats.tickets.tansho.total}R</td>
+                <td class="rate-cell">{stats.tickets.tansho.rate}%</td>
+              </tr>
+              <tr>
+                <td>馬単</td>
+                <td>{stats.tickets.umatan.hit}R</td>
+                <td>{stats.tickets.umatan.total}R</td>
+                <td class="rate-cell">{stats.tickets.umatan.rate}%</td>
+              </tr>
+              <tr>
+                <td>三連複</td>
+                <td>{stats.tickets.sanrenpuku.hit}R</td>
+                <td>{stats.tickets.sanrenpuku.total}R</td>
+                <td class="rate-cell">{stats.tickets.sanrenpuku.rate}%</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <!-- 競馬場別成績 -->
+        <section class="section">
+          <h2>🏇 競馬場別成績</h2>
+          <div class="venue-stats-grid">
+            {Object.entries(stats.venues).map(([venueName, venueData]: [string, any]) => {
+              const venueColors = {
+                '大井': '#FF6B6B',
+                '川崎': '#45B7D1',
+                '船橋': '#4ECDC4',
+                '浦和': '#A770EF'
+              };
+              const color = venueColors[venueName as keyof typeof venueColors] || '#667eea';
+
+              return (
+                <div class="venue-stat-card" style={`border-left-color: ${color};`}>
+                  <div class="venue-name">{venueName}競馬場</div>
+                  <div class="venue-stat-row">
+                    <span class="venue-stat-label">総レース数</span>
+                    <span class="venue-stat-value">{venueData.totalRaces}R</span>
+                  </div>
+                  <div class="venue-stat-row">
+                    <span class="venue-stat-label">本命的中</span>
+                    <span class="venue-stat-value">{venueData.honmeiWin}R</span>
+                  </div>
+                  <div class="venue-stat-row">
+                    <span class="venue-stat-label">的中率</span>
+                    <span class="venue-stat-value">{venueData.winRate}%</span>
+                  </div>
+                  <div class="venue-stat-row">
+                    <span class="venue-stat-label">回収率</span>
+                    <span class="venue-stat-value">{venueData.recoveryRate}%</span>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+
+        <!-- 回収率詳細 -->
+        <section class="section">
+          <h2>💰 回収率詳細</h2>
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-label">総投資額</div>
+              <div class="stat-value">{(stats.recovery.totalBet / 10000).toFixed(1)}</div>
+              <div class="stat-subtext">万円</div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-label">総払戻額</div>
+              <div class="stat-value">{(stats.recovery.totalReturn / 10000).toFixed(1)}</div>
+              <div class="stat-subtext">万円</div>
+            </div>
+
+            <div class="stat-card highlight">
+              <div class="stat-label">利益</div>
+              <div class="stat-value">{((stats.recovery.totalReturn - stats.recovery.totalBet) / 10000).toFixed(1)}</div>
+              <div class="stat-subtext">万円</div>
+            </div>
+          </div>
+        </section>
+      </>
+    ) : (
+      <section class="section">
+        <p style="text-align: center; font-size: 1.2rem; color: #7f8c8d;">
+          統計データを読み込めませんでした。<br />
+          <code>npm run calc-stats</code> を実行してください。
+        </p>
+      </section>
+    )}
+  </main>
+
+  <footer>
+    <p>📊 KEIBA Intelligence 予想成績統計</p>
+    <p>
+      <a href="https://keiba-intelligence.jp/" target="_blank" rel="noopener noreferrer">
+        KEIBA Intelligence で AI予想を見る →
+      </a>
+    </p>
+    <p><a href="/" style="color: white;">← トップページに戻る</a></p>
+    <p style="margin-top: 1rem; font-size: 0.85rem;">&copy; 2026 All rights reserved</p>
+  </footer>
+</body>
+</html>
