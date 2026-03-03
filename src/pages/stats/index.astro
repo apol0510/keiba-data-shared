@@ -49,7 +49,6 @@ function formatDateTime(isoString: string) {
 
   <!-- Chart.js -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.0.1/dist/chartjs-plugin-annotation.min.js"></script>
 
   <style>
     * {
@@ -901,57 +900,12 @@ function formatDateTime(isoString: string) {
         // 回収率グラフ専用オプション（100%超を強調）
         const recoveryRateOptions = JSON.parse(JSON.stringify(commonOptions));
 
-        // 100%の基準線を追加
-        recoveryRateOptions.plugins.annotation = {
-          annotations: {
-            line100: {
-              type: 'line',
-              yMin: 100,
-              yMax: 100,
-              borderColor: '#22C55E',
-              borderWidth: 3,
-              borderDash: [10, 5],
-              label: {
-                display: true,
-                content: '💯 損益分岐点（100%）',
-                enabled: true,
-                position: 'end',
-                backgroundColor: 'rgba(34, 197, 94, 0.9)',
-                color: 'white',
-                font: {
-                  size: 12,
-                  weight: 'bold'
-                },
-                padding: 8,
-                borderRadius: 6
-              }
-            },
-            box100Over: {
-              type: 'box',
-              yMin: 100,
-              yMax: 500,
-              backgroundColor: 'rgba(34, 197, 94, 0.05)',
-              borderWidth: 0
-            }
-          }
-        };
-
         // Y軸の設定を調整（100%を強調）
         recoveryRateOptions.scales.y.ticks.callback = function(value) {
           if (value === 100) {
             return '💯 ' + value + '%';
           }
           return value + '%';
-        };
-        recoveryRateOptions.scales.y.ticks.color = function(context) {
-          return context.tick.value === 100 ? '#22C55E' : '#6B7280';
-        };
-        recoveryRateOptions.scales.y.ticks.font = function(context) {
-          return {
-            size: context.tick.value === 100 ? 14 : 13,
-            weight: context.tick.value === 100 ? '800' : '600',
-            family: "'Inter', -apple-system, sans-serif"
-          };
         };
 
         // ツールチップに100%超の表示を追加
@@ -964,16 +918,31 @@ function formatDateTime(isoString: string) {
         recoveryRateOptions.plugins.tooltip.callbacks.afterLabel = function(context) {
           const value = context.parsed.y;
           if (value > 100) {
-            return '\n✨ 投資額以上の回収に成功';
+            return '✨ 投資額以上の回収に成功';
           }
           return '';
         };
+
+        // 100%基準線用のダミーデータセットを追加
+        const datasets = createDatasets('recoveryRate');
+        datasets.push({
+          label: '💯 損益分岐点',
+          data: new Array(labels.length).fill(100),
+          borderColor: '#22C55E',
+          backgroundColor: 'rgba(34, 197, 94, 0.1)',
+          borderWidth: 2,
+          borderDash: [10, 5],
+          fill: false,
+          pointRadius: 0,
+          pointHoverRadius: 0,
+          tension: 0
+        });
 
         new Chart(recoveryRateCtx, {
           type: 'line',
           data: {
             labels: labels,
-            datasets: createDatasets('recoveryRate')
+            datasets: datasets
           },
           options: recoveryRateOptions
         });
