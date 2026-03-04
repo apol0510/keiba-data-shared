@@ -1,0 +1,9 @@
+# 競馬結果速報 - robots.txt
+# すべてのクローラーを許可
+
+User-agent: *
+Allow: /
+
+# サイトマップ
+Sitemap: https://keiba-data-shared.netlify.app/sitemap-index.xml
+Sitemap: https://keiba-data-shared.netlify.app/sitemap-0.xml
