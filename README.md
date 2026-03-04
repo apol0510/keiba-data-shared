@@ -160,7 +160,7 @@ keiba-data-shared/
 
 ## 🔗 **管理画面との連携**
 
-このリポジトリは、管理画面（keiba-data-shared-admin）からデータを受け取り、公開サイト（https://keiba-data-shared.netlify.app/）で配信します。
+このリポジトリは、管理画面（keiba-data-shared-admin）からデータを受け取り、公開サイト（https://data.keiba-intelligence.jp/）で配信します。
 
 ### 自動ビルド・デプロイの仕組み
 

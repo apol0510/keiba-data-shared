@@ -160,7 +160,7 @@ npm run dev
 
 1. 管理画面でレース結果を保存
 2. Netlifyダッシュボード（https://app.netlify.com/sites/keiba-data-shared/deploys）で新しいビルドが開始されたか確認
-3. 2-3分後、公開サイト（https://keiba-data-shared.netlify.app/）で新しいレースが表示されるか確認
+3. 2-3分後、公開サイト（https://data.keiba-intelligence.jp/）で新しいレースが表示されるか確認
 
 ## 📊 期待される動作フロー
 
@@ -198,7 +198,7 @@ npm run dev
 
 ## 🔗 関連リンク
 
-- 公開サイト: https://keiba-data-shared.netlify.app/
+- 公開サイト: https://data.keiba-intelligence.jp/
 - Netlifyダッシュボード: https://app.netlify.com/sites/keiba-data-shared
 - GitHubリポジトリ: https://github.com/apol0510/keiba-data-shared
 
