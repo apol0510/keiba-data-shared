@@ -13,6 +13,7 @@
     "preview": "astro preview",
     "validate": "node scripts/validate-results.js",
     "calc-stats": "node scripts/calculate-stats.js",
+    "calc-stats:jra": "node scripts/calculate-jra-stats.js",
     "test": "npm run validate"
   },
   "repository": {

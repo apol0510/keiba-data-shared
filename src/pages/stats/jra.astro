@@ -1,0 +1,1031 @@
+---
+/**
+ * JRA的中率ダッシュボード - 中央競馬予想成績統計ページ
+ */
+
+import { readFileSync } from 'fs';
+import { join } from 'path';
+
+// 統計データ読み込み
+let stats = null;
+try {
+  const statsPath = join(process.cwd(), 'stats', 'jra-stats.json');
+  const statsData = readFileSync(statsPath, 'utf-8');
+  stats = JSON.parse(statsData);
+} catch (error) {
+  console.error('統計データ読み込みエラー:', error);
+}
+
+const title = 'JRA馬単予想成績統計 - KEIBA Intelligence 中央競馬的中率・回収率ダッシュボード';
+const description = stats
+  ? `JRA中央競馬の馬単予想成績を公開。馬単的中率${stats.tickets.umatan.rate}%、回収率${stats.recovery.recoveryRate}%の実績データ。競馬場別成績も確認できます。`
+  : 'JRA中央競馬の馬単予想成績を公開。馬単的中率47.8%、回収率139.1%の実績データ。競馬場別成績も確認できます。';
+
+// 生成日時のフォーマット
+function formatDateTime(isoString: string) {
+  const date = new Date(isoString);
+  return `${date.getFullYear()}年${date.getMonth() + 1}月${date.getDate()}日 ${date.getHours()}:${String(date.getMinutes()).padStart(2, '0')}`;
+}
+---
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>{title}</title>
+  <meta name="description" content={description}>
+
+  <!-- SEO -->
+  <meta name="keywords" content="競馬,予想,的中率,回収率,JRA,中央競馬,東京,阪神,京都,中山,小倉,統計,成績">
+  <link rel="canonical" href={`${Astro.site}stats/jra/`}>
+
+  <!-- OGP -->
+  <meta property="og:title" content={title}>
+  <meta property="og:description" content={description}>
+  <meta property="og:type" content="website">
+  <meta property="og:url" content={`${Astro.site}stats/jra/`}>
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif;
+      line-height: 1.6;
+      color: #1F2937;
+      background: linear-gradient(135deg, #F0F4F8 0%, #E1E8ED 100%);
+      min-height: 100vh;
+    }
+
+    /* ヘッダー */
+    header {
+      background: linear-gradient(135deg, #0D6EFD 0%, #DC267F 100%);
+      box-shadow: 0 4px 20px rgba(13, 110, 253, 0.2);
+      color: white;
+      padding: 3rem 1rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+      animation: shimmer 4s infinite;
+    }
+
+    @keyframes shimmer {
+      0% { transform: translateX(-100%) skewX(-15deg); }
+      100% { transform: translateX(100%) skewX(-15deg); }
+    }
+
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+      font-weight: 800;
+      color: white;
+      letter-spacing: -0.01em;
+      position: relative;
+      z-index: 1;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .subtitle {
+      font-size: 1.1rem;
+      opacity: 0.95;
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.9);
+      position: relative;
+      z-index: 1;
+    }
+
+    /* メインコンテンツ */
+    main {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    .section {
+      background: white;
+      border-radius: 16px;
+      padding: 2.5rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #0D6EFD 0%, #DC267F 100%);
+    }
+
+    .section h2 {
+      font-size: 1.75rem;
+      background: linear-gradient(135deg, #0D6EFD 0%, #DC267F 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1.5rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    /* 主要指標カード */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .stat-card {
+      background: linear-gradient(135deg, #FAFBFC 0%, #FFFFFF 100%);
+      border-radius: 12px;
+      padding: 2rem;
+      text-align: center;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(13, 110, 253, 0.08), transparent);
+      transition: left 0.6s;
+    }
+
+    .stat-card:hover::before {
+      left: 100%;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(13, 110, 253, 0.15);
+      border-color: rgba(13, 110, 253, 0.2);
+    }
+
+    .stat-card.highlight {
+      background: linear-gradient(135deg, #F0F7FF 0%, #FFF5F7 100%);
+      border: 2px solid transparent;
+      background-clip: padding-box;
+      box-shadow:
+        0 4px 16px rgba(13, 110, 253, 0.15),
+        0 0 0 1px rgba(13, 110, 253, 0.1);
+    }
+
+    .stat-card.highlight:hover {
+      box-shadow:
+        0 8px 28px rgba(13, 110, 253, 0.2),
+        0 0 0 1px rgba(13, 110, 253, 0.2);
+    }
+
+    .stat-label {
+      font-size: 0.85rem;
+      color: #6B7280;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .stat-value {
+      font-size: 3rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #0D6EFD 0%, #DC267F 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.5rem;
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+
+    .stat-card.highlight .stat-value {
+      background: linear-gradient(135deg, #0D6EFD 0%, #DC267F 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .stat-subtext {
+      font-size: 0.9rem;
+      color: #9CA3AF;
+      font-weight: 600;
+    }
+
+    /* 券種別成績テーブル */
+    .tickets-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+
+    .tickets-table th,
+    .tickets-table td {
+      padding: 1rem;
+      text-align: left;
+      border-bottom: 2px solid #ecf0f1;
+    }
+
+    .tickets-table th {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-size: 0.9rem;
+    }
+
+    .tickets-table tr:hover {
+      background: #f8f9fa;
+    }
+
+    .tickets-table td {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #2C3E50;
+    }
+
+    .rate-cell {
+      font-size: 1.5rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* 競馬場別成績カード */
+    .venue-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .venue-stat-card {
+      background: white;
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      border-left-width: 4px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .venue-stat-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 30%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.01));
+      pointer-events: none;
+    }
+
+    .venue-stat-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+      border-left-color: var(--venue-color, #0D6EFD);
+    }
+
+    .venue-name {
+      font-size: 1.4rem;
+      font-weight: 800;
+      margin-bottom: 1.25rem;
+      color: #1F2937;
+      letter-spacing: -0.01em;
+    }
+
+    .venue-stat-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.75rem;
+      padding: 0.75rem 1rem;
+      background: #F9FAFB;
+      border-radius: 8px;
+      transition: all 0.2s ease;
+      border-left: 2px solid transparent;
+    }
+
+    .venue-stat-row:hover {
+      background: #F3F4F6;
+      border-left-color: var(--venue-color, #0D6EFD);
+      transform: translateX(4px);
+    }
+
+    .venue-stat-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .venue-stat-label {
+      font-size: 0.85rem;
+      color: #6B7280;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    .venue-stat-value {
+      font-size: 1.25rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #0D6EFD 0%, #DC267F 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -0.01em;
+    }
+
+    /* データ更新日時 */
+    .updated-at {
+      text-align: center;
+      color: #9CA3AF;
+      font-size: 0.85rem;
+      margin-top: 1.5rem;
+      font-weight: 500;
+      padding: 0.75rem;
+      background: #F9FAFB;
+      border-radius: 8px;
+      border: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    /* グラフコンテナ（現代風デザイン） */
+    .chart-container {
+      margin-bottom: 3rem;
+      background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+      padding: 2.5rem;
+      border-radius: 20px;
+      box-shadow:
+        0 10px 40px rgba(0, 0, 0, 0.08),
+        0 2px 8px rgba(0, 0, 0, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .chart-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #0D6EFD 0%, #DC267F 100%);
+    }
+
+    .chart-container:hover {
+      transform: translateY(-4px);
+      box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.12),
+        0 4px 16px rgba(0, 0, 0, 0.06);
+    }
+
+    .chart-header {
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .chart-title {
+      font-size: 1.5rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+      color: #1F2937;
+      letter-spacing: -0.02em;
+    }
+
+    .chart-subtitle {
+      font-size: 0.9rem;
+      color: #6B7280;
+      font-weight: 500;
+      margin: 0;
+    }
+
+    canvas {
+      max-height: 350px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* フッター */
+    footer {
+      background: white;
+      border-top: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.05);
+      color: #6B7280;
+      text-align: center;
+      padding: 3rem 1rem;
+      margin-top: 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #0D6EFD 0%, #DC267F 100%);
+    }
+
+    footer p {
+      font-size: 1rem;
+      margin: 0.75rem 0;
+      font-weight: 500;
+      color: #6B7280;
+      position: relative;
+      z-index: 1;
+    }
+
+    footer p:first-child {
+      color: #1F2937;
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+
+    footer a {
+      color: #0D6EFD;
+      text-decoration: none;
+      font-weight: 700;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    footer a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(135deg, #0D6EFD 0%, #DC267F 100%);
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+
+    footer a:hover {
+      color: #DC267F;
+    }
+
+    footer a:hover::after {
+      transform: scaleX(1);
+    }
+
+    /* モバイル対応 */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 1.75rem;
+      }
+
+      header {
+        padding: 2rem 1rem;
+      }
+
+      .section {
+        padding: 1.5rem;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .stat-value {
+        font-size: 2.5rem;
+      }
+
+      .tickets-table {
+        font-size: 0.9rem;
+      }
+
+      .tickets-table th,
+      .tickets-table td {
+        padding: 0.75rem 0.5rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="header-content">
+      <h1>📊 JRA馬単予想成績統計</h1>
+      <p class="subtitle">KEIBA Intelligence - 中央競馬 馬単的中率{stats.tickets.umatan.rate}%・回収率{stats.recovery.recoveryRate}%</p>
+    </div>
+  </header>
+
+  <main>
+    {stats ? (
+      <>
+        <!-- 総合成績 -->
+        <section class="section">
+          <h2>🎯 馬単予想 総合成績</h2>
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-label">🏇 総レース数</div>
+              <div class="stat-value">{stats.totalRaces}</div>
+              <div class="stat-subtext">R</div>
+            </div>
+
+            <div class="stat-card highlight">
+              <div class="stat-label">🎯 馬単的中率</div>
+              <div class="stat-value">{stats.tickets.umatan.rate}</div>
+              <div class="stat-subtext">%</div>
+            </div>
+
+            <div class="stat-card highlight">
+              <div class="stat-label">💰 馬単回収率</div>
+              <div class="stat-value">{stats.recovery.recoveryRate}</div>
+              <div class="stat-subtext">%</div>
+            </div>
+          </div>
+
+          <div class="updated-at">
+            最終更新: {formatDateTime(stats.generatedAt)}
+          </div>
+        </section>
+
+        <!-- 馬単詳細成績 -->
+        <section class="section">
+          <h2>🎫 馬単詳細成績</h2>
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-label">✅ 馬単的中</div>
+              <div class="stat-value">{stats.tickets.umatan.hit}</div>
+              <div class="stat-subtext">R</div>
+            </div>
+
+            <div class="stat-card highlight">
+              <div class="stat-label">📈 馬単的中率</div>
+              <div class="stat-value">{stats.tickets.umatan.rate}</div>
+              <div class="stat-subtext">%</div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-label">💸 馬単総投資額</div>
+              <div class="stat-value">{(stats.recovery.totalBet / 10000).toFixed(1)}</div>
+              <div class="stat-subtext">万円</div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-label">💵 馬単総払戻</div>
+              <div class="stat-value">{(stats.recovery.totalReturn / 10000).toFixed(1)}</div>
+              <div class="stat-subtext">万円</div>
+            </div>
+
+            <div class="stat-card highlight">
+              <div class="stat-label">🎉 馬単利益</div>
+              <div class="stat-value">{((stats.recovery.totalReturn - stats.recovery.totalBet) / 10000).toFixed(1)}</div>
+              <div class="stat-subtext">万円</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 競馬場別推移グラフ -->
+        <section class="section">
+          <h2>📈 競馬場別推移グラフ</h2>
+
+          <div class="chart-container">
+            <div class="chart-header">
+              <h3 class="chart-title">🎯 競馬場別 馬単的中率の推移</h3>
+              <p class="chart-subtitle">各競馬場ごとの的中率パフォーマンス｜✨ 50%超（ゴールド点）が優秀！</p>
+            </div>
+            <canvas id="hitRateChart"></canvas>
+          </div>
+
+          <div class="chart-container">
+            <div class="chart-header">
+              <h3 class="chart-title">💰 競馬場別 馬単回収率の推移</h3>
+              <p class="chart-subtitle">各競馬場ごとの投資回収パフォーマンス｜✨ 100%超（ゴールド点）が優秀！</p>
+            </div>
+            <canvas id="recoveryRateChart"></canvas>
+          </div>
+        </section>
+
+        <!-- 競馬場別成績 -->
+        <section class="section">
+          <h2>🏇 競馬場別 馬単成績</h2>
+          <div class="venue-stats-grid">
+            {Object.entries(stats.venues).map(([venueName, venueData]: [string, any]) => {
+              const venueColors = {
+                '東京': '#DC267F',
+                '阪神': '#0D6EFD',
+                '京都': '#06B6D4',
+                '中山': '#8B5CF6',
+                '小倉': '#F59E0B',
+                '中京': '#10B981',
+                '新潟': '#EC4899',
+                '札幌': '#6366F1',
+                '函館': '#14B8A6',
+                '福島': '#EF4444'
+              };
+              const venueGlows = {
+                '東京': 'rgba(220, 38, 127, 0.3)',
+                '阪神': 'rgba(13, 110, 253, 0.3)',
+                '京都': 'rgba(6, 182, 212, 0.3)',
+                '中山': 'rgba(139, 92, 246, 0.3)',
+                '小倉': 'rgba(245, 158, 11, 0.3)',
+                '中京': 'rgba(16, 185, 129, 0.3)',
+                '新潟': 'rgba(236, 72, 153, 0.3)',
+                '札幌': 'rgba(99, 102, 241, 0.3)',
+                '函館': 'rgba(20, 184, 166, 0.3)',
+                '福島': 'rgba(239, 68, 68, 0.3)'
+              };
+              const venueEmojis = {
+                '東京': '🗼',
+                '阪神': '🏯',
+                '京都': '⛩️',
+                '中山': '🎋',
+                '小倉': '🌸',
+                '中京': '🏯',
+                '新潟': '🌾',
+                '札幌': '❄️',
+                '函館': '🦑',
+                '福島': '🍑'
+              };
+              const color = venueColors[venueName as keyof typeof venueColors] || '#0D6EFD';
+              const glow = venueGlows[venueName as keyof typeof venueGlows] || 'rgba(13, 110, 253, 0.3)';
+              const emoji = venueEmojis[venueName as keyof typeof venueEmojis] || '🏇';
+
+              return (
+                <div class="venue-stat-card" style={`border-color: ${color}; --venue-color: ${color}; --venue-glow: ${glow};`}>
+                  <div class="venue-name">{emoji} {venueName}競馬場</div>
+                  <div class="venue-stat-row">
+                    <span class="venue-stat-label">🏇 総レース数</span>
+                    <span class="venue-stat-value">{venueData.totalRaces}R</span>
+                  </div>
+                  <div class="venue-stat-row">
+                    <span class="venue-stat-label">🎯 馬単的中率</span>
+                    <span class="venue-stat-value">{venueData.umatanRate}%</span>
+                  </div>
+                  <div class="venue-stat-row">
+                    <span class="venue-stat-label">💰 馬単回収率</span>
+                    <span class="venue-stat-value">{venueData.recoveryRate}%</span>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+
+      </>
+    ) : (
+      <section class="section">
+        <p style="text-align: center; font-size: 1.2rem; color: #7f8c8d;">
+          JRA統計データを読み込めませんでした。<br />
+          <code>npm run calc-stats:jra</code> を実行してください。
+        </p>
+      </section>
+    )}
+  </main>
+
+  <script is:inline define:vars={{ venueTimeSeries: stats?.venueTimeSeries || {} }}>
+    document.addEventListener('DOMContentLoaded', function() {
+      if (typeof Chart === 'undefined' || !venueTimeSeries) {
+        return;
+      }
+
+      // 競馬場の設定（JRA版）
+      const venueConfig = {
+        '東京': { color: '#DC267F', emoji: '🗼' },
+        '阪神': { color: '#0D6EFD', emoji: '🏯' },
+        '京都': { color: '#06B6D4', emoji: '⛩️' },
+        '中山': { color: '#8B5CF6', emoji: '🎋' },
+        '小倉': { color: '#F59E0B', emoji: '🌸' },
+        '中京': { color: '#10B981', emoji: '🏯' },
+        '新潟': { color: '#EC4899', emoji: '🌾' },
+        '札幌': { color: '#6366F1', emoji: '❄️' },
+        '函館': { color: '#14B8A6', emoji: '🦑' },
+        '福島': { color: '#EF4444', emoji: '🍑' }
+      };
+
+      // 全ての日付を収集（横軸用）
+      const allDates = new Set();
+      Object.values(venueTimeSeries).forEach(entries => {
+        entries.forEach(e => allDates.add(e.date));
+      });
+      const sortedDates = Array.from(allDates).sort();
+
+      // ラベル作成
+      const labels = sortedDates.map(date => {
+        const d = new Date(date);
+        return `${d.getMonth() + 1}/${d.getDate()}`;
+      });
+
+      // 競馬場別のデータセットを作成
+      const createDatasets = (metric) => {
+        return Object.keys(venueConfig).map(venue => {
+          const config = venueConfig[venue];
+          const entries = venueTimeSeries[venue] || [];
+
+          // 日付ごとのマッピング
+          const dataMap = {};
+          entries.forEach(e => {
+            dataMap[e.date] = metric === 'hitRate' ? e.umatanRate : e.recoveryRate;
+          });
+
+          // 全日付に対してデータを配置（ない日はnull）
+          const data = sortedDates.map(date => dataMap[date] || null);
+
+          // 的中率の場合、50%超をゴールドで強調
+          // 回収率の場合、100%超をゴールドで強調
+          const threshold = metric === 'hitRate' ? 50 : 100;
+          const pointBackgroundColors = data.map(value =>
+            value !== null && value > threshold ? '#FFD700' : config.color
+          );
+
+          const pointBorderColors = data.map(value =>
+            value !== null && value > threshold ? '#FFA500' : '#fff'
+          );
+
+          const pointRadii = data.map(value =>
+            value !== null && value > threshold ? 7 : 5
+          );
+
+          return {
+            label: `${config.emoji} ${venue}`,
+            data: data,
+            borderColor: config.color,
+            backgroundColor: config.color,
+            borderWidth: 3,
+            fill: false,
+            tension: 0.4,
+            pointRadius: pointRadii,
+            pointHoverRadius: 10,
+            pointBackgroundColor: pointBackgroundColors,
+            pointBorderColor: pointBorderColors,
+            pointBorderWidth: 2,
+            pointHoverBackgroundColor: data.map(value =>
+              value !== null && value > threshold ? '#FFD700' : '#fff'
+            ),
+            pointHoverBorderColor: data.map(value =>
+              value !== null && value > threshold ? '#FFA500' : config.color
+            ),
+            pointHoverBorderWidth: 3,
+            spanGaps: true // 欠損値を線で繋ぐ
+          };
+        });
+      };
+
+      // 現代風の共通設定
+      const commonOptions = {
+        responsive: true,
+        maintainAspectRatio: true,
+        interaction: {
+          mode: 'index',
+          intersect: false,
+        },
+        plugins: {
+          legend: {
+            display: true,
+            position: 'top',
+            labels: {
+              usePointStyle: true,
+              pointStyle: 'circle',
+              padding: 15,
+              font: {
+                size: 13,
+                weight: '600',
+                family: "'Inter', -apple-system, sans-serif"
+              },
+              color: '#374151'
+            }
+          },
+          tooltip: {
+            backgroundColor: 'rgba(17, 24, 39, 0.95)',
+            padding: 16,
+            cornerRadius: 12,
+            titleFont: {
+              size: 15,
+              weight: '700',
+              family: "'Inter', -apple-system, sans-serif"
+            },
+            bodyFont: {
+              size: 14,
+              weight: '500',
+              family: "'Inter', -apple-system, sans-serif"
+            },
+            titleColor: '#F9FAFB',
+            bodyColor: '#E5E7EB',
+            borderColor: 'rgba(255, 255, 255, 0.1)',
+            borderWidth: 1,
+            displayColors: false,
+            callbacks: {
+              title: function(context) {
+                return context[0].label.replace('\n', ' ');
+              },
+              label: function(context) {
+                return '  ' + context.parsed.y.toFixed(1) + '%';
+              }
+            }
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            grid: {
+              color: 'rgba(0, 0, 0, 0.04)',
+              lineWidth: 1,
+              drawBorder: false
+            },
+            ticks: {
+              callback: function(value) {
+                return value + '%';
+              },
+              font: {
+                size: 13,
+                weight: '600',
+                family: "'Inter', -apple-system, sans-serif"
+              },
+              color: '#6B7280',
+              padding: 12
+            },
+            border: {
+              display: false
+            }
+          },
+          x: {
+            grid: {
+              display: false,
+              drawBorder: false
+            },
+            ticks: {
+              font: {
+                size: 12,
+                weight: '600',
+                family: "'Inter', -apple-system, sans-serif"
+              },
+              color: '#6B7280',
+              padding: 8,
+              maxRotation: 0,
+              minRotation: 0
+            },
+            border: {
+              display: false
+            }
+          }
+        }
+      };
+
+      // 的中率グラフ（競馬場別）
+      const hitRateCtx = document.getElementById('hitRateChart');
+      if (hitRateCtx) {
+        // 的中率グラフ専用オプション（50%超を強調）
+        const hitRateOptions = JSON.parse(JSON.stringify(commonOptions));
+
+        // Y軸の設定を調整（50%を強調）
+        hitRateOptions.scales.y.ticks.callback = function(value) {
+          if (value === 50) {
+            return '✨ ' + value + '%';
+          }
+          return value + '%';
+        };
+
+        // ツールチップに50%超の表示を追加
+        hitRateOptions.plugins.tooltip.callbacks.label = function(context) {
+          const value = context.parsed.y;
+          const emoji = value > 50 ? '🎉 ' : '';
+          const suffix = value > 50 ? ' 【優秀！】' : '';
+          return '  ' + emoji + value.toFixed(1) + '%' + suffix;
+        };
+        hitRateOptions.plugins.tooltip.callbacks.afterLabel = function(context) {
+          const value = context.parsed.y;
+          if (value > 50) {
+            return '✨ 2回に1回以上的中';
+          }
+          return '';
+        };
+
+        // 50%基準線用のダミーデータセットを追加
+        const datasets = createDatasets('hitRate');
+        datasets.push({
+          label: '✨ 優秀ライン',
+          data: new Array(labels.length).fill(50),
+          borderColor: '#F59E0B',
+          backgroundColor: 'rgba(245, 158, 11, 0.1)',
+          borderWidth: 2,
+          borderDash: [10, 5],
+          fill: false,
+          pointRadius: 0,
+          pointHoverRadius: 0,
+          tension: 0
+        });
+
+        new Chart(hitRateCtx, {
+          type: 'line',
+          data: {
+            labels: labels,
+            datasets: datasets
+          },
+          options: hitRateOptions
+        });
+      }
+
+      // 回収率グラフ（競馬場別）
+      const recoveryRateCtx = document.getElementById('recoveryRateChart');
+      if (recoveryRateCtx) {
+        // 回収率グラフ専用オプション（100%超を強調）
+        const recoveryRateOptions = JSON.parse(JSON.stringify(commonOptions));
+
+        // Y軸の設定を調整（100%を強調）
+        recoveryRateOptions.scales.y.ticks.callback = function(value) {
+          if (value === 100) {
+            return '💯 ' + value + '%';
+          }
+          return value + '%';
+        };
+
+        // ツールチップに100%超の表示を追加
+        recoveryRateOptions.plugins.tooltip.callbacks.label = function(context) {
+          const value = context.parsed.y;
+          const emoji = value > 100 ? '🎉 ' : '';
+          const suffix = value > 100 ? ' 【優秀！】' : '';
+          return '  ' + emoji + value.toFixed(1) + '%' + suffix;
+        };
+        recoveryRateOptions.plugins.tooltip.callbacks.afterLabel = function(context) {
+          const value = context.parsed.y;
+          if (value > 100) {
+            return '✨ 投資額以上の回収に成功';
+          }
+          return '';
+        };
+
+        // 100%基準線用のダミーデータセットを追加
+        const datasets = createDatasets('recoveryRate');
+        datasets.push({
+          label: '💯 損益分岐点',
+          data: new Array(labels.length).fill(100),
+          borderColor: '#22C55E',
+          backgroundColor: 'rgba(34, 197, 94, 0.1)',
+          borderWidth: 2,
+          borderDash: [10, 5],
+          fill: false,
+          pointRadius: 0,
+          pointHoverRadius: 0,
+          tension: 0
+        });
+
+        new Chart(recoveryRateCtx, {
+          type: 'line',
+          data: {
+            labels: labels,
+            datasets: datasets
+          },
+          options: recoveryRateOptions
+        });
+      }
+    });
+  </script>
+
+  <footer>
+    <p>📊 KEIBA Intelligence 予想成績統計</p>
+    <p>
+      <a href="https://keiba-intelligence.jp/" target="_blank" rel="noopener noreferrer">
+        KEIBA Intelligence で AI予想を見る →
+      </a>
+    </p>
+    <p><a href="/" style="color: white;">← トップページに戻る</a></p>
+    <p style="margin-top: 1rem; font-size: 0.85rem;">&copy; 2026 All rights reserved</p>
+  </footer>
+</body>
+</html>
