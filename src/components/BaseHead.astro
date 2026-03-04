@@ -1,0 +1,48 @@
+---
+/**
+ * 共通のHeadコンポーネント - SEO、Analytics、メタタグを一元管理
+ */
+interface Props {
+  title: string;
+  description: string;
+  ogType?: string;
+  ogImage?: string;
+}
+
+const { title, description, ogType = 'website', ogImage } = Astro.props;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!-- SEO基本設定 -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content={description}>
+<link rel="canonical" href={canonicalURL}>
+
+<!-- Google Search Console所有権確認 -->
+<meta name="google-site-verification" content="h9RWFH-pjrhWPBnD4ScJ6ajBs1WfeeTjMCvxwOcpXOI">
+
+<!-- Open Graph -->
+<meta property="og:title" content={title}>
+<meta property="og:description" content={description}>
+<meta property="og:type" content={ogType}>
+<meta property="og:url" content={canonicalURL}>
+{ogImage && <meta property="og:image" content={ogImage}>}
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content={title}>
+<meta name="twitter:description" content={description}>
+{ogImage && <meta name="twitter:image" content={ogImage}>}
+
+<!-- TODO: GA4測定ID取得後に追加 -->
+<!-- Google Analytics 4 -->
+<!--
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX');
+</script>
+-->

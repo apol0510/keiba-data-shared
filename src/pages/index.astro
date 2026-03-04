@@ -6,6 +6,7 @@
 
 import { readdirSync, readFileSync, existsSync } from 'fs';
 import { join } from 'path';
+import BaseHead from '../components/BaseHead.astro';
 
 const title = '競馬結果速報 - 南関競馬・中央競馬（JRA）の結果';
 const description = '南関東4競馬場（大井・川崎・船橋・浦和）と中央競馬（JRA）全10競馬場の最新レース結果を速報。着順・払戻金・ラップタイムなど詳細データを掲載。';
@@ -145,21 +146,12 @@ const jraVenues = [
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <BaseHead title={title} description={description} />
 
   <title>{title}</title>
-  <meta name="description" content={description}>
 
   <!-- SEO -->
   <meta name="keywords" content="競馬結果,JRA,中央競馬,南関競馬,大井競馬,川崎競馬,船橋競馬,浦和競馬,東京競馬,中山競馬,京都競馬,阪神競馬,レース結果,払戻金">
-  <link rel="canonical" href={Astro.site}>
-
-  <!-- OGP -->
-  <meta property="og:title" content={title}>
-  <meta property="og:description" content={description}>
-  <meta property="og:type" content="website">
-  <meta property="og:url" content={Astro.site}>
 
   <!-- 構造化データ -->
   <script type="application/ld+json" set:html={JSON.stringify({
