@@ -28,7 +28,7 @@ export async function GET(context) {
       const dateCompare = new Date(b.pubDate) - new Date(a.pubDate);
       if (dateCompare !== 0) return dateCompare;
       // 同日の場合はレース番号順（降順: 12R→1R）
-      return (b.customData?.raceNumber || 0) - (a.customData?.raceNumber || 0);
+      return (b._raceNumber || 0) - (a._raceNumber || 0);
     });
 
     // 最大100件に制限（1日12R×7日=84件程度）
@@ -153,14 +153,16 @@ async function fetchRecentResults(category) {
 
             // title と description が必須（空文字を避ける）
             if (title && title.trim().length > 0 && description && description.trim().length > 0) {
-              items.push({
+              const item = {
                 title: title.trim(),
                 link: `https://data.keiba-intelligence.jp/nankan/results/${year}/${month}/${day}/${venueSlug}/${raceNumber}/`,
                 description: description.trim(),
                 pubDate: pubDate,
                 categories: ['南関競馬', venue + '競馬', '競馬結果', `第${raceNumber}R`],
-                customData: { raceNumber: raceNumber }, // ソート用
-              });
+              };
+              // ソート用のメタデータを別途保持
+              item._raceNumber = raceNumber;
+              items.push(item);
             }
           }
         }
@@ -219,14 +221,16 @@ async function fetchRecentResults(category) {
 
               // title と description が必須（空文字を避ける）
               if (title && title.trim().length > 0 && description && description.trim().length > 0) {
-                items.push({
+                const item = {
                   title: title.trim(),
                   link: `https://data.keiba-intelligence.jp/jra/results/${year}/${month}/${day}/${venueSlug}/${raceNumber}/`,
                   description: description.trim(),
                   pubDate: pubDate,
                   categories: ['JRA', name + '競馬', '競馬結果', `第${raceNumber}R`],
-                  customData: { raceNumber: raceNumber }, // ソート用
-                });
+                };
+                // ソート用のメタデータを別途保持
+                item._raceNumber = raceNumber;
+                items.push(item);
               }
             }
           }
