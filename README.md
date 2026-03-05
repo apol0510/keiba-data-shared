@@ -16,6 +16,8 @@
 | **利用プロジェクト** | keiba-intelligence, nankan-analytics, nankan-analytics-pro 等 |
 | **更新方法** | 管理画面（results-manager）から自動Push |
 | **公開設定** | Public（他開発者も利用可能） |
+| **RSS配信** | https://data.keiba-intelligence.jp/rss.xml |
+| **X自動投稿** | dlvr.it経由（安定） |
 
 ---
 
@@ -221,6 +223,40 @@ const honmei = race1Prediction.horses.find(h => h.role === '本命');
 const isHit = (winner === honmei.number); // 本命的中判定
 console.log(`本命的中: ${isHit ? '◎' : '×'}`);
 ```
+
+### **4. RSS配信（X自動投稿用）** 🆕
+
+**RSS Feed URL:**
+```
+https://data.keiba-intelligence.jp/rss.xml
+```
+
+**特徴:**
+- 南関競馬・JRA競馬の結果を自動配信
+- 直近7日分のデータを含む
+- 絵文字付きタイトル（🏇🐴🎠🏆🌸）
+- dlvr.it経由でX（Twitter）に自動投稿可能
+
+**dlvr.it連携設定:**
+詳細は [DLVR_IT_SETUP.md](./DLVR_IT_SETUP.md) を参照してください。
+
+**投稿例:**
+```
+🏇 2026/03/05 大井競馬の結果
+
+大井競馬 全12レースの結果を公開しました。
+着順・払戻金・コーナー通過順を掲載。
+
+https://data.keiba-intelligence.jp/nankan/results/2026/03/05/ooi/
+
+#南関競馬 #大井競馬 #競馬結果
+```
+
+**メリット:**
+- ✅ X API直接投稿より安定
+- ✅ X側の障害の影響を受けにくい
+- ✅ 自動リトライ機能
+- ✅ 設定が簡単（Webダッシュボード）
 
 ---
 
