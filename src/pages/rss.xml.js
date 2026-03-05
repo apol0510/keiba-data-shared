@@ -1,34 +1,38 @@
 import rss from '@astrojs/rss';
-import { getCollection } from 'astro:content';
 
 /**
- * RSS Feed生成
+ * RSS Feed生成（レース毎）
  *
- * dlvr.it連携用RSS：南関競馬・JRA結果を配信
+ * dlvr.it連携用RSS：南関競馬・JRA結果を1レース毎に配信
  * URL: https://data.keiba-intelligence.jp/rss.xml
  */
 export async function GET(context) {
-  // 最新の結果データを取得（GitHub API経由）
+  // 最新の結果データを取得（直近7日分、レース毎）
   const items = [];
 
   try {
-    // 南関競馬の最新結果（直近7日分）
+    // 南関競馬の最新結果（レース毎）
     const nankanResults = await fetchRecentResults('nankan');
     items.push(...nankanResults);
 
-    // JRA競馬の最新結果（直近7日分）
+    // JRA競馬の最新結果（レース毎）
     const jraResults = await fetchRecentResults('jra');
     items.push(...jraResults);
 
-    // 日付順でソート（新しい順）
-    items.sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
+    // 日付・レース番号順でソート（新しい順、同日内は12R→1R）
+    items.sort((a, b) => {
+      const dateCompare = new Date(b.pubDate) - new Date(a.pubDate);
+      if (dateCompare !== 0) return dateCompare;
+      // 同日の場合はレース番号順（降順: 12R→1R）
+      return (b.customData?.raceNumber || 0) - (a.customData?.raceNumber || 0);
+    });
 
-    // 最大50件に制限
-    const recentItems = items.slice(0, 50);
+    // 最大100件に制限（1日12R×7日=84件程度）
+    const recentItems = items.slice(0, 100);
 
     return rss({
-      title: '競馬データ共有 - 南関・JRA結果速報',
-      description: '南関競馬・JRA競馬の結果データをリアルタイム配信',
+      title: '競馬データ共有 - 南関・JRA結果速報（レース毎）',
+      description: '南関競馬・JRA競馬の結果データを1レース毎にリアルタイム配信',
       site: context.site || 'https://data.keiba-intelligence.jp',
       items: recentItems,
       customData: `<language>ja</language>`,
@@ -37,8 +41,8 @@ export async function GET(context) {
     console.error('RSS生成エラー:', error);
     // エラー時は空のフィードを返す
     return rss({
-      title: '競馬データ共有 - 南関・JRA結果速報',
-      description: '南関競馬・JRA競馬の結果データをリアルタイム配信',
+      title: '競馬データ共有 - 南関・JRA結果速報（レース毎）',
+      description: '南関競馬・JRA競馬の結果データを1レース毎にリアルタイム配信',
       site: context.site || 'https://data.keiba-intelligence.jp',
       items: [],
       customData: `<language>ja</language>`,
@@ -47,7 +51,7 @@ export async function GET(context) {
 }
 
 /**
- * 最新結果データを取得（直近7日分）
+ * 最新結果データを取得（直近7日分、レース毎）
  */
 async function fetchRecentResults(category) {
   const items = [];
@@ -89,13 +93,48 @@ async function fetchRecentResults(category) {
           const venue = data.venue || '南関';
           const venueSlug = getVenueSlug(data.venueCode || 'OI');
 
-          items.push({
-            title: `${venueEmoji[venue] || '📊'} ${dateStr.replace(/-/g, '/')} ${venue}競馬の結果`,
-            link: `https://data.keiba-intelligence.jp/nankan/results/${year}/${month}/${day}/${venueSlug}/`,
-            description: `${venue}競馬 全${data.races?.length || 0}レースの結果を公開しました。着順・払戻金・コーナー通過順を掲載。`,
-            pubDate: new Date(dateStr + 'T21:00:00+09:00'),
-            categories: ['南関競馬', venue + '競馬', '競馬結果'],
-          });
+          // 各レースごとにRSSアイテムを生成
+          for (const race of (data.races || [])) {
+            const raceNumber = race.raceNumber;
+            const raceName = race.raceName || '';
+            const winner = race.results?.[0];
+            const sanrentan = race.payouts?.sanrentan?.[0];
+
+            // タイトル生成
+            let title = `${venueEmoji[venue] || '📊'} ${dateStr.replace(/-/g, '/')} ${venue}競馬 第${raceNumber}R`;
+            if (raceName && raceName.length >= 2 && raceName.length <= 40 && !raceName.includes('賞金')) {
+              title += ` ${raceName}`;
+            }
+
+            // 説明文生成
+            let description = '';
+            if (winner) {
+              description = `1着 ${winner.number}番${winner.name}（${winner.jockey}）`;
+              if (sanrentan) {
+                description += `\n三連単 ${sanrentan.combination} ${sanrentan.payout.toLocaleString()}円`;
+              }
+              description += `\n\n詳細・払戻金はこちら`;
+            } else {
+              description = `${venue}競馬 第${raceNumber}R の結果を公開しました。`;
+            }
+
+            // レース終了時刻を推定（発走時刻 + 5分）
+            let pubDate = new Date(dateStr + 'T21:00:00+09:00'); // デフォルト
+            if (race.startTime) {
+              const [hour, minute] = race.startTime.split(':').map(Number);
+              pubDate = new Date(dateStr);
+              pubDate.setHours(hour, minute + 5, 0, 0); // 発走5分後
+            }
+
+            items.push({
+              title: title,
+              link: `https://data.keiba-intelligence.jp/nankan/results/${year}/${month}/${day}/${venueSlug}/${raceNumber}/`,
+              description: description,
+              pubDate: pubDate,
+              categories: ['南関競馬', venue + '競馬', '競馬結果', `第${raceNumber}R`],
+              customData: { raceNumber: raceNumber }, // ソート用
+            });
+          }
         }
       } else if (category === 'jra') {
         // JRAは競馬場ごとにファイルが分かれている
@@ -119,13 +158,48 @@ async function fetchRecentResults(category) {
             const data = await response.json();
             const venueSlug = code.toLowerCase();
 
-            items.push({
-              title: `${venueEmoji[name] || '🏇'} ${dateStr.replace(/-/g, '/')} ${name}競馬の結果`,
-              link: `https://data.keiba-intelligence.jp/jra/results/${year}/${month}/${day}/${venueSlug}/`,
-              description: `${name}競馬 全${data.races?.length || 0}レースの結果を公開しました。着順・払戻金・コーナー通過順を掲載。`,
-              pubDate: new Date(dateStr + 'T16:00:00+09:00'),
-              categories: ['JRA', name + '競馬', '競馬結果'],
-            });
+            // 各レースごとにRSSアイテムを生成
+            for (const race of (data.races || [])) {
+              const raceNumber = race.raceNumber;
+              const raceName = race.raceName || '';
+              const winner = race.results?.[0];
+              const sanrentan = race.payouts?.sanrentan?.[0];
+
+              // タイトル生成
+              let title = `${venueEmoji[name] || '🏇'} ${dateStr.replace(/-/g, '/')} ${name}競馬 第${raceNumber}R`;
+              if (raceName && raceName.length >= 2 && raceName.length <= 40 && !raceName.includes('賞金')) {
+                title += ` ${raceName}`;
+              }
+
+              // 説明文生成
+              let description = '';
+              if (winner) {
+                description = `1着 ${winner.number}番${winner.name}（${winner.jockey}）`;
+                if (sanrentan) {
+                  description += `\n三連単 ${sanrentan.combination} ${sanrentan.payout.toLocaleString()}円`;
+                }
+                description += `\n\n詳細・払戻金はこちら`;
+              } else {
+                description = `${name}競馬 第${raceNumber}R の結果を公開しました。`;
+              }
+
+              // レース終了時刻を推定（発走時刻 + 5分）
+              let pubDate = new Date(dateStr + 'T16:00:00+09:00'); // デフォルト
+              if (race.startTime) {
+                const [hour, minute] = race.startTime.split(':').map(Number);
+                pubDate = new Date(dateStr);
+                pubDate.setHours(hour, minute + 5, 0, 0); // 発走5分後
+              }
+
+              items.push({
+                title: title,
+                link: `https://data.keiba-intelligence.jp/jra/results/${year}/${month}/${day}/${venueSlug}/${raceNumber}/`,
+                description: description,
+                pubDate: pubDate,
+                categories: ['JRA', name + '競馬', '競馬結果', `第${raceNumber}R`],
+                customData: { raceNumber: raceNumber }, // ソート用
+              });
+            }
           }
         }
       }
