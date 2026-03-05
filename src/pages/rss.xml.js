@@ -116,16 +116,14 @@ async function fetchRecentResults(category) {
               title += ` ${raceName}`;
             }
 
-            // 説明文生成
-            let description = '';
-            if (winner) {
-              description = `1着 ${winner.number}番${winner.name}（${winner.jockey}）`;
-              if (sanrentan) {
+            // 説明文生成（必ず何か入れる）
+            let description = `${venue}競馬 第${raceNumber}R の結果を公開しました。`;
+            if (winner && winner.name) {
+              description = `1着 ${winner.number}番${winner.name}（${winner.jockey || '騎手不明'}）`;
+              if (sanrentan && sanrentan.combination && sanrentan.payout) {
                 description += `\n三連単 ${sanrentan.combination} ${sanrentan.payout.toLocaleString()}円`;
               }
               description += `\n\n詳細・払戻金はこちら`;
-            } else {
-              description = `${venue}競馬 第${raceNumber}R の結果を公開しました。`;
             }
 
             // レース終了時刻を推定（発走時刻 + 5分）
@@ -137,11 +135,11 @@ async function fetchRecentResults(category) {
             }
 
             // title と description が必須（空文字を避ける）
-            if (title && description) {
+            if (title && title.trim().length > 0 && description && description.trim().length > 0) {
               items.push({
-                title: title,
+                title: title.trim(),
                 link: `https://data.keiba-intelligence.jp/nankan/results/${year}/${month}/${day}/${venueSlug}/${raceNumber}/`,
-                description: description,
+                description: description.trim(),
                 pubDate: pubDate,
                 categories: ['南関競馬', venue + '競馬', '競馬結果', `第${raceNumber}R`],
                 customData: { raceNumber: raceNumber }, // ソート用
@@ -184,16 +182,14 @@ async function fetchRecentResults(category) {
                 title += ` ${raceName}`;
               }
 
-              // 説明文生成
-              let description = '';
-              if (winner) {
-                description = `1着 ${winner.number}番${winner.name}（${winner.jockey}）`;
-                if (sanrentan) {
+              // 説明文生成（必ず何か入れる）
+              let description = `${name}競馬 第${raceNumber}R の結果を公開しました。`;
+              if (winner && winner.name) {
+                description = `1着 ${winner.number}番${winner.name}（${winner.jockey || '騎手不明'}）`;
+                if (sanrentan && sanrentan.combination && sanrentan.payout) {
                   description += `\n三連単 ${sanrentan.combination} ${sanrentan.payout.toLocaleString()}円`;
                 }
                 description += `\n\n詳細・払戻金はこちら`;
-              } else {
-                description = `${name}競馬 第${raceNumber}R の結果を公開しました。`;
               }
 
               // レース終了時刻を推定（発走時刻 + 5分）
@@ -205,11 +201,11 @@ async function fetchRecentResults(category) {
               }
 
               // title と description が必須（空文字を避ける）
-              if (title && description) {
+              if (title && title.trim().length > 0 && description && description.trim().length > 0) {
                 items.push({
-                  title: title,
+                  title: title.trim(),
                   link: `https://data.keiba-intelligence.jp/jra/results/${year}/${month}/${day}/${venueSlug}/${raceNumber}/`,
-                  description: description,
+                  description: description.trim(),
                   pubDate: pubDate,
                   categories: ['JRA', name + '競馬', '競馬結果', `第${raceNumber}R`],
                   customData: { raceNumber: raceNumber }, // ソート用
