@@ -30,6 +30,16 @@ export async function GET(context) {
     // 最大100件に制限（1日12R×7日=84件程度）
     const recentItems = items.slice(0, 100);
 
+    // itemsが空の場合、プレースホルダーアイテムを追加
+    if (recentItems.length === 0) {
+      recentItems.push({
+        title: '競馬データ共有 - 最新結果を準備中',
+        link: 'https://data.keiba-intelligence.jp/',
+        description: '最新の競馬結果データを準備中です。しばらくお待ちください。',
+        pubDate: new Date(),
+      });
+    }
+
     return rss({
       title: '競馬データ共有 - 南関・JRA結果速報（レース毎）',
       description: '南関競馬・JRA競馬の結果データを1レース毎にリアルタイム配信',
@@ -126,14 +136,17 @@ async function fetchRecentResults(category) {
               pubDate.setHours(hour, minute + 5, 0, 0); // 発走5分後
             }
 
-            items.push({
-              title: title,
-              link: `https://data.keiba-intelligence.jp/nankan/results/${year}/${month}/${day}/${venueSlug}/${raceNumber}/`,
-              description: description,
-              pubDate: pubDate,
-              categories: ['南関競馬', venue + '競馬', '競馬結果', `第${raceNumber}R`],
-              customData: { raceNumber: raceNumber }, // ソート用
-            });
+            // title と description が必須（空文字を避ける）
+            if (title && description) {
+              items.push({
+                title: title,
+                link: `https://data.keiba-intelligence.jp/nankan/results/${year}/${month}/${day}/${venueSlug}/${raceNumber}/`,
+                description: description,
+                pubDate: pubDate,
+                categories: ['南関競馬', venue + '競馬', '競馬結果', `第${raceNumber}R`],
+                customData: { raceNumber: raceNumber }, // ソート用
+              });
+            }
           }
         }
       } else if (category === 'jra') {
@@ -191,14 +204,17 @@ async function fetchRecentResults(category) {
                 pubDate.setHours(hour, minute + 5, 0, 0); // 発走5分後
               }
 
-              items.push({
-                title: title,
-                link: `https://data.keiba-intelligence.jp/jra/results/${year}/${month}/${day}/${venueSlug}/${raceNumber}/`,
-                description: description,
-                pubDate: pubDate,
-                categories: ['JRA', name + '競馬', '競馬結果', `第${raceNumber}R`],
-                customData: { raceNumber: raceNumber }, // ソート用
-              });
+              // title と description が必須（空文字を避ける）
+              if (title && description) {
+                items.push({
+                  title: title,
+                  link: `https://data.keiba-intelligence.jp/jra/results/${year}/${month}/${day}/${venueSlug}/${raceNumber}/`,
+                  description: description,
+                  pubDate: pubDate,
+                  categories: ['JRA', name + '競馬', '競馬結果', `第${raceNumber}R`],
+                  customData: { raceNumber: raceNumber }, // ソート用
+                });
+              }
             }
           }
         }
