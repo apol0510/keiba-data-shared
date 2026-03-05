@@ -13,11 +13,15 @@ export async function GET(context) {
   try {
     // 南関競馬の最新結果（レース毎）
     const nankanResults = await fetchRecentResults('nankan');
+    console.log('[RSS] 南関結果取得:', nankanResults.length, '件');
     items.push(...nankanResults);
 
     // JRA競馬の最新結果（レース毎）
     const jraResults = await fetchRecentResults('jra');
+    console.log('[RSS] JRA結果取得:', jraResults.length, '件');
     items.push(...jraResults);
+
+    console.log('[RSS] 合計アイテム数:', items.length);
 
     // 日付・レース番号順でソート（新しい順、同日内は12R→1R）
     items.sort((a, b) => {
@@ -30,8 +34,21 @@ export async function GET(context) {
     // 最大100件に制限（1日12R×7日=84件程度）
     const recentItems = items.slice(0, 100);
 
+    console.log('[RSS] 制限後アイテム数:', recentItems.length);
+
+    // 各アイテムの検証
+    recentItems.forEach((item, index) => {
+      console.log(`[RSS] Item ${index}:`, {
+        title: item.title ? `"${item.title.substring(0, 30)}..."` : 'EMPTY',
+        description: item.description ? `"${item.description.substring(0, 30)}..."` : 'EMPTY',
+        link: item.link,
+        pubDate: item.pubDate
+      });
+    });
+
     // itemsが空の場合、プレースホルダーアイテムを追加
     if (recentItems.length === 0) {
+      console.log('[RSS] アイテムが空のためプレースホルダーを追加');
       recentItems.push({
         title: '競馬データ共有 - 最新結果を準備中',
         link: 'https://data.keiba-intelligence.jp/',
