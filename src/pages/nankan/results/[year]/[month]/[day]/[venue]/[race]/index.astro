@@ -106,11 +106,35 @@ let allRaces = [];
 let errorMessage = null;
 
 try {
-  const filePath = join(process.cwd(), 'nankan', 'results', year, month.padStart(2, '0'), `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}.json`);
-  const content = readFileSync(filePath, 'utf-8');
-  const json = JSON.parse(content);
-  allRaces = json.races || [];
-  raceData = allRaces.find(r => r.raceNumber === raceNumber);
+  const paddedMonth = month.padStart(2, '0');
+  const paddedDay = day.padStart(2, '0');
+
+  // 会場コードマップ（slug → venueCode）
+  const venueCodeMap = {
+    'ooi': 'OOI',
+    'funabashi': 'FUN',
+    'kawasaki': 'KAW',
+    'urawa': 'URA'
+  };
+
+  const venueCode = venueCodeMap[venue];
+
+  // 会場別ファイル優先、なければ統合ファイルにフォールバック
+  let filePath = join(process.cwd(), 'nankan', 'results', year, paddedMonth, `${year}-${paddedMonth}-${paddedDay}-${venueCode}.json`);
+
+  try {
+    const content = readFileSync(filePath, 'utf-8');
+    const json = JSON.parse(content);
+    allRaces = json.races || [];
+    raceData = allRaces.find(r => r.raceNumber === raceNumber);
+  } catch (venueFileError) {
+    // 会場別ファイルがなければ統合ファイルを試す
+    filePath = join(process.cwd(), 'nankan', 'results', year, paddedMonth, `${year}-${paddedMonth}-${paddedDay}.json`);
+    const content = readFileSync(filePath, 'utf-8');
+    const json = JSON.parse(content);
+    allRaces = json.races || [];
+    raceData = allRaces.find(r => r.raceNumber === raceNumber);
+  }
 } catch (error) {
   console.error('データ取得エラー:', error);
   errorMessage = 'データの取得に失敗しました';
