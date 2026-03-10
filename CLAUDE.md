@@ -55,6 +55,17 @@ cd /Users/apolon/Projects/keiba-data-shared
 
 ---
 
+## 🚨 **結果システム設計の参照義務** 🚨
+
+**結果ページ構造を変更する場合は、必ず以下のドキュメントを参照すること:**
+
+- `RESULTS_SYSTEM_ARCHITECTURE.md`（結果システム全体設計）
+- `MULTI_VENUE_CHECK.md`（2会場同時開催チェックリスト）
+
+**このリポジトリが結果システムの設計本体である。**
+
+---
+
 ## 🔗 **関連プロジェクトとの役割分担** 🔗
 
 ### **keiba-data-shared-admin（管理画面プロジェクト）**
