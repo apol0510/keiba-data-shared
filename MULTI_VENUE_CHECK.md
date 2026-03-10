@@ -11,6 +11,116 @@
 
 ---
 
+## システム仕様
+
+### 1. JSON保存形式
+
+**旧仕様（2026-03-09以前）:**
+```
+YYYY-MM-DD.json
+```
+1日1ファイル（統合ファイル形式）
+
+**新仕様（2026-03-09以降）:**
+```
+YYYY-MM-DD-OOI.json   # 大井
+YYYY-MM-DD-FUN.json   # 船橋
+YYYY-MM-DD-KAW.json   # 川崎
+YYYY-MM-DD-URA.json   # 浦和
+```
+**1開催場1ファイル**（会場別ファイル形式）
+
+**例:**
+```
+2026-03-09-OOI.json   # 大井12レース
+2026-03-09-FUN.json   # 船橋12レース
+```
+
+---
+
+### 2. ページ階層構造
+
+```
+day     /nankan/results/YYYY/MM/DD/           # 日付親ページ（全会場表示）
+venue   /nankan/results/YYYY/MM/DD/ooi/       # 会場親ページ（全レース表示）
+race    /nankan/results/YYYY/MM/DD/ooi/1/     # レース詳細ページ
+```
+
+**URL例（2会場開催日）:**
+```
+/nankan/results/2026/03/09/                  # 大井・船橋両会場表示
+/nankan/results/2026/03/09/ooi/              # 大井会場ページ
+/nankan/results/2026/03/09/ooi/1/            # 大井1R詳細
+/nankan/results/2026/03/09/funabashi/        # 船橋会場ページ
+/nankan/results/2026/03/09/funabashi/1/      # 船橋1R詳細
+```
+
+---
+
+### 3. JSON読み込みルール
+
+**全ページ共通:**
+1. **会場別JSONを優先**: `YYYY-MM-DD-XXX.json`
+2. **統合JSONへフォールバック**: `YYYY-MM-DD.json`（旧形式対応）
+
+**実装例:**
+```javascript
+// 会場別ファイル優先
+let filePath = join(process.cwd(), 'nankan', 'results', year, paddedMonth,
+                   `${year}-${paddedMonth}-${paddedDay}-${venueCode}.json`);
+
+try {
+  const content = readFileSync(filePath, 'utf-8');
+  const json = JSON.parse(content);
+  allRaces = json.races || [];
+} catch (venueFileError) {
+  // 会場別ファイルがなければ統合ファイルを試す
+  filePath = join(process.cwd(), 'nankan', 'results', year, paddedMonth,
+                 `${year}-${paddedMonth}-${paddedDay}.json`);
+  const content = readFileSync(filePath, 'utf-8');
+  const json = JSON.parse(content);
+  allRaces = json.races || [];
+}
+```
+
+---
+
+### 4. venue slug mapping
+
+| slug | venueCode | 会場名 |
+|------|-----------|--------|
+| ooi | OOI | 大井 |
+| funabashi | FUN | 船橋 |
+| kawasaki | KAW | 川崎 |
+| urawa | URA | 浦和 |
+
+**実装例:**
+```javascript
+const venueCodeMap = {
+  'ooi': 'OOI',
+  'funabashi': 'FUN',
+  'kawasaki': 'KAW',
+  'urawa': 'URA'
+};
+```
+
+---
+
+### 5. 対応ページ一覧
+
+| ページ | ファイルパス | 対応状況 |
+|--------|------------|----------|
+| race | `src/pages/nankan/results/[year]/[month]/[day]/[venue]/[race]/index.astro` | ✅ 完了 (7f0f0cb) |
+| venue | `src/pages/nankan/results/[year]/[month]/[day]/[venue]/index.astro` | ✅ 完了 (f713ac5) |
+| day | `src/pages/nankan/results/[year]/[month]/[day]/index.astro` | ✅ 完了 (65ec044) |
+| month | `src/pages/nankan/results/[year]/[month]/index.astro` | ✅ 対応済み |
+| year | `src/pages/nankan/results/[year]/index.astro` | ✅ 対応済み |
+| index | `src/pages/nankan/results/index.astro` | ✅ 対応済み |
+
+**全ページで会場別JSON優先、統合JSONフォールバック実装済み**
+
+---
+
 ## チェック項目
 
 ### 1. JSON保存形式
