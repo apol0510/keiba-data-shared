@@ -28,16 +28,22 @@ export async function getStaticPaths() {
       for (const month of months) {
         const monthDir = join(yearDir, month);
 
-        // JSONファイルを取得
+        // JSONファイルを取得（統合ファイル形式 + 会場別ファイル形式の両対応）
         const files = readdirSync(monthDir).filter(name => name.endsWith('.json'));
+        const processedDates = new Set();
 
         for (const file of files) {
-          const match = file.match(/^(\d{4})-(\d{2})-(\d{2})\.json$/);
+          const match = file.match(/^(\d{4})-(\d{2})-(\d{2})(-[A-Z]{2,3})?\.json$/);
           if (match) {
             const [, fileYear, fileMonth, day] = match;
-            paths.push({
-              params: { year: fileYear, month: fileMonth, day }
-            });
+            const dateKey = `${fileYear}-${fileMonth}-${day}`;
+
+            if (!processedDates.has(dateKey)) {
+              paths.push({
+                params: { year: fileYear, month: fileMonth, day }
+              });
+              processedDates.add(dateKey);
+            }
           }
         }
       }
@@ -58,15 +64,42 @@ const { year, month, day } = Astro.params;
 // ローカルファイルシステムからJSONデータを取得
 let allVenuesData = [];
 
+const paddedMonth = month.padStart(2, '0');
+const paddedDay = day.padStart(2, '0');
+const monthDir = join(process.cwd(), 'nankan', 'results', year, paddedMonth);
+
 try {
-  const filePath = join(process.cwd(), 'nankan', 'results', year, month.padStart(2, '0'), `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}.json`);
-  const content = readFileSync(filePath, 'utf-8');
-  const data = JSON.parse(content);
-  allVenuesData = [{
-    venue: data.venue,
-    venueCode: data.venueCode,
-    races: data.races || []
-  }];
+  // 会場別ファイル優先、なければ統合ファイルにフォールバック
+  const files = readdirSync(monthDir).filter(name => name.endsWith('.json'));
+  const venueFiles = files.filter(f => f.match(new RegExp(`^${year}-${paddedMonth}-${paddedDay}-[A-Z]{2,3}\\.json$`)));
+
+  if (venueFiles.length > 0) {
+    // 会場別ファイルが存在する場合、全会場を読み込み
+    for (const file of venueFiles) {
+      try {
+        const filePath = join(monthDir, file);
+        const content = readFileSync(filePath, 'utf-8');
+        const data = JSON.parse(content);
+        allVenuesData.push({
+          venue: data.venue,
+          venueCode: data.venueCode,
+          races: data.races || []
+        });
+      } catch (e) {
+        console.error(`Error reading ${file}:`, e.message);
+      }
+    }
+  } else {
+    // 統合ファイルを試す
+    const filePath = join(monthDir, `${year}-${paddedMonth}-${paddedDay}.json`);
+    const content = readFileSync(filePath, 'utf-8');
+    const data = JSON.parse(content);
+    allVenuesData = [{
+      venue: data.venue,
+      venueCode: data.venueCode,
+      races: data.races || []
+    }];
+  }
 } catch (error) {
   console.error(`${year}年${month}月${day}日のデータ取得エラー:`, error);
 }
