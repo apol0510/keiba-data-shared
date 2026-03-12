@@ -1,2418 +1,1601 @@
 {
-  "raceDate": "2026-03-13",
-  "lastUpdated": "2026-03-12T14:37:51.208Z",
-  "track": "船橋",
-  "totalRaces": 12,
+  "date": "2026-03-13",
+  "venue": "船橋",
+  "venueCode": "FUN",
+  "category": "nankan",
+  "dataSource": "computer-index",
   "races": [
     {
-      "version": "1.0.0",
-      "createdAt": "2026-03-12T14:37:44.036Z",
-      "lastUpdated": "2026-03-12T14:37:44.036Z",
-      "raceInfo": {
-        "date": "2026年3月13日",
-        "track": "船橋",
-        "raceNumber": "1R",
-        "raceName": "サラ３歳",
-        "raceSubtitle": "",
-        "raceType": "",
-        "distance": "1200",
-        "surface": "ダート",
-        "startTime": "14:15"
-      },
+      "raceNumber": 1,
+      "raceName": "３歳",
+      "distance": 1200,
+      "surface": "ダート",
+      "track": "左",
+      "startTime": "14:15",
       "horses": [
         {
+          "bracket": 8,
           "number": 8,
           "name": "マリフェイス",
+          "computerIndex": 90,
+          "popularity": 1,
+          "jockey": "澤田龍",
+          "trainer": "(船)佐藤裕",
+          "weight": 54,
+          "ageGender": "牝3",
           "umacd": "0951593",
-          "marks": {
-            "印4": "◎",
-            "印3": "◎",
-            "印2": "◎",
-            "印1": "◎"
-          },
-          "seirei": "牝3",
-          "kisyu": "澤田龍",
-          "kinryo": "54",
-          "kyusya": "(船)佐藤裕",
-          "totalScore": 20,
-          "assignment": "本命"
+          "enrichedFrom": "predictions"
         },
         {
-          "number": 7,
-          "name": "ルミナスストーン",
-          "umacd": "0948064",
-          "marks": {
-            "印4": "○",
-            "印3": "○",
-            "印2": "▲",
-            "印1": "▲"
-          },
-          "seirei": "牝3",
-          "kisyu": "所蛍",
-          "kinryo": "52",
-          "kyusya": "(船)林幻",
-          "totalScore": 14,
-          "assignment": "対抗"
-        },
-        {
+          "bracket": 5,
           "number": 5,
           "name": "マサッキー",
+          "computerIndex": 66,
+          "popularity": 2,
+          "jockey": "臼井健",
+          "trainer": "(船)岩崎",
+          "weight": 54,
+          "ageGender": "牝3",
           "umacd": "0947247",
-          "marks": {
-            "印4": "▲",
-            "印3": "-",
-            "印2": "○",
-            "印1": "○"
-          },
-          "seirei": "牝3",
-          "kisyu": "臼井健",
-          "kinryo": "54",
-          "kyusya": "(船)岩崎",
-          "totalScore": 11,
-          "assignment": "単穴"
+          "enrichedFrom": "predictions"
         },
         {
-          "number": 6,
-          "name": "ハッピーデイジー",
-          "umacd": "0952186",
-          "marks": {
-            "印4": "△",
-            "印3": "svg",
-            "印2": "svg",
-            "印1": "svg"
-          },
-          "seirei": "牝3",
-          "kisyu": "濱田達",
-          "kinryo": "54",
-          "kyusya": "(船)川島一",
-          "totalScore": 7,
-          "assignment": "連下最上位"
+          "bracket": 7,
+          "number": 7,
+          "name": "ルミナスストーン",
+          "computerIndex": 61,
+          "popularity": 3,
+          "jockey": "所蛍",
+          "trainer": "(船)林幻",
+          "weight": 52,
+          "ageGender": "牝3",
+          "umacd": "0948064",
+          "enrichedFrom": "predictions"
         },
         {
+          "bracket": 1,
           "number": 1,
           "name": "ハクアイゴブレイ",
+          "computerIndex": 59,
+          "popularity": 5,
+          "jockey": "西村栄",
+          "trainer": "(船)石井",
+          "weight": 56,
+          "ageGender": "牡3",
           "umacd": "0953083",
-          "marks": {
-            "印4": "△",
-            "印3": "▲",
-            "印2": "-",
-            "印1": "△"
-          },
-          "seirei": "牡3",
-          "kisyu": "西村栄",
-          "kinryo": "56",
-          "kyusya": "(船)石井",
-          "totalScore": 5,
-          "assignment": "連下"
+          "enrichedFrom": "predictions"
         },
         {
-          "number": 4,
-          "name": "オールインアリス",
-          "umacd": "0973252",
-          "marks": {
-            "印4": "svg",
-            "印3": "-",
-            "印2": "△",
-            "印1": "△"
-          },
-          "seirei": "牝3",
-          "kisyu": "山本大",
-          "kinryo": "51",
-          "kyusya": "(船)渋谷博",
-          "totalScore": 4,
-          "assignment": "連下"
+          "bracket": 6,
+          "number": 6,
+          "name": "ハッピーデイジー",
+          "computerIndex": 57,
+          "popularity": 4,
+          "jockey": "濱田達",
+          "trainer": "(船)川島一",
+          "weight": 54,
+          "ageGender": "牝3",
+          "umacd": "0952186",
+          "enrichedFrom": "predictions"
         },
         {
+          "bracket": 2,
           "number": 2,
           "name": "アークローズ",
+          "computerIndex": 49,
+          "popularity": 6,
+          "jockey": "笠野雄",
+          "trainer": "(船)山中尊",
+          "weight": 54,
+          "ageGender": "牝3",
           "umacd": "0946382",
-          "marks": {
-            "印4": "△",
-            "印3": "-",
-            "印2": "△",
-            "印1": "△"
-          },
-          "seirei": "牝3",
-          "kisyu": "笠野雄",
-          "kinryo": "54",
-          "kyusya": "(船)山中尊",
-          "totalScore": 3,
-          "assignment": "連下"
+          "enrichedFrom": "predictions"
         },
         {
+          "bracket": 4,
+          "number": 4,
+          "name": "オールインアリス",
+          "computerIndex": 48,
+          "popularity": 7,
+          "jockey": "山本大",
+          "trainer": "(船)渋谷博",
+          "weight": 51,
+          "ageGender": "牝3",
+          "umacd": "0973252",
+          "enrichedFrom": "predictions"
+        },
+        {
+          "bracket": 3,
           "number": 3,
           "name": "ラグビル",
+          "computerIndex": 40,
+          "popularity": 8,
+          "jockey": "庄司大",
+          "trainer": "(船)阿井",
+          "weight": 56,
+          "ageGender": "牡3",
           "umacd": "0951690",
-          "marks": {
-            "印4": "-",
-            "印3": "-",
-            "印2": "-",
-            "印1": "-"
-          },
-          "seirei": "牡3",
-          "kisyu": "庄司大",
-          "kinryo": "56",
-          "kyusya": "(船)阿井",
-          "totalScore": 0,
-          "assignment": "無"
+          "enrichedFrom": "predictions"
         }
-      ],
-      "predictors": [
-        "印4",
-        "印3",
-        "印2",
-        "印1"
-      ],
-      "assignments": {
-        "main": 8,
-        "sub": 7,
-        "hole": 5,
-        "connectTop": 6,
-        "connect": [
-          1,
-          4,
-          2
-        ],
-        "reserve": [],
-        "none": [
-          3
-        ]
-      }
+      ]
     },
     {
-      "version": "1.0.0",
-      "createdAt": "2026-03-12T14:37:44.041Z",
-      "lastUpdated": "2026-03-12T14:37:44.041Z",
-      "raceInfo": {
-        "date": "2026年3月13日",
-        "track": "船橋",
-        "raceNumber": "2R",
-        "raceName": "サラ４歳以上",
-        "raceSubtitle": "Ｃ２－７組～９組",
-        "raceType": "",
-        "distance": "1200",
-        "surface": "ダート",
-        "startTime": "14:50"
-      },
+      "raceNumber": 2,
+      "raceName": "Ｃ２",
+      "distance": 1200,
+      "surface": "ダート",
+      "track": "左",
+      "startTime": "14:50",
       "horses": [
         {
+          "bracket": 3,
           "number": 3,
           "name": "アトラクトラン",
+          "computerIndex": 86,
+          "popularity": 1,
+          "jockey": "岡村健",
+          "trainer": "(船)川島一",
+          "weight": 56,
+          "ageGender": "セン4",
           "umacd": "0935164",
-          "marks": {
-            "印4": "○",
-            "印3": "▲",
-            "印2": "◎",
-            "印1": "◎"
-          },
-          "seirei": "セン4",
-          "kisyu": "岡村健",
-          "kinryo": "56",
-          "kyusya": "(船)川島一",
-          "totalScore": 17,
-          "assignment": "本命"
+          "enrichedFrom": "predictions"
         },
         {
+          "bracket": 7,
           "number": 9,
           "name": "ジェイルブレイク",
+          "computerIndex": 74,
+          "popularity": 2,
+          "jockey": "庄司大",
+          "trainer": "(船)阿井",
+          "weight": 56,
+          "ageGender": "牡4",
           "umacd": "0931591",
-          "marks": {
-            "印4": "◎",
-            "印3": "svg",
-            "印2": "○",
-            "印1": "○"
-          },
-          "seirei": "牡4",
-          "kisyu": "庄司大",
-          "kinryo": "56",
-          "kyusya": "(船)阿井",
-          "totalScore": 15,
-          "assignment": "対抗"
+          "enrichedFrom": "predictions"
         },
         {
-          "number": 4,
-          "name": "スタンドアップ",
-          "umacd": "0915969",
-          "marks": {
-            "印4": "▲",
-            "印3": "◎",
-            "印2": "▲",
-            "印1": "▲"
-          },
-          "seirei": "セン5",
-          "kisyu": "仲野光",
-          "kinryo": "56",
-          "kyusya": "(船)山下",
-          "totalScore": 14,
-          "assignment": "単穴"
-        },
-        {
+          "bracket": 1,
           "number": 1,
           "name": "リーヴルワンダー",
+          "computerIndex": 61,
+          "popularity": 3,
+          "jockey": "山中悠",
+          "trainer": "(船)渡邊貴",
+          "weight": 56,
+          "ageGender": "牡5",
           "umacd": "0918474",
-          "marks": {
-            "印4": "svg",
-            "印3": "○",
-            "印2": "svg",
-            "印1": "svg"
-          },
-          "seirei": "牡5",
-          "kisyu": "山中悠",
-          "kinryo": "56",
-          "kyusya": "(船)渡邊貴",
-          "totalScore": 10,
-          "assignment": "連下最上位"
+          "enrichedFrom": "predictions"
         },
         {
+          "bracket": 4,
+          "number": 4,
+          "name": "スタンドアップ",
+          "computerIndex": 58,
+          "popularity": 4,
+          "jockey": "仲野光",
+          "trainer": "(船)山下",
+          "weight": 56,
+          "ageGender": "セン5",
+          "umacd": "0915969",
+          "enrichedFrom": "predictions"
+        },
+        {
+          "bracket": 8,
           "number": 10,
           "name": "ウインコンパス",
+          "computerIndex": 53,
+          "popularity": 5,
+          "jockey": "小杉亮",
+          "trainer": "(船)坂本昇",
+          "weight": 56,
+          "ageGender": "牡4",
           "umacd": "0933804",
-          "marks": {
-            "印4": "△",
-            "印3": "△",
-            "印2": "△",
-            "印1": "△"
-          },
-          "seirei": "牡4",
-          "kisyu": "小杉亮",
-          "kinryo": "56",
-          "kyusya": "(船)坂本昇",
-          "totalScore": 4,
-          "assignment": "連下"
+          "enrichedFrom": "predictions"
         },
         {
+          "bracket": 8,
           "number": 11,
           "name": "フロレシミエント",
+          "computerIndex": 52,
+          "popularity": 6,
+          "jockey": "加藤雄",
+          "trainer": "(川)村田順",
+          "weight": 51,
+          "ageGender": "牝4",
           "umacd": "0932469",
-          "marks": {
-            "印4": "△",
-            "印3": "△",
-            "印2": "△",
-            "印1": "△"
-          },
-          "seirei": "牝4",
-          "kisyu": "加藤雄",
-          "kinryo": "51",
-          "kyusya": "(川)村田順",
-          "totalScore": 4,
-          "assignment": "連下"
+          "enrichedFrom": "predictions"
         },
         {
-          "number": 8,
-          "name": "ピーカンパイ",
-          "umacd": "0937772",
-          "marks": {
-            "印4": "△",
-            "印3": "-",
-            "印2": "△",
-            "印1": "△"
-          },
-          "seirei": "牝4",
-          "kisyu": "池谷匠",
-          "kinryo": "54",
-          "kyusya": "(川)甲田",
-          "totalScore": 3,
-          "assignment": "連下"
-        },
-        {
-          "number": 2,
-          "name": "タイニービキニ",
-          "umacd": "0936287",
-          "marks": {
-            "印4": "-",
-            "印3": "-",
-            "印2": "-",
-            "印1": "-"
-          },
-          "seirei": "牝4",
-          "kisyu": "臼井健",
-          "kinryo": "54",
-          "kyusya": "(船)山本学",
-          "totalScore": 0,
-          "assignment": "無"
-        },
-        {
+          "bracket": 5,
           "number": 5,
           "name": "フェリスラリー",
+          "computerIndex": 49,
+          "popularity": 7,
+          "jockey": "山口達",
+          "trainer": "(船)阿井",
+          "weight": 56,
+          "ageGender": "牡6",
           "umacd": "0899142",
-          "marks": {
-            "印4": "-",
-            "印3": "-",
-            "印2": "-",
-            "印1": "-"
-          },
-          "seirei": "牡6",
-          "kisyu": "山口達",
-          "kinryo": "56",
-          "kyusya": "(船)阿井",
-          "totalScore": 0,
-          "assignment": "無"
+          "enrichedFrom": "predictions"
         },
         {
+          "bracket": 7,
+          "number": 8,
+          "name": "ピーカンパイ",
+          "computerIndex": 48,
+          "popularity": 9,
+          "jockey": "池谷匠",
+          "trainer": "(川)甲田",
+          "weight": 54,
+          "ageGender": "牝4",
+          "umacd": "0937772",
+          "enrichedFrom": "predictions"
+        },
+        {
+          "bracket": 6,
           "number": 6,
           "name": "ザボドフスキー",
+          "computerIndex": 47,
+          "popularity": 10,
+          "jockey": "椿聡太",
+          "trainer": "(船)伊藤滋",
+          "weight": 53,
+          "ageGender": "牡4",
           "umacd": "0938303",
-          "marks": {
-            "印4": "-",
-            "印3": "-",
-            "印2": "-",
-            "印1": "-"
-          },
-          "seirei": "牡4",
-          "kisyu": "椿聡太",
-          "kinryo": "53",
-          "kyusya": "(船)伊藤滋",
-          "totalScore": 0,
-          "assignment": "無"
+          "enrichedFrom": "predictions"
         },
         {
+          "bracket": 2,
+          "number": 2,
+          "name": "タイニービキニ",
+          "computerIndex": 46,
+          "popularity": 8,
+          "jockey": "臼井健",
+          "trainer": "(船)山本学",
+          "weight": 54,
+          "ageGender": "牝4",
+          "umacd": "0936287",
+          "enrichedFrom": "predictions"
+        },
+        {
+          "bracket": 6,
           "number": 7,
           "name": "ラヴォタ",
+          "computerIndex": 40,
+          "popularity": 11,
+          "jockey": "高橋利",
+          "trainer": "(船)玉井昇",
+          "weight": 56,
+          "ageGender": "牡5",
           "umacd": "0922118",
-          "marks": {
-            "印4": "-",
-            "印3": "-",
-            "印2": "-",
-            "印1": "-"
-          },
-          "seirei": "牡5",
-          "kisyu": "高橋利",
-          "kinryo": "56",
-          "kyusya": "(船)玉井昇",
-          "totalScore": 0,
-          "assignment": "無"
+          "enrichedFrom": "predictions"
         }
-      ],
-      "predictors": [
-        "印4",
-        "印3",
-        "印2",
-        "印1"
-      ],
-      "assignments": {
-        "main": 3,
-        "sub": 9,
-        "hole": 4,
-        "connectTop": 1,
-        "connect": [
-          10,
-          11,
-          8
-        ],
-        "reserve": [],
-        "none": [
-          2,
-          5,
-          6,
-          7
-        ]
-      }
+      ]
     },
     {
-      "version": "1.0.0",
-      "createdAt": "2026-03-12T14:37:44.047Z",
-      "lastUpdated": "2026-03-12T14:37:44.047Z",
-      "raceInfo": {
-        "date": "2026年3月13日",
-        "track": "船橋",
-        "raceNumber": "3R",
-        "raceName": "野田賞",
-        "raceSubtitle": "サラ，Ｃ３－１組",
-        "raceType": "",
-        "distance": "1500",
-        "surface": "ダート",
-        "startTime": "15:25"
-      },
+      "raceNumber": 3,
+      "raceName": "野田賞",
+      "distance": 1500,
+      "surface": "ダート",
+      "track": "左",
+      "startTime": "15:25",
       "horses": [
         {
+          "bracket": 6,
           "number": 7,
           "name": "ゴッドトレジャー",
+          "computerIndex": 82,
+          "popularity": 1,
+          "jockey": "町田直",
+          "trainer": "(船)石崎",
+          "weight": 56,
+          "ageGender": "牡4",
           "umacd": "0930937",
-          "marks": {
-            "印4": "◎",
-            "印3": "◎",
-            "印2": "○",
-            "印1": "○"
-          },
-          "seirei": "牡4",
-          "kisyu": "町田直",
-          "kinryo": "56",
-          "kyusya": "(船)石崎",
-          "totalScore": 18,
-          "assignment": "本命"
+          "enrichedFrom": "predictions"
         },
         {
+          "bracket": 4,
           "number": 4,
           "name": "ビービープリメーロ",
+          "computerIndex": 75,
+          "popularity": 2,
+          "jockey": "本田重",
+          "trainer": "(船)新井",
+          "weight": 54,
+          "ageGender": "牝4",
           "umacd": "0933171",
-          "marks": {
-            "印4": "○",
-            "印3": "▲",
-            "印2": "◎",
-            "印1": "◎"
-          },
-          "seirei": "牝4",
-          "kisyu": "本田重",
-          "kinryo": "54",
-          "kyusya": "(船)新井",
-          "totalScore": 17,
-          "assignment": "対抗"
+          "enrichedFrom": "predictions"
         },
         {
-          "number": 10,
-          "name": "レイワエポック",
-          "umacd": "0949143",
-          "marks": {
-            "印4": "svg",
-            "印3": "○",
-            "印2": "svg",
-            "印1": "svg"
-          },
-          "seirei": "牝4",
-          "kisyu": "山中悠",
-          "kinryo": "54",
-          "kyusya": "(船)阿井",
-          "totalScore": 10,
-          "assignment": "単穴"
-        },
-        {
+          "bracket": 6,
           "number": 8,
           "name": "バレエコア",
+          "computerIndex": 61,
+          "popularity": 3,
+          "jockey": "岡村健",
+          "trainer": "(船)佐藤裕",
+          "weight": 54,
+          "ageGender": "牝4",
           "umacd": "0936005",
-          "marks": {
-            "印4": "▲",
-            "印3": "svg",
-            "印2": "△",
-            "印1": "▲"
-          },
-          "seirei": "牝4",
-          "kisyu": "岡村健",
-          "kinryo": "54",
-          "kyusya": "(船)佐藤裕",
-          "totalScore": 9,
-          "assignment": "連下最上位"
+          "enrichedFrom": "predictions"
         },
         {
-          "number": 5,
-          "name": "サーフプラチナム",
-          "umacd": "0931498",
-          "marks": {
-            "印4": "△",
-            "印3": "-",
-            "印2": "▲",
-            "印1": "△"
-          },
-          "seirei": "牝4",
-          "kisyu": "山口達",
-          "kinryo": "54",
-          "kyusya": "(船)林正人",
-          "totalScore": 5,
-          "assignment": "連下"
+          "bracket": 7,
+          "number": 10,
+          "name": "レイワエポック",
+          "computerIndex": 57,
+          "popularity": 4,
+          "jockey": "山中悠",
+          "trainer": "(船)阿井",
+          "weight": 54,
+          "ageGender": "牝4",
+          "umacd": "0949143",
+          "enrichedFrom": "predictions"
         },
         {
-          "number": 1,
-          "name": "バーニングウインド",
-          "umacd": "0904306",
-          "marks": {
-            "印4": "△",
-            "印3": "△",
-            "印2": "△",
-            "印1": "△"
-          },
-          "seirei": "牡6",
-          "kisyu": "川島正",
-          "kinryo": "56",
-          "kyusya": "(船)斉藤敏",
-          "totalScore": 4,
-          "assignment": "連下"
-        },
-        {
+          "bracket": 3,
           "number": 3,
           "name": "アルセリア",
+          "computerIndex": 56,
+          "popularity": 6,
+          "jockey": "篠谷葵",
+          "trainer": "(船)林正人",
+          "weight": 54,
+          "ageGender": "牝6",
           "umacd": "0898654",
-          "marks": {
-            "印4": "△",
-            "印3": "-",
-            "印2": "△",
-            "印1": "△"
-          },
-          "seirei": "牝6",
-          "kisyu": "篠谷葵",
-          "kinryo": "54",
-          "kyusya": "(船)林正人",
-          "totalScore": 3,
-          "assignment": "連下"
+          "enrichedFrom": "predictions"
         },
         {
-          "number": 11,
-          "name": "フィオーレ",
-          "umacd": "0934908",
-          "marks": {
-            "印4": "-",
-            "印3": "△",
-            "印2": "-",
-            "印1": "-"
-          },
-          "seirei": "牝4",
-          "kisyu": "笠野雄",
-          "kinryo": "54",
-          "kyusya": "(船)林幻",
-          "totalScore": 1,
-          "assignment": "補欠"
+          "bracket": 1,
+          "number": 1,
+          "name": "バーニングウインド",
+          "computerIndex": 52,
+          "popularity": 5,
+          "jockey": "川島正",
+          "trainer": "(船)斉藤敏",
+          "weight": 56,
+          "ageGender": "牡6",
+          "umacd": "0904306",
+          "enrichedFrom": "predictions"
         },
         {
-          "number": 2,
-          "name": "アラッキーフェイス",
-          "umacd": "0884103",
-          "marks": {
-            "印4": "-",
-            "印3": "-",
-            "印2": "-",
-            "印1": "-"
-          },
-          "seirei": "セン7",
-          "kisyu": "仲野光",
-          "kinryo": "56",
-          "kyusya": "(船)森始",
-          "totalScore": 0,
-          "assignment": "無"
-        },
-        {
-          "number": 6,
-          "name": "ビジューメファ",
-          "umacd": "0921664",
-          "marks": {
-            "印4": "-",
-            "印3": "-",
-            "印2": "-",
-            "印1": "-"
-          },
-          "seirei": "牝5",
-          "kisyu": "福原杏",
-          "kinryo": "54",
-          "kyusya": "(船)山本学",
-          "totalScore": 0,
-          "assignment": "無"
-        },
-        {
-          "number": 9,
-          "name": "プリマベーラ",
-          "umacd": "0938650",
-          "marks": {
-            "印4": "-",
-            "印3": "-",
-            "印2": "-",
-            "印1": "-"
-          },
-          "seirei": "牝4",
-          "kisyu": "西村栄",
-          "kinryo": "54",
-          "kyusya": "(船)坂本昇",
-          "totalScore": 0,
-          "assignment": "無"
-        },
-        {
+          "bracket": 8,
           "number": 12,
           "name": "コビナイフォンテン",
+          "computerIndex": 51,
+          "popularity": 7,
+          "jockey": "小杉亮",
+          "trainer": "(船)玉井昇",
+          "weight": 54,
+          "ageGender": "牝7",
           "umacd": "0885911",
-          "marks": {
-            "印4": "-",
-            "印3": "-",
-            "印2": "-",
-            "印1": "-"
-          },
-          "seirei": "牝7",
-          "kisyu": "小杉亮",
-          "kinryo": "54",
-          "kyusya": "(船)玉井昇",
-          "totalScore": 0,
-          "assignment": "無"
+          "enrichedFrom": "predictions"
+        },
+        {
+          "bracket": 8,
+          "number": 11,
+          "name": "フィオーレ",
+          "computerIndex": 50,
+          "popularity": 8,
+          "jockey": "笠野雄",
+          "trainer": "(船)林幻",
+          "weight": 54,
+          "ageGender": "牝4",
+          "umacd": "0934908",
+          "enrichedFrom": "predictions"
+        },
+        {
+          "bracket": 5,
+          "number": 5,
+          "name": "サーフプラチナム",
+          "computerIndex": 49,
+          "popularity": 9,
+          "jockey": "山口達",
+          "trainer": "(船)林正人",
+          "weight": 54,
+          "ageGender": "牝4",
+          "umacd": "0931498",
+          "enrichedFrom": "predictions"
+        },
+        {
+          "bracket": 5,
+          "number": 6,
+          "name": "ビジューメファ",
+          "computerIndex": 47,
+          "popularity": 10,
+          "jockey": "福原杏",
+          "trainer": "(船)山本学",
+          "weight": 54,
+          "ageGender": "牝5",
+          "umacd": "0921664",
+          "enrichedFrom": "predictions"
+        },
+        {
+          "bracket": 2,
+          "number": 2,
+          "name": "アラッキーフェイス",
+          "computerIndex": 46,
+          "popularity": 11,
+          "jockey": "仲野光",
+          "trainer": "(船)森始",
+          "weight": 56,
+          "ageGender": "セン7",
+          "umacd": "0884103",
+          "enrichedFrom": "predictions"
+        },
+        {
+          "bracket": 7,
+          "number": 9,
+          "name": "プリマベーラ",
+          "computerIndex": 40,
+          "popularity": 12,
+          "jockey": "西村栄",
+          "trainer": "(船)坂本昇",
+          "weight": 54,
+          "ageGender": "牝4",
+          "umacd": "0938650",
+          "enrichedFrom": "predictions"
         }
-      ],
-      "predictors": [
-        "印4",
-        "印3",
-        "印2",
-        "印1"
-      ],
-      "assignments": {
-        "main": 7,
-        "sub": 4,
-        "hole": 10,
-        "connectTop": 8,
-        "connect": [
-          5,
-          1,
-          3
-        ],
-        "reserve": [
-          11
-        ],
-        "none": [
-          2,
-          6,
-          9,
-          12
-        ]
-      }
+      ]
     },
     {
-      "version": "1.0.0",
-      "createdAt": "2026-03-12T14:37:44.050Z",
-      "lastUpdated": "2026-03-12T14:37:44.050Z",
-      "raceInfo": {
-        "date": "2026年3月13日",
-        "track": "船橋",
-        "raceNumber": "4R",
-        "raceName": "サラ４歳以上",
-        "raceSubtitle": "Ｃ２－７組～９組",
-        "raceType": "",
-        "distance": "1200",
-        "surface": "ダート",
-        "startTime": "16:00"
-      },
+      "raceNumber": 4,
+      "raceName": "Ｃ２",
+      "distance": 1200,
+      "surface": "ダート",
+      "track": "左",
+      "startTime": "16:00",
       "horses": [
         {
+          "bracket": 2,
           "number": 2,
           "name": "ジャストキングダム",
+          "computerIndex": 84,
+          "popularity": 1,
+          "jockey": "山中悠",
+          "trainer": "(船)山下",
+          "weight": 56,
+          "ageGender": "牡4",
           "umacd": "0932195",
-          "marks": {
-            "印4": "◎",
-            "印3": "○",
-            "印2": "○",
-            "印1": "◎"
-          },
-          "seirei": "牡4",
-          "kisyu": "山中悠",
-          "kinryo": "56",
-          "kyusya": "(船)山下",
-          "totalScore": 18,
-          "assignment": "本命"
+          "enrichedFrom": "predictions"
         },
         {
-          "number": 9,
-          "name": "リュウノラプター",
-          "umacd": "0902674",
-          "marks": {
-            "印4": "▲",
-            "印3": "◎",
-            "印2": "◎",
-            "印1": "○"
-          },
-          "seirei": "牡6",
-          "kisyu": "野沢憲",
-          "kinryo": "56",
-          "kyusya": "(船)斉藤敏",
-          "totalScore": 17,
-          "assignment": "対抗"
-        },
-        {
+          "bracket": 7,
           "number": 8,
           "name": "ケイアイワカポノ",
+          "computerIndex": 72,
+          "popularity": 2,
+          "jockey": "張田昂",
+          "trainer": "(船)田中力",
+          "weight": 56,
+          "ageGender": "セン4",
           "umacd": "0934727",
-          "marks": {
-            "印4": "○",
-            "印3": "▲",
-            "印2": "▲",
-            "印1": "▲"
-          },
-          "seirei": "セン4",
-          "kisyu": "張田昂",
-          "kinryo": "56",
-          "kyusya": "(船)田中力",
-          "totalScore": 13,
-          "assignment": "単穴"
+          "enrichedFrom": "predictions"
         },
         {
+          "bracket": 8,
+          "number": 9,
+          "name": "リュウノラプター",
+          "computerIndex": 68,
+          "popularity": 3,
+          "jockey": "野沢憲",
+          "trainer": "(船)斉藤敏",
+          "weight": 56,
+          "ageGender": "牡6",
+          "umacd": "0902674",
+          "enrichedFrom": "predictions"
+        },
+        {
+          "bracket": 4,
           "number": 4,
           "name": "スティールチャーム",
+          "computerIndex": 54,
+          "popularity": 4,
+          "jockey": "仲野光",
+          "trainer": "(船)渡邊貴",
+          "weight": 54,
+          "ageGender": "牝4",
           "umacd": "0938056",
-          "marks": {
-            "印4": "svg",
-            "印3": "svg",
-            "印2": "svg",
-            "印1": "svg"
-          },
-          "seirei": "牝4",
-          "kisyu": "仲野光",
-          "kinryo": "54",
-          "kyusya": "(船)渡邊貴",
-          "totalScore": 8,
-          "assignment": "連下最上位"
+          "enrichedFrom": "predictions"
         },
         {
-          "number": 3,
-          "name": "フェアリオンアイス",
-          "umacd": "0934890",
-          "marks": {
-            "印4": "△",
-            "印3": "-",
-            "印2": "△",
-            "印1": "△"
-          },
-          "seirei": "牝4",
-          "kisyu": "木間塚龍",
-          "kinryo": "54",
-          "kyusya": "(船)伊藤滋",
-          "totalScore": 3,
-          "assignment": "連下"
-        },
-        {
-          "number": 5,
-          "name": "レターフロムパリ",
-          "umacd": "0919139",
-          "marks": {
-            "印4": "△",
-            "印3": "-",
-            "印2": "△",
-            "印1": "△"
-          },
-          "seirei": "牝5",
-          "kisyu": "櫻井光",
-          "kinryo": "54",
-          "kyusya": "(川)新井健",
-          "totalScore": 3,
-          "assignment": "連下"
-        },
-        {
+          "bracket": 7,
           "number": 7,
           "name": "シェルヴァレイ",
+          "computerIndex": 53,
+          "popularity": 5,
+          "jockey": "古岡勇",
+          "trainer": "(船)玉井昇",
+          "weight": 56,
+          "ageGender": "牡4",
           "umacd": "0932828",
-          "marks": {
-            "印4": "△",
-            "印3": "-",
-            "印2": "△",
-            "印1": "△"
-          },
-          "seirei": "牡4",
-          "kisyu": "古岡勇",
-          "kinryo": "56",
-          "kyusya": "(船)玉井昇",
-          "totalScore": 3,
-          "assignment": "連下"
+          "enrichedFrom": "predictions"
         },
         {
-          "number": 1,
-          "name": "リンテンリュウ",
-          "umacd": "0933522",
-          "marks": {
-            "印4": "-",
-            "印3": "△",
-            "印2": "-",
-            "印1": "-"
-          },
-          "seirei": "牝4",
-          "kisyu": "新原周",
-          "kinryo": "54",
-          "kyusya": "(川)鈴木義",
-          "totalScore": 1,
-          "assignment": "補欠"
+          "bracket": 5,
+          "number": 5,
+          "name": "レターフロムパリ",
+          "computerIndex": 51,
+          "popularity": 7,
+          "jockey": "櫻井光",
+          "trainer": "(川)新井健",
+          "weight": 54,
+          "ageGender": "牝5",
+          "umacd": "0919139",
+          "enrichedFrom": "predictions"
         },
         {
-          "number": 6,
-          "name": "スマイルナゴミ",
-          "umacd": "0955164",
-          "marks": {
-            "印4": "-",
-            "印3": "-",
-            "印2": "-",
-            "印1": "-"
-          },
-          "seirei": "牝4",
-          "kisyu": "臼井健",
-          "kinryo": "54",
-          "kyusya": "(船)函館一",
-          "totalScore": 0,
-          "assignment": "無"
-        },
-        {
+          "bracket": 8,
           "number": 10,
           "name": "モズミラクル",
+          "computerIndex": 50,
+          "popularity": 6,
+          "jockey": "小杉亮",
+          "trainer": "(船)阿井",
+          "weight": 54,
+          "ageGender": "牝4",
           "umacd": "0932879",
-          "marks": {
-            "印4": "-",
-            "印3": "-",
-            "印2": "-",
-            "印1": "-"
-          },
-          "seirei": "牝4",
-          "kisyu": "小杉亮",
-          "kinryo": "54",
-          "kyusya": "(船)阿井",
-          "totalScore": 0,
-          "assignment": "無"
+          "enrichedFrom": "predictions"
+        },
+        {
+          "bracket": 3,
+          "number": 3,
+          "name": "フェアリオンアイス",
+          "computerIndex": 48,
+          "popularity": 8,
+          "jockey": "木間塚龍",
+          "trainer": "(船)伊藤滋",
+          "weight": 54,
+          "ageGender": "牝4",
+          "umacd": "0934890",
+          "enrichedFrom": "predictions"
+        },
+        {
+          "bracket": 1,
+          "number": 1,
+          "name": "リンテンリュウ",
+          "computerIndex": 41,
+          "popularity": 10,
+          "jockey": "新原周",
+          "trainer": "(川)鈴木義",
+          "weight": 54,
+          "ageGender": "牝4",
+          "umacd": "0933522",
+          "enrichedFrom": "predictions"
+        },
+        {
+          "bracket": 6,
+          "number": 6,
+          "name": "スマイルナゴミ",
+          "computerIndex": 40,
+          "popularity": 9,
+          "jockey": "臼井健",
+          "trainer": "(船)函館一",
+          "weight": 54,
+          "ageGender": "牝4",
+          "umacd": "0955164",
+          "enrichedFrom": "predictions"
         }
-      ],
-      "predictors": [
-        "印4",
-        "印3",
-        "印2",
-        "印1"
-      ],
-      "assignments": {
-        "main": 2,
-        "sub": 9,
-        "hole": 8,
-        "connectTop": 4,
-        "connect": [
-          3,
-          5,
-          7
-        ],
-        "reserve": [
-          1
-        ],
-        "none": [
-          6,
-          10
-        ]
-      }
+      ]
     },
     {
-      "version": "1.0.0",
-      "createdAt": "2026-03-12T14:37:44.053Z",
-      "lastUpdated": "2026-03-12T14:37:44.053Z",
-      "raceInfo": {
-        "date": "2026年3月13日",
-        "track": "船橋",
-        "raceNumber": "5R",
-        "raceName": "馬い！グリーングラス発売記念",
-        "raceSubtitle": "サラ４歳以上，Ｃ２－７組～９組",
-        "raceType": "",
-        "distance": "1500",
-        "surface": "ダート",
-        "startTime": "16:35"
-      },
+      "raceNumber": 5,
+      "raceName": "馬い！グリーングラス発売記念",
+      "distance": 1500,
+      "surface": "ダート",
+      "track": "左",
+      "startTime": "16:35",
       "horses": [
         {
+          "bracket": 7,
           "number": 9,
           "name": "ピリナマアナ",
+          "computerIndex": 81,
+          "popularity": 1,
+          "jockey": "岡村健",
+          "trainer": "(船)山中尊",
+          "weight": 54,
+          "ageGender": "牝4",
           "umacd": "0937703",
-          "marks": {
-            "印4": "svg",
-            "印3": "◎",
-            "印2": "◎",
-            "印1": "▲"
-          },
-          "seirei": "牝4",
-          "kisyu": "岡村健",
-          "kinryo": "54",
-          "kyusya": "(船)山中尊",
-          "totalScore": 15,
-          "assignment": "本命"
+          "enrichedFrom": "predictions"
         },
         {
-          "number": 3,
-          "name": "エウクレイア",
-          "umacd": "0934445",
-          "marks": {
-            "印4": "▲",
-            "印3": "svg",
-            "印2": "○",
-            "印1": "◎"
-          },
-          "seirei": "牝4",
-          "kisyu": "本橋孝",
-          "kinryo": "54",
-          "kyusya": "(船)米谷",
-          "totalScore": 14,
-          "assignment": "対抗"
-        },
-        {
+          "bracket": 5,
           "number": 5,
           "name": "バスキュラリティ",
+          "computerIndex": 67,
+          "popularity": 2,
+          "jockey": "張田昂",
+          "trainer": "(船)林幻",
+          "weight": 56,
+          "ageGender": "牡4",
           "umacd": "0930772",
-          "marks": {
-            "印4": "○",
-            "印3": "△",
-            "印2": "▲",
-            "印1": "○"
-          },
-          "seirei": "牡4",
-          "kisyu": "張田昂",
-          "kinryo": "56",
-          "kyusya": "(船)林幻",
-          "totalScore": 12,
-          "assignment": "単穴"
+          "enrichedFrom": "predictions"
         },
         {
+          "bracket": 7,
           "number": 8,
           "name": "ジャスマン",
+          "computerIndex": 64,
+          "popularity": 4,
+          "jockey": "町田直",
+          "trainer": "(船)佐々功",
+          "weight": 56,
+          "ageGender": "牡4",
           "umacd": "0933908",
-          "marks": {
-            "印4": "◎",
-            "印3": "○",
-            "印2": "△",
-            "印1": "△"
-          },
-          "seirei": "牡4",
-          "kisyu": "町田直",
-          "kinryo": "56",
-          "kyusya": "(船)佐々功",
-          "totalScore": 11,
-          "assignment": "連下最上位"
+          "enrichedFrom": "predictions"
         },
         {
-          "number": 4,
-          "name": "アドラマリク",
-          "umacd": "0932749",
-          "marks": {
-            "印4": "△",
-            "印3": "-",
-            "印2": "svg",
-            "印1": "svg"
-          },
-          "seirei": "牡4",
-          "kisyu": "山中悠",
-          "kinryo": "56",
-          "kyusya": "(船)新井",
-          "totalScore": 5,
-          "assignment": "連下"
+          "bracket": 3,
+          "number": 3,
+          "name": "エウクレイア",
+          "computerIndex": 62,
+          "popularity": 3,
+          "jockey": "本橋孝",
+          "trainer": "(船)米谷",
+          "weight": 54,
+          "ageGender": "牝4",
+          "umacd": "0934445",
+          "enrichedFrom": "predictions"
         },
         {
-          "number": 11,
-          "name": "キョウエイロード",
-          "umacd": "0934782",
-          "marks": {
-            "印4": "△",
-            "印3": "△",
-            "印2": "△",
-            "印1": "△"
-          },
-          "seirei": "セン4",
-          "kisyu": "實川純",
-          "kinryo": "56",
-          "kyusya": "(船)佐々功",
-          "totalScore": 4,
-          "assignment": "連下"
-        },
-        {
+          "bracket": 6,
           "number": 6,
           "name": "レジェンド",
+          "computerIndex": 56,
+          "popularity": 5,
+          "jockey": "本田重",
+          "trainer": "(船)山田信",
+          "weight": 56,
+          "ageGender": "セン4",
           "umacd": "0934789",
-          "marks": {
-            "印4": "△",
-            "印3": "-",
-            "印2": "△",
-            "印1": "△"
-          },
-          "seirei": "セン4",
-          "kisyu": "本田重",
-          "kinryo": "56",
-          "kyusya": "(船)山田信",
-          "totalScore": 3,
-          "assignment": "連下"
+          "enrichedFrom": "predictions"
         },
         {
+          "bracket": 2,
           "number": 2,
           "name": "テリオスボス",
+          "computerIndex": 52,
+          "popularity": 6,
+          "jockey": "臼井健",
+          "trainer": "(船)佐々功",
+          "weight": 56,
+          "ageGender": "牡5",
           "umacd": "0914555",
-          "marks": {
-            "印4": "-",
-            "印3": "△",
-            "印2": "-",
-            "印1": "-"
-          },
-          "seirei": "牡5",
-          "kisyu": "臼井健",
-          "kinryo": "56",
-          "kyusya": "(船)佐々功",
-          "totalScore": 1,
-          "assignment": "補欠"
+          "enrichedFrom": "predictions"
         },
         {
+          "bracket": 4,
+          "number": 4,
+          "name": "アドラマリク",
+          "computerIndex": 51,
+          "popularity": 7,
+          "jockey": "山中悠",
+          "trainer": "(船)新井",
+          "weight": 56,
+          "ageGender": "牡4",
+          "umacd": "0932749",
+          "enrichedFrom": "predictions"
+        },
+        {
+          "bracket": 8,
+          "number": 11,
+          "name": "キョウエイロード",
+          "computerIndex": 50,
+          "popularity": 8,
+          "jockey": "實川純",
+          "trainer": "(船)佐々功",
+          "weight": 56,
+          "ageGender": "セン4",
+          "umacd": "0934782",
+          "enrichedFrom": "predictions"
+        },
+        {
+          "bracket": 8,
           "number": 10,
           "name": "プロメテドール",
+          "computerIndex": 47,
+          "popularity": 9,
+          "jockey": "加藤雄",
+          "trainer": "(船)川島一",
+          "weight": 51,
+          "ageGender": "牝4",
           "umacd": "0936336",
-          "marks": {
-            "印4": "-",
-            "印3": "△",
-            "印2": "-",
-            "印1": "-"
-          },
-          "seirei": "牝4",
-          "kisyu": "加藤雄",
-          "kinryo": "51",
-          "kyusya": "(船)川島一",
-          "totalScore": 1,
-          "assignment": "補欠"
+          "enrichedFrom": "predictions"
         },
         {
-          "number": 1,
-          "name": "タイキレヴィン",
-          "umacd": "0917878",
-          "marks": {
-            "印4": "-",
-            "印3": "-",
-            "印2": "-",
-            "印1": "-"
-          },
-          "seirei": "牡5",
-          "kisyu": "古岡勇",
-          "kinryo": "56",
-          "kyusya": "(川)武井和",
-          "totalScore": 0,
-          "assignment": "無"
-        },
-        {
+          "bracket": 6,
           "number": 7,
           "name": "ノメンターノ",
+          "computerIndex": 41,
+          "popularity": 11,
+          "jockey": "山本紀",
+          "trainer": "(船)坂本昇",
+          "weight": 54,
+          "ageGender": "牝4",
           "umacd": "0937812",
-          "marks": {
-            "印4": "-",
-            "印3": "-",
-            "印2": "-",
-            "印1": "-"
-          },
-          "seirei": "牝4",
-          "kisyu": "山本紀",
-          "kinryo": "54",
-          "kyusya": "(船)坂本昇",
-          "totalScore": 0,
-          "assignment": "無"
+          "enrichedFrom": "predictions"
+        },
+        {
+          "bracket": 1,
+          "number": 1,
+          "name": "タイキレヴィン",
+          "computerIndex": 40,
+          "popularity": 10,
+          "jockey": "古岡勇",
+          "trainer": "(川)武井和",
+          "weight": 56,
+          "ageGender": "牡5",
+          "umacd": "0917878",
+          "enrichedFrom": "predictions"
         }
-      ],
-      "predictors": [
-        "印4",
-        "印3",
-        "印2",
-        "印1"
-      ],
-      "assignments": {
-        "main": 9,
-        "sub": 3,
-        "hole": 5,
-        "connectTop": 8,
-        "connect": [
-          4,
-          11,
-          6
-        ],
-        "reserve": [
-          2,
-          10
-        ],
-        "none": [
-          1,
-          7
-        ]
-      }
+      ]
     },
     {
-      "version": "1.0.0",
-      "createdAt": "2026-03-12T14:37:44.058Z",
-      "lastUpdated": "2026-03-12T14:37:44.058Z",
-      "raceInfo": {
-        "date": "2026年3月13日",
-        "track": "船橋",
-        "raceNumber": "6R",
-        "raceName": "千葉の酪農応援賞",
-        "raceSubtitle": "",
-        "raceType": "サラ３歳，選抜馬",
-        "distance": "1200",
-        "surface": "ダート",
-        "startTime": "17:10"
-      },
+      "raceNumber": 6,
+      "raceName": "千葉の酪農応援賞",
+      "distance": 1200,
+      "surface": "ダート",
+      "track": "左",
+      "startTime": "17:10",
       "horses": [
         {
-          "number": 3,
-          "name": "ナヒク",
-          "umacd": "0950789",
-          "marks": {
-            "印4": "◎",
-            "印3": "▲",
-            "印2": "◎",
-            "印1": "◎"
-          },
-          "seirei": "牡3",
-          "kisyu": "所蛍",
-          "kinryo": "54",
-          "kyusya": "(船)川島一",
-          "totalScore": 18,
-          "assignment": "本命"
-        },
-        {
-          "number": 2,
-          "name": "プレストエンペラー",
-          "umacd": "0949979",
-          "marks": {
-            "印4": "▲",
-            "印3": "○",
-            "印2": "○",
-            "印1": "○"
-          },
-          "seirei": "牡3",
-          "kisyu": "本橋孝",
-          "kinryo": "57",
-          "kyusya": "(船)山下",
-          "totalScore": 15,
-          "assignment": "対抗"
-        },
-        {
-          "number": 5,
-          "name": "ベストポジション",
-          "umacd": "0949514",
-          "marks": {
-            "印4": "○",
-            "印3": "△",
-            "印2": "▲",
-            "印1": "▲"
-          },
-          "seirei": "牝3",
-          "kisyu": "濱田達",
-          "kinryo": "54",
-          "kyusya": "(船)川島一",
-          "totalScore": 11,
-          "assignment": "単穴"
-        },
-        {
+          "bracket": 6,
           "number": 6,
           "name": "アラモ",
+          "computerIndex": 78,
+          "popularity": 1,
+          "jockey": "篠谷葵",
+          "trainer": "(船)石崎",
+          "weight": 56,
+          "ageGender": "牡3",
           "umacd": "0953583",
-          "marks": {
-            "印4": "△",
-            "印3": "◎",
-            "印2": "svg",
-            "印1": "△"
-          },
-          "seirei": "牡3",
-          "kisyu": "篠谷葵",
-          "kinryo": "56",
-          "kyusya": "(船)石崎",
-          "totalScore": 9,
-          "assignment": "連下最上位"
+          "enrichedFrom": "predictions"
         },
         {
+          "bracket": 2,
+          "number": 2,
+          "name": "プレストエンペラー",
+          "computerIndex": 73,
+          "popularity": 2,
+          "jockey": "本橋孝",
+          "trainer": "(船)山下",
+          "weight": 57,
+          "ageGender": "牡3",
+          "umacd": "0949979",
+          "enrichedFrom": "predictions"
+        },
+        {
+          "bracket": 3,
+          "number": 3,
+          "name": "ナヒク",
+          "computerIndex": 66,
+          "popularity": 3,
+          "jockey": "所蛍",
+          "trainer": "(船)川島一",
+          "weight": 54,
+          "ageGender": "牡3",
+          "umacd": "0950789",
+          "enrichedFrom": "predictions"
+        },
+        {
+          "bracket": 5,
+          "number": 5,
+          "name": "ベストポジション",
+          "computerIndex": 59,
+          "popularity": 4,
+          "jockey": "濱田達",
+          "trainer": "(船)川島一",
+          "weight": 54,
+          "ageGender": "牝3",
+          "umacd": "0949514",
+          "enrichedFrom": "predictions"
+        },
+        {
+          "bracket": 4,
           "number": 4,
           "name": "オルタスグロウ",
+          "computerIndex": 57,
+          "popularity": 5,
+          "jockey": "岡村健",
+          "trainer": "(船)渋谷博",
+          "weight": 56,
+          "ageGender": "牡3",
           "umacd": "0951591",
-          "marks": {
-            "印4": "△",
-            "印3": "svg",
-            "印2": "△",
-            "印1": "△"
-          },
-          "seirei": "牡3",
-          "kisyu": "岡村健",
-          "kinryo": "56",
-          "kyusya": "(船)渋谷博",
-          "totalScore": 5,
-          "assignment": "連下"
+          "enrichedFrom": "predictions"
         },
         {
+          "bracket": 7,
           "number": 7,
           "name": "セイジョークラウン",
+          "computerIndex": 49,
+          "popularity": 6,
+          "jockey": "山本紀",
+          "trainer": "(船)渡邊貴",
+          "weight": 56,
+          "ageGender": "牡3",
           "umacd": "0951643",
-          "marks": {
-            "印4": "svg",
-            "印3": "-",
-            "印2": "△",
-            "印1": "svg"
-          },
-          "seirei": "牡3",
-          "kisyu": "山本紀",
-          "kinryo": "56",
-          "kyusya": "(船)渡邊貴",
-          "totalScore": 5,
-          "assignment": "連下"
+          "enrichedFrom": "predictions"
         },
         {
+          "bracket": 1,
           "number": 1,
           "name": "ジーベローチェ",
+          "computerIndex": 41,
+          "popularity": 7,
+          "jockey": "新原周",
+          "trainer": "(川)鈴木義",
+          "weight": 54,
+          "ageGender": "牝3",
           "umacd": "0947436",
-          "marks": {
-            "印4": "-",
-            "印3": "-",
-            "印2": "-",
-            "印1": "-"
-          },
-          "seirei": "牝3",
-          "kisyu": "新原周",
-          "kinryo": "54",
-          "kyusya": "(川)鈴木義",
-          "totalScore": 0,
-          "assignment": "無"
+          "enrichedFrom": "predictions"
         },
         {
+          "bracket": 8,
           "number": 8,
           "name": "ムーンアンバック",
+          "computerIndex": 40,
+          "popularity": 8,
+          "jockey": "山本大",
+          "trainer": "(船)川島一",
+          "weight": 51,
+          "ageGender": "牝3",
           "umacd": "0949944",
-          "marks": {
-            "印4": "-",
-            "印3": "-",
-            "印2": "-",
-            "印1": "-"
-          },
-          "seirei": "牝3",
-          "kisyu": "山本大",
-          "kinryo": "51",
-          "kyusya": "(船)川島一",
-          "totalScore": 0,
-          "assignment": "無"
+          "enrichedFrom": "predictions"
         }
-      ],
-      "predictors": [
-        "印4",
-        "印3",
-        "印2",
-        "印1"
-      ],
-      "assignments": {
-        "main": 3,
-        "sub": 2,
-        "hole": 5,
-        "connectTop": 6,
-        "connect": [
-          4,
-          7
-        ],
-        "reserve": [],
-        "none": [
-          1,
-          8
-        ]
-      }
+      ]
     },
     {
-      "version": "1.0.0",
-      "createdAt": "2026-03-12T14:37:44.065Z",
-      "lastUpdated": "2026-03-12T14:37:44.065Z",
-      "raceInfo": {
-        "date": "2026年3月13日",
-        "track": "船橋",
-        "raceNumber": "7R",
-        "raceName": "若葉スプリント",
-        "raceSubtitle": "",
-        "raceType": "サラ，Ｃ１，選抜馬",
-        "distance": "1200",
-        "surface": "ダート",
-        "startTime": "17:45"
-      },
+      "raceNumber": 7,
+      "raceName": "若葉スプリント",
+      "distance": 1200,
+      "surface": "ダート",
+      "track": "左",
+      "startTime": "17:45",
       "horses": [
         {
+          "bracket": 1,
           "number": 1,
           "name": "デザーヴ",
+          "computerIndex": 74,
+          "popularity": 1,
+          "jockey": "本田重",
+          "trainer": "(船)川島一",
+          "weight": 56,
+          "ageGender": "牡4",
           "umacd": "0935406",
-          "marks": {
-            "印4": "◎",
-            "印3": "○",
-            "印2": "○",
-            "印1": "◎"
-          },
-          "seirei": "牡4",
-          "kisyu": "本田重",
-          "kinryo": "56",
-          "kyusya": "(船)川島一",
-          "totalScore": 18,
-          "assignment": "本命"
+          "enrichedFrom": "predictions"
         },
         {
+          "bracket": 6,
           "number": 6,
           "name": "プライムブルー",
+          "computerIndex": 73,
+          "popularity": 2,
+          "jockey": "笠野雄",
+          "trainer": "(船)稲益",
+          "weight": 56,
+          "ageGender": "牡5",
           "umacd": "0918392",
-          "marks": {
-            "印4": "▲",
-            "印3": "◎",
-            "印2": "▲",
-            "印1": "○"
-          },
-          "seirei": "牡5",
-          "kisyu": "笠野雄",
-          "kinryo": "56",
-          "kyusya": "(船)稲益",
-          "totalScore": 15,
-          "assignment": "対抗"
+          "enrichedFrom": "predictions"
         },
         {
-          "number": 9,
-          "name": "イッシンフラン",
-          "umacd": "0932175",
-          "marks": {
-            "印4": "○",
-            "印3": "△",
-            "印2": "◎",
-            "印1": "▲"
-          },
-          "seirei": "牝4",
-          "kisyu": "岡村健",
-          "kinryo": "54",
-          "kyusya": "(船)新井",
-          "totalScore": 13,
-          "assignment": "単穴"
-        },
-        {
+          "bracket": 2,
           "number": 2,
           "name": "ドントレットゴー",
+          "computerIndex": 64,
+          "popularity": 3,
+          "jockey": "本橋孝",
+          "trainer": "(船)米谷",
+          "weight": 54,
+          "ageGender": "牝5",
           "umacd": "0918447",
-          "marks": {
-            "印4": "△",
-            "印3": "▲",
-            "印2": "svg",
-            "印1": "svg"
-          },
-          "seirei": "牝5",
-          "kisyu": "本橋孝",
-          "kinryo": "54",
-          "kyusya": "(船)米谷",
-          "totalScore": 8,
-          "assignment": "連下最上位"
+          "enrichedFrom": "predictions"
         },
         {
-          "number": 3,
-          "name": "ラブリエスト",
-          "umacd": "0921986",
-          "marks": {
-            "印4": "△",
-            "印3": "△",
-            "印2": "△",
-            "印1": "△"
-          },
-          "seirei": "牝5",
-          "kisyu": "古岡勇",
-          "kinryo": "54",
-          "kyusya": "(船)矢内",
-          "totalScore": 4,
-          "assignment": "連下"
-        },
-        {
+          "bracket": 5,
           "number": 5,
           "name": "マルヒロナイト",
+          "computerIndex": 60,
+          "popularity": 5,
+          "jockey": "仲野光",
+          "trainer": "(船)玉井等",
+          "weight": 56,
+          "ageGender": "牡5",
           "umacd": "0918478",
-          "marks": {
-            "印4": "svg",
-            "印3": "-",
-            "印2": "△",
-            "印1": "△"
-          },
-          "seirei": "牡5",
-          "kisyu": "仲野光",
-          "kinryo": "56",
-          "kyusya": "(船)玉井等",
-          "totalScore": 4,
-          "assignment": "連下"
+          "enrichedFrom": "predictions"
         },
         {
-          "number": 7,
-          "name": "ヨタロー",
-          "umacd": "0934723",
-          "marks": {
-            "印4": "-",
-            "印3": "svg",
-            "印2": "△",
-            "印1": "△"
-          },
-          "seirei": "牡4",
-          "kisyu": "木間塚龍",
-          "kinryo": "56",
-          "kyusya": "(船)山本学",
-          "totalScore": 4,
-          "assignment": "連下"
+          "bracket": 8,
+          "number": 9,
+          "name": "イッシンフラン",
+          "computerIndex": 59,
+          "popularity": 4,
+          "jockey": "岡村健",
+          "trainer": "(船)新井",
+          "weight": 54,
+          "ageGender": "牝4",
+          "umacd": "0932175",
+          "enrichedFrom": "predictions"
         },
         {
+          "bracket": 4,
           "number": 4,
           "name": "タイセイマーシャル",
+          "computerIndex": 52,
+          "popularity": 7,
+          "jockey": "山本紀",
+          "trainer": "(船)山田信",
+          "weight": 56,
+          "ageGender": "牡5",
           "umacd": "0922167",
-          "marks": {
-            "印4": "△",
-            "印3": "-",
-            "印2": "-",
-            "印1": "-"
-          },
-          "seirei": "牡5",
-          "kisyu": "山本紀",
-          "kinryo": "56",
-          "kyusya": "(船)山田信",
-          "totalScore": 1,
-          "assignment": "補欠"
+          "enrichedFrom": "predictions"
         },
         {
+          "bracket": 7,
+          "number": 7,
+          "name": "ヨタロー",
+          "computerIndex": 51,
+          "popularity": 8,
+          "jockey": "木間塚龍",
+          "trainer": "(船)山本学",
+          "weight": 56,
+          "ageGender": "牡4",
+          "umacd": "0934723",
+          "enrichedFrom": "predictions"
+        },
+        {
+          "bracket": 3,
+          "number": 3,
+          "name": "ラブリエスト",
+          "computerIndex": 50,
+          "popularity": 6,
+          "jockey": "古岡勇",
+          "trainer": "(船)矢内",
+          "weight": 54,
+          "ageGender": "牝5",
+          "umacd": "0921986",
+          "enrichedFrom": "predictions"
+        },
+        {
+          "bracket": 8,
           "number": 8,
           "name": "スキーサンダー",
+          "computerIndex": 40,
+          "popularity": 9,
+          "jockey": "張田昂",
+          "trainer": "(船)張田",
+          "weight": 54,
+          "ageGender": "牝5",
           "umacd": "0915890",
-          "marks": {
-            "印4": "-",
-            "印3": "-",
-            "印2": "-",
-            "印1": "-"
-          },
-          "seirei": "牝5",
-          "kisyu": "張田昂",
-          "kinryo": "54",
-          "kyusya": "(船)張田",
-          "totalScore": 0,
-          "assignment": "無"
+          "enrichedFrom": "predictions"
         }
-      ],
-      "predictors": [
-        "印4",
-        "印3",
-        "印2",
-        "印1"
-      ],
-      "assignments": {
-        "main": 1,
-        "sub": 6,
-        "hole": 9,
-        "connectTop": 2,
-        "connect": [
-          3,
-          5,
-          7
-        ],
-        "reserve": [
-          4
-        ],
-        "none": [
-          8
-        ]
-      }
+      ]
     },
     {
-      "version": "1.0.0",
-      "createdAt": "2026-03-12T14:37:44.066Z",
-      "lastUpdated": "2026-03-12T14:37:44.066Z",
-      "raceInfo": {
-        "date": "2026年3月13日",
-        "track": "船橋",
-        "raceNumber": "8R",
-        "raceName": "電光雷轟ダッシュ",
-        "raceSubtitle": "",
-        "raceType": "サラ，Ａ２以下，選抜馬",
-        "distance": "1000",
-        "surface": "ダート",
-        "startTime": "18:20"
-      },
+      "raceNumber": 8,
+      "raceName": "電光雷轟ダッシュ",
+      "distance": 1000,
+      "surface": "ダート",
+      "track": "左",
+      "startTime": "18:20",
       "horses": [
         {
+          "bracket": 2,
           "number": 2,
           "name": "アッカーマン",
+          "computerIndex": 90,
+          "popularity": 1,
+          "jockey": "本田重",
+          "trainer": "(船)川島一",
+          "weight": 57,
+          "ageGender": "セン4",
           "umacd": "0935181",
-          "marks": {
-            "印4": "◎",
-            "印3": "◎",
-            "印2": "◎",
-            "印1": "◎"
-          },
-          "seirei": "セン4",
-          "kisyu": "本田重",
-          "kinryo": "57",
-          "kyusya": "(船)川島一",
-          "totalScore": 20,
-          "assignment": "本命"
+          "enrichedFrom": "predictions"
         },
         {
+          "bracket": 3,
           "number": 3,
           "name": "キューティロメラ",
+          "computerIndex": 68,
+          "popularity": 2,
+          "jockey": "山中悠",
+          "trainer": "(大)中道",
+          "weight": 53,
+          "ageGender": "牝6",
           "umacd": "0902055",
-          "marks": {
-            "印4": "○",
-            "印3": "○",
-            "印2": "○",
-            "印1": "○"
-          },
-          "seirei": "牝6",
-          "kisyu": "山中悠",
-          "kinryo": "53",
-          "kyusya": "(大)中道",
-          "totalScore": 16,
-          "assignment": "対抗"
+          "enrichedFrom": "predictions"
         },
         {
+          "bracket": 5,
           "number": 5,
           "name": "サトノムスタング",
+          "computerIndex": 65,
+          "popularity": 3,
+          "jockey": "本橋孝",
+          "trainer": "(船)川島一",
+          "weight": 57,
+          "ageGender": "牡8",
           "umacd": "0892693",
-          "marks": {
-            "印4": "▲",
-            "印3": "▲",
-            "印2": "▲",
-            "印1": "▲"
-          },
-          "seirei": "牡8",
-          "kisyu": "本橋孝",
-          "kinryo": "57",
-          "kyusya": "(船)川島一",
-          "totalScore": 12,
-          "assignment": "単穴"
+          "enrichedFrom": "predictions"
         },
         {
+          "bracket": 6,
           "number": 6,
           "name": "クリダーム",
+          "computerIndex": 51,
+          "popularity": 4,
+          "jockey": "加藤雄",
+          "trainer": "(川)茂木",
+          "weight": 52,
+          "ageGender": "牡6",
           "umacd": "0905123",
-          "marks": {
-            "印4": "svg",
-            "印3": "-",
-            "印2": "svg",
-            "印1": "svg"
-          },
-          "seirei": "牡6",
-          "kisyu": "加藤雄",
-          "kinryo": "52",
-          "kyusya": "(川)茂木",
-          "totalScore": 6,
-          "assignment": "連下最上位"
+          "enrichedFrom": "predictions"
         },
         {
+          "bracket": 1,
           "number": 1,
           "name": "シナノスマイル",
+          "computerIndex": 48,
+          "popularity": 5,
+          "jockey": "保園翔",
+          "trainer": "(浦)鹿沼",
+          "weight": 53,
+          "ageGender": "牝5",
           "umacd": "0917468",
-          "marks": {
-            "印4": "-",
-            "印3": "-",
-            "印2": "-",
-            "印1": "-"
-          },
-          "seirei": "牝5",
-          "kisyu": "保園翔",
-          "kinryo": "53",
-          "kyusya": "(浦)鹿沼",
-          "totalScore": 0,
-          "assignment": "無"
+          "enrichedFrom": "predictions"
         },
         {
+          "bracket": 4,
           "number": 4,
           "name": "ナイトオブバンド",
+          "computerIndex": 47,
+          "popularity": 6,
+          "jockey": "篠谷葵",
+          "trainer": "(船)米谷",
+          "weight": 57,
+          "ageGender": "牡6",
           "umacd": "0898230",
-          "marks": {
-            "印4": "-",
-            "印3": "-",
-            "印2": "-",
-            "印1": "-"
-          },
-          "seirei": "牡6",
-          "kisyu": "篠谷葵",
-          "kinryo": "57",
-          "kyusya": "(船)米谷",
-          "totalScore": 0,
-          "assignment": "無"
+          "enrichedFrom": "predictions"
         }
-      ],
-      "predictors": [
-        "印4",
-        "印3",
-        "印2",
-        "印1"
-      ],
-      "assignments": {
-        "main": 2,
-        "sub": 3,
-        "hole": 5,
-        "connectTop": 6,
-        "connect": [],
-        "reserve": [],
-        "none": [
-          1,
-          4
-        ]
-      }
+      ]
     },
     {
-      "version": "1.0.0",
-      "createdAt": "2026-03-12T14:37:44.069Z",
-      "lastUpdated": "2026-03-12T14:37:44.069Z",
-      "raceInfo": {
-        "date": "2026年3月13日",
-        "track": "船橋",
-        "raceNumber": "9R",
-        "raceName": "うお座賞",
-        "raceSubtitle": "サラ，Ｃ１－１組",
-        "raceType": "",
-        "distance": "1600",
-        "surface": "ダート",
-        "startTime": "18:55"
-      },
+      "raceNumber": 9,
+      "raceName": "うお座賞",
+      "distance": 1600,
+      "surface": "ダート",
+      "track": "左",
+      "startTime": "18:55",
       "horses": [
         {
+          "bracket": 6,
           "number": 6,
           "name": "タイセイバンクール",
+          "computerIndex": 90,
+          "popularity": 1,
+          "jockey": "本田重",
+          "trainer": "(船)山田信",
+          "weight": 56,
+          "ageGender": "牡4",
           "umacd": "0935270",
-          "marks": {
-            "印4": "◎",
-            "印3": "◎",
-            "印2": "◎",
-            "印1": "◎"
-          },
-          "seirei": "牡4",
-          "kisyu": "本田重",
-          "kinryo": "56",
-          "kyusya": "(船)山田信",
-          "totalScore": 20,
-          "assignment": "本命"
+          "enrichedFrom": "predictions"
         },
         {
-          "number": 8,
-          "name": "グレック",
-          "umacd": "0919537",
-          "marks": {
-            "印4": "▲",
-            "印3": "▲",
-            "印2": "○",
-            "印1": "○"
-          },
-          "seirei": "牡5",
-          "kisyu": "仲野光",
-          "kinryo": "56",
-          "kyusya": "(船)田中力",
-          "totalScore": 14,
-          "assignment": "対抗"
-        },
-        {
+          "bracket": 8,
           "number": 10,
           "name": "アナレクタ",
+          "computerIndex": 64,
+          "popularity": 2,
+          "jockey": "張田昂",
+          "trainer": "(船)佐藤裕",
+          "weight": 56,
+          "ageGender": "牡5",
           "umacd": "0918367",
-          "marks": {
-            "印4": "○",
-            "印3": "△",
-            "印2": "svg",
-            "印1": "▲"
-          },
-          "seirei": "牡5",
-          "kisyu": "張田昂",
-          "kinryo": "56",
-          "kyusya": "(船)佐藤裕",
-          "totalScore": 10,
-          "assignment": "単穴"
+          "enrichedFrom": "predictions"
         },
         {
-          "number": 2,
-          "name": "マジックモーメント",
-          "umacd": "0915006",
-          "marks": {
-            "印4": "svg",
-            "印3": "○",
-            "印2": "△",
-            "印1": "△"
-          },
-          "seirei": "牡5",
-          "kisyu": "椿聡太",
-          "kinryo": "53",
-          "kyusya": "(船)川島一",
-          "totalScore": 8,
-          "assignment": "連下最上位"
+          "bracket": 7,
+          "number": 8,
+          "name": "グレック",
+          "computerIndex": 61,
+          "popularity": 3,
+          "jockey": "仲野光",
+          "trainer": "(船)田中力",
+          "weight": 56,
+          "ageGender": "牡5",
+          "umacd": "0919537",
+          "enrichedFrom": "predictions"
         },
         {
+          "bracket": 6,
           "number": 7,
           "name": "ミッドナイトホーク",
+          "computerIndex": 60,
+          "popularity": 4,
+          "jockey": "篠谷葵",
+          "trainer": "(船)石井",
+          "weight": 56,
+          "ageGender": "セン5",
           "umacd": "0920668",
-          "marks": {
-            "印4": "△",
-            "印3": "svg",
-            "印2": "△",
-            "印1": "svg"
-          },
-          "seirei": "セン5",
-          "kisyu": "篠谷葵",
-          "kinryo": "56",
-          "kyusya": "(船)石井",
-          "totalScore": 6,
-          "assignment": "連下"
+          "enrichedFrom": "predictions"
         },
         {
+          "bracket": 2,
+          "number": 2,
+          "name": "マジックモーメント",
+          "computerIndex": 58,
+          "popularity": 5,
+          "jockey": "椿聡太",
+          "trainer": "(船)川島一",
+          "weight": 53,
+          "ageGender": "牡5",
+          "umacd": "0915006",
+          "enrichedFrom": "predictions"
+        },
+        {
+          "bracket": 7,
           "number": 9,
           "name": "ニキ",
+          "computerIndex": 54,
+          "popularity": 6,
+          "jockey": "新原周",
+          "trainer": "(浦)野口寛",
+          "weight": 56,
+          "ageGender": "牡5",
           "umacd": "0922036",
-          "marks": {
-            "印4": "△",
-            "印3": "△",
-            "印2": "▲",
-            "印1": "△"
-          },
-          "seirei": "牡5",
-          "kisyu": "新原周",
-          "kinryo": "56",
-          "kyusya": "(浦)野口寛",
-          "totalScore": 6,
-          "assignment": "連下"
+          "enrichedFrom": "predictions"
         },
         {
+          "bracket": 3,
           "number": 3,
           "name": "ケイアイインダラ",
+          "computerIndex": 50,
+          "popularity": 7,
+          "jockey": "濱田達",
+          "trainer": "(船)佐々功",
+          "weight": 56,
+          "ageGender": "牡6",
           "umacd": "0898880",
-          "marks": {
-            "印4": "△",
-            "印3": "-",
-            "印2": "△",
-            "印1": "△"
-          },
-          "seirei": "牡6",
-          "kisyu": "濱田達",
-          "kinryo": "56",
-          "kyusya": "(船)佐々功",
-          "totalScore": 3,
-          "assignment": "連下"
+          "enrichedFrom": "predictions"
         },
         {
-          "number": 1,
-          "name": "ラブシックボッサ",
-          "umacd": "0888478",
-          "marks": {
-            "印4": "-",
-            "印3": "-",
-            "印2": "-",
-            "印1": "-"
-          },
-          "seirei": "牡7",
-          "kisyu": "山本紀",
-          "kinryo": "56",
-          "kyusya": "(船)伊藤滋",
-          "totalScore": 0,
-          "assignment": "無"
-        },
-        {
-          "number": 4,
-          "name": "ハピネスマインド",
-          "umacd": "0868863",
-          "marks": {
-            "印4": "-",
-            "印3": "-",
-            "印2": "-",
-            "印1": "-"
-          },
-          "seirei": "牝8",
-          "kisyu": "所蛍",
-          "kinryo": "52",
-          "kyusya": "(船)玉井等",
-          "totalScore": 0,
-          "assignment": "無"
-        },
-        {
-          "number": 5,
-          "name": "スターゲット",
-          "umacd": "0919214",
-          "marks": {
-            "印4": "-",
-            "印3": "-",
-            "印2": "-",
-            "印1": "-"
-          },
-          "seirei": "牡5",
-          "kisyu": "庄司大",
-          "kinryo": "56",
-          "kyusya": "(船)玉井勝",
-          "totalScore": 0,
-          "assignment": "無"
-        },
-        {
+          "bracket": 8,
           "number": 11,
           "name": "アヴェッリーノ",
+          "computerIndex": 46,
+          "popularity": 8,
+          "jockey": "木間塚龍",
+          "trainer": "(船)斉藤敏",
+          "weight": 56,
+          "ageGender": "牡6",
           "umacd": "0901282",
-          "marks": {
-            "印4": "-",
-            "印3": "-",
-            "印2": "-",
-            "印1": "-"
-          },
-          "seirei": "牡6",
-          "kisyu": "木間塚龍",
-          "kinryo": "56",
-          "kyusya": "(船)斉藤敏",
-          "totalScore": 0,
-          "assignment": "無"
+          "enrichedFrom": "predictions"
+        },
+        {
+          "bracket": 1,
+          "number": 1,
+          "name": "ラブシックボッサ",
+          "computerIndex": 42,
+          "popularity": 10,
+          "jockey": "山本紀",
+          "trainer": "(船)伊藤滋",
+          "weight": 56,
+          "ageGender": "牡7",
+          "umacd": "0888478",
+          "enrichedFrom": "predictions"
+        },
+        {
+          "bracket": 4,
+          "number": 4,
+          "name": "ハピネスマインド",
+          "computerIndex": 41,
+          "popularity": 9,
+          "jockey": "所蛍",
+          "trainer": "(船)玉井等",
+          "weight": 52,
+          "ageGender": "牝8",
+          "umacd": "0868863",
+          "enrichedFrom": "predictions"
+        },
+        {
+          "bracket": 5,
+          "number": 5,
+          "name": "スターゲット",
+          "computerIndex": 40,
+          "popularity": 11,
+          "jockey": "庄司大",
+          "trainer": "(船)玉井勝",
+          "weight": 56,
+          "ageGender": "牡5",
+          "umacd": "0919214",
+          "enrichedFrom": "predictions"
         }
-      ],
-      "predictors": [
-        "印4",
-        "印3",
-        "印2",
-        "印1"
-      ],
-      "assignments": {
-        "main": 6,
-        "sub": 8,
-        "hole": 10,
-        "connectTop": 2,
-        "connect": [
-          7,
-          9,
-          3
-        ],
-        "reserve": [],
-        "none": [
-          1,
-          4,
-          5,
-          11
-        ]
-      }
+      ]
     },
     {
-      "version": "1.0.0",
-      "createdAt": "2026-03-12T14:37:44.072Z",
-      "lastUpdated": "2026-03-12T14:37:44.072Z",
-      "raceInfo": {
-        "date": "2026年3月13日",
-        "track": "船橋",
-        "raceNumber": "10R",
-        "raceName": "アストロメリア賞",
-        "raceSubtitle": "サラ，Ｂ２－２組",
-        "raceType": "",
-        "distance": "1700",
-        "surface": "ダート",
-        "startTime": "19:30"
-      },
+      "raceNumber": 10,
+      "raceName": "アストロメリア賞",
+      "distance": 1700,
+      "surface": "ダート",
+      "track": "左",
+      "startTime": "19:30",
       "horses": [
         {
+          "bracket": 7,
           "number": 7,
           "name": "モルジブフレイバー",
+          "computerIndex": 82,
+          "popularity": 1,
+          "jockey": "川島正",
+          "trainer": "(船)稲益",
+          "weight": 56,
+          "ageGender": "セン4",
           "umacd": "0930829",
-          "marks": {
-            "印4": "◎",
-            "印3": "◎",
-            "印2": "◎",
-            "印1": "◎"
-          },
-          "seirei": "セン4",
-          "kisyu": "川島正",
-          "kinryo": "56",
-          "kyusya": "(船)稲益",
-          "totalScore": 20,
-          "assignment": "本命"
+          "enrichedFrom": "predictions"
         },
         {
-          "number": 6,
-          "name": "プレストムーラン",
-          "umacd": "0935224",
-          "marks": {
-            "印4": "○",
-            "印3": "○",
-            "印2": "svg",
-            "印1": "○"
-          },
-          "seirei": "牝4",
-          "kisyu": "山中悠",
-          "kinryo": "54",
-          "kyusya": "(船)佐々清",
-          "totalScore": 14,
-          "assignment": "対抗"
-        },
-        {
-          "number": 5,
-          "name": "アルアインオアシス",
-          "umacd": "0915534",
-          "marks": {
-            "印4": "▲",
-            "印3": "△",
-            "印2": "○",
-            "印1": "△"
-          },
-          "seirei": "牝5",
-          "kisyu": "篠谷葵",
-          "kinryo": "54",
-          "kyusya": "(船)川島一",
-          "totalScore": 9,
-          "assignment": "単穴"
-        },
-        {
-          "number": 1,
-          "name": "ジラルデ",
-          "umacd": "0903893",
-          "marks": {
-            "印4": "△",
-            "印3": "▲",
-            "印2": "△",
-            "印1": "▲"
-          },
-          "seirei": "牡6",
-          "kisyu": "本田重",
-          "kinryo": "56",
-          "kyusya": "(船)山中尊",
-          "totalScore": 8,
-          "assignment": "連下最上位"
-        },
-        {
+          "bracket": 8,
           "number": 9,
           "name": "スマイルモア",
+          "computerIndex": 63,
+          "popularity": 2,
+          "jockey": "澤田龍",
+          "trainer": "(船)張田",
+          "weight": 56,
+          "ageGender": "牡5",
           "umacd": "0919343",
-          "marks": {
-            "印4": "svg",
-            "印3": "svg",
-            "印2": "△",
-            "印1": "svg"
-          },
-          "seirei": "牡5",
-          "kisyu": "澤田龍",
-          "kinryo": "56",
-          "kyusya": "(船)張田",
-          "totalScore": 7,
-          "assignment": "連下"
+          "enrichedFrom": "predictions"
         },
         {
+          "bracket": 6,
+          "number": 6,
+          "name": "プレストムーラン",
+          "computerIndex": 62,
+          "popularity": 3,
+          "jockey": "山中悠",
+          "trainer": "(船)佐々清",
+          "weight": 54,
+          "ageGender": "牝4",
+          "umacd": "0935224",
+          "enrichedFrom": "predictions"
+        },
+        {
+          "bracket": 4,
           "number": 4,
           "name": "ブルーパッション",
+          "computerIndex": 60,
+          "popularity": 5,
+          "jockey": "木間塚龍",
+          "trainer": "(船)矢野義",
+          "weight": 54,
+          "ageGender": "牝4",
           "umacd": "0937717",
-          "marks": {
-            "印4": "-",
-            "印3": "-",
-            "印2": "▲",
-            "印1": "△"
-          },
-          "seirei": "牝4",
-          "kisyu": "木間塚龍",
-          "kinryo": "54",
-          "kyusya": "(船)矢野義",
-          "totalScore": 4,
-          "assignment": "連下"
+          "enrichedFrom": "predictions"
         },
         {
-          "number": 2,
-          "name": "キタサンエルピス",
-          "umacd": "0904256",
-          "marks": {
-            "印4": "△",
-            "印3": "-",
-            "印2": "△",
-            "印1": "△"
-          },
-          "seirei": "牝6",
-          "kisyu": "本橋孝",
-          "kinryo": "54",
-          "kyusya": "(船)石崎",
-          "totalScore": 3,
-          "assignment": "連下"
+          "bracket": 1,
+          "number": 1,
+          "name": "ジラルデ",
+          "computerIndex": 56,
+          "popularity": 4,
+          "jockey": "本田重",
+          "trainer": "(船)山中尊",
+          "weight": 56,
+          "ageGender": "牡6",
+          "umacd": "0903893",
+          "enrichedFrom": "predictions"
         },
         {
+          "bracket": 3,
           "number": 3,
           "name": "グロリオサ",
+          "computerIndex": 55,
+          "popularity": 6,
+          "jockey": "岡村健",
+          "trainer": "(大)嶋田幸",
+          "weight": 56,
+          "ageGender": "牡6",
           "umacd": "0905286",
-          "marks": {
-            "印4": "△",
-            "印3": "△",
-            "印2": "-",
-            "印1": "-"
-          },
-          "seirei": "牡6",
-          "kisyu": "岡村健",
-          "kinryo": "56",
-          "kyusya": "(大)嶋田幸",
-          "totalScore": 2,
-          "assignment": "補欠"
+          "enrichedFrom": "predictions"
         },
         {
+          "bracket": 5,
+          "number": 5,
+          "name": "アルアインオアシス",
+          "computerIndex": 51,
+          "popularity": 7,
+          "jockey": "篠谷葵",
+          "trainer": "(船)川島一",
+          "weight": 54,
+          "ageGender": "牝5",
+          "umacd": "0915534",
+          "enrichedFrom": "predictions"
+        },
+        {
+          "bracket": 2,
+          "number": 2,
+          "name": "キタサンエルピス",
+          "computerIndex": 50,
+          "popularity": 8,
+          "jockey": "本橋孝",
+          "trainer": "(船)石崎",
+          "weight": 54,
+          "ageGender": "牝6",
+          "umacd": "0904256",
+          "enrichedFrom": "predictions"
+        },
+        {
+          "bracket": 8,
           "number": 8,
           "name": "ヒーローショー",
+          "computerIndex": 46,
+          "popularity": 9,
+          "jockey": "所蛍",
+          "trainer": "(船)林幻",
+          "weight": 54,
+          "ageGender": "牡5",
           "umacd": "0915707",
-          "marks": {
-            "印4": "-",
-            "印3": "-",
-            "印2": "-",
-            "印1": "-"
-          },
-          "seirei": "牡5",
-          "kisyu": "所蛍",
-          "kinryo": "54",
-          "kyusya": "(船)林幻",
-          "totalScore": 0,
-          "assignment": "無"
+          "enrichedFrom": "predictions"
         }
-      ],
-      "predictors": [
-        "印4",
-        "印3",
-        "印2",
-        "印1"
-      ],
-      "assignments": {
-        "main": 7,
-        "sub": 6,
-        "hole": 5,
-        "connectTop": 1,
-        "connect": [
-          9,
-          4,
-          2
-        ],
-        "reserve": [
-          3
-        ],
-        "none": [
-          8
-        ]
-      }
+      ]
     },
     {
-      "version": "1.0.0",
-      "createdAt": "2026-03-12T14:37:44.076Z",
-      "lastUpdated": "2026-03-12T14:37:44.076Z",
-      "raceInfo": {
-        "date": "2026年3月13日",
-        "track": "船橋",
-        "raceNumber": "11R",
-        "raceName": "アクアマリンカップ",
-        "raceSubtitle": "",
-        "raceType": "サラ３歳，選抜馬，別定",
-        "distance": "1700",
-        "surface": "ダート",
-        "startTime": "20:10"
-      },
+      "raceNumber": 11,
+      "raceName": "アクアマリンカップ 準重賞",
+      "distance": 1700,
+      "surface": "ダート",
+      "track": "左",
+      "startTime": "20:10",
       "horses": [
         {
-          "number": 5,
-          "name": "マルーンドライブ",
-          "umacd": "0947978",
-          "marks": {
-            "印4": "◎",
-            "印3": "○",
-            "印2": "▲",
-            "印1": "▲"
-          },
-          "seirei": "牡3",
-          "kisyu": "川島正",
-          "kinryo": "56",
-          "kyusya": "(川)長友",
-          "totalScore": 15,
-          "assignment": "本命"
-        },
-        {
-          "number": 8,
-          "name": "シージャムブルース",
-          "umacd": "0947999",
-          "marks": {
-            "印4": "▲",
-            "印3": "◎",
-            "印2": "-",
-            "印1": "◎"
-          },
-          "seirei": "牡3",
-          "kisyu": "岡村健",
-          "kinryo": "56",
-          "kyusya": "(川)内田勝",
-          "totalScore": 13,
-          "assignment": "対抗"
-        },
-        {
-          "number": 7,
-          "name": "ハセノガイセン",
-          "umacd": "0951506",
-          "marks": {
-            "印4": "svg",
-            "印3": "svg",
-            "印2": "◎",
-            "印1": "svg"
-          },
-          "seirei": "牡3",
-          "kisyu": "張田昂",
-          "kinryo": "57",
-          "kyusya": "(船)張田",
-          "totalScore": 11,
-          "assignment": "単穴"
-        },
-        {
-          "number": 2,
-          "name": "タツノスカイ",
-          "umacd": "0945948",
-          "marks": {
-            "印4": "-",
-            "印3": "▲",
-            "印2": "svg",
-            "印1": "○"
-          },
-          "seirei": "牡3",
-          "kisyu": "笠野雄",
-          "kinryo": "56",
-          "kyusya": "(船)山中尊",
-          "totalScore": 9,
-          "assignment": "連下最上位"
-        },
-        {
+          "bracket": 1,
           "number": 1,
           "name": "ジーティートレイン",
+          "computerIndex": 75,
+          "popularity": 1,
+          "jockey": "本田重",
+          "trainer": "(大)中道",
+          "weight": 57,
+          "ageGender": "牡3",
           "umacd": "0953403",
-          "marks": {
-            "印4": "△",
-            "印3": "△",
-            "印2": "○",
-            "印1": "△"
-          },
-          "seirei": "牡3",
-          "kisyu": "本田重",
-          "kinryo": "57",
-          "kyusya": "(大)中道",
-          "totalScore": 7,
-          "assignment": "連下"
+          "enrichedFrom": "predictions"
         },
         {
-          "number": 4,
-          "name": "クレームドール",
-          "umacd": "0949736",
-          "marks": {
-            "印4": "△",
-            "印3": "△",
-            "印2": "△",
-            "印1": "△"
-          },
-          "seirei": "牡3",
-          "kisyu": "町田直",
-          "kinryo": "56",
-          "kyusya": "(船)林正人",
-          "totalScore": 4,
-          "assignment": "連下"
+          "bracket": 2,
+          "number": 2,
+          "name": "タツノスカイ",
+          "computerIndex": 66,
+          "popularity": 2,
+          "jockey": "笠野雄",
+          "trainer": "(船)山中尊",
+          "weight": 56,
+          "ageGender": "牡3",
+          "umacd": "0945948",
+          "enrichedFrom": "predictions"
         },
         {
-          "number": 6,
-          "name": "コールブラック",
-          "umacd": "0952130",
-          "marks": {
-            "印4": "○",
-            "印3": "-",
-            "印2": "-",
-            "印1": "-"
-          },
-          "seirei": "牡3",
-          "kisyu": "澤田龍",
-          "kinryo": "56",
-          "kyusya": "(船)山下",
-          "totalScore": 4,
-          "assignment": "連下"
+          "bracket": 7,
+          "number": 7,
+          "name": "ハセノガイセン",
+          "computerIndex": 64,
+          "popularity": 3,
+          "jockey": "張田昂",
+          "trainer": "(船)張田",
+          "weight": 57,
+          "ageGender": "牡3",
+          "umacd": "0951506",
+          "enrichedFrom": "predictions"
         },
         {
+          "bracket": 8,
           "number": 9,
           "name": "モエレサワンミヤギ",
+          "computerIndex": 60,
+          "popularity": 4,
+          "jockey": "本橋孝",
+          "trainer": "(船)森泰斗",
+          "weight": 57,
+          "ageGender": "牡3",
           "umacd": "0951565",
-          "marks": {
-            "印4": "△",
-            "印3": "-",
-            "印2": "△",
-            "印1": "△"
-          },
-          "seirei": "牡3",
-          "kisyu": "本橋孝",
-          "kinryo": "57",
-          "kyusya": "(船)森泰斗",
-          "totalScore": 3,
-          "assignment": "補欠"
+          "enrichedFrom": "predictions"
         },
         {
+          "bracket": 5,
+          "number": 5,
+          "name": "マルーンドライブ",
+          "computerIndex": 57,
+          "popularity": 5,
+          "jockey": "川島正",
+          "trainer": "(川)長友",
+          "weight": 56,
+          "ageGender": "牡3",
+          "umacd": "0947978",
+          "enrichedFrom": "predictions"
+        },
+        {
+          "bracket": 4,
+          "number": 4,
+          "name": "クレームドール",
+          "computerIndex": 54,
+          "popularity": 6,
+          "jockey": "町田直",
+          "trainer": "(船)林正人",
+          "weight": 56,
+          "ageGender": "牡3",
+          "umacd": "0949736",
+          "enrichedFrom": "predictions"
+        },
+        {
+          "bracket": 8,
+          "number": 8,
+          "name": "シージャムブルース",
+          "computerIndex": 53,
+          "popularity": 7,
+          "jockey": "岡村健",
+          "trainer": "(川)内田勝",
+          "weight": 56,
+          "ageGender": "牡3",
+          "umacd": "0947999",
+          "enrichedFrom": "predictions"
+        },
+        {
+          "bracket": 6,
+          "number": 6,
+          "name": "コールブラック",
+          "computerIndex": 51,
+          "popularity": 8,
+          "jockey": "澤田龍",
+          "trainer": "(船)山下",
+          "weight": 56,
+          "ageGender": "牡3",
+          "umacd": "0952130",
+          "enrichedFrom": "predictions"
+        },
+        {
+          "bracket": 3,
           "number": 3,
           "name": "ストゥディア",
+          "computerIndex": 40,
+          "popularity": 9,
+          "jockey": "小杉亮",
+          "trainer": "(船)矢野義",
+          "weight": 56,
+          "ageGender": "牡3",
           "umacd": "0949632",
-          "marks": {
-            "印4": "-",
-            "印3": "-",
-            "印2": "△",
-            "印1": "-"
-          },
-          "seirei": "牡3",
-          "kisyu": "小杉亮",
-          "kinryo": "56",
-          "kyusya": "(船)矢野義",
-          "totalScore": 1,
-          "assignment": "補欠"
+          "enrichedFrom": "predictions"
         }
-      ],
-      "predictors": [
-        "印4",
-        "印3",
-        "印2",
-        "印1"
-      ],
-      "assignments": {
-        "main": 5,
-        "sub": 8,
-        "hole": 7,
-        "connectTop": 2,
-        "connect": [
-          1,
-          4,
-          6
-        ],
-        "reserve": [
-          9,
-          3
-        ],
-        "none": []
-      }
+      ]
     },
     {
-      "version": "1.0.0",
-      "createdAt": "2026-03-12T14:37:44.080Z",
-      "lastUpdated": "2026-03-12T14:37:44.080Z",
-      "raceInfo": {
-        "date": "2026年3月13日",
-        "track": "船橋",
-        "raceNumber": "12R",
-        "raceName": "３月２２日はばんえい記念",
-        "raceSubtitle": "サラ，Ｂ１－２組",
-        "raceType": "",
-        "distance": "1800",
-        "surface": "ダート",
-        "startTime": "20:50"
-      },
+      "raceNumber": 12,
+      "raceName": "３月22日はばんえい記念",
+      "distance": 1800,
+      "surface": "ダート",
+      "track": "左",
+      "startTime": "20:50",
       "horses": [
         {
+          "bracket": 1,
           "number": 1,
           "name": "キタサンドーシン",
+          "computerIndex": 84,
+          "popularity": 1,
+          "jockey": "本田重",
+          "trainer": "(船)川島一",
+          "weight": 56,
+          "ageGender": "牡7",
           "umacd": "0889765",
-          "marks": {
-            "印4": "◎",
-            "印3": "◎",
-            "印2": "◎",
-            "印1": "◎"
-          },
-          "seirei": "牡7",
-          "kisyu": "本田重",
-          "kinryo": "56",
-          "kyusya": "(船)川島一",
-          "totalScore": 20,
-          "assignment": "本命"
+          "enrichedFrom": "predictions"
         },
         {
+          "bracket": 3,
           "number": 3,
           "name": "ジルバーン",
+          "computerIndex": 70,
+          "popularity": 2,
+          "jockey": "澤田龍",
+          "trainer": "(船)山下",
+          "weight": 56,
+          "ageGender": "牡7",
           "umacd": "0885065",
-          "marks": {
-            "印4": "○",
-            "印3": "svg",
-            "印2": "▲",
-            "印1": "▲"
-          },
-          "seirei": "牡7",
-          "kisyu": "澤田龍",
-          "kinryo": "56",
-          "kyusya": "(船)山下",
-          "totalScore": 12,
-          "assignment": "対抗"
+          "enrichedFrom": "predictions"
         },
         {
+          "bracket": 5,
           "number": 5,
           "name": "カレンアルカンタラ",
+          "computerIndex": 63,
+          "popularity": 3,
+          "jockey": "山中悠",
+          "trainer": "(船)佐藤裕",
+          "weight": 56,
+          "ageGender": "牡6",
           "umacd": "0901852",
-          "marks": {
-            "印4": "▲",
-            "印3": "△",
-            "印2": "○",
-            "印1": "○"
-          },
-          "seirei": "牡6",
-          "kisyu": "山中悠",
-          "kinryo": "56",
-          "kyusya": "(船)佐藤裕",
-          "totalScore": 12,
-          "assignment": "単穴"
+          "enrichedFrom": "predictions"
         },
         {
-          "number": 9,
-          "name": "ナショナルモール",
-          "umacd": "0884044",
-          "marks": {
-            "印4": "△",
-            "印3": "○",
-            "印2": "△",
-            "印1": "svg"
-          },
-          "seirei": "セン7",
-          "kisyu": "町田直",
-          "kinryo": "56",
-          "kyusya": "(船)佐々清",
-          "totalScore": 8,
-          "assignment": "連下最上位"
-        },
-        {
-          "number": 2,
-          "name": "タイセイウォリアー",
-          "umacd": "0902235",
-          "marks": {
-            "印4": "△",
-            "印3": "▲",
-            "印2": "△",
-            "印1": "△"
-          },
-          "seirei": "牡6",
-          "kisyu": "本橋孝",
-          "kinryo": "56",
-          "kyusya": "(船)山田信",
-          "totalScore": 6,
-          "assignment": "連下"
-        },
-        {
+          "bracket": 8,
           "number": 8,
           "name": "リュードマン",
+          "computerIndex": 61,
+          "popularity": 4,
+          "jockey": "篠谷葵",
+          "trainer": "(船)矢内",
+          "weight": 56,
+          "ageGender": "牡9",
           "umacd": "0854316",
-          "marks": {
-            "印4": "svg",
-            "印3": "△",
-            "印2": "svg",
-            "印1": "△"
-          },
-          "seirei": "牡9",
-          "kisyu": "篠谷葵",
-          "kinryo": "56",
-          "kyusya": "(船)矢内",
-          "totalScore": 6,
-          "assignment": "連下"
+          "enrichedFrom": "predictions"
         },
         {
+          "bracket": 8,
+          "number": 9,
+          "name": "ナショナルモール",
+          "computerIndex": 55,
+          "popularity": 5,
+          "jockey": "町田直",
+          "trainer": "(船)佐々清",
+          "weight": 56,
+          "ageGender": "セン7",
+          "umacd": "0884044",
+          "enrichedFrom": "predictions"
+        },
+        {
+          "bracket": 7,
           "number": 7,
           "name": "ヒロシゲジャック",
+          "computerIndex": 52,
+          "popularity": 6,
+          "jockey": "笠野雄",
+          "trainer": "(船)山中尊",
+          "weight": 56,
+          "ageGender": "牡7",
           "umacd": "0884005",
-          "marks": {
-            "印4": "△",
-            "印3": "-",
-            "印2": "-",
-            "印1": "△"
-          },
-          "seirei": "牡7",
-          "kisyu": "笠野雄",
-          "kinryo": "56",
-          "kyusya": "(船)山中尊",
-          "totalScore": 2,
-          "assignment": "連下"
+          "enrichedFrom": "predictions"
         },
         {
+          "bracket": 2,
+          "number": 2,
+          "name": "タイセイウォリアー",
+          "computerIndex": 47,
+          "popularity": 7,
+          "jockey": "本橋孝",
+          "trainer": "(船)山田信",
+          "weight": 56,
+          "ageGender": "牡6",
+          "umacd": "0902235",
+          "enrichedFrom": "predictions"
+        },
+        {
+          "bracket": 4,
           "number": 4,
           "name": "ソレナ",
+          "computerIndex": 41,
+          "popularity": 9,
+          "jockey": "西村栄",
+          "trainer": "(船)矢野義",
+          "weight": 56,
+          "ageGender": "セン5",
           "umacd": "0922012",
-          "marks": {
-            "印4": "-",
-            "印3": "-",
-            "印2": "-",
-            "印1": "-"
-          },
-          "seirei": "セン5",
-          "kisyu": "西村栄",
-          "kinryo": "56",
-          "kyusya": "(船)矢野義",
-          "totalScore": 0,
-          "assignment": "無"
+          "enrichedFrom": "predictions"
         },
         {
+          "bracket": 6,
           "number": 6,
           "name": "ヤギリケハヤ",
+          "computerIndex": 40,
+          "popularity": 8,
+          "jockey": "實川純",
+          "trainer": "(船)張田",
+          "weight": 56,
+          "ageGender": "牡4",
           "umacd": "0934926",
-          "marks": {
-            "印4": "-",
-            "印3": "-",
-            "印2": "-",
-            "印1": "-"
-          },
-          "seirei": "牡4",
-          "kisyu": "實川純",
-          "kinryo": "56",
-          "kyusya": "(船)張田",
-          "totalScore": 0,
-          "assignment": "無"
+          "enrichedFrom": "predictions"
         }
-      ],
-      "predictors": [
-        "印4",
-        "印3",
-        "印2",
-        "印1"
-      ],
-      "assignments": {
-        "main": 1,
-        "sub": 3,
-        "hole": 5,
-        "connectTop": 9,
-        "connect": [
-          2,
-          8,
-          7
-        ],
-        "reserve": [],
-        "none": [
-          4,
-          6
-        ]
-      }
+      ]
     }
-  ]
+  ],
+  "dataVersion": "1.0",
+  "createdAt": "2026-03-12T22:17:42.669Z",
+  "enrichedAt": "2026-03-12T22:17:57.782Z"
 }
