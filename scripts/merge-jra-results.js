@@ -12,6 +12,7 @@
 import { readFileSync, writeFileSync, existsSync, readdirSync, mkdirSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
+import { validatePayouts } from '../parser/validate-payouts.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -50,12 +51,19 @@ function mergeJraResults(date) {
 
     console.log(`   - ${venueName}: ${data.races.length}レース`);
 
-    // 各レースに会場情報を追加
+    // 各レースに会場情報を追加 + 配当データバリデーション
     for (const race of data.races) {
-      allRaces.push({
+      const validatedRace = {
         ...race,
         venue: venueName
-      });
+      };
+
+      // 配当データがある場合はバリデーション実行（再発防止）
+      if (validatedRace.payouts) {
+        validatedRace.payouts = validatePayouts(validatedRace.payouts, { verbose: false });
+      }
+
+      allRaces.push(validatedRace);
     }
 
     totalRaces += data.races.length;

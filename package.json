@@ -12,7 +12,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "validate": "node scripts/validate-results.js",
-    "test": "npm run validate"
+    "test": "npm run validate",
+    "test:payouts": "node parser/test-validate-payouts.js"
   },
   "repository": {
     "type": "git",

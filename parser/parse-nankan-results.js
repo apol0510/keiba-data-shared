@@ -4,6 +4,8 @@
  * @description 南関公式サイトからコピーした結果データを自動解析してJSON化
  */
 
+import { validatePayouts } from './validate-payouts.js';
+
 /**
  * 南関競馬公式フォーマットをパース
  * @param {string} text - 南関公式サイトからコピーしたテキスト
@@ -238,7 +240,8 @@ function extractPayouts(text) {
     };
   }
 
-  return payouts;
+  // 【再発防止】配当データのバリデーション（payout/popularity が null のエントリを除外）
+  return validatePayouts(payouts);
 }
 
 /**
