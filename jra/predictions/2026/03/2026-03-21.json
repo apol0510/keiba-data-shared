@@ -1,0 +1,4000 @@
+{
+  "date": "2026-03-21",
+  "lastUpdated": "2026-03-20T13:08:07.972Z",
+  "totalVenues": 1,
+  "totalRaces": 12,
+  "venues": [
+    {
+      "venue": "中京",
+      "totalRaces": 12,
+      "races": [
+        {
+          "version": "1.0.0",
+          "createdAt": "2026-03-20T13:07:57.719Z",
+          "lastUpdated": "2026-03-20T13:07:57.719Z",
+          "raceInfo": {
+            "date": "2026-03-21",
+            "track": "中京",
+            "raceNumber": "1",
+            "raceName": "３歳未勝利",
+            "raceType": "[指定]",
+            "distance": "1800",
+            "surface": "ダート",
+            "kaisaiInfo": "1回中京3日目",
+            "hassoTime": "9:45",
+            "courseInfo": "(ダート・左)",
+            "tenkiBaba": "",
+            "recordTime": "レコード1.47.6",
+            "estimatedTime": "良1.54.8 / 重1.53.0",
+            "prizes": [
+              "1着: 590.0万",
+              "2着: 240.0万",
+              "3着: 150.0万",
+              "4着: 89.0万",
+              "5着: 59.0万"
+            ]
+          },
+          "horses": [
+            {
+              "number": 13,
+              "name": "コルヴァス",
+              "umacd": "0951250",
+              "marks": {
+                "印5": "◎",
+                "印4": "◎",
+                "印3": "◎",
+                "印2": "◎",
+                "印1": "◎"
+              },
+              "seirei": "牡3",
+              "kisyu": "川田将",
+              "kinryo": "57",
+              "kyusya": "(栗)矢作",
+              "totalScore": 25,
+              "assignment": "本命"
+            },
+            {
+              "number": 5,
+              "name": "ハイロード",
+              "umacd": "0949616",
+              "marks": {
+                "印5": "▲",
+                "印4": "○",
+                "印3": "△",
+                "印2": "○",
+                "印1": "△"
+              },
+              "seirei": "牡3",
+              "kisyu": "斎藤新",
+              "kinryo": "57",
+              "kyusya": "(栗)浜田",
+              "totalScore": 13,
+              "assignment": "対抗"
+            },
+            {
+              "number": 9,
+              "name": "ナウオアネヴァー",
+              "umacd": "0951247",
+              "marks": {
+                "印5": "○",
+                "印4": "svg",
+                "印3": "svg",
+                "印2": "▲",
+                "印1": "svg"
+              },
+              "seirei": "牡3",
+              "kisyu": "川又賢",
+              "kinryo": "57",
+              "kyusya": "(栗)寺島",
+              "totalScore": 13,
+              "assignment": "単穴"
+            },
+            {
+              "number": 10,
+              "name": "サンライズジャッジ",
+              "umacd": "0947495",
+              "marks": {
+                "印5": "△",
+                "印4": "-",
+                "印3": "○",
+                "印2": "△",
+                "印1": "○"
+              },
+              "seirei": "牡3",
+              "kisyu": "田山旺",
+              "kinryo": "54",
+              "kyusya": "(栗)小椋",
+              "totalScore": 10,
+              "assignment": "連下最上位"
+            },
+            {
+              "number": 2,
+              "name": "レジェルテ",
+              "umacd": "0954363",
+              "marks": {
+                "印5": "△",
+                "印4": "-",
+                "印3": "▲",
+                "印2": "svg",
+                "印1": "▲"
+              },
+              "seirei": "牡3",
+              "kisyu": "和田陽",
+              "kinryo": "54",
+              "kyusya": "(栗)柴田卓",
+              "totalScore": 9,
+              "assignment": "連下"
+            },
+            {
+              "number": 11,
+              "name": "コンテナヒーロー",
+              "umacd": "0951721",
+              "marks": {
+                "印5": "svg",
+                "印4": "-",
+                "印3": "△",
+                "印2": "-",
+                "印1": "△"
+              },
+              "seirei": "牡3",
+              "kisyu": "団野大",
+              "kinryo": "57",
+              "kyusya": "(栗)茶木",
+              "totalScore": 4,
+              "assignment": "連下"
+            },
+            {
+              "number": 3,
+              "name": "ダイメイミラクル",
+              "umacd": "0947526",
+              "marks": {
+                "印5": "-",
+                "印4": "▲",
+                "印3": "-",
+                "印2": "-",
+                "印1": "-"
+              },
+              "seirei": "牡3",
+              "kisyu": "河原田菜",
+              "kinryo": "53",
+              "kyusya": "(栗)本田",
+              "totalScore": 3,
+              "assignment": "連下"
+            },
+            {
+              "number": 7,
+              "name": "ロードエルドラド",
+              "umacd": "0952794",
+              "marks": {
+                "印5": "穴",
+                "印4": "-",
+                "印3": "-",
+                "印2": "△",
+                "印1": "-"
+              },
+              "seirei": "牡3",
+              "kisyu": "中井裕",
+              "kinryo": "57",
+              "kyusya": "(栗)坂口智",
+              "totalScore": 3,
+              "assignment": "補欠"
+            },
+            {
+              "number": 8,
+              "name": "サウンドラッシュ",
+              "umacd": "0951097",
+              "marks": {
+                "印5": "穴",
+                "印4": "-",
+                "印3": "-",
+                "印2": "-",
+                "印1": "-"
+              },
+              "seirei": "牡3",
+              "kisyu": "古川奈",
+              "kinryo": "55",
+              "kyusya": "(栗)安達",
+              "totalScore": 2,
+              "assignment": "補欠"
+            },
+            {
+              "number": 1,
+              "name": "ビーストウォーズ",
+              "umacd": "0951971",
+              "marks": {
+                "印5": "-",
+                "印4": "△",
+                "印3": "-",
+                "印2": "-",
+                "印1": "-"
+              },
+              "seirei": "牡3",
+              "kisyu": "国分恭",
+              "kinryo": "57",
+              "kyusya": "(美)松山将",
+              "totalScore": 1,
+              "assignment": "補欠"
+            },
+            {
+              "number": 12,
+              "name": "バンブラボー",
+              "umacd": "0952002",
+              "marks": {
+                "印5": "-",
+                "印4": "△",
+                "印3": "-",
+                "印2": "-",
+                "印1": "-"
+              },
+              "seirei": "牡3",
+              "kisyu": "富田暁",
+              "kinryo": "57",
+              "kyusya": "(栗)飯田祐",
+              "totalScore": 1,
+              "assignment": "補欠"
+            },
+            {
+              "number": 4,
+              "name": "オセアビシャイン",
+              "umacd": "0945978",
+              "marks": {
+                "印5": "-",
+                "印4": "-",
+                "印3": "-",
+                "印2": "-",
+                "印1": "-"
+              },
+              "seirei": "牡3",
+              "kisyu": "嶋田純",
+              "kinryo": "57",
+              "kyusya": "(美)菊川",
+              "totalScore": 0,
+              "assignment": "無"
+            },
+            {
+              "number": 6,
+              "name": "クランドゥルス",
+              "umacd": "0947718",
+              "marks": {
+                "印5": "-",
+                "印4": "-",
+                "印3": "-",
+                "印2": "-",
+                "印1": "-"
+              },
+              "seirei": "牡3",
+              "kisyu": "小沢大",
+              "kinryo": "57",
+              "kyusya": "(栗)羽月",
+              "totalScore": 0,
+              "assignment": "無"
+            }
+          ],
+          "predictors": [
+            "印5",
+            "印4",
+            "印3",
+            "印2",
+            "印1"
+          ],
+          "assignments": {
+            "main": 13,
+            "sub": 5,
+            "hole": 9,
+            "connectTop": 10,
+            "connect": [
+              2,
+              11,
+              3
+            ],
+            "reserve": [
+              7,
+              8,
+              1,
+              12
+            ],
+            "none": [
+              4,
+              6
+            ]
+          }
+        },
+        {
+          "version": "1.0.0",
+          "createdAt": "2026-03-20T13:07:57.725Z",
+          "lastUpdated": "2026-03-20T13:07:57.725Z",
+          "raceInfo": {
+            "date": "2026-03-21",
+            "track": "中京",
+            "raceNumber": "2",
+            "raceName": "３歳未勝利",
+            "raceType": "[指定]，牝馬",
+            "distance": "1200",
+            "surface": "ダート",
+            "kaisaiInfo": "1回中京3日目",
+            "hassoTime": "10:10",
+            "courseInfo": "(ダート・左)",
+            "tenkiBaba": "",
+            "recordTime": "レコード1.09.4",
+            "estimatedTime": "良1.13.0 / 重1.11.8",
+            "prizes": [
+              "1着: 590.0万",
+              "2着: 240.0万",
+              "3着: 150.0万",
+              "4着: 89.0万",
+              "5着: 59.0万"
+            ]
+          },
+          "horses": [
+            {
+              "number": 1,
+              "name": "クロカミジョウ",
+              "umacd": "0947421",
+              "marks": {
+                "印5": "◎",
+                "印4": "△",
+                "印3": "◎",
+                "印2": "◎",
+                "印1": "◎"
+              },
+              "seirei": "牝3",
+              "kisyu": "田山旺",
+              "kinryo": "52",
+              "kyusya": "(栗)岡田",
+              "totalScore": 21,
+              "assignment": "本命"
+            },
+            {
+              "number": 4,
+              "name": "スノーランス",
+              "umacd": "0950538",
+              "marks": {
+                "印5": "○",
+                "印4": "▲",
+                "印3": "△",
+                "印2": "○",
+                "印1": "△"
+              },
+              "seirei": "牝3",
+              "kisyu": "吉村誠",
+              "kinryo": "55",
+              "kyusya": "(美)上原佑",
+              "totalScore": 13,
+              "assignment": "対抗"
+            },
+            {
+              "number": 2,
+              "name": "ライトニングロッド",
+              "umacd": "0947064",
+              "marks": {
+                "印5": "△",
+                "印4": "○",
+                "印3": "svg",
+                "印2": "△",
+                "印1": "svg"
+              },
+              "seirei": "牝3",
+              "kisyu": "川田将",
+              "kinryo": "55",
+              "kyusya": "(栗)高橋忠",
+              "totalScore": 10,
+              "assignment": "単穴"
+            },
+            {
+              "number": 16,
+              "name": "シャインフォーミー",
+              "umacd": "0952634",
+              "marks": {
+                "印5": "svg",
+                "印4": "-",
+                "印3": "-",
+                "印2": "▲",
+                "印1": "○"
+              },
+              "seirei": "牝3",
+              "kisyu": "横山武",
+              "kinryo": "55",
+              "kyusya": "(美)尾関",
+              "totalScore": 9,
+              "assignment": "連下最上位"
+            },
+            {
+              "number": 5,
+              "name": "タマモビスケット",
+              "umacd": "0949307",
+              "marks": {
+                "印5": "▲",
+                "印4": "svg",
+                "印3": "△",
+                "印2": "△",
+                "印1": "△"
+              },
+              "seirei": "牝3",
+              "kisyu": "柴田裕",
+              "kinryo": "53",
+              "kyusya": "(栗)中竹",
+              "totalScore": 8,
+              "assignment": "連下"
+            },
+            {
+              "number": 10,
+              "name": "ヴェルジーネ",
+              "umacd": "0953850",
+              "marks": {
+                "印5": "-",
+                "印4": "△",
+                "印3": "○",
+                "印2": "-",
+                "印1": "▲"
+              },
+              "seirei": "牝3",
+              "kisyu": "国分恭",
+              "kinryo": "55",
+              "kyusya": "(栗)宮地",
+              "totalScore": 8,
+              "assignment": "連下"
+            },
+            {
+              "number": 7,
+              "name": "スマートジャスミン",
+              "umacd": "0953076",
+              "marks": {
+                "印5": "-",
+                "印4": "◎",
+                "印3": "-",
+                "印2": "-",
+                "印1": "-"
+              },
+              "seirei": "牝3",
+              "kisyu": "荻野琢",
+              "kinryo": "55",
+              "kyusya": "(栗)小林",
+              "totalScore": 5,
+              "assignment": "連下"
+            },
+            {
+              "number": 15,
+              "name": "ムルーデ",
+              "umacd": "0953260",
+              "marks": {
+                "印5": "穴",
+                "印4": "-",
+                "印3": "△",
+                "印2": "△",
+                "印1": "△"
+              },
+              "seirei": "牝3",
+              "kisyu": "松若風",
+              "kinryo": "55",
+              "kyusya": "(栗)藤野",
+              "totalScore": 5,
+              "assignment": "補欠"
+            },
+            {
+              "number": 3,
+              "name": "タマモキャロル",
+              "umacd": "0949327",
+              "marks": {
+                "印5": "-",
+                "印4": "-",
+                "印3": "△",
+                "印2": "svg",
+                "印1": "-"
+              },
+              "seirei": "牝3",
+              "kisyu": "鷲頭虎",
+              "kinryo": "53",
+              "kyusya": "(栗)井上智",
+              "totalScore": 3,
+              "assignment": "補欠"
+            },
+            {
+              "number": 6,
+              "name": "スノーガーネット",
+              "umacd": "0948259",
+              "marks": {
+                "印5": "穴",
+                "印4": "-",
+                "印3": "-",
+                "印2": "-",
+                "印1": "-"
+              },
+              "seirei": "牝3",
+              "kisyu": "富田暁",
+              "kinryo": "55",
+              "kyusya": "(栗)中尾秀",
+              "totalScore": 2,
+              "assignment": "補欠"
+            },
+            {
+              "number": 8,
+              "name": "トゥレイス",
+              "umacd": "0949253",
+              "marks": {
+                "印5": "-",
+                "印4": "-",
+                "印3": "-",
+                "印2": "-",
+                "印1": "-"
+              },
+              "seirei": "牝3",
+              "kisyu": "今村聖",
+              "kinryo": "53",
+              "kyusya": "(美)高柳瑞",
+              "totalScore": 0,
+              "assignment": "無"
+            },
+            {
+              "number": 9,
+              "name": "エナジーアユ",
+              "umacd": "0952809",
+              "marks": {
+                "印5": "-",
+                "印4": "-",
+                "印3": "-",
+                "印2": "-",
+                "印1": "-"
+              },
+              "seirei": "牝3",
+              "kisyu": "団野大",
+              "kinryo": "55",
+              "kyusya": "(栗)荒川",
+              "totalScore": 0,
+              "assignment": "無"
+            },
+            {
+              "number": 11,
+              "name": "マドンナアスク",
+              "umacd": "0953468",
+              "marks": {
+                "印5": "-",
+                "印4": "-",
+                "印3": "-",
+                "印2": "-",
+                "印1": "-"
+              },
+              "seirei": "牝3",
+              "kisyu": "河原田菜",
+              "kinryo": "51",
+              "kyusya": "(美)青木",
+              "totalScore": 0,
+              "assignment": "無"
+            },
+            {
+              "number": 12,
+              "name": "コウユーニポポニコ",
+              "umacd": "0946680",
+              "marks": {
+                "印5": "-",
+                "印4": "-",
+                "印3": "-",
+                "印2": "-",
+                "印1": "-"
+              },
+              "seirei": "牝3",
+              "kisyu": "長岡禎",
+              "kinryo": "55",
+              "kyusya": "(美)竹内",
+              "totalScore": 0,
+              "assignment": "無"
+            },
+            {
+              "number": 13,
+              "name": "ウチュウノハナ",
+              "umacd": "0947470",
+              "marks": {
+                "印5": "-",
+                "印4": "-",
+                "印3": "-",
+                "印2": "-",
+                "印1": "-"
+              },
+              "seirei": "牝3",
+              "kisyu": "和田陽",
+              "kinryo": "52",
+              "kyusya": "(美)牧",
+              "totalScore": 0,
+              "assignment": "無"
+            },
+            {
+              "number": 14,
+              "name": "トリエンナーレ",
+              "umacd": "0950624",
+              "marks": {
+                "印5": "-",
+                "印4": "-",
+                "印3": "-",
+                "印2": "-",
+                "印1": "-"
+              },
+              "seirei": "牝3",
+              "kisyu": "石神道",
+              "kinryo": "52",
+              "kyusya": "(美)森一誠",
+              "totalScore": 0,
+              "assignment": "無"
+            }
+          ],
+          "predictors": [
+            "印5",
+            "印4",
+            "印3",
+            "印2",
+            "印1"
+          ],
+          "assignments": {
+            "main": 1,
+            "sub": 4,
+            "hole": 2,
+            "connectTop": 16,
+            "connect": [
+              5,
+              10,
+              7
+            ],
+            "reserve": [
+              15,
+              3,
+              6
+            ],
+            "none": [
+              8,
+              9,
+              11,
+              12,
+              13,
+              14
+            ]
+          }
+        },
+        {
+          "version": "1.0.0",
+          "createdAt": "2026-03-20T13:07:57.728Z",
+          "lastUpdated": "2026-03-20T13:07:57.728Z",
+          "raceInfo": {
+            "date": "2026-03-21",
+            "track": "中京",
+            "raceNumber": "3",
+            "raceName": "３歳未勝利",
+            "raceType": "[指定]",
+            "distance": "1900",
+            "surface": "ダート",
+            "kaisaiInfo": "1回中京3日目",
+            "hassoTime": "10:40",
+            "courseInfo": "(ダート・左)",
+            "tenkiBaba": "",
+            "recordTime": "レコード1.54.7",
+            "estimatedTime": "良2.01.8 / 重1.59.8",
+            "prizes": [
+              "1着: 590.0万",
+              "2着: 240.0万",
+              "3着: 150.0万",
+              "4着: 89.0万",
+              "5着: 59.0万"
+            ]
+          },
+          "horses": [
+            {
+              "number": 1,
+              "name": "セルジュバローズ",
+              "umacd": "0949941",
+              "marks": {
+                "印5": "◎",
+                "印4": "◎",
+                "印3": "○",
+                "印2": "○",
+                "印1": "○"
+              },
+              "seirei": "牡3",
+              "kisyu": "川田将",
+              "kinryo": "57",
+              "kyusya": "(栗)池江寿",
+              "totalScore": 22,
+              "assignment": "本命"
+            },
+            {
+              "number": 7,
+              "name": "メイショウジンライ",
+              "umacd": "0950001",
+              "marks": {
+                "印5": "○",
+                "印4": "▲",
+                "印3": "◎",
+                "印2": "◎",
+                "印1": "◎"
+              },
+              "seirei": "牡3",
+              "kisyu": "吉村誠",
+              "kinryo": "57",
+              "kyusya": "(栗)高橋亮",
+              "totalScore": 22,
+              "assignment": "対抗"
+            },
+            {
+              "number": 11,
+              "name": "レッドホット",
+              "umacd": "0951235",
+              "marks": {
+                "印5": "-",
+                "印4": "○",
+                "印3": "▲",
+                "印2": "△",
+                "印1": "▲"
+              },
+              "seirei": "セン3",
+              "kisyu": "松若風",
+              "kinryo": "57",
+              "kyusya": "(栗)河嶋",
+              "totalScore": 11,
+              "assignment": "単穴"
+            },
+            {
+              "number": 4,
+              "name": "エクストラプッシュ",
+              "umacd": "0952404",
+              "marks": {
+                "印5": "▲",
+                "印4": "svg",
+                "印3": "svg",
+                "印2": "△",
+                "印1": "svg"
+              },
+              "seirei": "牡3",
+              "kisyu": "小沢大",
+              "kinryo": "57",
+              "kyusya": "(栗)奥村豊",
+              "totalScore": 10,
+              "assignment": "連下最上位"
+            },
+            {
+              "number": 3,
+              "name": "マサノシリウス",
+              "umacd": "0945944",
+              "marks": {
+                "印5": "svg",
+                "印4": "△",
+                "印3": "△",
+                "印2": "svg",
+                "印1": "△"
+              },
+              "seirei": "牡3",
+              "kisyu": "田山旺",
+              "kinryo": "54",
+              "kyusya": "(栗)藤野",
+              "totalScore": 7,
+              "assignment": "連下"
+            },
+            {
+              "number": 5,
+              "name": "ピースビート",
+              "umacd": "0949947",
+              "marks": {
+                "印5": "穴",
+                "印4": "-",
+                "印3": "△",
+                "印2": "▲",
+                "印1": "△"
+              },
+              "seirei": "牡3",
+              "kisyu": "団野大",
+              "kinryo": "57",
+              "kyusya": "(栗)中村",
+              "totalScore": 7,
+              "assignment": "連下"
+            },
+            {
+              "number": 6,
+              "name": "ケンフィールド",
+              "umacd": "0947778",
+              "marks": {
+                "印5": "△",
+                "印4": "-",
+                "印3": "△",
+                "印2": "-",
+                "印1": "△"
+              },
+              "seirei": "牡3",
+              "kisyu": "国分恭",
+              "kinryo": "57",
+              "kyusya": "(栗)大根田",
+              "totalScore": 3,
+              "assignment": "連下"
+            },
+            {
+              "number": 8,
+              "name": "レヴロード",
+              "umacd": "0953209",
+              "marks": {
+                "印5": "穴",
+                "印4": "-",
+                "印3": "-",
+                "印2": "-",
+                "印1": "-"
+              },
+              "seirei": "牡3",
+              "kisyu": "和田陽",
+              "kinryo": "54",
+              "kyusya": "(栗)畑端",
+              "totalScore": 2,
+              "assignment": "補欠"
+            },
+            {
+              "number": 12,
+              "name": "ロイヤルタイム",
+              "umacd": "0950775",
+              "marks": {
+                "印5": "△",
+                "印4": "-",
+                "印3": "-",
+                "印2": "△",
+                "印1": "-"
+              },
+              "seirei": "牡3",
+              "kisyu": "石神道",
+              "kinryo": "54",
+              "kyusya": "(美)和田郎",
+              "totalScore": 2,
+              "assignment": "補欠"
+            },
+            {
+              "number": 2,
+              "name": "オパールテソーロ",
+              "umacd": "0953820",
+              "marks": {
+                "印5": "-",
+                "印4": "△",
+                "印3": "-",
+                "印2": "-",
+                "印1": "-"
+              },
+              "seirei": "牝3",
+              "kisyu": "中井裕",
+              "kinryo": "55",
+              "kyusya": "(美)高橋文",
+              "totalScore": 1,
+              "assignment": "補欠"
+            },
+            {
+              "number": 9,
+              "name": "メイショウイッカク",
+              "umacd": "0948324",
+              "marks": {
+                "印5": "-",
+                "印4": "-",
+                "印3": "-",
+                "印2": "-",
+                "印1": "-"
+              },
+              "seirei": "牡3",
+              "kisyu": "河原田菜",
+              "kinryo": "53",
+              "kyusya": "(栗)池添学",
+              "totalScore": 0,
+              "assignment": "無"
+            },
+            {
+              "number": 10,
+              "name": "ツキノコブネ",
+              "umacd": "0952612",
+              "marks": {
+                "印5": "-",
+                "印4": "-",
+                "印3": "-",
+                "印2": "-",
+                "印1": "-"
+              },
+              "seirei": "牡3",
+              "kisyu": "菅原隆",
+              "kinryo": "57",
+              "kyusya": "(美)小手川",
+              "totalScore": 0,
+              "assignment": "無"
+            },
+            {
+              "number": 13,
+              "name": "ゴーレジェンド",
+              "umacd": "0946329",
+              "marks": {
+                "印5": "-",
+                "印4": "-",
+                "印3": "-",
+                "印2": "-",
+                "印1": "-"
+              },
+              "seirei": "牡3",
+              "kisyu": "富田暁",
+              "kinryo": "57",
+              "kyusya": "(栗)武英",
+              "totalScore": 0,
+              "assignment": "無"
+            }
+          ],
+          "predictors": [
+            "印5",
+            "印4",
+            "印3",
+            "印2",
+            "印1"
+          ],
+          "assignments": {
+            "main": 1,
+            "sub": 7,
+            "hole": 11,
+            "connectTop": 4,
+            "connect": [
+              3,
+              5,
+              6
+            ],
+            "reserve": [
+              8,
+              12,
+              2
+            ],
+            "none": [
+              9,
+              10,
+              13
+            ]
+          }
+        },
+        {
+          "version": "1.0.0",
+          "createdAt": "2026-03-20T13:07:57.735Z",
+          "lastUpdated": "2026-03-20T13:07:57.735Z",
+          "raceInfo": {
+            "date": "2026-03-21",
+            "track": "中京",
+            "raceNumber": "4",
+            "raceName": "３歳未勝利",
+            "raceType": "[指定]，牝馬",
+            "distance": "2000",
+            "surface": "芝",
+            "kaisaiInfo": "1回中京3日目",
+            "hassoTime": "11:10",
+            "courseInfo": "(芝Ａ・左)",
+            "tenkiBaba": "",
+            "recordTime": "レコード1.56.5",
+            "estimatedTime": "良2.01.0 / 重2.04.0",
+            "prizes": [
+              "1着: 590.0万",
+              "2着: 240.0万",
+              "3着: 150.0万",
+              "4着: 89.0万",
+              "5着: 59.0万"
+            ]
+          },
+          "horses": [
+            {
+              "number": 16,
+              "name": "レイクラシック",
+              "umacd": "0950750",
+              "marks": {
+                "印5": "svg",
+                "印4": "◎",
+                "印3": "◎",
+                "印2": "○",
+                "印1": "○"
+              },
+              "seirei": "牝3",
+              "kisyu": "横山武",
+              "kinryo": "55",
+              "kyusya": "(栗)新谷",
+              "totalScore": 20,
+              "assignment": "本命"
+            },
+            {
+              "number": 9,
+              "name": "ザタイムハズカム",
+              "umacd": "0950581",
+              "marks": {
+                "印5": "-",
+                "印4": "○",
+                "印3": "○",
+                "印2": "△",
+                "印1": "◎"
+              },
+              "seirei": "牝3",
+              "kisyu": "川田将",
+              "kinryo": "55",
+              "kyusya": "(栗)福永",
+              "totalScore": 14,
+              "assignment": "対抗"
+            },
+            {
+              "number": 12,
+              "name": "リアル",
+              "umacd": "0946668",
+              "marks": {
+                "印5": "◎",
+                "印4": "-",
+                "印3": "-",
+                "印2": "◎",
+                "印1": "▲"
+              },
+              "seirei": "牝3",
+              "kisyu": "田山旺",
+              "kinryo": "52",
+              "kyusya": "(栗)長谷川",
+              "totalScore": 13,
+              "assignment": "単穴"
+            },
+            {
+              "number": 5,
+              "name": "カトマンズゴールド",
+              "umacd": "0950213",
+              "marks": {
+                "印5": "○",
+                "印4": "△",
+                "印3": "△",
+                "印2": "△",
+                "印1": "△"
+              },
+              "seirei": "牝3",
+              "kisyu": "三浦皇",
+              "kinryo": "55",
+              "kyusya": "(栗)宮本",
+              "totalScore": 8,
+              "assignment": "連下最上位"
+            },
+            {
+              "number": 18,
+              "name": "マーゴットガイア",
+              "umacd": "0947786",
+              "marks": {
+                "印5": "△",
+                "印4": "svg",
+                "印3": "△",
+                "印2": "▲",
+                "印1": "△"
+              },
+              "seirei": "牝3",
+              "kisyu": "小崎綾",
+              "kinryo": "55",
+              "kyusya": "(栗)石坂公",
+              "totalScore": 8,
+              "assignment": "連下"
+            },
+            {
+              "number": 3,
+              "name": "ルクスキャンディ",
+              "umacd": "0948304",
+              "marks": {
+                "印5": "-",
+                "印4": "-",
+                "印3": "svg",
+                "印2": "svg",
+                "印1": "svg"
+              },
+              "seirei": "牝3",
+              "kisyu": "吉村誠",
+              "kinryo": "55",
+              "kyusya": "(栗)石橋",
+              "totalScore": 6,
+              "assignment": "連下"
+            },
+            {
+              "number": 6,
+              "name": "ハナコトバ",
+              "umacd": "0949834",
+              "marks": {
+                "印5": "▲",
+                "印4": "△",
+                "印3": "-",
+                "印2": "△",
+                "印1": "△"
+              },
+              "seirei": "牝3",
+              "kisyu": "今村聖",
+              "kinryo": "53",
+              "kyusya": "(栗)寺島",
+              "totalScore": 6,
+              "assignment": "連下"
+            },
+            {
+              "number": 17,
+              "name": "ソルインフィニティ",
+              "umacd": "0950309",
+              "marks": {
+                "印5": "-",
+                "印4": "▲",
+                "印3": "-",
+                "印2": "-",
+                "印1": "-"
+              },
+              "seirei": "牝3",
+              "kisyu": "富田暁",
+              "kinryo": "55",
+              "kyusya": "(栗)武幸",
+              "totalScore": 3,
+              "assignment": "補欠"
+            },
+            {
+              "number": 10,
+              "name": "ピカソジャスパー",
+              "umacd": "0946418",
+              "marks": {
+                "印5": "穴",
+                "印4": "-",
+                "印3": "-",
+                "印2": "-",
+                "印1": "-"
+              },
+              "seirei": "牝3",
+              "kisyu": "嶋田純",
+              "kinryo": "55",
+              "kyusya": "(美)松山将",
+              "totalScore": 2,
+              "assignment": "補欠"
+            },
+            {
+              "number": 11,
+              "name": "ノヴァレジーナ",
+              "umacd": "0952660",
+              "marks": {
+                "印5": "穴",
+                "印4": "-",
+                "印3": "-",
+                "印2": "-",
+                "印1": "-"
+              },
+              "seirei": "牝3",
+              "kisyu": "柴田裕",
+              "kinryo": "53",
+              "kyusya": "(栗)中尾秀",
+              "totalScore": 2,
+              "assignment": "補欠"
+            },
+            {
+              "number": 1,
+              "name": "スウィーティーベル",
+              "umacd": "0946860",
+              "marks": {
+                "印5": "-",
+                "印4": "-",
+                "印3": "△",
+                "印2": "-",
+                "印1": "-"
+              },
+              "seirei": "牝3",
+              "kisyu": "団野大",
+              "kinryo": "55",
+              "kyusya": "(栗)田中克",
+              "totalScore": 1,
+              "assignment": "補欠"
+            },
+            {
+              "number": 2,
+              "name": "アーミル",
+              "umacd": "0954063",
+              "marks": {
+                "印5": "-",
+                "印4": "-",
+                "印3": "△",
+                "印2": "-",
+                "印1": "-"
+              },
+              "seirei": "牝3",
+              "kisyu": "鷲頭虎",
+              "kinryo": "53",
+              "kyusya": "(栗)高柳大",
+              "totalScore": 1,
+              "assignment": "補欠"
+            },
+            {
+              "number": 4,
+              "name": "カワキタスズリノ",
+              "umacd": "0946017",
+              "marks": {
+                "印5": "-",
+                "印4": "-",
+                "印3": "-",
+                "印2": "-",
+                "印1": "-"
+              },
+              "seirei": "牝3",
+              "kisyu": "小林美",
+              "kinryo": "52",
+              "kyusya": "(美)池上和",
+              "totalScore": 0,
+              "assignment": "無"
+            },
+            {
+              "number": 7,
+              "name": "アルビオン",
+              "umacd": "0949999",
+              "marks": {
+                "印5": "-",
+                "印4": "-",
+                "印3": "-",
+                "印2": "-",
+                "印1": "-"
+              },
+              "seirei": "牝3",
+              "kisyu": "河原田菜",
+              "kinryo": "51",
+              "kyusya": "(栗)笹田",
+              "totalScore": 0,
+              "assignment": "無"
+            },
+            {
+              "number": 8,
+              "name": "ポリメトリック",
+              "umacd": "0952753",
+              "marks": {
+                "印5": "-",
+                "印4": "-",
+                "印3": "-",
+                "印2": "-",
+                "印1": "-"
+              },
+              "seirei": "牝3",
+              "kisyu": "小沢大",
+              "kinryo": "55",
+              "kyusya": "(栗)池江寿",
+              "totalScore": 0,
+              "assignment": "無"
+            },
+            {
+              "number": 13,
+              "name": "ソニックブーム",
+              "umacd": "0948092",
+              "marks": {
+                "印5": "-",
+                "印4": "-",
+                "印3": "-",
+                "印2": "-",
+                "印1": "-"
+              },
+              "seirei": "牝3",
+              "kisyu": "和田陽",
+              "kinryo": "52",
+              "kyusya": "(栗)柴田卓",
+              "totalScore": 0,
+              "assignment": "無"
+            },
+            {
+              "number": 14,
+              "name": "ケナゲ",
+              "umacd": "0948249",
+              "marks": {
+                "印5": "-",
+                "印4": "-",
+                "印3": "-",
+                "印2": "-",
+                "印1": "-"
+              },
+              "seirei": "牝3",
+              "kisyu": "石神道",
+              "kinryo": "52",
+              "kyusya": "(美)和田雄",
+              "totalScore": 0,
+              "assignment": "無"
+            },
+            {
+              "number": 15,
+              "name": "ホウオウロレンシア",
+              "umacd": "0949255",
+              "marks": {
+                "印5": "-",
+                "印4": "-",
+                "印3": "-",
+                "印2": "-",
+                "印1": "-"
+              },
+              "seirei": "牝3",
+              "kisyu": "西塚洸",
+              "kinryo": "55",
+              "kyusya": "(美)高木登",
+              "totalScore": 0,
+              "assignment": "無"
+            }
+          ],
+          "predictors": [
+            "印5",
+            "印4",
+            "印3",
+            "印2",
+            "印1"
+          ],
+          "assignments": {
+            "main": 16,
+            "sub": 9,
+            "hole": 12,
+            "connectTop": 5,
+            "connect": [
+              18,
+              3,
+              6
+            ],
+            "reserve": [
+              17,
+              10,
+              11,
+              1,
+              2
+            ],
+            "none": [
+              4,
+              7,
+              8,
+              13,
+              14,
+              15
+            ]
+          }
+        },
+        {
+          "version": "1.0.0",
+          "createdAt": "2026-03-20T13:07:57.740Z",
+          "lastUpdated": "2026-03-20T13:07:57.740Z",
+          "raceInfo": {
+            "date": "2026-03-21",
+            "track": "中京",
+            "raceNumber": "5",
+            "raceName": "３歳未勝利",
+            "raceType": "[指定]",
+            "distance": "2000",
+            "surface": "芝",
+            "kaisaiInfo": "1回中京3日目",
+            "hassoTime": "12:00",
+            "courseInfo": "(芝Ａ・左)",
+            "tenkiBaba": "",
+            "recordTime": "レコード1.56.5",
+            "estimatedTime": "良2.01.0 / 重2.04.0",
+            "prizes": [
+              "1着: 590.0万",
+              "2着: 240.0万",
+              "3着: 150.0万",
+              "4着: 89.0万",
+              "5着: 59.0万"
+            ]
+          },
+          "horses": [
+            {
+              "number": 6,
+              "name": "アラムシャピラス",
+              "umacd": "0952755",
+              "marks": {
+                "印5": "◎",
+                "印4": "◎",
+                "印3": "◎",
+                "印2": "◎",
+                "印1": "◎"
+              },
+              "seirei": "牡3",
+              "kisyu": "川田将",
+              "kinryo": "57",
+              "kyusya": "(栗)池江寿",
+              "totalScore": 25,
+              "assignment": "本命"
+            },
+            {
+              "number": 2,
+              "name": "ダーリンダーリン",
+              "umacd": "0946653",
+              "marks": {
+                "印5": "○",
+                "印4": "○",
+                "印3": "○",
+                "印2": "○",
+                "印1": "○"
+              },
+              "seirei": "牝3",
+              "kisyu": "斎藤新",
+              "kinryo": "55",
+              "kyusya": "(栗)秋山",
+              "totalScore": 20,
+              "assignment": "対抗"
+            },
+            {
+              "number": 15,
+              "name": "メイプルキュート",
+              "umacd": "0949630",
+              "marks": {
+                "印5": "△",
+                "印4": "svg",
+                "印3": "▲",
+                "印2": "-",
+                "印1": "svg"
+              },
+              "seirei": "牝3",
+              "kisyu": "亀田温",
+              "kinryo": "55",
+              "kyusya": "(栗)北出",
+              "totalScore": 8,
+              "assignment": "単穴"
+            },
+            {
+              "number": 5,
+              "name": "サンライズコナー",
+              "umacd": "0953613",
+              "marks": {
+                "印5": "-",
+                "印4": "▲",
+                "印3": "-",
+                "印2": "▲",
+                "印1": "△"
+              },
+              "seirei": "牡3",
+              "kisyu": "小沢大",
+              "kinryo": "57",
+              "kyusya": "(栗)羽月",
+              "totalScore": 7,
+              "assignment": "連下最上位"
+            },
+            {
+              "number": 9,
+              "name": "エイシンウィスパー",
+              "umacd": "0952558",
+              "marks": {
+                "印5": "svg",
+                "印4": "-",
+                "印3": "-",
+                "印2": "△",
+                "印1": "▲"
+              },
+              "seirei": "牝3",
+              "kisyu": "松若風",
+              "kinryo": "55",
+              "kyusya": "(栗)今野",
+              "totalScore": 6,
+              "assignment": "連下"
+            },
+            {
+              "number": 14,
+              "name": "メイショウヒタカミ",
+              "umacd": "0948327",
+              "marks": {
+                "印5": "▲",
+                "印4": "△",
+                "印3": "-",
+                "印2": "svg",
+                "印1": "-"
+              },
+              "seirei": "牡3",
+              "kisyu": "田山旺",
+              "kinryo": "54",
+              "kyusya": "(栗)石橋",
+              "totalScore": 6,
+              "assignment": "連下"
+            },
+            {
+              "number": 12,
+              "name": "カパルア",
+              "umacd": "0952312",
+              "marks": {
+                "印5": "△",
+                "印4": "-",
+                "印3": "-",
+                "印2": "△",
+                "印1": "△"
+              },
+              "seirei": "牡3",
+              "kisyu": "太宰啓",
+              "kinryo": "57",
+              "kyusya": "(栗)松永幹",
+              "totalScore": 3,
+              "assignment": "連下"
+            },
+            {
+              "number": 1,
+              "name": "カゲムシャ",
+              "umacd": "0953749",
+              "marks": {
+                "印5": "-",
+                "印4": "-",
+                "印3": "-",
+                "印2": "△",
+                "印1": "△"
+              },
+              "seirei": "牡3",
+              "kisyu": "横山典",
+              "kinryo": "57",
+              "kyusya": "(美)萩原",
+              "totalScore": 2,
+              "assignment": "補欠"
+            },
+            {
+              "number": 7,
+              "name": "グリッタードール",
+              "umacd": "0949892",
+              "marks": {
+                "印5": "穴",
+                "印4": "-",
+                "印3": "-",
+                "印2": "-",
+                "印1": "-"
+              },
+              "seirei": "牝3",
+              "kisyu": "西塚洸",
+              "kinryo": "55",
+              "kyusya": "(栗)大橋",
+              "totalScore": 2,
+              "assignment": "補欠"
+            },
+            {
+              "number": 16,
+              "name": "クルサール",
+              "umacd": "0952083",
+              "marks": {
+                "印5": "-",
+                "印4": "-",
+                "印3": "svg",
+                "印2": "-",
+                "印1": "-"
+              },
+              "seirei": "牝3",
+              "kisyu": "富田暁",
+              "kinryo": "55",
+              "kyusya": "(栗)武英",
+              "totalScore": 2,
+              "assignment": "補欠"
+            },
+            {
+              "number": 18,
+              "name": "グリュイエール",
+              "umacd": "0951706",
+              "marks": {
+                "印5": "穴",
+                "印4": "-",
+                "印3": "-",
+                "印2": "-",
+                "印1": "-"
+              },
+              "seirei": "牡3",
+              "kisyu": "小林美",
+              "kinryo": "54",
+              "kyusya": "(栗)前川",
+              "totalScore": 2,
+              "assignment": "補欠"
+            },
+            {
+              "number": 17,
+              "name": "ファイヤーナイフ",
+              "umacd": "0950445",
+              "marks": {
+                "印5": "-",
+                "印4": "△",
+                "印3": "-",
+                "印2": "-",
+                "印1": "-"
+              },
+              "seirei": "牡3",
+              "kisyu": "吉村誠",
+              "kinryo": "57",
+              "kyusya": "(栗)中村",
+              "totalScore": 1,
+              "assignment": "補欠"
+            },
+            {
+              "number": 3,
+              "name": "ハイラブレジェンド",
+              "umacd": "0949633",
+              "marks": {
+                "印5": "-",
+                "印4": "-",
+                "印3": "-",
+                "印2": "-",
+                "印1": "-"
+              },
+              "seirei": "牡3",
+              "kisyu": "永島ま",
+              "kinryo": "55",
+              "kyusya": "(栗)荒川",
+              "totalScore": 0,
+              "assignment": "無"
+            },
+            {
+              "number": 4,
+              "name": "プラウドブルーベル",
+              "umacd": "0951999",
+              "marks": {
+                "印5": "-",
+                "印4": "-",
+                "印3": "-",
+                "印2": "-",
+                "印1": "-"
+              },
+              "seirei": "牡3",
+              "kisyu": "舟山瑠",
+              "kinryo": "54",
+              "kyusya": "(栗)長谷川",
+              "totalScore": 0,
+              "assignment": "無"
+            },
+            {
+              "number": 8,
+              "name": "マイネルエトルタ",
+              "umacd": "0951328",
+              "marks": {
+                "印5": "-",
+                "印4": "-",
+                "印3": "-",
+                "印2": "-",
+                "印1": "-"
+              },
+              "seirei": "牡3",
+              "kisyu": "石神道",
+              "kinryo": "54",
+              "kyusya": "(美)和田郎",
+              "totalScore": 0,
+              "assignment": "無"
+            },
+            {
+              "number": 10,
+              "name": "エアリアルグレース",
+              "umacd": "0952460",
+              "marks": {
+                "印5": "-",
+                "印4": "-",
+                "印3": "-",
+                "印2": "-",
+                "印1": "-"
+              },
+              "seirei": "牝3",
+              "kisyu": "川又賢",
+              "kinryo": "55",
+              "kyusya": "(栗)吉村",
+              "totalScore": 0,
+              "assignment": "無"
+            },
+            {
+              "number": 11,
+              "name": "バルドル",
+              "umacd": "0952000",
+              "marks": {
+                "印5": "-",
+                "印4": "-",
+                "印3": "-",
+                "印2": "-",
+                "印1": "-"
+              },
+              "seirei": "牡3",
+              "kisyu": "杉原誠",
+              "kinryo": "57",
+              "kyusya": "(美)池上和",
+              "totalScore": 0,
+              "assignment": "無"
+            },
+            {
+              "number": 13,
+              "name": "シャロン",
+              "umacd": "0952447",
+              "marks": {
+                "印5": "-",
+                "印4": "-",
+                "印3": "-",
+                "印2": "-",
+                "印1": "-"
+              },
+              "seirei": "牝3",
+              "kisyu": "団野大",
+              "kinryo": "55",
+              "kyusya": "(栗)杉山晴",
+              "totalScore": 0,
+              "assignment": "無"
+            }
+          ],
+          "predictors": [
+            "印5",
+            "印4",
+            "印3",
+            "印2",
+            "印1"
+          ],
+          "assignments": {
+            "main": 6,
+            "sub": 2,
+            "hole": 15,
+            "connectTop": 5,
+            "connect": [
+              9,
+              14,
+              12
+            ],
+            "reserve": [
+              1,
+              7,
+              16,
+              18,
+              17
+            ],
+            "none": [
+              3,
+              4,
+              8,
+              10,
+              11,
+              13
+            ]
+          }
+        },
+        {
+          "version": "1.0.0",
+          "createdAt": "2026-03-20T13:07:57.744Z",
+          "lastUpdated": "2026-03-20T13:07:57.744Z",
+          "raceInfo": {
+            "date": "2026-03-21",
+            "track": "中京",
+            "raceNumber": "6",
+            "raceName": "３歳未勝利",
+            "raceType": "[指定]，(混)",
+            "distance": "1400",
+            "surface": "芝",
+            "kaisaiInfo": "1回中京3日目",
+            "hassoTime": "12:30",
+            "courseInfo": "(芝Ａ・左)",
+            "tenkiBaba": "",
+            "recordTime": "レコード1.18.7",
+            "estimatedTime": "良1.21.5 / 重1.23.6",
+            "prizes": [
+              "1着: 590.0万",
+              "2着: 240.0万",
+              "3着: 150.0万",
+              "4着: 89.0万",
+              "5着: 59.0万"
+            ]
+          },
+          "horses": [
+            {
+              "number": 4,
+              "name": "ペアレンツギフト",
+              "umacd": "0950564",
+              "marks": {
+                "印5": "○",
+                "印4": "◎",
+                "印3": "svg",
+                "印2": "▲",
+                "印1": "◎"
+              },
+              "seirei": "牝3",
+              "kisyu": "川田将",
+              "kinryo": "55",
+              "kyusya": "(栗)中内田",
+              "totalScore": 19,
+              "assignment": "本命"
+            },
+            {
+              "number": 14,
+              "name": "ジューンオアシス",
+              "umacd": "0947806",
+              "marks": {
+                "印5": "▲",
+                "印4": "○",
+                "印3": "◎",
+                "印2": "△",
+                "印1": "○"
+              },
+              "seirei": "牡3",
+              "kisyu": "富田暁",
+              "kinryo": "57",
+              "kyusya": "(栗)飯田祐",
+              "totalScore": 17,
+              "assignment": "対抗"
+            },
+            {
+              "number": 12,
+              "name": "ダノンプレサージュ",
+              "umacd": "0952370",
+              "marks": {
+                "印5": "◎",
+                "印4": "svg",
+                "印3": "△",
+                "印2": "◎",
+                "印1": "svg"
+              },
+              "seirei": "牝3",
+              "kisyu": "横山典",
+              "kinryo": "55",
+              "kyusya": "(美)大竹",
+              "totalScore": 15,
+              "assignment": "単穴"
+            },
+            {
+              "number": 8,
+              "name": "ハピネスサンライズ",
+              "umacd": "0946832",
+              "marks": {
+                "印5": "svg",
+                "印4": "△",
+                "印3": "○",
+                "印2": "svg",
+                "印1": "△"
+              },
+              "seirei": "牝3",
+              "kisyu": "松若風",
+              "kinryo": "55",
+              "kyusya": "(栗)東田",
+              "totalScore": 10,
+              "assignment": "連下最上位"
+            },
+            {
+              "number": 6,
+              "name": "ケンブリッジグレイ",
+              "umacd": "0952164",
+              "marks": {
+                "印5": "△",
+                "印4": "▲",
+                "印3": "-",
+                "印2": "-",
+                "印1": "▲"
+              },
+              "seirei": "牝3",
+              "kisyu": "河原田菜",
+              "kinryo": "51",
+              "kyusya": "(栗)渡辺",
+              "totalScore": 7,
+              "assignment": "連下"
+            },
+            {
+              "number": 5,
+              "name": "トウカイジーク",
+              "umacd": "0946479",
+              "marks": {
+                "印5": "-",
+                "印4": "-",
+                "印3": "-",
+                "印2": "○",
+                "印1": "△"
+              },
+              "seirei": "牡3",
+              "kisyu": "今村聖",
+              "kinryo": "55",
+              "kyusya": "(栗)野中",
+              "totalScore": 5,
+              "assignment": "連下"
+            },
+            {
+              "number": 10,
+              "name": "(外)ユウトザイノセント",
+              "umacd": "0974300",
+              "marks": {
+                "印5": "穴",
+                "印4": "△",
+                "印3": "-",
+                "印2": "-",
+                "印1": "△"
+              },
+              "seirei": "牡3",
+              "kisyu": "三浦皇",
+              "kinryo": "57",
+              "kyusya": "(栗)小崎",
+              "totalScore": 4,
+              "assignment": "連下"
+            },
+            {
+              "number": 9,
+              "name": "(外)リメンバーシドニー",
+              "umacd": "0973967",
+              "marks": {
+                "印5": "-",
+                "印4": "△",
+                "印3": "△",
+                "印2": "-",
+                "印1": "△"
+              },
+              "seirei": "牝3",
+              "kisyu": "田山旺",
+              "kinryo": "50",
+              "kyusya": "(栗)橋口慎",
+              "totalScore": 3,
+              "assignment": "補欠"
+            },
+            {
+              "number": 16,
+              "name": "エレクトロン",
+              "umacd": "0953673",
+              "marks": {
+                "印5": "穴",
+                "印4": "-",
+                "印3": "-",
+                "印2": "-",
+                "印1": "-"
+              },
+              "seirei": "牡3",
+              "kisyu": "嶋田純",
+              "kinryo": "57",
+              "kyusya": "(美)佐藤吉",
+              "totalScore": 2,
+              "assignment": "補欠"
+            },
+            {
+              "number": 18,
+              "name": "ラミアスペランツァ",
+              "umacd": "0953858",
+              "marks": {
+                "印5": "-",
+                "印4": "-",
+                "印3": "△",
+                "印2": "△",
+                "印1": "-"
+              },
+              "seirei": "牝3",
+              "kisyu": "団野大",
+              "kinryo": "55",
+              "kyusya": "(栗)斉藤崇",
+              "totalScore": 2,
+              "assignment": "補欠"
+            },
+            {
+              "number": 2,
+              "name": "(外)ルナーファントム",
+              "umacd": "0975134",
+              "marks": {
+                "印5": "-",
+                "印4": "-",
+                "印3": "△",
+                "印2": "-",
+                "印1": "-"
+              },
+              "seirei": "牡3",
+              "kisyu": "吉村誠",
+              "kinryo": "55",
+              "kyusya": "(美)上原佑",
+              "totalScore": 1,
+              "assignment": "補欠"
+            },
+            {
+              "number": 17,
+              "name": "ルージュバロン",
+              "umacd": "0954166",
+              "marks": {
+                "印5": "-",
+                "印4": "-",
+                "印3": "-",
+                "印2": "△",
+                "印1": "-"
+              },
+              "seirei": "牝3",
+              "kisyu": "横山武",
+              "kinryo": "55",
+              "kyusya": "(栗)福永",
+              "totalScore": 1,
+              "assignment": "補欠"
+            },
+            {
+              "number": 1,
+              "name": "ヴェンデボヌール",
+              "umacd": "0946202",
+              "marks": {
+                "印5": "-",
+                "印4": "-",
+                "印3": "-",
+                "印2": "-",
+                "印1": "-"
+              },
+              "seirei": "牡3",
+              "kisyu": "斎藤新",
+              "kinryo": "57",
+              "kyusya": "(美)久保田",
+              "totalScore": 0,
+              "assignment": "無"
+            },
+            {
+              "number": 3,
+              "name": "ニチヤヲツイデ",
+              "umacd": "0947269",
+              "marks": {
+                "印5": "-",
+                "印4": "-",
+                "印3": "-",
+                "印2": "-",
+                "印1": "-"
+              },
+              "seirei": "牝3",
+              "kisyu": "永島ま",
+              "kinryo": "53",
+              "kyusya": "(美)高橋文",
+              "totalScore": 0,
+              "assignment": "無"
+            },
+            {
+              "number": 7,
+              "name": "エイシンビギー",
+              "umacd": "0952574",
+              "marks": {
+                "印5": "-",
+                "印4": "-",
+                "印3": "-",
+                "印2": "-",
+                "印1": "-"
+              },
+              "seirei": "牝3",
+              "kisyu": "小沢大",
+              "kinryo": "55",
+              "kyusya": "(栗)今野",
+              "totalScore": 0,
+              "assignment": "無"
+            },
+            {
+              "number": 11,
+              "name": "エクスプロウド",
+              "umacd": "0950997",
+              "marks": {
+                "印5": "-",
+                "印4": "-",
+                "印3": "-",
+                "印2": "-",
+                "印1": "-"
+              },
+              "seirei": "セン3",
+              "kisyu": "小崎綾",
+              "kinryo": "57",
+              "kyusya": "(栗)高橋一",
+              "totalScore": 0,
+              "assignment": "無"
+            },
+            {
+              "number": 13,
+              "name": "ペコリズム",
+              "umacd": "0953407",
+              "marks": {
+                "印5": "-",
+                "印4": "-",
+                "印3": "-",
+                "印2": "-",
+                "印1": "-"
+              },
+              "seirei": "牝3",
+              "kisyu": "国分優",
+              "kinryo": "55",
+              "kyusya": "(栗)森田",
+              "totalScore": 0,
+              "assignment": "無"
+            },
+            {
+              "number": 15,
+              "name": "ホットジュピター",
+              "umacd": "0947317",
+              "marks": {
+                "印5": "-",
+                "印4": "-",
+                "印3": "-",
+                "印2": "-",
+                "印1": "-"
+              },
+              "seirei": "牝3",
+              "kisyu": "丸田恭",
+              "kinryo": "55",
+              "kyusya": "(美)千葉",
+              "totalScore": 0,
+              "assignment": "無"
+            }
+          ],
+          "predictors": [
+            "印5",
+            "印4",
+            "印3",
+            "印2",
+            "印1"
+          ],
+          "assignments": {
+            "main": 4,
+            "sub": 14,
+            "hole": 12,
+            "connectTop": 8,
+            "connect": [
+              6,
+              5,
+              10
+            ],
+            "reserve": [
+              9,
+              16,
+              18,
+              2,
+              17
+            ],
+            "none": [
+              1,
+              3,
+              7,
+              11,
+              13,
+              15
+            ]
+          }
+        },
+        {
+          "version": "1.0.0",
+          "createdAt": "2026-03-20T13:07:57.751Z",
+          "lastUpdated": "2026-03-20T13:07:57.751Z",
+          "raceInfo": {
+            "date": "2026-03-21",
+            "track": "中京",
+            "raceNumber": "7",
+            "raceName": "４歳以上１勝クラス",
+            "raceType": "[指定]，定量",
+            "distance": "1400",
+            "surface": "ダート",
+            "kaisaiInfo": "1回中京3日目",
+            "hassoTime": "13:00",
+            "courseInfo": "(ダート・左)",
+            "tenkiBaba": "",
+            "recordTime": "レコード1.20.3",
+            "estimatedTime": "良1.24.6 / 重1.23.2",
+            "prizes": [
+              "1着: 820.0万",
+              "2着: 330.0万",
+              "3着: 210.0万",
+              "4着: 120.0万",
+              "5着: 82.0万"
+            ]
+          },
+          "horses": [
+            {
+              "number": 5,
+              "name": "フォースミラクル",
+              "umacd": "0936294",
+              "marks": {
+                "印5": "○",
+                "印4": "△",
+                "印3": "○",
+                "印2": "▲",
+                "印1": "◎"
+              },
+              "seirei": "牡4",
+              "kisyu": "横山武",
+              "kinryo": "58",
+              "kyusya": "(美)加藤征",
+              "totalScore": 17,
+              "assignment": "本命"
+            },
+            {
+              "number": 13,
+              "name": "ドリーミングアップ",
+              "umacd": "0918000",
+              "marks": {
+                "印5": "◎",
+                "印4": "svg",
+                "印3": "-",
+                "印2": "○",
+                "印1": "▲"
+              },
+              "seirei": "牡5",
+              "kisyu": "三浦皇",
+              "kinryo": "58",
+              "kyusya": "(美)高橋文",
+              "totalScore": 14,
+              "assignment": "対抗"
+            },
+            {
+              "number": 1,
+              "name": "インディゴ",
+              "umacd": "0931821",
+              "marks": {
+                "印5": "-",
+                "印4": "▲",
+                "印3": "◎",
+                "印2": "△",
+                "印1": "svg"
+              },
+              "seirei": "牡4",
+              "kisyu": "富田暁",
+              "kinryo": "58",
+              "kyusya": "(栗)野中",
+              "totalScore": 11,
+              "assignment": "単穴"
+            },
+            {
+              "number": 7,
+              "name": "ジェミート",
+              "umacd": "0931091",
+              "marks": {
+                "印5": "△",
+                "印4": "-",
+                "印3": "△",
+                "印2": "◎",
+                "印1": "○"
+              },
+              "seirei": "牡4",
+              "kisyu": "舟山瑠",
+              "kinryo": "55",
+              "kyusya": "(栗)四位",
+              "totalScore": 11,
+              "assignment": "連下最上位"
+            },
+            {
+              "number": 8,
+              "name": "(地)エムティエスターテ",
+              "umacd": "0935102",
+              "marks": {
+                "印5": "-",
+                "印4": "◎",
+                "印3": "△",
+                "印2": "△",
+                "印1": "-"
+              },
+              "seirei": "牡4",
+              "kisyu": "田山旺",
+              "kinryo": "55",
+              "kyusya": "(美)矢野英",
+              "totalScore": 7,
+              "assignment": "連下"
+            },
+            {
+              "number": 15,
+              "name": "ハウリングウィンド",
+              "umacd": "0936372",
+              "marks": {
+                "印5": "svg",
+                "印4": "△",
+                "印3": "△",
+                "印2": "svg",
+                "印1": "△"
+              },
+              "seirei": "牡4",
+              "kisyu": "岡田祥",
+              "kinryo": "58",
+              "kyusya": "(栗)安田翔",
+              "totalScore": 7,
+              "assignment": "連下"
+            },
+            {
+              "number": 16,
+              "name": "ウフドゥウフ",
+              "umacd": "0936309",
+              "marks": {
+                "印5": "-",
+                "印4": "○",
+                "印3": "svg",
+                "印2": "△",
+                "印1": "-"
+              },
+              "seirei": "牡4",
+              "kisyu": "丸田恭",
+              "kinryo": "58",
+              "kyusya": "(美)上原博",
+              "totalScore": 7,
+              "assignment": "連下"
+            },
+            {
+              "number": 10,
+              "name": "ポンピエ",
+              "umacd": "0919749",
+              "marks": {
+                "印5": "▲",
+                "印4": "-",
+                "印3": "-",
+                "印2": "-",
+                "印1": "△"
+              },
+              "seirei": "牡5",
+              "kisyu": "斎藤新",
+              "kinryo": "58",
+              "kyusya": "(栗)井上智",
+              "totalScore": 4,
+              "assignment": "補欠"
+            },
+            {
+              "number": 2,
+              "name": "(地)エテオクロス",
+              "umacd": "0936510",
+              "marks": {
+                "印5": "穴",
+                "印4": "-",
+                "印3": "△",
+                "印2": "-",
+                "印1": "-"
+              },
+              "seirei": "牡4",
+              "kisyu": "杉原誠",
+              "kinryo": "58",
+              "kyusya": "(美)新開",
+              "totalScore": 3,
+              "assignment": "補欠"
+            },
+            {
+              "number": 14,
+              "name": "ユージュアーナ",
+              "umacd": "0933830",
+              "marks": {
+                "印5": "穴",
+                "印4": "-",
+                "印3": "-",
+                "印2": "-",
+                "印1": "-"
+              },
+              "seirei": "牝4",
+              "kisyu": "柴田裕",
+              "kinryo": "54",
+              "kyusya": "(栗)奥村豊",
+              "totalScore": 2,
+              "assignment": "補欠"
+            },
+            {
+              "number": 6,
+              "name": "プロスペクトパーク",
+              "umacd": "0936599",
+              "marks": {
+                "印5": "-",
+                "印4": "-",
+                "印3": "-",
+                "印2": "-",
+                "印1": "△"
+              },
+              "seirei": "牡4",
+              "kisyu": "吉村誠",
+              "kinryo": "58",
+              "kyusya": "(美)高柳瑞",
+              "totalScore": 1,
+              "assignment": "補欠"
+            },
+            {
+              "number": 3,
+              "name": "(地)ステラノヴァ",
+              "umacd": "0934356",
+              "marks": {
+                "印5": "-",
+                "印4": "-",
+                "印3": "-",
+                "印2": "-",
+                "印1": "-"
+              },
+              "seirei": "牡4",
+              "kisyu": "松若風",
+              "kinryo": "58",
+              "kyusya": "(美)水野",
+              "totalScore": 0,
+              "assignment": "無"
+            },
+            {
+              "number": 4,
+              "name": "(地)ハイケンス",
+              "umacd": "0917513",
+              "marks": {
+                "印5": "-",
+                "印4": "-",
+                "印3": "-",
+                "印2": "-",
+                "印1": "-"
+              },
+              "seirei": "牡5",
+              "kisyu": "小沢大",
+              "kinryo": "58",
+              "kyusya": "(栗)今野",
+              "totalScore": 0,
+              "assignment": "無"
+            },
+            {
+              "number": 9,
+              "name": "タリスマン",
+              "umacd": "0919433",
+              "marks": {
+                "印5": "-",
+                "印4": "-",
+                "印3": "-",
+                "印2": "-",
+                "印1": "-"
+              },
+              "seirei": "牡5",
+              "kisyu": "伊藤工",
+              "kinryo": "58",
+              "kyusya": "(美)金成",
+              "totalScore": 0,
+              "assignment": "無"
+            },
+            {
+              "number": 11,
+              "name": "メイショウサトノヒ",
+              "umacd": "0934507",
+              "marks": {
+                "印5": "-",
+                "印4": "-",
+                "印3": "-",
+                "印2": "-",
+                "印1": "-"
+              },
+              "seirei": "牡4",
+              "kisyu": "西塚洸",
+              "kinryo": "58",
+              "kyusya": "(栗)長谷川",
+              "totalScore": 0,
+              "assignment": "無"
+            },
+            {
+              "number": 12,
+              "name": "(地)フクノスナノバラ",
+              "umacd": "0922257",
+              "marks": {
+                "印5": "-",
+                "印4": "-",
+                "印3": "-",
+                "印2": "-",
+                "印1": "-"
+              },
+              "seirei": "セン5",
+              "kisyu": "江田照",
+              "kinryo": "58",
+              "kyusya": "(美)小野次",
+              "totalScore": 0,
+              "assignment": "無"
+            }
+          ],
+          "predictors": [
+            "印5",
+            "印4",
+            "印3",
+            "印2",
+            "印1"
+          ],
+          "assignments": {
+            "main": 5,
+            "sub": 13,
+            "hole": 1,
+            "connectTop": 7,
+            "connect": [
+              8,
+              15,
+              16
+            ],
+            "reserve": [
+              10,
+              2,
+              14,
+              6
+            ],
+            "none": [
+              3,
+              4,
+              9,
+              11,
+              12
+            ]
+          }
+        },
+        {
+          "version": "1.0.0",
+          "createdAt": "2026-03-20T13:07:57.754Z",
+          "lastUpdated": "2026-03-20T13:07:57.754Z",
+          "raceInfo": {
+            "date": "2026-03-21",
+            "track": "中京",
+            "raceNumber": "8",
+            "raceName": "４歳以上１勝クラス",
+            "raceType": "[指定]，(混)，定量",
+            "distance": "2000",
+            "surface": "芝",
+            "kaisaiInfo": "1回中京3日目",
+            "hassoTime": "13:35",
+            "courseInfo": "(芝Ａ・左)",
+            "tenkiBaba": "",
+            "recordTime": "レコード1.56.5",
+            "estimatedTime": "良2.00.0 / 重2.03.0",
+            "prizes": [
+              "1着: 820.0万",
+              "2着: 330.0万",
+              "3着: 210.0万",
+              "4着: 120.0万",
+              "5着: 82.0万"
+            ]
+          },
+          "horses": [
+            {
+              "number": 11,
+              "name": "エアビッグマム",
+              "umacd": "0936302",
+              "marks": {
+                "印5": "○",
+                "印4": "◎",
+                "印3": "○",
+                "印2": "○",
+                "印1": "◎"
+              },
+              "seirei": "牝4",
+              "kisyu": "西塚洸",
+              "kinryo": "56",
+              "kyusya": "(栗)笹田",
+              "totalScore": 22,
+              "assignment": "本命"
+            },
+            {
+              "number": 5,
+              "name": "コスモレオナルド",
+              "umacd": "0921950",
+              "marks": {
+                "印5": "◎",
+                "印4": "○",
+                "印3": "◎",
+                "印2": "△",
+                "印1": "svg"
+              },
+              "seirei": "牡5",
+              "kisyu": "団野大",
+              "kinryo": "58",
+              "kyusya": "(美)鹿戸雄",
+              "totalScore": 17,
+              "assignment": "対抗"
+            },
+            {
+              "number": 1,
+              "name": "リポサンテ",
+              "umacd": "0936389",
+              "marks": {
+                "印5": "▲",
+                "印4": "-",
+                "印3": "svg",
+                "印2": "◎",
+                "印1": "▲"
+              },
+              "seirei": "牝4",
+              "kisyu": "吉村誠",
+              "kinryo": "56",
+              "kyusya": "(美)蛯名正",
+              "totalScore": 13,
+              "assignment": "単穴"
+            },
+            {
+              "number": 6,
+              "name": "ルールーリマ",
+              "umacd": "0931541",
+              "marks": {
+                "印5": "svg",
+                "印4": "△",
+                "印3": "▲",
+                "印2": "▲",
+                "印1": "○"
+              },
+              "seirei": "牝4",
+              "kisyu": "三浦皇",
+              "kinryo": "56",
+              "kyusya": "(美)大竹",
+              "totalScore": 13,
+              "assignment": "連下最上位"
+            },
+            {
+              "number": 10,
+              "name": "ディアボリカドンナ",
+              "umacd": "0938312",
+              "marks": {
+                "印5": "△",
+                "印4": "svg",
+                "印3": "-",
+                "印2": "svg",
+                "印1": "△"
+              },
+              "seirei": "牝4",
+              "kisyu": "今村聖",
+              "kinryo": "54",
+              "kyusya": "(美)武井",
+              "totalScore": 6,
+              "assignment": "連下"
+            },
+            {
+              "number": 2,
+              "name": "ニヴルヘイム",
+              "umacd": "0935816",
+              "marks": {
+                "印5": "穴",
+                "印4": "-",
+                "印3": "△",
+                "印2": "△",
+                "印1": "△"
+              },
+              "seirei": "牡4",
+              "kisyu": "杉原誠",
+              "kinryo": "58",
+              "kyusya": "(美)栗田徹",
+              "totalScore": 5,
+              "assignment": "連下"
+            },
+            {
+              "number": 7,
+              "name": "アドミラルシップ",
+              "umacd": "0917408",
+              "marks": {
+                "印5": "-",
+                "印4": "▲",
+                "印3": "-",
+                "印2": "-",
+                "印1": "△"
+              },
+              "seirei": "牡5",
+              "kisyu": "横山武",
+              "kinryo": "58",
+              "kyusya": "(美)相沢",
+              "totalScore": 4,
+              "assignment": "連下"
+            },
+            {
+              "number": 3,
+              "name": "アンビアンス",
+              "umacd": "0937677",
+              "marks": {
+                "印5": "穴",
+                "印4": "-",
+                "印3": "△",
+                "印2": "-",
+                "印1": "-"
+              },
+              "seirei": "牝4",
+              "kisyu": "松若風",
+              "kinryo": "56",
+              "kyusya": "(栗)清水久",
+              "totalScore": 3,
+              "assignment": "補欠"
+            },
+            {
+              "number": 13,
+              "name": "テンドリームガール",
+              "umacd": "0937392",
+              "marks": {
+                "印5": "-",
+                "印4": "△",
+                "印3": "-",
+                "印2": "△",
+                "印1": "-"
+              },
+              "seirei": "牝4",
+              "kisyu": "田山旺",
+              "kinryo": "53",
+              "kyusya": "(美)矢野英",
+              "totalScore": 2,
+              "assignment": "補欠"
+            },
+            {
+              "number": 4,
+              "name": "レゼールドラペ",
+              "umacd": "0937443",
+              "marks": {
+                "印5": "-",
+                "印4": "-",
+                "印3": "-",
+                "印2": "-",
+                "印1": "-"
+              },
+              "seirei": "セン4",
+              "kisyu": "石神道",
+              "kinryo": "55",
+              "kyusya": "(美)松尾",
+              "totalScore": 0,
+              "assignment": "無"
+            },
+            {
+              "number": 8,
+              "name": "(地)レイホープ",
+              "umacd": "0933642",
+              "marks": {
+                "印5": "-",
+                "印4": "-",
+                "印3": "-",
+                "印2": "-",
+                "印1": "-"
+              },
+              "seirei": "牡4",
+              "kisyu": "鷲頭虎",
+              "kinryo": "56",
+              "kyusya": "(美)菊川",
+              "totalScore": 0,
+              "assignment": "無"
+            },
+            {
+              "number": 9,
+              "name": "ハルフロンティア",
+              "umacd": "0935779",
+              "marks": {
+                "印5": "-",
+                "印4": "-",
+                "印3": "-",
+                "印2": "-",
+                "印1": "-"
+              },
+              "seirei": "牡4",
+              "kisyu": "和田陽",
+              "kinryo": "55",
+              "kyusya": "(栗)池添学",
+              "totalScore": 0,
+              "assignment": "無"
+            },
+            {
+              "number": 12,
+              "name": "(地)ウインドラート",
+              "umacd": "0921337",
+              "marks": {
+                "印5": "-",
+                "印4": "-",
+                "印3": "-",
+                "印2": "-",
+                "印1": "-"
+              },
+              "seirei": "牡5",
+              "kisyu": "舟山瑠",
+              "kinryo": "55",
+              "kyusya": "(美)水野",
+              "totalScore": 0,
+              "assignment": "無"
+            }
+          ],
+          "predictors": [
+            "印5",
+            "印4",
+            "印3",
+            "印2",
+            "印1"
+          ],
+          "assignments": {
+            "main": 11,
+            "sub": 5,
+            "hole": 1,
+            "connectTop": 6,
+            "connect": [
+              10,
+              2,
+              7
+            ],
+            "reserve": [
+              3,
+              13
+            ],
+            "none": [
+              4,
+              8,
+              9,
+              12
+            ]
+          }
+        },
+        {
+          "version": "1.0.0",
+          "createdAt": "2026-03-20T13:07:57.757Z",
+          "lastUpdated": "2026-03-20T13:07:57.757Z",
+          "raceInfo": {
+            "date": "2026-03-21",
+            "track": "中京",
+            "raceNumber": "9",
+            "raceName": "岡崎特別",
+            "raceType": "(特指)，(混)，４歳以上，２勝クラス，定量",
+            "distance": "1400",
+            "surface": "芝",
+            "kaisaiInfo": "1回中京3日目",
+            "hassoTime": "14:10",
+            "courseInfo": "(芝Ａ・左)",
+            "tenkiBaba": "",
+            "recordTime": "レコード1.18.7",
+            "estimatedTime": "良1.20.6 / 重1.22.7",
+            "prizes": [
+              "1着: 1,580.0万",
+              "2着: 630.0万",
+              "3着: 400.0万",
+              "4着: 240.0万",
+              "5着: 158.0万"
+            ]
+          },
+          "horses": [
+            {
+              "number": 6,
+              "name": "パルティクラール",
+              "umacd": "0899341",
+              "marks": {
+                "印5": "○",
+                "印4": "◎",
+                "印3": "◎",
+                "印2": "○",
+                "印1": "△"
+              },
+              "seirei": "牝6",
+              "kisyu": "国分恭",
+              "kinryo": "56",
+              "kyusya": "(栗)牧浦",
+              "totalScore": 19,
+              "assignment": "本命"
+            },
+            {
+              "number": 5,
+              "name": "ホーリーブラッサム",
+              "umacd": "0933937",
+              "marks": {
+                "印5": "-",
+                "印4": "○",
+                "印3": "△",
+                "印2": "◎",
+                "印1": "◎"
+              },
+              "seirei": "牝4",
+              "kisyu": "団野大",
+              "kinryo": "56",
+              "kyusya": "(栗)斉藤崇",
+              "totalScore": 15,
+              "assignment": "対抗"
+            },
+            {
+              "number": 10,
+              "name": "ダノンキラウェア",
+              "umacd": "0914188",
+              "marks": {
+                "印5": "◎",
+                "印4": "-",
+                "印3": "svg",
+                "印2": "▲",
+                "印1": "○"
+              },
+              "seirei": "牡5",
+              "kisyu": "川田将",
+              "kinryo": "58",
+              "kyusya": "(栗)中内田",
+              "totalScore": 14,
+              "assignment": "単穴"
+            },
+            {
+              "number": 4,
+              "name": "(外)ミクストベリーズ",
+              "umacd": "0944573",
+              "marks": {
+                "印5": "△",
+                "印4": "svg",
+                "印3": "○",
+                "印2": "△",
+                "印1": "△"
+              },
+              "seirei": "牡4",
+              "kisyu": "横山武",
+              "kinryo": "58",
+              "kyusya": "(美)伊藤圭",
+              "totalScore": 9,
+              "assignment": "連下最上位"
+            },
+            {
+              "number": 9,
+              "name": "タイキヴァンクール",
+              "umacd": "0917870",
+              "marks": {
+                "印5": "svg",
+                "印4": "△",
+                "印3": "-",
+                "印2": "△",
+                "印1": "▲"
+              },
+              "seirei": "牡5",
+              "kisyu": "小崎綾",
+              "kinryo": "58",
+              "kyusya": "(栗)中尾秀",
+              "totalScore": 7,
+              "assignment": "連下"
+            },
+            {
+              "number": 3,
+              "name": "ワース",
+              "umacd": "0935789",
+              "marks": {
+                "印5": "▲",
+                "印4": "△",
+                "印3": "-",
+                "印2": "svg",
+                "印1": "-"
+              },
+              "seirei": "牡4",
+              "kisyu": "吉村誠",
+              "kinryo": "58",
+              "kyusya": "(美)上原佑",
+              "totalScore": 6,
+              "assignment": "連下"
+            },
+            {
+              "number": 7,
+              "name": "ガンマジーティーピ",
+              "umacd": "0937168",
+              "marks": {
+                "印5": "穴",
+                "印4": "▲",
+                "印3": "△",
+                "印2": "-",
+                "印1": "-"
+              },
+              "seirei": "牡4",
+              "kisyu": "松若風",
+              "kinryo": "58",
+              "kyusya": "(栗)渡辺",
+              "totalScore": 6,
+              "assignment": "連下"
+            },
+            {
+              "number": 1,
+              "name": "ミトノオルフェ",
+              "umacd": "0934923",
+              "marks": {
+                "印5": "-",
+                "印4": "-",
+                "印3": "▲",
+                "印2": "-",
+                "印1": "svg"
+              },
+              "seirei": "牡4",
+              "kisyu": "三浦皇",
+              "kinryo": "58",
+              "kyusya": "(栗)前川",
+              "totalScore": 5,
+              "assignment": "補欠"
+            },
+            {
+              "number": 8,
+              "name": "メイケイバートン",
+              "umacd": "0885095",
+              "marks": {
+                "印5": "穴",
+                "印4": "-",
+                "印3": "-",
+                "印2": "-",
+                "印1": "-"
+              },
+              "seirei": "牡7",
+              "kisyu": "柴田裕",
+              "kinryo": "58",
+              "kyusya": "(栗)中竹",
+              "totalScore": 2,
+              "assignment": "補欠"
+            },
+            {
+              "number": 2,
+              "name": "(地)ラーテル",
+              "umacd": "0902368",
+              "marks": {
+                "印5": "-",
+                "印4": "-",
+                "印3": "-",
+                "印2": "-",
+                "印1": "-"
+              },
+              "seirei": "セン6",
+              "kisyu": "嶋田純",
+              "kinryo": "58",
+              "kyusya": "(美)室井",
+              "totalScore": 0,
+              "assignment": "無"
+            }
+          ],
+          "predictors": [
+            "印5",
+            "印4",
+            "印3",
+            "印2",
+            "印1"
+          ],
+          "assignments": {
+            "main": 6,
+            "sub": 5,
+            "hole": 10,
+            "connectTop": 4,
+            "connect": [
+              9,
+              3,
+              7
+            ],
+            "reserve": [
+              1,
+              8
+            ],
+            "none": [
+              2
+            ]
+          }
+        },
+        {
+          "version": "1.0.0",
+          "createdAt": "2026-03-20T13:07:57.762Z",
+          "lastUpdated": "2026-03-20T13:07:57.762Z",
+          "raceInfo": {
+            "date": "2026-03-21",
+            "track": "中京",
+            "raceNumber": "10",
+            "raceName": "豊明ステークス",
+            "raceType": "[指定]，(混)，４歳以上，３勝クラス，ハンデ",
+            "distance": "1400",
+            "surface": "ダート",
+            "kaisaiInfo": "1回中京3日目",
+            "hassoTime": "14:45",
+            "courseInfo": "(ダート・左)",
+            "tenkiBaba": "",
+            "recordTime": "レコード1.20.3",
+            "estimatedTime": "良1.23.7 / 重1.22.3",
+            "prizes": [
+              "1着: 1,870.0万",
+              "2着: 750.0万",
+              "3着: 470.0万",
+              "4着: 280.0万",
+              "5着: 187.0万"
+            ]
+          },
+          "horses": [
+            {
+              "number": 6,
+              "name": "ピエマンソン",
+              "umacd": "0930970",
+              "marks": {
+                "印5": "○",
+                "印4": "◎",
+                "印3": "svg",
+                "印2": "○",
+                "印1": "◎"
+              },
+              "seirei": "牡4",
+              "kisyu": "川田将",
+              "kinryo": "57",
+              "kyusya": "(栗)平田",
+              "totalScore": 20,
+              "assignment": "本命"
+            },
+            {
+              "number": 3,
+              "name": "ヤマニンアストロン",
+              "umacd": "0921724",
+              "marks": {
+                "印5": "▲",
+                "印4": "△",
+                "印3": "◎",
+                "印2": "▲",
+                "印1": "svg"
+              },
+              "seirei": "牡5",
+              "kisyu": "松若風",
+              "kinryo": "56",
+              "kyusya": "(栗)石橋",
+              "totalScore": 14,
+              "assignment": "対抗"
+            },
+            {
+              "number": 9,
+              "name": "セギレエルビエント",
+              "umacd": "0936880",
+              "marks": {
+                "印5": "△",
+                "印4": "▲",
+                "印3": "△",
+                "印2": "◎",
+                "印1": "○"
+              },
+              "seirei": "牝4",
+              "kisyu": "斎藤新",
+              "kinryo": "54",
+              "kyusya": "(美)伊坂",
+              "totalScore": 14,
+              "assignment": "単穴"
+            },
+            {
+              "number": 1,
+              "name": "ドンレパルス",
+              "umacd": "0885863",
+              "marks": {
+                "印5": "◎",
+                "印4": "-",
+                "印3": "△",
+                "印2": "svg",
+                "印1": "△"
+              },
+              "seirei": "牡7",
+              "kisyu": "三浦皇",
+              "kinryo": "58",
+              "kyusya": "(美)高木登",
+              "totalScore": 9,
+              "assignment": "連下最上位"
+            },
+            {
+              "number": 13,
+              "name": "(外)ドラゴンテイラー",
+              "umacd": "0958667",
+              "marks": {
+                "印5": "-",
+                "印4": "-",
+                "印3": "○",
+                "印2": "△",
+                "印1": "▲"
+              },
+              "seirei": "牡4",
+              "kisyu": "横山武",
+              "kinryo": "56",
+              "kyusya": "(栗)藤原英",
+              "totalScore": 8,
+              "assignment": "連下"
+            },
+            {
+              "number": 16,
+              "name": "ノボリショウリュウ",
+              "umacd": "0917418",
+              "marks": {
+                "印5": "svg",
+                "印4": "svg",
+                "印3": "△",
+                "印2": "-",
+                "印1": "△"
+              },
+              "seirei": "牡5",
+              "kisyu": "吉村誠",
+              "kinryo": "56",
+              "kyusya": "(栗)石橋",
+              "totalScore": 6,
+              "assignment": "連下"
+            },
+            {
+              "number": 11,
+              "name": "クインズデネブ",
+              "umacd": "0921466",
+              "marks": {
+                "印5": "-",
+                "印4": "○",
+                "印3": "△",
+                "印2": "-",
+                "印1": "-"
+              },
+              "seirei": "牝5",
+              "kisyu": "杉原誠",
+              "kinryo": "54",
+              "kyusya": "(美)小島茂",
+              "totalScore": 5,
+              "assignment": "連下"
+            },
+            {
+              "number": 4,
+              "name": "ロサンゼルス",
+              "umacd": "0918542",
+              "marks": {
+                "印5": "穴",
+                "印4": "-",
+                "印3": "-",
+                "印2": "-",
+                "印1": "-"
+              },
+              "seirei": "牡5",
+              "kisyu": "団野大",
+              "kinryo": "56",
+              "kyusya": "(美)伊藤圭",
+              "totalScore": 2,
+              "assignment": "補欠"
+            },
+            {
+              "number": 12,
+              "name": "オペラプラージュ",
+              "umacd": "0919593",
+              "marks": {
+                "印5": "穴",
+                "印4": "-",
+                "印3": "-",
+                "印2": "-",
+                "印1": "-"
+              },
+              "seirei": "セン5",
+              "kisyu": "富田暁",
+              "kinryo": "53",
+              "kyusya": "(美)上原佑",
+              "totalScore": 2,
+              "assignment": "補欠"
+            },
+            {
+              "number": 2,
+              "name": "ルージュスタニング",
+              "umacd": "0920901",
+              "marks": {
+                "印5": "-",
+                "印4": "-",
+                "印3": "-",
+                "印2": "△",
+                "印1": "-"
+              },
+              "seirei": "牝5",
+              "kisyu": "西塚洸",
+              "kinryo": "54",
+              "kyusya": "(栗)友道",
+              "totalScore": 1,
+              "assignment": "補欠"
+            },
+            {
+              "number": 5,
+              "name": "スリリングチェイス",
+              "umacd": "0900953",
+              "marks": {
+                "印5": "-",
+                "印4": "-",
+                "印3": "-",
+                "印2": "-",
+                "印1": "△"
+              },
+              "seirei": "セン6",
+              "kisyu": "亀田温",
+              "kinryo": "55",
+              "kyusya": "(栗)渡辺",
+              "totalScore": 1,
+              "assignment": "補欠"
+            },
+            {
+              "number": 8,
+              "name": "ベルギューン",
+              "umacd": "0930864",
+              "marks": {
+                "印5": "-",
+                "印4": "-",
+                "印3": "-",
+                "印2": "△",
+                "印1": "-"
+              },
+              "seirei": "牝4",
+              "kisyu": "小崎綾",
+              "kinryo": "53",
+              "kyusya": "(栗)牧浦",
+              "totalScore": 1,
+              "assignment": "補欠"
+            },
+            {
+              "number": 14,
+              "name": "ルシフェル",
+              "umacd": "0920175",
+              "marks": {
+                "印5": "-",
+                "印4": "△",
+                "印3": "-",
+                "印2": "-",
+                "印1": "-"
+              },
+              "seirei": "牝5",
+              "kisyu": "小沢大",
+              "kinryo": "53",
+              "kyusya": "(栗)西園翔",
+              "totalScore": 1,
+              "assignment": "補欠"
+            },
+            {
+              "number": 7,
+              "name": "ショーモン",
+              "umacd": "0900828",
+              "marks": {
+                "印5": "-",
+                "印4": "-",
+                "印3": "-",
+                "印2": "-",
+                "印1": "-"
+              },
+              "seirei": "セン6",
+              "kisyu": "田山旺",
+              "kinryo": "52",
+              "kyusya": "(栗)東田",
+              "totalScore": 0,
+              "assignment": "無"
+            },
+            {
+              "number": 10,
+              "name": "(外)ジュタロウ",
+              "umacd": "0896163",
+              "marks": {
+                "印5": "-",
+                "印4": "-",
+                "印3": "-",
+                "印2": "-",
+                "印1": "-"
+              },
+              "seirei": "牡7",
+              "kisyu": "柴田裕",
+              "kinryo": "54",
+              "kyusya": "(栗)秋山",
+              "totalScore": 0,
+              "assignment": "無"
+            },
+            {
+              "number": 15,
+              "name": "(外)ハードワイヤード",
+              "umacd": "0907305",
+              "marks": {
+                "印5": "-",
+                "印4": "-",
+                "印3": "-",
+                "印2": "-",
+                "印1": "-"
+              },
+              "seirei": "牡6",
+              "kisyu": "長岡禎",
+              "kinryo": "56",
+              "kyusya": "(美)加藤征",
+              "totalScore": 0,
+              "assignment": "無"
+            }
+          ],
+          "predictors": [
+            "印5",
+            "印4",
+            "印3",
+            "印2",
+            "印1"
+          ],
+          "assignments": {
+            "main": 6,
+            "sub": 3,
+            "hole": 9,
+            "connectTop": 1,
+            "connect": [
+              13,
+              16,
+              11
+            ],
+            "reserve": [
+              4,
+              12,
+              2,
+              5,
+              8,
+              14
+            ],
+            "none": [
+              7,
+              10,
+              15
+            ]
+          }
+        },
+        {
+          "version": "1.0.0",
+          "createdAt": "2026-03-20T13:07:57.768Z",
+          "lastUpdated": "2026-03-20T13:07:57.768Z",
+          "raceInfo": {
+            "date": "2026-03-21",
+            "track": "中京",
+            "raceNumber": "11",
+            "raceName": "第４０回　ファルコンステークス(ＧⅢ)",
+            "raceType": "(特指)，国際，３歳，オープン，馬齢",
+            "distance": "1400",
+            "surface": "芝",
+            "kaisaiInfo": "1回中京3日目",
+            "hassoTime": "15:20",
+            "courseInfo": "(芝Ａ・左)",
+            "tenkiBaba": "",
+            "recordTime": "レコード1.18.7",
+            "estimatedTime": "良1.20.2 / 重1.22.3",
+            "prizes": [
+              "1着: 4,100.0万",
+              "2着: 1,600.0万",
+              "3着: 1,000.0万",
+              "4着: 620.0万",
+              "5着: 410.0万"
+            ]
+          },
+          "horses": [
+            {
+              "number": 9,
+              "name": "ダイヤモンドノット",
+              "umacd": "0952757",
+              "marks": {
+                "印5": "◎",
+                "印4": "◎",
+                "印3": "○",
+                "印2": "○",
+                "印1": "◎"
+              },
+              "seirei": "牡3",
+              "kisyu": "川田将",
+              "kinryo": "57",
+              "kyusya": "(栗)福永",
+              "totalScore": 23,
+              "assignment": "本命"
+            },
+            {
+              "number": 17,
+              "name": "タマモイカロス",
+              "umacd": "0950011",
+              "marks": {
+                "印5": "○",
+                "印4": "○",
+                "印3": "◎",
+                "印2": "svg",
+                "印1": "○"
+              },
+              "seirei": "牡3",
+              "kisyu": "小沢大",
+              "kinryo": "57",
+              "kyusya": "(栗)藤岡健",
+              "totalScore": 19,
+              "assignment": "対抗"
+            },
+            {
+              "number": 6,
+              "name": "ハッピーエンジェル",
+              "umacd": "0946720",
+              "marks": {
+                "印5": "▲",
+                "印4": "svg",
+                "印3": "-",
+                "印2": "◎",
+                "印1": "svg"
+              },
+              "seirei": "牝3",
+              "kisyu": "三浦皇",
+              "kinryo": "55",
+              "kyusya": "(美)武市",
+              "totalScore": 12,
+              "assignment": "単穴"
+            },
+            {
+              "number": 4,
+              "name": "タイセイアストロ",
+              "umacd": "0950761",
+              "marks": {
+                "印5": "-",
+                "印4": "▲",
+                "印3": "▲",
+                "印2": "-",
+                "印1": "▲"
+              },
+              "seirei": "牡3",
+              "kisyu": "杉原誠",
+              "kinryo": "57",
+              "kyusya": "(美)森一誠",
+              "totalScore": 9,
+              "assignment": "連下最上位"
+            },
+            {
+              "number": 7,
+              "name": "フクチャンショウ",
+              "umacd": "0950264",
+              "marks": {
+                "印5": "△",
+                "印4": "△",
+                "印3": "△",
+                "印2": "▲",
+                "印1": "△"
+              },
+              "seirei": "牡3",
+              "kisyu": "横山武",
+              "kinryo": "57",
+              "kyusya": "(美)加藤征",
+              "totalScore": 7,
+              "assignment": "連下"
+            },
+            {
+              "number": 11,
+              "name": "タガノアラリア",
+              "umacd": "0951154",
+              "marks": {
+                "印5": "-",
+                "印4": "△",
+                "印3": "svg",
+                "印2": "-",
+                "印1": "△"
+              },
+              "seirei": "牡3",
+              "kisyu": "斎藤新",
+              "kinryo": "57",
+              "kyusya": "(栗)西園翔",
+              "totalScore": 4,
+              "assignment": "連下"
+            },
+            {
+              "number": 1,
+              "name": "カフェラバー",
+              "umacd": "0954336",
+              "marks": {
+                "印5": "-",
+                "印4": "△",
+                "印3": "-",
+                "印2": "△",
+                "印1": "△"
+              },
+              "seirei": "牝3",
+              "kisyu": "舟山瑠",
+              "kinryo": "55",
+              "kyusya": "(美)和田郎",
+              "totalScore": 3,
+              "assignment": "連下"
+            },
+            {
+              "number": 2,
+              "name": "メイクワンズデイ",
+              "umacd": "0950009",
+              "marks": {
+                "印5": "穴",
+                "印4": "-",
+                "印3": "△",
+                "印2": "-",
+                "印1": "-"
+              },
+              "seirei": "牡3",
+              "kisyu": "松若風",
+              "kinryo": "57",
+              "kyusya": "(栗)宮地",
+              "totalScore": 3,
+              "assignment": "補欠"
+            },
+            {
+              "number": 10,
+              "name": "(地)エイシンディード",
+              "umacd": "0952579",
+              "marks": {
+                "印5": "svg",
+                "印4": "-",
+                "印3": "-",
+                "印2": "△",
+                "印1": "-"
+              },
+              "seirei": "牡3",
+              "kisyu": "川又賢",
+              "kinryo": "57",
+              "kyusya": "(栗)大久龍",
+              "totalScore": 3,
+              "assignment": "補欠"
+            },
+            {
+              "number": 8,
+              "name": "マーゴットブロー",
+              "umacd": "0952431",
+              "marks": {
+                "印5": "穴",
+                "印4": "-",
+                "印3": "-",
+                "印2": "-",
+                "印1": "-"
+              },
+              "seirei": "牡3",
+              "kisyu": "横山典",
+              "kinryo": "57",
+              "kyusya": "(美)伊坂",
+              "totalScore": 2,
+              "assignment": "補欠"
+            },
+            {
+              "number": 3,
+              "name": "トライアンフパス",
+              "umacd": "0953497",
+              "marks": {
+                "印5": "-",
+                "印4": "-",
+                "印3": "△",
+                "印2": "-",
+                "印1": "-"
+              },
+              "seirei": "牝3",
+              "kisyu": "国分恭",
+              "kinryo": "55",
+              "kyusya": "(栗)宮",
+              "totalScore": 1,
+              "assignment": "補欠"
+            },
+            {
+              "number": 13,
+              "name": "(外)プリンセスモコ",
+              "umacd": "0976873",
+              "marks": {
+                "印5": "-",
+                "印4": "-",
+                "印3": "-",
+                "印2": "△",
+                "印1": "-"
+              },
+              "seirei": "牝3",
+              "kisyu": "西塚洸",
+              "kinryo": "55",
+              "kyusya": "(栗)藤原英",
+              "totalScore": 1,
+              "assignment": "補欠"
+            },
+            {
+              "number": 5,
+              "name": "アスミル",
+              "umacd": "0952040",
+              "marks": {
+                "印5": "-",
+                "印4": "-",
+                "印3": "-",
+                "印2": "-",
+                "印1": "-"
+              },
+              "seirei": "牡3",
+              "kisyu": "太宰啓",
+              "kinryo": "57",
+              "kyusya": "(栗)本田",
+              "totalScore": 0,
+              "assignment": "無"
+            },
+            {
+              "number": 12,
+              "name": "(外)プルヴォワール",
+              "umacd": "0973627",
+              "marks": {
+                "印5": "-",
+                "印4": "-",
+                "印3": "-",
+                "印2": "-",
+                "印1": "-"
+              },
+              "seirei": "牝3",
+              "kisyu": "長岡禎",
+              "kinryo": "55",
+              "kyusya": "(美)竹内",
+              "totalScore": 0,
+              "assignment": "無"
+            },
+            {
+              "number": 14,
+              "name": "フォーゲル",
+              "umacd": "0952348",
+              "marks": {
+                "印5": "-",
+                "印4": "-",
+                "印3": "-",
+                "印2": "-",
+                "印1": "-"
+              },
+              "seirei": "牡3",
+              "kisyu": "吉村誠",
+              "kinryo": "57",
+              "kyusya": "(栗)斉藤崇",
+              "totalScore": 0,
+              "assignment": "無"
+            },
+            {
+              "number": 15,
+              "name": "テルヴィセクス",
+              "umacd": "0951195",
+              "marks": {
+                "印5": "-",
+                "印4": "-",
+                "印3": "-",
+                "印2": "-",
+                "印1": "-"
+              },
+              "seirei": "牡3",
+              "kisyu": "団野大",
+              "kinryo": "57",
+              "kyusya": "(栗)斉藤崇",
+              "totalScore": 0,
+              "assignment": "無"
+            },
+            {
+              "number": 16,
+              "name": "タヤスロレンヌ",
+              "umacd": "0951074",
+              "marks": {
+                "印5": "-",
+                "印4": "-",
+                "印3": "-",
+                "印2": "-",
+                "印1": "-"
+              },
+              "seirei": "牝3",
+              "kisyu": "江田照",
+              "kinryo": "55",
+              "kyusya": "(美)岩戸",
+              "totalScore": 0,
+              "assignment": "無"
+            }
+          ],
+          "predictors": [
+            "印5",
+            "印4",
+            "印3",
+            "印2",
+            "印1"
+          ],
+          "assignments": {
+            "main": 9,
+            "sub": 17,
+            "hole": 6,
+            "connectTop": 4,
+            "connect": [
+              7,
+              11,
+              1
+            ],
+            "reserve": [
+              2,
+              10,
+              8,
+              3,
+              13
+            ],
+            "none": [
+              5,
+              12,
+              14,
+              15,
+              16
+            ]
+          }
+        },
+        {
+          "version": "1.0.0",
+          "createdAt": "2026-03-20T13:07:57.772Z",
+          "lastUpdated": "2026-03-20T13:07:57.772Z",
+          "raceInfo": {
+            "date": "2026-03-21",
+            "track": "中京",
+            "raceNumber": "12",
+            "raceName": "４歳以上１勝クラス",
+            "raceType": "[指定]，定量",
+            "distance": "1600",
+            "surface": "芝",
+            "kaisaiInfo": "1回中京3日目",
+            "hassoTime": "16:00",
+            "courseInfo": "(芝Ａ・左)",
+            "tenkiBaba": "",
+            "recordTime": "レコード1.31.3",
+            "estimatedTime": "良1.33.5 / 重1.35.9",
+            "prizes": [
+              "1着: 820.0万",
+              "2着: 330.0万",
+              "3着: 210.0万",
+              "4着: 120.0万",
+              "5着: 82.0万"
+            ]
+          },
+          "horses": [
+            {
+              "number": 5,
+              "name": "シャンパンライフ",
+              "umacd": "0936585",
+              "marks": {
+                "印5": "◎",
+                "印4": "◎",
+                "印3": "◎",
+                "印2": "◎",
+                "印1": "◎"
+              },
+              "seirei": "牝4",
+              "kisyu": "川田将",
+              "kinryo": "56",
+              "kyusya": "(栗)四位",
+              "totalScore": 25,
+              "assignment": "本命"
+            },
+            {
+              "number": 2,
+              "name": "ゴールドブレス",
+              "umacd": "0914101",
+              "marks": {
+                "印5": "▲",
+                "印4": "○",
+                "印3": "○",
+                "印2": "○",
+                "印1": "○"
+              },
+              "seirei": "セン5",
+              "kisyu": "国分恭",
+              "kinryo": "58",
+              "kyusya": "(栗)西園翔",
+              "totalScore": 19,
+              "assignment": "対抗"
+            },
+            {
+              "number": 3,
+              "name": "ベストシーン",
+              "umacd": "0932147",
+              "marks": {
+                "印5": "○",
+                "印4": "svg",
+                "印3": "▲",
+                "印2": "svg",
+                "印1": "▲"
+              },
+              "seirei": "牡4",
+              "kisyu": "嶋田純",
+              "kinryo": "58",
+              "kyusya": "(美)手塚久",
+              "totalScore": 14,
+              "assignment": "単穴"
+            },
+            {
+              "number": 13,
+              "name": "スタンピー",
+              "umacd": "0932074",
+              "marks": {
+                "印5": "穴",
+                "印4": "△",
+                "印3": "-",
+                "印2": "▲",
+                "印1": "△"
+              },
+              "seirei": "牝4",
+              "kisyu": "西塚洸",
+              "kinryo": "56",
+              "kyusya": "(美)深山",
+              "totalScore": 7,
+              "assignment": "連下最上位"
+            },
+            {
+              "number": 11,
+              "name": "ゴーゴータカシ",
+              "umacd": "0932888",
+              "marks": {
+                "印5": "svg",
+                "印4": "△",
+                "印3": "△",
+                "印2": "△",
+                "印1": "△"
+              },
+              "seirei": "セン4",
+              "kisyu": "石神道",
+              "kinryo": "55",
+              "kyusya": "(美)武井",
+              "totalScore": 6,
+              "assignment": "連下"
+            },
+            {
+              "number": 9,
+              "name": "ドルビナ",
+              "umacd": "0934268",
+              "marks": {
+                "印5": "△",
+                "印4": "-",
+                "印3": "svg",
+                "印2": "△",
+                "印1": "△"
+              },
+              "seirei": "牡4",
+              "kisyu": "舟山瑠",
+              "kinryo": "55",
+              "kyusya": "(美)杉浦",
+              "totalScore": 5,
+              "assignment": "連下"
+            },
+            {
+              "number": 4,
+              "name": "メイショウビストロ",
+              "umacd": "0934126",
+              "marks": {
+                "印5": "△",
+                "印4": "-",
+                "印3": "△",
+                "印2": "-",
+                "印1": "svg"
+              },
+              "seirei": "牡4",
+              "kisyu": "田山旺",
+              "kinryo": "55",
+              "kyusya": "(栗)岡田",
+              "totalScore": 4,
+              "assignment": "連下"
+            },
+            {
+              "number": 7,
+              "name": "(地)アスクアメージモア",
+              "umacd": "0919929",
+              "marks": {
+                "印5": "-",
+                "印4": "▲",
+                "印3": "-",
+                "印2": "-",
+                "印1": "-"
+              },
+              "seirei": "牡5",
+              "kisyu": "古川奈",
+              "kinryo": "56",
+              "kyusya": "(栗)前川",
+              "totalScore": 3,
+              "assignment": "補欠"
+            },
+            {
+              "number": 6,
+              "name": "チョングク",
+              "umacd": "0935396",
+              "marks": {
+                "印5": "穴",
+                "印4": "-",
+                "印3": "-",
+                "印2": "-",
+                "印1": "-"
+              },
+              "seirei": "牡4",
+              "kisyu": "江田照",
+              "kinryo": "58",
+              "kyusya": "(美)佐藤吉",
+              "totalScore": 2,
+              "assignment": "補欠"
+            },
+            {
+              "number": 1,
+              "name": "ロアヴィヴィエンヌ",
+              "umacd": "0931249",
+              "marks": {
+                "印5": "-",
+                "印4": "-",
+                "印3": "-",
+                "印2": "-",
+                "印1": "-"
+              },
+              "seirei": "セン4",
+              "kisyu": "和田陽",
+              "kinryo": "55",
+              "kyusya": "(美)本間",
+              "totalScore": 0,
+              "assignment": "無"
+            },
+            {
+              "number": 8,
+              "name": "アラバンサ",
+              "umacd": "0935927",
+              "marks": {
+                "印5": "-",
+                "印4": "-",
+                "印3": "-",
+                "印2": "-",
+                "印1": "-"
+              },
+              "seirei": "セン4",
+              "kisyu": "小林美",
+              "kinryo": "55",
+              "kyusya": "(栗)畑端",
+              "totalScore": 0,
+              "assignment": "無"
+            },
+            {
+              "number": 10,
+              "name": "(地)オドラニャソンソン",
+              "umacd": "0933635",
+              "marks": {
+                "印5": "-",
+                "印4": "-",
+                "印3": "-",
+                "印2": "-",
+                "印1": "-"
+              },
+              "seirei": "牡4",
+              "kisyu": "柴田裕",
+              "kinryo": "56",
+              "kyusya": "(栗)森田",
+              "totalScore": 0,
+              "assignment": "無"
+            },
+            {
+              "number": 12,
+              "name": "(地)レフィナード",
+              "umacd": "0933847",
+              "marks": {
+                "印5": "-",
+                "印4": "-",
+                "印3": "-",
+                "印2": "-",
+                "印1": "-"
+              },
+              "seirei": "牝4",
+              "kisyu": "横山典",
+              "kinryo": "56",
+              "kyusya": "(栗)昆",
+              "totalScore": 0,
+              "assignment": "無"
+            },
+            {
+              "number": 14,
+              "name": "コスモキャバリエ",
+              "umacd": "0937872",
+              "marks": {
+                "印5": "-",
+                "印4": "-",
+                "印3": "-",
+                "印2": "-",
+                "印1": "-"
+              },
+              "seirei": "牡4",
+              "kisyu": "斎藤新",
+              "kinryo": "58",
+              "kyusya": "(美)室井",
+              "totalScore": 0,
+              "assignment": "無"
+            }
+          ],
+          "predictors": [
+            "印5",
+            "印4",
+            "印3",
+            "印2",
+            "印1"
+          ],
+          "assignments": {
+            "main": 5,
+            "sub": 2,
+            "hole": 3,
+            "connectTop": 13,
+            "connect": [
+              11,
+              9,
+              4
+            ],
+            "reserve": [
+              7,
+              6
+            ],
+            "none": [
+              1,
+              8,
+              10,
+              12,
+              14
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
