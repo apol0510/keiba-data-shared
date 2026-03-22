@@ -7,6 +7,10 @@ on:
     paths:
       - 'jra/results/**/*.json'
 
+concurrency:
+  group: push-main
+  cancel-in-progress: false
+
 jobs:
   dispatch:
     runs-on: ubuntu-latest
