@@ -9,7 +9,7 @@ on:
       - '!jra/predictions/computer/**'  # コンピ指数は除外
 
 concurrency:
-  group: push-main
+  group: merge-jra-predictions
   cancel-in-progress: false
 
 jobs:

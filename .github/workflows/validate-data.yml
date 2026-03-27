@@ -13,8 +13,8 @@ on:
       - 'nankan/predictions/**/*.json'
 
 concurrency:
-  group: push-main
-  cancel-in-progress: false
+  group: validate-data-${{ github.sha }}
+  cancel-in-progress: true
 
 jobs:
   validate:

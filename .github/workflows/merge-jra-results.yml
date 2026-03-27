@@ -8,7 +8,7 @@ on:
       - 'jra/results/**/*.json'
 
 concurrency:
-  group: push-main
+  group: merge-jra-results
   cancel-in-progress: false
 
 jobs:

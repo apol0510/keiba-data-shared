@@ -8,8 +8,8 @@ on:
       - 'jra/results/**/*.json'
 
 concurrency:
-  group: push-main
-  cancel-in-progress: false
+  group: dispatch-jra-results-${{ github.sha }}
+  cancel-in-progress: true
 
 jobs:
   dispatch:

@@ -11,8 +11,8 @@ on:
       - 'jra/predictions/**/*.json'
 
 concurrency:
-  group: push-main
-  cancel-in-progress: false
+  group: trigger-netlify-${{ github.sha }}
+  cancel-in-progress: true
 
 jobs:
   trigger-netlify:
