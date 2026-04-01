@@ -32,3 +32,8 @@ dist/
 nankan/**/*.html
 nankan/results/venue/
 # Trigger build
+node_modules
+dist
+.astro
+.env
+.env.*
