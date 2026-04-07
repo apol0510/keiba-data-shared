@@ -1,7 +1,7 @@
 {
   "version": "1.1.0",
   "source": "racebook",
-  "createdAt": "2026-04-07T18:37:23.062Z",
+  "createdAt": "2026-04-07T20:55:37.460Z",
   "date": "2026-04-08",
   "category": "nankan",
   "track": "川崎",
@@ -20,17 +20,18 @@
         "hole": 1,
         "connectTop": 7,
         "connect": [
-          6,
-          2
+          2,
+          6
         ],
-        "reserve": [],
-        "none": [
-          11,
-          9,
-          10,
+        "reserve": [
           8,
+          10
+        ],
+        "none": [
+          3,
           5,
-          3
+          9,
+          11
         ]
       },
       "horses": [
@@ -45,7 +46,7 @@
           "weight": 54,
           "jockey": "町田直",
           "trainer": "茂木浩",
-          "computerIndex": "72",
+          "computerIndex": "71",
           "marks": [
             "▲",
             "◎",
@@ -131,7 +132,7 @@
           "weight": 56,
           "jockey": "古岡勇",
           "trainer": "田辺陽",
-          "computerIndex": "20",
+          "computerIndex": "54",
           "marks": [
             "△",
             "△",
@@ -202,7 +203,7 @@
           "weight": 54,
           "jockey": "秋元耕",
           "trainer": "酒井一",
-          "computerIndex": "1",
+          "computerIndex": "43",
           "marks": [],
           "totalScore": 0,
           "assignment": "無",
@@ -284,7 +285,7 @@
           "weight": 56,
           "jockey": "吉原寛",
           "trainer": "林隆之",
-          "computerIndex": "86",
+          "computerIndex": "80",
           "marks": [
             "◎",
             "○",
@@ -325,7 +326,7 @@
           "weight": 56,
           "jockey": "岡村裕",
           "trainer": "山田正",
-          "computerIndex": "1",
+          "computerIndex": "42",
           "marks": [],
           "totalScore": 0,
           "assignment": "無",
@@ -407,7 +408,7 @@
           "weight": 54,
           "jockey": "中越琉",
           "trainer": "村田六",
-          "computerIndex": "22",
+          "computerIndex": "55",
           "marks": [
             "△",
             "△",
@@ -493,7 +494,7 @@
           "weight": 56,
           "jockey": "岡村健",
           "trainer": "斉藤敏",
-          "computerIndex": "42",
+          "computerIndex": "56",
           "marks": [
             "☆",
             "☆",
@@ -578,11 +579,11 @@
           "age": 6,
           "weight": null,
           "jockey": null,
-          "trainer": null,
-          "computerIndex": "8",
+          "trainer": "今井輝",
+          "computerIndex": "49",
           "marks": [],
           "totalScore": 0,
-          "assignment": "無",
+          "assignment": "補欠",
           "predictedOdds": null,
           "shortComment": null,
           "training": null,
@@ -660,8 +661,8 @@
           "age": 6,
           "weight": null,
           "jockey": null,
-          "trainer": null,
-          "computerIndex": "1",
+          "trainer": "川島豊",
+          "computerIndex": "41",
           "marks": [],
           "totalScore": 0,
           "assignment": "無",
@@ -743,10 +744,10 @@
           "weight": 54,
           "jockey": "増田充",
           "trainer": "今井輝",
-          "computerIndex": "2",
+          "computerIndex": "46",
           "marks": [],
           "totalScore": 0,
-          "assignment": "無",
+          "assignment": "補欠",
           "predictedOdds": null,
           "shortComment": null,
           "training": null,
@@ -825,7 +826,7 @@
           "weight": 56,
           "jockey": "吉留孝",
           "trainer": "吉田正",
-          "computerIndex": "1",
+          "computerIndex": "40",
           "marks": [],
           "totalScore": 0,
           "assignment": "無",
@@ -907,7 +908,7 @@
           "weight": 56,
           "jockey": "野畑凌",
           "trainer": "佐藤博",
-          "computerIndex": "76",
+          "computerIndex": "72",
           "marks": [
             "○",
             "▲",
@@ -952,17 +953,18 @@
         "hole": 9,
         "connectTop": 6,
         "connect": [
-          11,
+          3,
           7,
-          3
+          11
         ],
-        "reserve": [],
-        "none": [
-          12,
-          8,
-          5,
+        "reserve": [
           4,
-          1
+          12
+        ],
+        "none": [
+          1,
+          5,
+          8
         ]
       },
       "horses": [
@@ -977,7 +979,7 @@
           "weight": 53,
           "jockey": "田中涼",
           "trainer": "山田質",
-          "computerIndex": "1",
+          "computerIndex": "40",
           "marks": [],
           "totalScore": 0,
           "assignment": "無",
@@ -1059,7 +1061,7 @@
           "weight": 56,
           "jockey": "新原周",
           "trainer": "山崎裕",
-          "computerIndex": "91",
+          "computerIndex": "85",
           "marks": [
             "◎",
             "○",
@@ -1100,7 +1102,7 @@
           "weight": 54,
           "jockey": "町田直",
           "trainer": "内田勝",
-          "computerIndex": "14",
+          "computerIndex": "51",
           "marks": [
             "△"
           ],
@@ -1153,11 +1155,11 @@
           "age": 3,
           "weight": null,
           "jockey": null,
-          "trainer": null,
-          "computerIndex": "2",
+          "trainer": "平田正",
+          "computerIndex": "46",
           "marks": [],
           "totalScore": 0,
-          "assignment": "無",
+          "assignment": "補欠",
           "predictedOdds": null,
           "shortComment": null,
           "training": null,
@@ -1236,7 +1238,7 @@
           "weight": 53,
           "jockey": "木間塚龍",
           "trainer": "田島寿",
-          "computerIndex": "1",
+          "computerIndex": "42",
           "marks": [],
           "totalScore": 0,
           "assignment": "無",
@@ -1318,7 +1320,7 @@
           "weight": 54,
           "jockey": "笹川翼",
           "trainer": "高月賢",
-          "computerIndex": "44",
+          "computerIndex": "58",
           "marks": [
             "△",
             "▲",
@@ -1403,8 +1405,8 @@
           "age": 3,
           "weight": null,
           "jockey": null,
-          "trainer": null,
-          "computerIndex": "20",
+          "trainer": "山田質",
+          "computerIndex": "52",
           "marks": [
             "☆",
             "△"
@@ -1489,7 +1491,7 @@
           "weight": 55,
           "jockey": "藤江渉",
           "trainer": "今井輝",
-          "computerIndex": "1",
+          "computerIndex": "41",
           "marks": [],
           "totalScore": 0,
           "assignment": "無",
@@ -1571,7 +1573,7 @@
           "weight": 53,
           "jockey": "張田昂",
           "trainer": "高橋宏",
-          "computerIndex": "60",
+          "computerIndex": "66",
           "marks": [
             "△",
             "◎",
@@ -1642,7 +1644,7 @@
           "weight": 53,
           "jockey": "野畑凌",
           "trainer": "茂木浩",
-          "computerIndex": "62",
+          "computerIndex": "67",
           "marks": [
             "○",
             "☆",
@@ -1713,7 +1715,7 @@
           "weight": 56,
           "jockey": "桜井光",
           "trainer": "山崎尋",
-          "computerIndex": "34",
+          "computerIndex": "57",
           "marks": [
             "▲",
             "△",
@@ -1799,10 +1801,10 @@
           "weight": 55,
           "jockey": "山林堂信",
           "trainer": "佐々木仁",
-          "computerIndex": "4",
+          "computerIndex": "47",
           "marks": [],
           "totalScore": 0,
-          "assignment": "無",
+          "assignment": "補欠",
           "predictedOdds": null,
           "shortComment": null,
           "training": null,
@@ -1885,15 +1887,16 @@
         "hole": 2,
         "connectTop": 7,
         "connect": [
-          6,
           5,
+          6,
           10
         ],
-        "reserve": [],
-        "none": [
-          4,
-          3,
+        "reserve": [
           1
+        ],
+        "none": [
+          3,
+          4
         ]
       },
       "horses": [
@@ -1908,10 +1911,10 @@
           "weight": 54,
           "jockey": "桜井光",
           "trainer": "藤原智",
-          "computerIndex": "2",
+          "computerIndex": "46",
           "marks": [],
           "totalScore": 0,
-          "assignment": "無",
+          "assignment": "補欠",
           "predictedOdds": null,
           "shortComment": null,
           "training": null,
@@ -1990,7 +1993,7 @@
           "weight": 56,
           "jockey": "吉原寛",
           "trainer": "内田勝",
-          "computerIndex": "70",
+          "computerIndex": "71",
           "marks": [
             "◎",
             "▲",
@@ -2076,7 +2079,7 @@
           "weight": 54,
           "jockey": "川島正",
           "trainer": "岩崎真",
-          "computerIndex": "1",
+          "computerIndex": "40",
           "marks": [],
           "totalScore": 0,
           "assignment": "無",
@@ -2128,7 +2131,7 @@
           "weight": 56,
           "jockey": "西啓太",
           "trainer": "河津裕",
-          "computerIndex": "1",
+          "computerIndex": "41",
           "marks": [],
           "totalScore": 0,
           "assignment": "無",
@@ -2210,7 +2213,7 @@
           "weight": 54,
           "jockey": "和田譲",
           "trainer": "鈴木義",
-          "computerIndex": "16",
+          "computerIndex": "50",
           "marks": [
             "△",
             "△"
@@ -2295,7 +2298,7 @@
           "weight": 54,
           "jockey": "本田正",
           "trainer": "山田質",
-          "computerIndex": "18",
+          "computerIndex": "53",
           "marks": [
             "☆",
             "△",
@@ -2381,7 +2384,7 @@
           "weight": 56,
           "jockey": "笹川翼",
           "trainer": "田辺陽",
-          "computerIndex": "38",
+          "computerIndex": "56",
           "marks": [
             "△",
             "☆",
@@ -2467,7 +2470,7 @@
           "weight": 56,
           "jockey": "矢野貴",
           "trainer": "高月賢",
-          "computerIndex": "91",
+          "computerIndex": "83",
           "marks": [
             "○",
             "○",
@@ -2523,7 +2526,7 @@
           "weight": 56,
           "jockey": "町田直",
           "trainer": "平田正",
-          "computerIndex": "74",
+          "computerIndex": "70",
           "marks": [
             "▲",
             "◎",
@@ -2609,7 +2612,7 @@
           "weight": 56,
           "jockey": "増田充",
           "trainer": "田島寿",
-          "computerIndex": "16",
+          "computerIndex": "52",
           "marks": [
             "△"
           ],
@@ -2684,10 +2687,10 @@
         "connect": [
           6
         ],
-        "reserve": [],
-        "none": [
+        "reserve": [
           1
-        ]
+        ],
+        "none": []
       },
       "horses": [
         {
@@ -2701,10 +2704,10 @@
           "weight": 56,
           "jockey": "西啓太",
           "trainer": "秋山直",
-          "computerIndex": "34",
+          "computerIndex": "57",
           "marks": [],
           "totalScore": 0,
-          "assignment": "無",
+          "assignment": "補欠",
           "predictedOdds": null,
           "shortComment": null,
           "training": null,
@@ -2753,7 +2756,7 @@
           "weight": 57,
           "jockey": "安藤洋",
           "trainer": "小久保智",
-          "computerIndex": "86",
+          "computerIndex": "77",
           "marks": [
             "○",
             "▲",
@@ -2839,7 +2842,7 @@
           "weight": 54,
           "jockey": "増田充",
           "trainer": "鈴木義",
-          "computerIndex": "26",
+          "computerIndex": "51",
           "marks": [
             "◎",
             "☆"
@@ -2924,7 +2927,7 @@
           "weight": 57,
           "jockey": "本橋孝",
           "trainer": "鈴木義",
-          "computerIndex": "48",
+          "computerIndex": "59",
           "marks": [
             "▲",
             "☆",
@@ -3010,7 +3013,7 @@
           "weight": 57,
           "jockey": "笹川翼",
           "trainer": "繁田健",
-          "computerIndex": "89",
+          "computerIndex": "83",
           "marks": [
             "◎",
             "○",
@@ -3095,8 +3098,8 @@
           "age": 3,
           "weight": null,
           "jockey": null,
-          "trainer": null,
-          "computerIndex": "4",
+          "trainer": "高月賢",
+          "computerIndex": "46",
           "marks": [
             "☆"
           ],
@@ -3184,18 +3187,18 @@
         "hole": 6,
         "connectTop": 1,
         "connect": [
+          5,
           10,
-          11,
-          5
+          11
         ],
         "reserve": [
-          3
+          2,
+          3,
+          8
         ],
         "none": [
-          9,
-          8,
           4,
-          2
+          9
         ]
       },
       "horses": [
@@ -3210,7 +3213,7 @@
           "weight": 54,
           "jockey": "桜井光",
           "trainer": "久保秀",
-          "computerIndex": "30",
+          "computerIndex": "56",
           "marks": [
             "△",
             "○",
@@ -3296,10 +3299,10 @@
           "weight": 56,
           "jockey": "池谷匠",
           "trainer": "山崎裕",
-          "computerIndex": "2",
+          "computerIndex": "46",
           "marks": [],
           "totalScore": 0,
-          "assignment": "無",
+          "assignment": "補欠",
           "predictedOdds": null,
           "shortComment": null,
           "training": null,
@@ -3377,8 +3380,8 @@
           "age": 5,
           "weight": null,
           "jockey": null,
-          "trainer": null,
-          "computerIndex": "8",
+          "trainer": "工藤伸",
+          "computerIndex": "48",
           "marks": [
             "△"
           ],
@@ -3462,7 +3465,7 @@
           "weight": 54,
           "jockey": "中越琉",
           "trainer": "久保勇",
-          "computerIndex": "1",
+          "computerIndex": "40",
           "marks": [],
           "totalScore": 0,
           "assignment": "無",
@@ -3544,7 +3547,7 @@
           "weight": 56,
           "jockey": "半沢慶",
           "trainer": "宇野木博",
-          "computerIndex": "6",
+          "computerIndex": "47",
           "marks": [
             "△"
           ],
@@ -3625,10 +3628,10 @@
           "sexAge": "牡4",
           "sex": "牡",
           "age": 4,
-          "weight": null,
-          "jockey": null,
-          "trainer": null,
-          "computerIndex": "93",
+          "weight": 56,
+          "jockey": "野畑凌",
+          "trainer": "佐藤博",
+          "computerIndex": "84",
           "marks": [
             "○",
             "◎"
@@ -3668,7 +3671,7 @@
           "weight": 56,
           "jockey": "張田昂",
           "trainer": "今井輝",
-          "computerIndex": "52",
+          "computerIndex": "60",
           "marks": [
             "▲",
             "☆",
@@ -3754,10 +3757,10 @@
           "weight": 54,
           "jockey": "町田直",
           "trainer": "平田正",
-          "computerIndex": "10",
+          "computerIndex": "49",
           "marks": [],
           "totalScore": 0,
-          "assignment": "無",
+          "assignment": "補欠",
           "predictedOdds": null,
           "shortComment": null,
           "training": null,
@@ -3835,8 +3838,8 @@
           "age": 4,
           "weight": null,
           "jockey": null,
-          "trainer": null,
-          "computerIndex": "1",
+          "trainer": "村田順",
+          "computerIndex": "41",
           "marks": [],
           "totalScore": 0,
           "assignment": "無",
@@ -3918,7 +3921,7 @@
           "weight": 56,
           "jockey": "菅原涼",
           "trainer": "佐々木仁",
-          "computerIndex": "32",
+          "computerIndex": "55",
           "marks": [
             "☆",
             "△",
@@ -4004,7 +4007,7 @@
           "weight": 54,
           "jockey": "藤江渉",
           "trainer": "八木喜",
-          "computerIndex": "14",
+          "computerIndex": "51",
           "marks": [
             "△"
           ],
@@ -4088,7 +4091,7 @@
           "weight": 56,
           "jockey": "笹川翼",
           "trainer": "高月賢",
-          "computerIndex": "82",
+          "computerIndex": "77",
           "marks": [
             "◎",
             "▲",
@@ -4133,17 +4136,18 @@
         "hole": 11,
         "connectTop": 12,
         "connect": [
-          9,
           2,
-          5
+          5,
+          9
         ],
-        "reserve": [],
-        "none": [
-          10,
-          8,
-          6,
+        "reserve": [
           4,
-          1
+          10
+        ],
+        "none": [
+          1,
+          6,
+          8
         ]
       },
       "horses": [
@@ -4158,7 +4162,7 @@
           "weight": 54,
           "jockey": "古岡勇",
           "trainer": "内田勝",
-          "computerIndex": "1",
+          "computerIndex": "40",
           "marks": [],
           "totalScore": 0,
           "assignment": "無",
@@ -4240,7 +4244,7 @@
           "weight": 54,
           "jockey": "桜井光",
           "trainer": "佐藤博",
-          "computerIndex": "32",
+          "computerIndex": "57",
           "marks": [
             "△",
             "△",
@@ -4396,11 +4400,11 @@
           "age": 6,
           "weight": null,
           "jockey": null,
-          "trainer": null,
-          "computerIndex": "6",
+          "trainer": "武井和",
+          "computerIndex": "49",
           "marks": [],
           "totalScore": 0,
-          "assignment": "無",
+          "assignment": "補欠",
           "predictedOdds": null,
           "shortComment": null,
           "training": null,
@@ -4478,8 +4482,8 @@
           "age": 4,
           "weight": null,
           "jockey": null,
-          "trainer": null,
-          "computerIndex": "14",
+          "trainer": "川島豊",
+          "computerIndex": "51",
           "marks": [
             "△"
           ],
@@ -4563,7 +4567,7 @@
           "weight": 54,
           "jockey": "七夕裕",
           "trainer": "野口孝",
-          "computerIndex": "1",
+          "computerIndex": "42",
           "marks": [],
           "totalScore": 0,
           "assignment": "無",
@@ -4645,7 +4649,7 @@
           "weight": 56,
           "jockey": "矢野貴",
           "trainer": "高月賢",
-          "computerIndex": "89",
+          "computerIndex": "84",
           "marks": [
             "○",
             "▲",
@@ -4686,7 +4690,7 @@
           "weight": 56,
           "jockey": "増田充",
           "trainer": "山崎裕",
-          "computerIndex": "1",
+          "computerIndex": "41",
           "marks": [],
           "totalScore": 0,
           "assignment": "無",
@@ -4768,7 +4772,7 @@
           "weight": 54,
           "jockey": "張田昂",
           "trainer": "久保勇",
-          "computerIndex": "12",
+          "computerIndex": "50",
           "marks": [
             "☆",
             "△",
@@ -4853,11 +4857,11 @@
           "age": 4,
           "weight": null,
           "jockey": null,
-          "trainer": null,
-          "computerIndex": "6",
+          "trainer": "小林真",
+          "computerIndex": "48",
           "marks": [],
           "totalScore": 0,
-          "assignment": "無",
+          "assignment": "補欠",
           "predictedOdds": null,
           "shortComment": null,
           "training": null,
@@ -4936,7 +4940,7 @@
           "weight": 54,
           "jockey": "池谷匠",
           "trainer": "村田順",
-          "computerIndex": "54",
+          "computerIndex": "62",
           "marks": [
             "▲",
             "◎",
@@ -5021,8 +5025,8 @@
           "age": 6,
           "weight": null,
           "jockey": null,
-          "trainer": null,
-          "computerIndex": "48",
+          "trainer": "吉橋淳",
+          "computerIndex": "59",
           "marks": [
             "☆",
             "▲"
@@ -5111,17 +5115,18 @@
         "hole": 3,
         "connectTop": 12,
         "connect": [
-          7,
-          5
+          5,
+          7
         ],
-        "reserve": [],
-        "none": [
-          10,
-          8,
-          6,
-          4,
+        "reserve": [
+          1,
           2,
-          1
+          6
+        ],
+        "none": [
+          4,
+          8,
+          10
         ]
       },
       "horses": [
@@ -5136,10 +5141,10 @@
           "weight": 54,
           "jockey": "伊藤裕",
           "trainer": "林隆之",
-          "computerIndex": "6",
+          "computerIndex": "48",
           "marks": [],
           "totalScore": 0,
-          "assignment": "無",
+          "assignment": "補欠",
           "predictedOdds": null,
           "shortComment": null,
           "training": null,
@@ -5217,11 +5222,11 @@
           "age": 4,
           "weight": null,
           "jockey": null,
-          "trainer": null,
-          "computerIndex": "6",
+          "trainer": "山田質",
+          "computerIndex": "47",
           "marks": [],
           "totalScore": 0,
-          "assignment": "無",
+          "assignment": "補欠",
           "predictedOdds": null,
           "shortComment": null,
           "training": null,
@@ -5300,7 +5305,7 @@
           "weight": 54,
           "jockey": "新原周",
           "trainer": "高月賢",
-          "computerIndex": "22",
+          "computerIndex": "52",
           "marks": [
             "▲",
             "☆",
@@ -5386,7 +5391,7 @@
           "weight": 54,
           "jockey": "赤津和",
           "trainer": "箕輪武",
-          "computerIndex": "1",
+          "computerIndex": "40",
           "marks": [],
           "totalScore": 0,
           "assignment": "無",
@@ -5468,7 +5473,7 @@
           "weight": 56,
           "jockey": "七夕裕",
           "trainer": "工藤伸",
-          "computerIndex": "28",
+          "computerIndex": "55",
           "marks": [
             "△",
             "△",
@@ -5554,10 +5559,10 @@
           "weight": 54,
           "jockey": "古岡勇",
           "trainer": "村田順",
-          "computerIndex": "8",
+          "computerIndex": "49",
           "marks": [],
           "totalScore": 0,
-          "assignment": "無",
+          "assignment": "補欠",
           "predictedOdds": null,
           "shortComment": null,
           "training": null,
@@ -5636,7 +5641,7 @@
           "weight": 56,
           "jockey": "岡村裕",
           "trainer": "久保秀",
-          "computerIndex": "28",
+          "computerIndex": "54",
           "marks": [
             "☆",
             "△",
@@ -5722,7 +5727,7 @@
           "weight": 54,
           "jockey": "岡村健",
           "trainer": "酒井一",
-          "computerIndex": "1",
+          "computerIndex": "42",
           "marks": [],
           "totalScore": 0,
           "assignment": "無",
@@ -5804,7 +5809,7 @@
           "weight": 56,
           "jockey": "桜井光",
           "trainer": "水上直",
-          "computerIndex": "82",
+          "computerIndex": "74",
           "marks": [
             "○",
             "○",
@@ -5890,7 +5895,7 @@
           "weight": 54,
           "jockey": "増田充",
           "trainer": "河津裕",
-          "computerIndex": "1",
+          "computerIndex": "41",
           "marks": [],
           "totalScore": 0,
           "assignment": "無",
@@ -5972,7 +5977,7 @@
           "weight": 56,
           "jockey": "野畑凌",
           "trainer": "鈴木義",
-          "computerIndex": "89",
+          "computerIndex": "83",
           "marks": [
             "◎",
             "▲",
@@ -6058,7 +6063,7 @@
           "weight": 56,
           "jockey": "町田直",
           "trainer": "内田勝",
-          "computerIndex": "60",
+          "computerIndex": "66",
           "marks": [
             "△",
             "◎",
@@ -6148,19 +6153,19 @@
         "hole": 8,
         "connectTop": 10,
         "connect": [
-          6,
           2,
+          6,
           11
         ],
         "reserve": [
-          5
+          4,
+          5,
+          7,
+          9
         ],
         "none": [
-          12,
-          9,
-          7,
-          4,
-          3
+          3,
+          12
         ]
       },
       "horses": [
@@ -6175,7 +6180,7 @@
           "weight": 56,
           "jockey": "本田正",
           "trainer": "小久保智",
-          "computerIndex": "72",
+          "computerIndex": "69",
           "marks": [
             "○",
             "○",
@@ -6261,7 +6266,7 @@
           "weight": 56,
           "jockey": "鷹見陸",
           "trainer": "佐々木仁",
-          "computerIndex": "6",
+          "computerIndex": "48",
           "marks": [
             "☆",
             "△"
@@ -6346,7 +6351,7 @@
           "weight": 56,
           "jockey": "池谷匠",
           "trainer": "山崎尋",
-          "computerIndex": "1",
+          "computerIndex": "41",
           "marks": [],
           "totalScore": 0,
           "assignment": "無",
@@ -6427,11 +6432,11 @@
           "age": 3,
           "weight": null,
           "jockey": null,
-          "trainer": null,
-          "computerIndex": "2",
+          "trainer": "高月賢",
+          "computerIndex": "49",
           "marks": [],
           "totalScore": 0,
-          "assignment": "無",
+          "assignment": "補欠",
           "predictedOdds": null,
           "shortComment": null,
           "training": null,
@@ -6510,7 +6515,7 @@
           "weight": 56,
           "jockey": "和田譲",
           "trainer": "小久保智",
-          "computerIndex": "32",
+          "computerIndex": "58",
           "marks": [
             "△"
           ],
@@ -6594,7 +6599,7 @@
           "weight": 56,
           "jockey": "新原周",
           "trainer": "鈴木義",
-          "computerIndex": "26",
+          "computerIndex": "54",
           "marks": [
             "△",
             "▲"
@@ -6678,11 +6683,11 @@
           "age": 3,
           "weight": null,
           "jockey": null,
-          "trainer": null,
-          "computerIndex": "2",
+          "trainer": "河津裕",
+          "computerIndex": "47",
           "marks": [],
           "totalScore": 0,
-          "assignment": "無",
+          "assignment": "補欠",
           "predictedOdds": null,
           "shortComment": null,
           "training": null,
@@ -6761,7 +6766,7 @@
           "weight": 56,
           "jockey": "西啓太",
           "trainer": "加藤誠",
-          "computerIndex": "79",
+          "computerIndex": "80",
           "marks": [
             "△",
             "◎",
@@ -6832,10 +6837,10 @@
           "weight": 54,
           "jockey": "田中涼",
           "trainer": "鈴木義",
-          "computerIndex": "2",
+          "computerIndex": "46",
           "marks": [],
           "totalScore": 0,
-          "assignment": "無",
+          "assignment": "補欠",
           "predictedOdds": null,
           "shortComment": null,
           "training": null,
@@ -6914,7 +6919,7 @@
           "weight": 56,
           "jockey": "町田直",
           "trainer": "長友豊",
-          "computerIndex": "44",
+          "computerIndex": "60",
           "marks": [
             "▲",
             "▲",
@@ -6955,7 +6960,7 @@
           "weight": 56,
           "jockey": "中越琉",
           "trainer": "佐藤博",
-          "computerIndex": "16",
+          "computerIndex": "51",
           "marks": [
             "△"
           ],
@@ -7024,7 +7029,7 @@
           "weight": 56,
           "jockey": "古岡勇",
           "trainer": "甲田悟",
-          "computerIndex": "1",
+          "computerIndex": "40",
           "marks": [],
           "totalScore": 0,
           "assignment": "無",
@@ -7106,7 +7111,7 @@
           "weight": 54,
           "jockey": "矢野貴",
           "trainer": "高月賢",
-          "computerIndex": "56",
+          "computerIndex": "65",
           "marks": [
             "◎",
             "☆",
@@ -7181,20 +7186,20 @@
         "hole": 8,
         "connectTop": 4,
         "connect": [
-          10,
           1,
-          9
+          9,
+          10
         ],
         "reserve": [
+          7,
+          11,
           12
         ],
         "none": [
-          13,
-          14,
-          11,
-          7,
+          2,
           3,
-          2
+          13,
+          14
         ]
       },
       "horses": [
@@ -7209,7 +7214,7 @@
           "weight": 56,
           "jockey": "笹川翼",
           "trainer": "平田正",
-          "computerIndex": "20",
+          "computerIndex": "54",
           "marks": [
             "△",
             "△",
@@ -7295,7 +7300,7 @@
           "weight": 54,
           "jockey": "福原杏",
           "trainer": "平山真",
-          "computerIndex": "1",
+          "computerIndex": "43",
           "marks": [],
           "totalScore": 0,
           "assignment": "無",
@@ -7377,7 +7382,7 @@
           "weight": 54,
           "jockey": "桜井光",
           "trainer": "古沢悟",
-          "computerIndex": "1",
+          "computerIndex": "42",
           "marks": [],
           "totalScore": 0,
           "assignment": "無",
@@ -7459,7 +7464,7 @@
           "weight": 56,
           "jockey": "保園翔",
           "trainer": "水上直",
-          "computerIndex": "54",
+          "computerIndex": "64",
           "marks": [
             "△",
             "▲",
@@ -7500,7 +7505,7 @@
           "weight": 56,
           "jockey": "吉原寛",
           "trainer": "林隆之",
-          "computerIndex": "91",
+          "computerIndex": "84",
           "marks": [
             "○",
             "○",
@@ -7586,7 +7591,7 @@
           "weight": 56,
           "jockey": "矢野貴",
           "trainer": "内田勝",
-          "computerIndex": "58",
+          "computerIndex": "65",
           "marks": [
             "▲",
             "◎",
@@ -7657,10 +7662,10 @@
           "weight": 56,
           "jockey": "古岡勇",
           "trainer": "古沢悟",
-          "computerIndex": "4",
+          "computerIndex": "47",
           "marks": [],
           "totalScore": 0,
-          "assignment": "無",
+          "assignment": "補欠",
           "predictedOdds": null,
           "shortComment": null,
           "training": null,
@@ -7809,8 +7814,8 @@
           "age": 5,
           "weight": null,
           "jockey": null,
-          "trainer": null,
-          "computerIndex": "12",
+          "trainer": "鈴木義",
+          "computerIndex": "49",
           "marks": [
             "△",
             "△"
@@ -7880,7 +7885,7 @@
           "weight": 56,
           "jockey": "本田正",
           "trainer": "河津裕",
-          "computerIndex": "22",
+          "computerIndex": "53",
           "marks": [
             "☆",
             "△",
@@ -7966,10 +7971,10 @@
           "weight": 56,
           "jockey": "新原周",
           "trainer": "甲田悟",
-          "computerIndex": "2",
+          "computerIndex": "46",
           "marks": [],
           "totalScore": 0,
-          "assignment": "無",
+          "assignment": "補欠",
           "predictedOdds": null,
           "shortComment": null,
           "training": null,
@@ -8048,7 +8053,7 @@
           "weight": 56,
           "jockey": "岡村健",
           "trainer": "小久保智",
-          "computerIndex": "10",
+          "computerIndex": "50",
           "marks": [
             "△"
           ],
@@ -8132,7 +8137,7 @@
           "weight": 54,
           "jockey": "池谷匠",
           "trainer": "村田順",
-          "computerIndex": "1",
+          "computerIndex": "40",
           "marks": [],
           "totalScore": 0,
           "assignment": "無",
@@ -8199,7 +8204,7 @@
           "weight": 54,
           "jockey": "室陽一",
           "trainer": "入口由",
-          "computerIndex": "1",
+          "computerIndex": "41",
           "marks": [],
           "totalScore": 0,
           "assignment": "無",
@@ -8290,15 +8295,15 @@
           10
         ],
         "reserve": [
-          8
+          5,
+          6,
+          7,
+          8,
+          11,
+          14
         ],
         "none": [
-          14,
-          11,
-          12,
-          7,
-          5,
-          6
+          12
         ]
       },
       "horses": [
@@ -8313,7 +8318,7 @@
           "weight": 55,
           "jockey": "野畑凌",
           "trainer": "佐藤博",
-          "computerIndex": "95",
+          "computerIndex": "86",
           "marks": [
             "○",
             "○",
@@ -8369,7 +8374,7 @@
           "weight": 57,
           "jockey": "本田正",
           "trainer": "佐藤博",
-          "computerIndex": "64",
+          "computerIndex": "65",
           "marks": [
             "▲",
             "▲",
@@ -8455,7 +8460,7 @@
           "weight": 57,
           "jockey": "菅原涼",
           "trainer": "佐々木仁",
-          "computerIndex": "18",
+          "computerIndex": "52",
           "marks": [
             "☆",
             "☆",
@@ -8540,8 +8545,8 @@
           "age": 6,
           "weight": null,
           "jockey": null,
-          "trainer": null,
-          "computerIndex": "16",
+          "trainer": "山崎裕",
+          "computerIndex": "51",
           "marks": [
             "△",
             "△",
@@ -8627,10 +8632,10 @@
           "weight": 55,
           "jockey": "本橋孝",
           "trainer": "酒井忍",
-          "computerIndex": "8",
+          "computerIndex": "49",
           "marks": [],
           "totalScore": 0,
-          "assignment": "無",
+          "assignment": "補欠",
           "predictedOdds": null,
           "shortComment": null,
           "training": null,
@@ -8664,10 +8669,10 @@
           "weight": 57,
           "jockey": "鷹見陸",
           "trainer": "内田勝",
-          "computerIndex": "2",
+          "computerIndex": "46",
           "marks": [],
           "totalScore": 0,
-          "assignment": "無",
+          "assignment": "補欠",
           "predictedOdds": null,
           "shortComment": null,
           "training": null,
@@ -8746,10 +8751,10 @@
           "weight": 57,
           "jockey": "和田譲",
           "trainer": "鈴木義",
-          "computerIndex": "2",
+          "computerIndex": "47",
           "marks": [],
           "totalScore": 0,
-          "assignment": "無",
+          "assignment": "補欠",
           "predictedOdds": null,
           "shortComment": null,
           "training": null,
@@ -8828,7 +8833,7 @@
           "weight": 55,
           "jockey": "新原周",
           "trainer": "林隆之",
-          "computerIndex": "22",
+          "computerIndex": "53",
           "marks": [
             "△",
             "△",
@@ -8914,7 +8919,7 @@
           "weight": 57,
           "jockey": "御神本訓",
           "trainer": "河津裕",
-          "computerIndex": "30",
+          "computerIndex": "57",
           "marks": [
             "◎"
           ],
@@ -8998,7 +9003,7 @@
           "weight": 57,
           "jockey": "笹川翼",
           "trainer": "山崎裕",
-          "computerIndex": "34",
+          "computerIndex": "55",
           "marks": [
             "△",
             "△",
@@ -9083,11 +9088,11 @@
           "age": 6,
           "weight": null,
           "jockey": null,
-          "trainer": null,
-          "computerIndex": "10",
+          "trainer": "水野貴",
+          "computerIndex": "50",
           "marks": [],
           "totalScore": 0,
-          "assignment": "無",
+          "assignment": "補欠",
           "predictedOdds": null,
           "shortComment": null,
           "training": null,
@@ -9166,7 +9171,7 @@
           "weight": 57,
           "jockey": "古岡勇",
           "trainer": "田辺陽",
-          "computerIndex": "1",
+          "computerIndex": "40",
           "marks": [],
           "totalScore": 0,
           "assignment": "無",
@@ -9248,7 +9253,7 @@
           "weight": 57,
           "jockey": "矢野貴",
           "trainer": "佐々木仁",
-          "computerIndex": "40",
+          "computerIndex": "59",
           "marks": [
             "◎",
             "▲"
@@ -9333,10 +9338,10 @@
           "weight": 55,
           "jockey": "岡村健",
           "trainer": "河津裕",
-          "computerIndex": "4",
+          "computerIndex": "48",
           "marks": [],
           "totalScore": 0,
-          "assignment": "無",
+          "assignment": "補欠",
           "predictedOdds": null,
           "shortComment": null,
           "training": null,
@@ -9424,11 +9429,11 @@
           11
         ],
         "reserve": [
-          2
+          2,
+          5,
+          7
         ],
         "none": [
-          7,
-          5,
           1
         ]
       },
@@ -9444,7 +9449,7 @@
           "weight": 57,
           "jockey": "高橋悠",
           "trainer": "伊藤忍",
-          "computerIndex": "1",
+          "computerIndex": "40",
           "marks": [],
           "totalScore": 0,
           "assignment": "無",
@@ -9556,7 +9561,7 @@
           "weight": 57,
           "jockey": "笹川翼",
           "trainer": "内田勝",
-          "computerIndex": "1",
+          "computerIndex": "41",
           "marks": [
             "△"
           ],
@@ -9670,7 +9675,7 @@
           "weight": 57,
           "jockey": "西村淳",
           "trainer": null,
-          "computerIndex": "30",
+          "computerIndex": "54",
           "marks": [
             "△",
             "△",
@@ -9713,7 +9718,7 @@
           "weight": 57,
           "jockey": "岩田望",
           "trainer": null,
-          "computerIndex": "6",
+          "computerIndex": "48",
           "marks": [
             "△",
             "◎"
@@ -9753,10 +9758,10 @@
           "weight": 57,
           "jockey": "横山武",
           "trainer": null,
-          "computerIndex": "4",
+          "computerIndex": "47",
           "marks": [],
           "totalScore": 0,
-          "assignment": "無",
+          "assignment": "補欠",
           "predictedOdds": null,
           "shortComment": null,
           "training": null,
@@ -9790,7 +9795,7 @@
           "weight": 57,
           "jockey": "岩田康",
           "trainer": null,
-          "computerIndex": "34",
+          "computerIndex": "56",
           "marks": [
             "▲",
             "◎",
@@ -9833,10 +9838,10 @@
           "weight": 57,
           "jockey": "御神本訓",
           "trainer": "藤田輝",
-          "computerIndex": "2",
+          "computerIndex": "46",
           "marks": [],
           "totalScore": 0,
-          "assignment": "無",
+          "assignment": "補欠",
           "predictedOdds": null,
           "shortComment": null,
           "training": null,
@@ -9870,7 +9875,7 @@
           "weight": 57,
           "jockey": "矢野貴",
           "trainer": null,
-          "computerIndex": "86",
+          "computerIndex": "79",
           "marks": [
             "☆",
             "○",
@@ -9943,7 +9948,7 @@
           "weight": 57,
           "jockey": "坂井瑠",
           "trainer": null,
-          "computerIndex": "74",
+          "computerIndex": "76",
           "marks": [
             "◎",
             "▲",
@@ -10001,7 +10006,7 @@
           "weight": 55,
           "jockey": "松山弘",
           "trainer": null,
-          "computerIndex": "44",
+          "computerIndex": "59",
           "marks": [
             "○",
             "☆",
@@ -10104,7 +10109,7 @@
           "weight": 57,
           "jockey": "吉原寛",
           "trainer": "内田勝",
-          "computerIndex": "48",
+          "computerIndex": "62",
           "marks": [
             "○",
             "△"
@@ -10163,19 +10168,20 @@
         "hole": 12,
         "connectTop": 6,
         "connect": [
-          10,
+          3,
           7,
-          3
+          10
         ],
-        "reserve": [],
-        "none": [
-          13,
-          14,
-          11,
-          9,
-          8,
+        "reserve": [
+          4,
           5,
-          4
+          8
+        ],
+        "none": [
+          9,
+          11,
+          13,
+          14
         ]
       },
       "horses": [
@@ -10276,7 +10282,7 @@
           "weight": 56,
           "jockey": "本田正",
           "trainer": "小久保智",
-          "computerIndex": "95",
+          "computerIndex": "90",
           "marks": [
             "○",
             "◎",
@@ -10317,7 +10323,7 @@
           "weight": 56,
           "jockey": "町田直",
           "trainer": "佐藤博",
-          "computerIndex": "20",
+          "computerIndex": "53",
           "marks": [
             "△",
             "△",
@@ -10403,10 +10409,10 @@
           "weight": 56,
           "jockey": "赤津和",
           "trainer": "宇野木博",
-          "computerIndex": "12",
+          "computerIndex": "50",
           "marks": [],
           "totalScore": 0,
-          "assignment": "無",
+          "assignment": "補欠",
           "predictedOdds": null,
           "shortComment": null,
           "training": null,
@@ -10485,10 +10491,10 @@
           "weight": 54,
           "jockey": "岡村健",
           "trainer": "坂本昇",
-          "computerIndex": "8",
+          "computerIndex": "48",
           "marks": [],
           "totalScore": 0,
-          "assignment": "無",
+          "assignment": "補欠",
           "predictedOdds": null,
           "shortComment": null,
           "training": null,
@@ -10567,7 +10573,7 @@
           "weight": 54,
           "jockey": "篠谷葵",
           "trainer": "佐藤裕",
-          "computerIndex": "34",
+          "computerIndex": "57",
           "marks": [
             "◎",
             "☆",
@@ -10652,8 +10658,8 @@
           "age": 4,
           "weight": null,
           "jockey": null,
-          "trainer": null,
-          "computerIndex": "30",
+          "trainer": "高月賢",
+          "computerIndex": "55",
           "marks": [
             "△",
             "△",
@@ -10739,10 +10745,10 @@
           "weight": 54,
           "jockey": "矢野貴",
           "trainer": "甲田悟",
-          "computerIndex": "8",
+          "computerIndex": "49",
           "marks": [],
           "totalScore": 0,
-          "assignment": "無",
+          "assignment": "補欠",
           "predictedOdds": null,
           "shortComment": null,
           "training": null,
@@ -10821,7 +10827,7 @@
           "weight": 56,
           "jockey": "小杉亮",
           "trainer": "矢内博",
-          "computerIndex": "1",
+          "computerIndex": "42",
           "marks": [],
           "totalScore": 0,
           "assignment": "無",
@@ -10903,7 +10909,7 @@
           "weight": 56,
           "jockey": "笠野雄",
           "trainer": "平山真",
-          "computerIndex": "16",
+          "computerIndex": "51",
           "marks": [
             "☆",
             "△",
@@ -10989,7 +10995,7 @@
           "weight": 56,
           "jockey": "本田紀",
           "trainer": "村田六",
-          "computerIndex": "1",
+          "computerIndex": "40",
           "marks": [],
           "totalScore": 0,
           "assignment": "無",
@@ -11071,7 +11077,7 @@
           "weight": 56,
           "jockey": "野畑凌",
           "trainer": "高月賢",
-          "computerIndex": "52",
+          "computerIndex": "59",
           "marks": [
             "△",
             "▲",
@@ -11157,7 +11163,7 @@
           "weight": 56,
           "jockey": "吉井章",
           "trainer": "藤原智",
-          "computerIndex": "1",
+          "computerIndex": "43",
           "marks": [],
           "totalScore": 0,
           "assignment": "無",
@@ -11239,7 +11245,7 @@
           "weight": 54,
           "jockey": "中越琉",
           "trainer": "久保勇",
-          "computerIndex": "1",
+          "computerIndex": "41",
           "marks": [],
           "totalScore": 0,
           "assignment": "無",
