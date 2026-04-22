@@ -95,12 +95,13 @@ jobs:
         with:
           token: ${{ secrets.INTELLIGENCE_REPO_DISPATCH_TOKEN }}
           repository: apol0510/keiba-intelligence
-          event-type: prediction-jra-updated
+          event-type: prediction-updated
           client-payload: |
             {
               "dates": ${{ steps.changed-files.outputs.dates }},
               "source": "keiba-data-shared",
               "venue": "jra",
+              "category": "jra",
               "trigger": "auto",
               "commit_sha": "${{ github.sha }}"
             }
@@ -110,7 +111,7 @@ jobs:
         run: |
           echo "✅ Dispatched JRA prediction to keiba-intelligence"
           echo "   Dates: ${{ steps.changed-files.outputs.dates }}"
-          echo "   Event type: prediction-jra-updated"
+          echo "   Event type: prediction-updated (category=jra)"
           echo "   Target repo: apol0510/keiba-intelligence"
 
       - name: Skip notification
