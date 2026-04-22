@@ -84,6 +84,7 @@ jobs:
             {
               "dates": ${{ steps.changed-files.outputs.dates }},
               "source": "keiba-data-shared",
+              "category": "nankan",
               "trigger": "auto",
               "commit_sha": "${{ github.sha }}"
             }
