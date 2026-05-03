@@ -219,6 +219,7 @@ const getWeatherEmoji = (weather) => {
 };
 
 // レース内容要約生成（自動生成）
+// 実走データ (cornerPass / lastFurlong / margin / popularity) からレース展開を分析
 const generateRaceSummary = () => {
   if (!raceData.results || raceData.results.length === 0) {
     return '結果データがありません。';
@@ -227,63 +228,95 @@ const generateRaceSummary = () => {
   const w = raceData.results[0];
   const second = raceData.results[1];
   const third = raceData.results[2];
+  const fieldSize = raceData.results.length;
 
-  // 人気による表現
-  const popularityText = w.popularity === 1 ? '1番人気に応えた' : `${w.popularity}番人気から`;
+  // ── 脚質判定: 最終コーナー通過順位で4分類 ──
+  const classifyStyle = (cornerPass) => {
+    if (!Array.isArray(cornerPass) || cornerPass.length === 0) return null;
+    const last = parseInt(cornerPass[cornerPass.length - 1], 10);
+    if (!Number.isFinite(last)) return null;
+    const midPoint = Math.max(3, Math.ceil(fieldSize / 2));
+    if (last === 1) return '逃げ';
+    if (last <= 3) return '先行';
+    if (last <= midPoint) return '中団';
+    return '後方';
+  };
 
-  let summary = `${popularityText}${w.number}番${w.name}（${w.jockey}騎手、${w.trainer}厩舎）が`;
+  // 勝ち方の動詞（脚質別）
+  const styleVerb = (style) => {
+    if (style === '逃げ') return '逃げ切って';
+    if (style === '先行') return '好位から抜け出して';
+    if (style === '中団') return '中団から差し切って';
+    if (style === '後方') return '後方から鋭く伸びて';
+    return '勝負を制して';
+  };
 
-  // レース展開の説明
-  if (w.popularity === 1) {
-    summary += '力を発揮。';
-  } else if (w.popularity <= 3) {
-    summary += '好走を見せ、';
-  } else {
-    summary += '人気を裏切る走りで、';
-  }
+  // 上がり3F最速馬を検出
+  const fastestL3F = (() => {
+    let best = null;
+    for (const h of raceData.results) {
+      const v = parseFloat(h.lastFurlong);
+      if (!Number.isFinite(v)) continue;
+      if (!best || v < best.value) best = { horse: h, value: v };
+    }
+    return best;
+  })();
 
-  // 2着馬との関係（margin は 2着馬側に格納されている）
+  const winnerStyle = classifyStyle(w.cornerPass);
+  const popularityText = w.popularity === 1 ? '1番人気' : `${w.popularity}番人気`;
+
+  // ── 本文組み立て ──
+  let summary = `${popularityText}の${w.number}番${w.name}`;
+  if (w.jockey) summary += `（${w.jockey}騎手、${w.trainer}厩舎）`;
+  summary += 'が';
+  summary += styleVerb(winnerStyle);
+
+  // 2着馬との着差
   if (second) {
     const rawMargin = (second.margin || '').trim();
     const hasMargin = rawMargin && rawMargin !== '-' && rawMargin !== '－';
     if (hasMargin) {
-      summary += `${second.number}番${second.name}に${rawMargin}差をつけて`;
-    } else {
-      summary += `${second.number}番${second.name}との接戦を制して`;
+      summary += `${second.number}番${second.name}に${rawMargin}差をつけ`;
     }
   }
+  summary += `1着でゴールイン。`;
 
-  summary += `1着でゴール。`;
+  // タイム
+  if (w.time) summary += `勝ちタイム${w.time}。`;
 
-  // タイム情報
-  if (w.time) {
-    summary += `勝ちタイム${w.time}。`;
-  }
-
-  // 上がり3F
+  // 上がり3F: 勝ち馬が最速か否かで言い分け
   if (w.lastFurlong) {
-    summary += `上がり3F${w.lastFurlong}秒の脚を使った。`;
-  }
-
-  // 重賞の場合の特別な表現
-  if (raceData.raceName && (raceData.raceName.includes('賞') && raceData.raceName.length > 3)) {
-    summary += `\n\n${raceData.raceName}を制した${w.name}は、`;
-    if (w.popularity === 1) {
-      summary += '順当に実力を見せつけた。';
+    if (fastestL3F && fastestL3F.horse === w) {
+      summary += `メンバー最速の上がり3F${w.lastFurlong}秒で押し切った。`;
     } else {
-      summary += '素晴らしい走りを披露した。';
+      summary += `上がり3Fは${w.lastFurlong}秒。`;
+      if (fastestL3F && fastestL3F.horse !== w) {
+        const fh = fastestL3F.horse;
+        summary += `最速の上がりは${fh.number}番${fh.name}の${fh.lastFurlong}秒。`;
+      }
     }
   }
 
-  // 2着・3着の情報
-  if (second && third) {
-    summary += `\n\n2着には${second.popularity}番人気の${second.name}が入り、3着は${third.popularity}番人気の${third.name}。`;
+  // 重賞向けの一文
+  if (raceData.raceName && raceData.raceName.includes('賞') && raceData.raceName.length > 3) {
+    summary += `\n\n${raceData.raceName}を制した${w.name}は`;
+    summary += w.popularity === 1 ? '順当に実力を見せつけた。' : '素晴らしい走りを披露した。';
+  }
 
-    // 上位3頭の人気傾向
-    const topThreePopularity = [w.popularity, second.popularity, third.popularity].sort((a, b) => a - b);
-    if (topThreePopularity[0] === 1 && topThreePopularity[1] === 2 && topThreePopularity[2] === 3) {
+  // 2・3着の脚質付き紹介
+  if (second && third) {
+    const s2 = classifyStyle(second.cornerPass);
+    const s3 = classifyStyle(third.cornerPass);
+    summary += `\n\n2着は${second.popularity}番人気の${second.name}`;
+    if (s2 && s2 !== winnerStyle) summary += `（${s2}）`;
+    summary += `、3着は${third.popularity}番人気の${third.name}`;
+    if (s3 && s3 !== winnerStyle) summary += `（${s3}）`;
+    summary += `。`;
+
+    const sortedPop = [w.popularity, second.popularity, third.popularity].sort((a, b) => a - b);
+    if (sortedPop[0] === 1 && sortedPop[1] === 2 && sortedPop[2] === 3) {
       summary += '人気順の決着となった。';
-    } else if (topThreePopularity[2] >= 5) {
+    } else if (sortedPop[2] >= 5) {
       summary += '波乱の決着となった。';
     } else {
       summary += '実力通りの上位争いとなった。';
