@@ -144,11 +144,17 @@ async function fetchRecentResults(category) {
             }
 
             // レース終了時刻を推定（発走時刻 + 5分）
+            // startTime は "9:50" / "9時50分" / null を許容
             let pubDate = new Date(dateStr + 'T21:00:00+09:00'); // デフォルト
             if (race.startTime) {
-              const [hour, minute] = race.startTime.split(':').map(Number);
-              pubDate = new Date(dateStr);
-              pubDate.setHours(hour, minute + 5, 0, 0); // 発走5分後
+              const m = String(race.startTime).match(/(\d{1,2})\s*[時:]\s*(\d{1,2})/);
+              if (m) {
+                const hour = Number(m[1]);
+                const minute = Number(m[2]);
+                const tentative = new Date(dateStr);
+                tentative.setHours(hour, minute + 5, 0, 0);
+                if (!isNaN(tentative.getTime())) pubDate = tentative;
+              }
             }
 
             // title と description が必須（空文字を避ける）
@@ -212,11 +218,17 @@ async function fetchRecentResults(category) {
               }
 
               // レース終了時刻を推定（発走時刻 + 5分）
+              // startTime は "9:50" / "9時50分" / null を許容
               let pubDate = new Date(dateStr + 'T16:00:00+09:00'); // デフォルト
               if (race.startTime) {
-                const [hour, minute] = race.startTime.split(':').map(Number);
-                pubDate = new Date(dateStr);
-                pubDate.setHours(hour, minute + 5, 0, 0); // 発走5分後
+                const m = String(race.startTime).match(/(\d{1,2})\s*[時:]\s*(\d{1,2})/);
+                if (m) {
+                  const hour = Number(m[1]);
+                  const minute = Number(m[2]);
+                  const tentative = new Date(dateStr);
+                  tentative.setHours(hour, minute + 5, 0, 0);
+                  if (!isNaN(tentative.getTime())) pubDate = tentative;
+                }
               }
 
               // title と description が必須（空文字を避ける）
