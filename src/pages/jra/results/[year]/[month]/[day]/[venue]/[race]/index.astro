@@ -1604,49 +1604,79 @@ const generateRaceSummary = () => {
       </section>
 
       <!-- 5. 詳細データ -->
+      <!-- 旧フォーマット: timeData / cornerData -->
+      <!-- 新フォーマット (auto-fetch): halonTime / upper / cornerPassDetail -->
       <section>
         <h2>📊 詳細データ</h2>
 
-        {raceData.timeData && (
+        {(raceData.timeData || raceData.halonTime || raceData.upper) && (
           <details>
             <summary>⏱️ ラップタイム</summary>
             <dl>
-              {raceData.timeData.last3F && (
+              {raceData.timeData?.last3F && (
                 <>
                   <dt>上がり3F</dt>
                   <dd>{raceData.timeData.last3F}秒</dd>
                 </>
               )}
 
-              {raceData.timeData.last4F && (
+              {raceData.timeData?.last4F && (
                 <>
                   <dt>上がり4F</dt>
                   <dd>{raceData.timeData.last4F}秒</dd>
                 </>
               )}
 
-              {raceData.timeData.furlongTimes && raceData.timeData.furlongTimes.length > 0 && (
+              {raceData.timeData?.furlongTimes && raceData.timeData.furlongTimes.length > 0 && (
                 <>
                   <dt>ハロンタイム（200m毎）</dt>
                   <dd>{raceData.timeData.furlongTimes.join(' - ')}</dd>
+                </>
+              )}
+
+              {raceData.upper && !raceData.timeData?.last3F && (
+                <>
+                  <dt>上がりタイム</dt>
+                  <dd>{raceData.upper}</dd>
+                </>
+              )}
+
+              {raceData.halonTime && !raceData.timeData?.furlongTimes && (
+                <>
+                  <dt>ハロンタイム（200m毎）</dt>
+                  <dd>{raceData.halonTime}</dd>
                 </>
               )}
             </dl>
           </details>
         )}
 
-        {raceData.cornerData && raceData.cornerData.length > 0 && (
+        {((raceData.cornerData && raceData.cornerData.length > 0) || raceData.cornerPassDetail) && (
           <details>
             <summary>📍 コーナー通過順</summary>
             <dl>
-              {raceData.cornerData.map(corner => (
+              {raceData.cornerData?.map(corner => (
                 <>
                   <dt>{corner.corner}</dt>
                   <dd>{corner.order.join(',')}</dd>
                 </>
               ))}
+
+              {raceData.cornerPassDetail?.corner3 && (
+                <>
+                  <dt>3コーナー</dt>
+                  <dd>{raceData.cornerPassDetail.corner3}</dd>
+                </>
+              )}
+
+              {raceData.cornerPassDetail?.corner4 && (
+                <>
+                  <dt>4コーナー</dt>
+                  <dd>{raceData.cornerPassDetail.corner4}</dd>
+                </>
+              )}
             </dl>
-            <p class="note">※ 数字は馬番を示します</p>
+            <p class="note">※ 数字は馬番。括弧は同位、ハイフンは馬身差</p>
           </details>
         )}
       </section>
