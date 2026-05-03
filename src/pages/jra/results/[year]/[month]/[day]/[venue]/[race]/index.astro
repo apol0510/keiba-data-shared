@@ -242,13 +242,14 @@ const generateRaceSummary = () => {
     summary += '人気を裏切る走りで、';
   }
 
-  // 2着馬との関係
+  // 2着馬との関係（margin は 2着馬側に格納されている）
   if (second) {
-    const marginText = w.margin && w.margin !== '-' ? `${w.margin}差` : '';
-    if (marginText) {
-      summary += `${second.number}番${second.name}を${marginText}で振り切って`;
+    const rawMargin = (second.margin || '').trim();
+    const hasMargin = rawMargin && rawMargin !== '-' && rawMargin !== '－';
+    if (hasMargin) {
+      summary += `${second.number}番${second.name}に${rawMargin}差をつけて`;
     } else {
-      summary += `${second.number}番${second.name}をかわして`;
+      summary += `${second.number}番${second.name}との接戦を制して`;
     }
   }
 
@@ -1406,7 +1407,7 @@ const generateRaceSummary = () => {
           <tbody>
             {raceData.results.map(horse => (
               <tr>
-                <td>{horse.rank}</td>
+                <td>{horse.rank ?? horse.position}</td>
                 <td>{horse.bracket}</td>
                 <td>{horse.number}</td>
                 <td><strong>{horse.name}</strong></td>
@@ -1432,7 +1433,7 @@ const generateRaceSummary = () => {
               {raceData.payouts.tansho && raceData.payouts.tansho[0] && (
                 <>
                   <dt>単勝</dt>
-                  <dd>{raceData.payouts.tansho[0].number}番 {raceData.payouts.tansho[0].payout.toLocaleString()}円（{raceData.payouts.tansho[0].popularity}番人気）</dd>
+                  <dd>{raceData.payouts.tansho[0].combination ?? raceData.payouts.tansho[0].number}番 {raceData.payouts.tansho[0].payout.toLocaleString()}円（{raceData.payouts.tansho[0].popularity}番人気）</dd>
                 </>
               )}
 
@@ -1468,7 +1469,7 @@ const generateRaceSummary = () => {
               {raceData.payouts?.fukusho?.map(item => (
                 <tr>
                   <td>複勝</td>
-                  <td>{item.number}番</td>
+                  <td>{item.combination ?? item.number}番</td>
                   <td>{item.payout.toLocaleString()}円</td>
                   <td>{item.popularity}</td>
                 </tr>
