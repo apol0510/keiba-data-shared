@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - 'jra/predictions/**/*.json'
+      - '!jra/predictions/computer/**'
 
 concurrency:
   group: dispatch-jra-predictions-${{ github.sha }}

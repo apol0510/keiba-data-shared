@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - 'nankan/predictions/**/*.json'
+      - '!nankan/predictions/computer/**'
 
 concurrency:
   group: dispatch-nankan-predictions-${{ github.sha }}
