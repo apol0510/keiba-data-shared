@@ -25,8 +25,8 @@ jobs:
       - name: Get changed prediction files
         id: changed-files
         run: |
-          # 更新されたファイルを取得
-          CHANGED_FILES=$(git diff --name-only HEAD^ HEAD | grep 'nankan/predictions/.*\.json' || true)
+          # 更新されたファイルを取得（computer/ は除外: paths フィルタと二重防御）
+          CHANGED_FILES=$(git diff --name-only HEAD^ HEAD | grep 'nankan/predictions/.*\.json' | grep -v 'nankan/predictions/computer/' || true)
 
           if [ -z "$CHANGED_FILES" ]; then
             echo "changed=false" >> $GITHUB_OUTPUT
